@@ -8,10 +8,19 @@
  */
 include('./simple_html_dom.php');
 
-const line = "\r\n";
-const site = 'http://php.net/manual/zh/';    //外链站点 //也可设为本地衔接 例: file:///D:/Temp/php-chunked-xhtml/
-define('in', __DIR__ . '\..\raw\php-chunked-xhtml\\');
-define('temp', __DIR__ . '\..\raw\temp\\');
+const line = PHP_EOL;
+const site = 'https://www.php.net/manual/zh/';    //外链站点 //也可设为本地衔接 例: file:///D:/Temp/php-chunked-xhtml/
+const in   = __DIR__.'/../raw/php-chunked-xhtml/';
+const temp = __DIR__.'/../raw/temp/';
+
+
+function myPrint(...$args)
+{
+	foreach ($args as $arg) {
+		print_r($arg);
+		echo PHP_EOL;
+	}
+}
 
 /**
  * 加载文本内容
@@ -32,28 +41,28 @@ function loadStr($name)
 function modifyUrl($dom)
 {
     $links = $dom->find('a');
-    for ($i = 0; $i < count($links); $i++) {
-        $a = $links[$i];
-        $href = $a->href;
-        if (strstr($href, 'http://')) {    //不处理外链
-            continue;
-        }
+	foreach ($links as $iValue) {
+	    $a = $iValue;
+	    $href = $a->href;
+	    if (strstr($href, 'http://')) {    //不处理外链
+	        continue;
+	    }
 
-        $known = 0;
-        if (strstr($href, 'function.')) {
-            $known = 1;
-        } else if (strstr($a->innertext, '::')) {
-            $known = 1;
-        }
+	    $known = 0;
+	    if (strstr($href, 'function.')) {
+	        $known = 1;
+	    } else if (strstr($a->innertext, '::')) {
+	        $known = 1;
+	    }
 
-        if ($known) {   //已知类型, 方法,类静态方法..
-            $href = '{@link ' . $a->innertext . '}';
-            $a->outertext = $href;
-        } else {        //如果未匹配到任何类型, 改成官网外链
-            $href = str_replace('.html', '.php', $href);    //网站外链为php 本地为html
-            $a->href = site . $href;
-        }
-    }
+	    if ($known) {   //已知类型, 方法,类静态方法..
+	        $href = '{@link ' . $a->innertext . '}';
+	        $a->outertext = $href;
+	    } else {        //如果未匹配到任何类型, 改成官网外链
+	        $href = str_replace('.html', '.php', $href);    //网站外链为php 本地为html
+	        $a->href = site . $href;
+	    }
+	}
 }
 
 /**
@@ -164,7 +173,7 @@ function handleConst($file = 'filesystem.consts.html')
         $html = modifyStr($html);
         if (strpos($outFile, '::')) continue;
         echo $outFile . line;
-        file_put_contents(temp . '\\' . $outFile, $html);
+        file_put_contents(temp . '/' . $outFile, $html);
     }
 }
 
@@ -202,21 +211,23 @@ function handle($file = 'function.date.html')
     $html = $dom->outertext;
     $html = modifyStr($html);
 
-    file_put_contents(temp . '\\' . $file, $html);
+    file_put_contents(temp . '/' . $file, $html);
     echo $file . line;
 }
 
 function handleAll()
 {
+	if (! is_dir(temp)) {
+		mkdir(temp);
+	}
     $clses = getClass();
     $clses['function'] = 1;
     $clses['class'] = 1;
     $clses['reserved'] = 1;
-
     if (@$handle = opendir(in)) {
-        while (($file = readdir($handle)) !== false) {
-            $tokens = explode('.', $file);
-            $prefix = $tokens[0];
+	    while (($file = readdir($handle)) !== false) {
+	        $tokens = explode('.', $file);
+	        $prefix = $tokens[0];
             if (@$clses[$prefix]) {
                 handle($file);
             }

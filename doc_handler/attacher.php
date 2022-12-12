@@ -8,29 +8,39 @@
 
 //const docIn = 'D:\Temp\data\\';
 //const docOut = 'D:\Temp\out';
-define('docIn', __DIR__ . '\..\raw\temp\\');
-define('docOut', __DIR__ . '\..\raw\phpstorm-stubs\\');
-const line = "\n";
+const docIn = __DIR__.'/../raw/temp/';
+const docOut = __DIR__.'/../raw/phpstorm-stubs-2022.3/';
+const line = PHP_EOL;
 const dataArr = [
     'AMQPBasicProperties.getContentType' => 'test comment',
     'AMQP_NOPARAM' => 'test const',
     'class.AMQPBasicProperties' => 'test class',
 ];
 
+
+function myPrint(...$args)
+{
+	foreach ($args as $arg) {
+		print_r($arg);
+		echo PHP_EOL;
+	}
+}
+
 function my_dir($dir, $parent = '', &$files = [])
 {
+	myPrint($dir);
     if (@$handle = opendir($dir)) { //注意这里要加一个@，不然会有warning错误提示：）
-        while (($file = readdir($handle)) !== false) {
-            if ($file != ".." && $file != ".") { //排除根目录
-                if (is_dir($dir . "/" . $file)) { //如果是子文件夹，就进行递归
-                    my_dir($dir . "/" . $file, $parent . '/' . $file, $files);
-                } else { //不然就将文件的名字存入数组
-                    $files[] = $parent . '/' . $file;
-                }
-            }
-        }
-        closedir($handle);
-        return $files;
+	    while (($file = readdir($handle)) !== false) {
+		    if ($file != ".." && $file != ".") { //排除根目录
+			    if (is_dir($dir . "/" . $file)) { //如果是子文件夹，就进行递归
+				    my_dir($dir . "/" . $file, $parent . '/' . $file, $files);
+			    } else { //不然就将文件的名字存入数组
+				    $files[] = $parent . '/' . $file;
+			    }
+		    }
+	    }
+	    closedir($handle);
+	    return $files;
     }
 }
 

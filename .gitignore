@@ -1,2 +1,7 @@
 .idea
 /doc_plugin/out/
+/raw/php-chunked-xhtml/
+.DS_Store
+/raw/temp/
+/raw/phpstorm-stub*
+/raw/php_manua*
