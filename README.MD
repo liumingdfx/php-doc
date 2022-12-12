@@ -160,7 +160,7 @@ Offline installation:   Download /document/phpdoc-en.zip file, unzip Then click 
    
    ![image-20221212121502148](README.assets/image-20221212121502148.png)
    
-   ![image-20221212121708197](README.assets/image-20221212121708197.png)
+   ![image-20221212180147368](README.assets/image-20221212180147368.png)
    
 3. 检查
    
