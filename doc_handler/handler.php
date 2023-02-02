@@ -91,12 +91,14 @@ function modifyAttr($dom,$selector,$value,$attr='style'){
 function modifyTag($dom, $selector,$outside, $pre, $after,$one=false){
     $subs=$dom->find($selector);
     foreach ($subs as $sub){
-        if($outside)
-            $sub->outertext=$pre.$sub->outertext().$after;
-        else
-            $sub->outertext=$pre.$sub->innertext().$after;
-        if($one)
-            break;
+	    if ($outside) {
+		    $sub->outertext = $pre.$sub->outertext().$after;
+	    } else {
+		    $sub->outertext = $pre.$sub->innertext().$after;
+	    }
+	    if ($one) {
+		    break;
+	    }
     }
 }
 
@@ -158,22 +160,34 @@ function handleConst($file = 'filesystem.consts.html')
     $doms = $selector->find('strong code');
     foreach ($doms as $dom) {
 //        $name = $dom->find('strong code', 0);
-        if (!$dom) continue;
-        $outFile = 'constant.' . $dom->innertext . '.html';
-        $parent = $dom->parentNode()->parentNode();
-        /** @var simple_html_dom_node $test */
-        $next = $parent->nextSibling();
-        if (!$next) continue;
-        $next = $next->children(0);
-        if (!$next) continue;
-        modifyUrl($next);
-        $html = $next->innertext;
-        if (!$html) continue;
-        if (trim($html) == '') continue;
-        $html = modifyStr($html);
-        if (strpos($outFile, '::')) continue;
-        echo $outFile . line;
-        file_put_contents(temp . '/' . $outFile, $html);
+	    if (! $dom) {
+		    continue;
+	    }
+	    $outFile = 'constant.'.$dom->innertext.'.html';
+	    $parent  = $dom->parentNode()->parentNode();
+	    /** @var simple_html_dom_node $test */
+	    $next = $parent->nextSibling();
+	    if (! $next) {
+		    continue;
+	    }
+	    $next = $next->children(0);
+	    if (! $next) {
+		    continue;
+	    }
+	    modifyUrl($next);
+	    $html = $next->innertext;
+	    if (! $html) {
+		    continue;
+	    }
+	    if (trim($html) == '') {
+		    continue;
+	    }
+	    $html = modifyStr($html);
+	    if (strpos($outFile, '::')) {
+		    continue;
+	    }
+	    echo $outFile.line;
+	    file_put_contents(temp.'/'.$outFile, $html);
     }
 }
 

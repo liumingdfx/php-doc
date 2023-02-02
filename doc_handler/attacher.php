@@ -190,7 +190,7 @@ function handleAll()
     my_dir(docOut, '', $files);
     foreach ($files as $file) {
         $suffix = substr(strrchr($file, '.'), 1);
-        if ($suffix == 'php') {
+        if ($suffix === 'php') {
             handle($file);
             echo $file . line;
 //            break;  //test
