@@ -1,0 +1,636 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>类型声明</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="language.types.iterable.html">« Iterable 可迭代对象</a></li>
+      <li style="float: right;"><a href="language.types.type-juggling.html">类型转换 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="language.types.html">类型</a></li>
+    <li>类型声明</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="language.types.declarations" class="sect1">
+ <h2 class="title">类型声明</h2>
+
+ <p class="para">
+  类型声明可以用于函数的参数、返回值，PHP 7.4.0
+  起还可以用于类的属性，来显性的指定需要的类型，如果预期类型在调用时不匹配，则会抛出一个
+  <span class="classname"><a href="class.typeerror.html" class="classname">TypeError</a></span> 异常。
+ </p>
+
+ <p class="para">
+  PHP 支持各种单一类型，除了 <span class="type">resource</span>
+  之外，都可以用于用户级别类型声明。这个页面包含了不同类型间的可用性变更日志以及在类型声明中用法的文档。
+ </p>
+ <blockquote class="note"><p><strong class="note">注意</strong>: 
+  <p class="para">
+   当类实现了接口方法或者重新实现了父级类中定义的方法时，必须与上述定义兼容。如果方法遵循<a href="language.oop5.variance.html" class="link">方差</a>规则，则兼容该方法。
+  </p>
+ </p></blockquote>
+
+ <div class="sect2">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>8.3.0</td>
+      <td>
+       新增了对类、接口、trait 和枚举常量类型的支持。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.2.0</td>
+      <td>
+       新增对 <abbr title="Disjunctive Normal Form">DNF</abbr> 类型的支持。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.2.0</td>
+      <td>
+       新增对 literal 类型 <span class="type"><span class="type true">true</span></span> 的支持。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.2.0</td>
+      <td>
+       现在可以单独使用 <span class="type">null</span> 和 <span class="type"><span class="type false">false</span></span>。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.1.0</td>
+      <td>
+       新增对交集类型的支持。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.1.0</td>
+      <td>
+       弃用 <span class="type"><span class="type void">void</span></span> 函数通过引用返回。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.1.0</td>
+      <td>
+       新增对返回类型 <abbr>never</abbr> 的支持。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       新增对 <abbr>mixed</abbr> 类型的支持。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       新增对返回类型 <abbr>static</abbr> 的支持。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       新增对联合类型的支持。
+      </td>
+     </tr>
+
+     <tr>
+      <td>7.4.0</td>
+      <td>
+       新增对类属性类型化的支持。
+      </td>
+     </tr>
+
+     <tr>
+      <td>7.2.0</td>
+      <td>
+       新增对 <abbr>object</abbr> 类型的支持。
+      </td>
+     </tr>
+
+     <tr>
+      <td>7.1.0</td>
+      <td>
+       新增对 <abbr>iterable</abbr> 类型的支持。
+      </td>
+     </tr>
+
+     <tr>
+      <td>7.1.0</td>
+      <td>
+       新增对 <abbr>void</abbr> 类型的支持。
+      </td>
+     </tr>
+
+     <tr>
+      <td>7.1.0</td>
+      <td>
+       新增对可为 null 类型的支持。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+ <div class="sect2" id="language.types.declarations.base">
+  <h3 class="title">原子类型使用说明</h3>
+
+  <p class="simpara">
+   Atomic types have straight forward behaviour with some minor caveats which
+   are described in this section.
+  </p>
+
+  <div class="sect3" id="language.types.declarations.base.scalar">
+   <h4 class="title">标量类型</h4>
+   <div class="warning"><strong class="warning">警告</strong>
+    <p class="para">
+     标量类型（<span class="type">bool</span>、<span class="type">int</span>、<span class="type">float</span>、<span class="type">string</span>）不支持别名。别名反而会视为类或接口名。例如，使用
+     <code class="literal">boolean</code> 作为类型声明，将要求值是 <a href="language.operators.type.html" class="link"><code class="literal">instanceof</code></a> 类或接口
+     <code class="literal">boolean</code>，而不是类型
+     <span class="type">bool</span>。
+    </p>
+    <div class="example" id="example-221">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />    </span><span style="color: #007700">function </span><span style="color: #0000BB">test</span><span style="color: #007700">(</span><span style="color: #0000BB">boolean $param</span><span style="color: #007700">) {}<br />    </span><span style="color: #0000BB">test</span><span style="color: #007700">(</span><span style="color: #0000BB">true</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+     <div class="example-contents"><p>以上示例在 PHP 8 中的输出：</p></div>
+     <div class="example-contents screen">
+<div class="cdata"><pre>
+Warning: &quot;boolean&quot; will be interpreted as a class name. Did you mean &quot;bool&quot;? Write &quot;\boolean&quot; to suppress this warning in /in/9YrUX on line 2
+
+Fatal error: Uncaught TypeError: test(): Argument #1 ($param) must be of type boolean, bool given, called in - on line 3 and defined in -:2
+Stack trace:
+#0 -(3): test(true)
+#1 {main}
+  thrown in - on line 2
+</pre></div>
+     </div>
+    </div>
+   </div>
+  </div>
+
+  <div class="sect3" id="language.types.declarations.void">
+   <h4 class="title">void</h4>
+   <blockquote class="note"><p><strong class="note">注意</strong>: 
+    <p class="para">
+     从 PHP 8.1.0 起弃用 <span class="type"><span class="type void">void</span></span> 函数通过引用返回，因为这样的函数自相矛盾。在此之前调用时总是会发出如下
+     <strong><code>E_NOTICE</code></strong>：<span class="computeroutput">Only variable references should be returned by reference</span>。
+
+     <div class="informalexample">
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function &amp;</span><span style="color: #0000BB">test</span><span style="color: #007700">(): </span><span style="color: #0000BB">void </span><span style="color: #007700">{}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+      </div>
+
+     </div>
+    </p>
+   </p></blockquote>
+  </div>
+
+  <div class="sect3" id="language.types.declarations.base.function">
+   <h4 class="title">Callable 类型</h4>
+   <p class="para">
+    此类型不能用于类属性的类型声明。
+   </p>
+
+   <blockquote class="note"><p><strong class="note">注意</strong>: 
+    <span class="simpara">
+     无法指定函数的签名。
+    </span>
+   </p></blockquote>
+  </div>
+
+  <div class="sect3" id="language.types.declarations.references">
+   <h4 class="title">通过引用传递的参数类型</h4>
+
+   <p class="simpara">
+    如果通过引用传递的参数有类型声明，则变量的类型<em>仅</em>在调用函数时检查，返回时不会检查。这意味着函数可以改变引用变量的类型。
+   </p>
+   <div class="example" id="example-224">
+    <p><strong>示例 #1 通过引用传递的参数类型</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">array_baz</span><span style="color: #007700">(array &amp;</span><span style="color: #0000BB">$param</span><span style="color: #007700">)<br />{<br />    </span><span style="color: #0000BB">$param </span><span style="color: #007700">= </span><span style="color: #0000BB">1</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">$var </span><span style="color: #007700">= [];<br /></span><span style="color: #0000BB">array_baz</span><span style="color: #007700">(</span><span style="color: #0000BB">$var</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$var</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">array_baz</span><span style="color: #007700">(</span><span style="color: #0000BB">$var</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例的输出类似于：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+int(1)
+
+Fatal error: Uncaught TypeError: array_baz(): Argument #1 ($param) must be of type array, int given, called in - on line 9 and defined in -:2
+Stack trace:
+#0 -(9): array_baz(1)
+#1 {main}
+  thrown in - on line 2
+</pre></div>
+    </div>
+   </div>
+  </div>
+ </div>
+
+ <div class="sect2" id="language.types.declarations.composite">
+  <h3 class="title">复合类型使用说明</h3>
+  <p class="para">
+   复合类型声明有几个限制，并且在编译时执行冗余检查以避免简单的错误。
+  </p>
+
+  <div class="caution"><strong class="caution">警告</strong>
+   <p class="simpara">
+    在 PHP 8.2 之前，也就是没引入 <abbr title="Disjunctive Normal Form">DNF</abbr> 之前，交集类型和联合类型不能组合使用。
+   </p>
+  </div>
+
+  <div class="sect3" id="language.types.declarations.composite.union">
+   <h4 class="title">联合类型</h4>
+   <div class="warning"><strong class="warning">警告</strong>
+    <p class="simpara">
+     在一个联合类型中不能同时用两个 Value 类型 <span class="type"><span class="type false">false</span></span> 和
+     <span class="type"><span class="type true">true</span></span>。而是使用 <span class="type">bool</span> 替代。
+    </p>
+   </div>
+
+   <div class="caution"><strong class="caution">警告</strong>
+    <p class="simpara">
+     在 PHP 8.2.0 之前，由于 <span class="type"><span class="type false">false</span></span> 和 <span class="type">null</span>
+     不能作为独立的类型使用，因此不允许仅由这些类型组成联合类型。这还包括以下类型：<span class="type"><span class="type false">false</span></span>、<code class="literal">false|null</code>,
+     和 <code class="literal">?false</code>。
+    </p>
+   </div>
+
+   <div class="sect4" id="language.types.declarations.nullable">
+    <h5 class="title">可为 null 类型语法糖</h5>
+
+    <p class="para">
+     单个基本类型声明可以通过在类型前添加问号（<code class="literal">?</code>）来标记可为 null。因此
+     <code class="literal">?T</code> 和 <code class="literal">T|null</code> 是相同的。
+    </p>
+
+    <blockquote class="note"><p><strong class="note">注意</strong>: 
+     <span class="simpara">
+      该语法自 PHP 7.1.0 起支持，且早于完整的（generalized）联合类型支持。
+     </span>
+    </p></blockquote>
+
+    <blockquote class="note"><p><strong class="note">注意</strong>: 
+     <p class="para">
+      也可以通过设置参数的参数的默认值为 <code class="literal">null</code> 来实现允许为
+      null。但并不建议这么做，因为如果在子类中更改了默认值，会引发类型兼容冲突，需要将
+      <span class="type">null</span> 类型添加到类型声明中。
+     </p>
+     <div class="example" id="example-227">
+      <p><strong>示例 #2 使参数可以为 null 的旧方法</strong></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">C </span><span style="color: #007700">{}<br /><br />function </span><span style="color: #0000BB">f</span><span style="color: #007700">(</span><span style="color: #0000BB">C $c </span><span style="color: #007700">= </span><span style="color: #0000BB">null</span><span style="color: #007700">) {<br />    </span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$c</span><span style="color: #007700">);<br />}<br /><br /></span><span style="color: #0000BB">f</span><span style="color: #007700">(new </span><span style="color: #0000BB">C</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">f</span><span style="color: #007700">(</span><span style="color: #0000BB">null</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+      </div>
+
+      <div class="example-contents"><p>以上示例会输出：</p></div>
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+object(C)#1 (0) {
+}
+NULL
+</pre></div>
+      </div>
+     </div>
+    </p></blockquote>
+   </div>
+  </div>
+
+  <div class="sect3" id="language.types.declarations.composite.redundant">
+   <h4 class="title">重复冗余的类型</h4>
+   <p class="para">
+    为了能捕获复合类型声明中的简单错误，不需要类加载检测到的冗余类型将导致编译时错误。包含：
+
+    <ul class="itemizedlist">
+     <li class="listitem">
+      <span class="simpara">
+       解析出来的类型只能出现一次。例如这样的类型 <code class="literal">int|string|INT</code> 或
+       <code class="literal">Countable&amp;Traversable&amp;COUNTABLE</code> 会导致错误。
+      </span>
+     </li>
+     <li class="listitem">
+      <span class="simpara">
+       使用 <span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> 会导致错误。
+      </span>
+     </li>
+     <li class="listitem">
+      <span class="simpara">对于联合类型：</span>
+      <ul class="itemizedlist">
+       <li class="listitem">
+        <span class="simpara">
+         使用了 <span class="type">bool</span> 时就不能再附带使用 <span class="type"><span class="type false">false</span></span> 或者 <span class="type"><span class="type true">true</span></span>。
+        </span>
+       </li>
+       <li class="listitem">
+        <span class="simpara">
+         使用了 <span class="type">object</span> 时就不能再附带使用 class 类型。
+        </span>
+       </li>
+       <li class="listitem">
+        <span class="simpara">
+         使用了 <span class="type"><a href="language.types.iterable.html" class="type iterable">iterable</a></span> 时，不能再附带使用 <span class="type">array</span>
+         和 <span class="classname"><a href="class.traversable.html" class="classname">Traversable</a></span>。
+        </span>
+       </li>
+      </ul>
+     </li>
+     <li class="listitem">
+      <span class="simpara">对于交集类型：</span>
+      <ul class="itemizedlist">
+       <li class="listitem">
+        <span class="simpara">
+         使用 class-type 以外的类型会导致错误。
+        </span>
+       </li>
+       <li class="listitem">
+        <span class="simpara">
+         使用 <span class="type"><span class="type self">self</span></span>、<span class="type"><span class="type parent">parent</span></span>
+         或 <span class="type"><span class="type static">static</span></span> 都会导致错误。
+        </span>
+       </li>
+      </ul>
+     </li>
+     <li class="listitem">
+      <span class="simpara"><abbr title="Disjunctive Normal Form">DNF</abbr> 类型：</span>
+      <ul class="itemizedlist">
+       <li class="listitem">
+        <span class="simpara">
+         If a more generic type is used, the more restrictive one is redundant.
+        </span>
+       </li>
+       <li class="listitem">
+        <span class="simpara">
+         使用两个相同的交集类型。
+        </span>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </p>
+
+   <blockquote class="note"><p><strong class="note">注意</strong>: 
+    <span class="simpara">
+     不过它不能确保类型最小化，因为要达到这样的效果，还要加载使用类型的 class。
+    </span>
+   </p></blockquote>
+
+   <p class="para">
+    例如，假设 <code class="literal">A</code> 和 <code class="literal">B</code> 都是一个类的别名，
+    而 <code class="literal">A|B</code> 仍然是有效的，哪怕它可以被简化为
+    <code class="literal">A</code> 或
+    <code class="literal">B</code>。
+    同样的，如果 <code class="code">B extends A {}</code>，那 <code class="literal">A|B</code>
+    仍然是有效的联合类型，尽管它可以被简化为
+    <code class="literal">A</code>。
+
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">foo</span><span style="color: #007700">(): </span><span style="color: #0000BB">int</span><span style="color: #007700">|</span><span style="color: #0000BB">INT </span><span style="color: #007700">{} </span><span style="color: #FF8000">// 不允许<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">foo</span><span style="color: #007700">(): </span><span style="color: #0000BB">bool</span><span style="color: #007700">|</span><span style="color: #0000BB">false </span><span style="color: #007700">{} </span><span style="color: #FF8000">// 不允许<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">foo</span><span style="color: #007700">(): </span><span style="color: #0000BB">int</span><span style="color: #007700">&amp;</span><span style="color: #0000BB">Traversable </span><span style="color: #007700">{} </span><span style="color: #FF8000">// 不允许<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">foo</span><span style="color: #007700">(): </span><span style="color: #0000BB">self</span><span style="color: #007700">&amp;</span><span style="color: #0000BB">Traversable </span><span style="color: #007700">{} </span><span style="color: #FF8000">// 不允许<br /><br /></span><span style="color: #007700">use </span><span style="color: #0000BB">A </span><span style="color: #007700">as </span><span style="color: #0000BB">B</span><span style="color: #007700">;<br />function </span><span style="color: #0000BB">foo</span><span style="color: #007700">(): </span><span style="color: #0000BB">A</span><span style="color: #007700">|</span><span style="color: #0000BB">B </span><span style="color: #007700">{} </span><span style="color: #FF8000">// 不允许 ("use" 是名称解析的一部分)<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">foo</span><span style="color: #007700">(): </span><span style="color: #0000BB">A</span><span style="color: #007700">&amp;</span><span style="color: #0000BB">B </span><span style="color: #007700">{} </span><span style="color: #FF8000">// 不允许 ("use" 是名称解析的一部分)<br /><br /></span><span style="color: #0000BB">class_alias</span><span style="color: #007700">(</span><span style="color: #DD0000">'X'</span><span style="color: #007700">, </span><span style="color: #DD0000">'Y'</span><span style="color: #007700">);<br />function </span><span style="color: #0000BB">foo</span><span style="color: #007700">(): </span><span style="color: #0000BB">X</span><span style="color: #007700">|</span><span style="color: #0000BB">Y </span><span style="color: #007700">{} </span><span style="color: #FF8000">// 允许 (运行时才能知道重复性)<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">foo</span><span style="color: #007700">(): </span><span style="color: #0000BB">X</span><span style="color: #007700">&amp;</span><span style="color: #0000BB">Y </span><span style="color: #007700">{} </span><span style="color: #FF8000">// 允许 (运行时才能知道重复性)<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </div>
+   </p>
+  </div>
+
+ </div>
+
+ <div class="sect2" id="language.types.declarations.examples">
+  <h3 class="title">示例</h3>
+  <div class="example" id="example-230">
+   <p><strong>示例 #3 基础类类型声明</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">C </span><span style="color: #007700">{}<br />class </span><span style="color: #0000BB">D </span><span style="color: #007700">extends </span><span style="color: #0000BB">C </span><span style="color: #007700">{}<br /><br /></span><span style="color: #FF8000">// 没有继承 C。<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">E </span><span style="color: #007700">{}<br /><br />function </span><span style="color: #0000BB">f</span><span style="color: #007700">(</span><span style="color: #0000BB">C $c</span><span style="color: #007700">) {<br />    echo </span><span style="color: #0000BB">get_class</span><span style="color: #007700">(</span><span style="color: #0000BB">$c</span><span style="color: #007700">).</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">f</span><span style="color: #007700">(new </span><span style="color: #0000BB">C</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">f</span><span style="color: #007700">(new </span><span style="color: #0000BB">D</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">f</span><span style="color: #007700">(new </span><span style="color: #0000BB">E</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例在 PHP 8 中的输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+C
+D
+
+Fatal error: Uncaught TypeError: f(): Argument #1 ($c) must be of type C, E given, called in /in/gLonb on line 14 and defined in /in/gLonb:8
+Stack trace:
+#0 -(14): f(Object(E))
+#1 {main}
+  thrown in - on line 8
+</pre></div>
+   </div>
+  </div>
+
+  <div class="example" id="example-233">
+   <p><strong>示例 #4 基础接口类型声明</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">interface </span><span style="color: #0000BB">I </span><span style="color: #007700">{ public function </span><span style="color: #0000BB">f</span><span style="color: #007700">(); }<br />class </span><span style="color: #0000BB">C </span><span style="color: #007700">implements </span><span style="color: #0000BB">I </span><span style="color: #007700">{ public function </span><span style="color: #0000BB">f</span><span style="color: #007700">() {} }<br /><br /></span><span style="color: #FF8000">// 没有实现（implement）I。<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">E </span><span style="color: #007700">{}<br /><br />function </span><span style="color: #0000BB">f</span><span style="color: #007700">(</span><span style="color: #0000BB">I $i</span><span style="color: #007700">) {<br />    echo </span><span style="color: #0000BB">get_class</span><span style="color: #007700">(</span><span style="color: #0000BB">$i</span><span style="color: #007700">).</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">f</span><span style="color: #007700">(new </span><span style="color: #0000BB">C</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">f</span><span style="color: #007700">(new </span><span style="color: #0000BB">E</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例在 PHP 8 中的输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+C
+
+Fatal error: Uncaught TypeError: f(): Argument #1 ($i) must be of type I, E given, called in - on line 13 and defined in -:8
+Stack trace:
+#0 -(13): f(Object(E))
+#1 {main}
+  thrown in - on line 8
+</pre></div>
+   </div>
+  </div>
+
+  <div class="example" id="example-236">
+   <p><strong>示例 #5 基础返回类型声明</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">sum</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">, </span><span style="color: #0000BB">$b</span><span style="color: #007700">): </span><span style="color: #0000BB">float </span><span style="color: #007700">{<br />    return </span><span style="color: #0000BB">$a </span><span style="color: #007700">+ </span><span style="color: #0000BB">$b</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #FF8000">// Note that a float will be returned.<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">sum</span><span style="color: #007700">(</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例会输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+float(3)
+</pre></div>
+   </div>
+  </div>
+
+  <div class="example" id="example-239">
+   <p><strong>示例 #6 返回对象</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">C </span><span style="color: #007700">{}<br /><br />function </span><span style="color: #0000BB">getC</span><span style="color: #007700">(): </span><span style="color: #0000BB">C </span><span style="color: #007700">{<br />    return new </span><span style="color: #0000BB">C</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">getC</span><span style="color: #007700">());<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例会输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+object(C)#1 (0) {
+}
+</pre></div>
+   </div>
+  </div>
+
+  <div class="example" id="example-242">
+   <p><strong>示例 #7 可为 null 参数类型声明</strong></p>
+   <div class="example-contents">
+    <div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">C </span><span style="color: #007700">{}<br /><br />function </span><span style="color: #0000BB">f</span><span style="color: #007700">(?</span><span style="color: #0000BB">C $c</span><span style="color: #007700">) {<br />    </span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$c</span><span style="color: #007700">);<br />}<br /><br /></span><span style="color: #0000BB">f</span><span style="color: #007700">(new </span><span style="color: #0000BB">C</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">f</span><span style="color: #007700">(</span><span style="color: #0000BB">null</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例会输出：</p></div>
+   <div class="example-contents screen">
+    <div class="cdata"><pre>
+object(C)#1 (0) {
+}
+NULL
+</pre></div>
+   </div>
+  </div>
+
+  <div class="example" id="example-245">
+   <p><strong>示例 #8 可为 null 返回类型声明</strong></p>
+   <div class="example-contents">
+    <div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">get_item</span><span style="color: #007700">(): ?</span><span style="color: #0000BB">string </span><span style="color: #007700">{<br />    if (isset(</span><span style="color: #0000BB">$_GET</span><span style="color: #007700">[</span><span style="color: #DD0000">'item'</span><span style="color: #007700">])) {<br />        return </span><span style="color: #0000BB">$_GET</span><span style="color: #007700">[</span><span style="color: #DD0000">'item'</span><span style="color: #007700">];<br />    } else {<br />        return </span><span style="color: #0000BB">null</span><span style="color: #007700">;<br />    }<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+  </div>
+
+  <div class="example" id="example-248">
+   <p><strong>示例 #9 类属性类型化声明</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">User </span><span style="color: #007700">{<br />    public static </span><span style="color: #0000BB">string $foo </span><span style="color: #007700">= </span><span style="color: #DD0000">'foo'</span><span style="color: #007700">;<br /><br />    public </span><span style="color: #0000BB">int $id</span><span style="color: #007700">;<br />    public </span><span style="color: #0000BB">string $username</span><span style="color: #007700">;<br /><br />    public function </span><span style="color: #0000BB">__construct</span><span style="color: #007700">(</span><span style="color: #0000BB">int $id</span><span style="color: #007700">, </span><span style="color: #0000BB">string $username</span><span style="color: #007700">) {<br />        </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">id </span><span style="color: #007700">= </span><span style="color: #0000BB">$id</span><span style="color: #007700">;<br />        </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">username </span><span style="color: #007700">= </span><span style="color: #0000BB">$username</span><span style="color: #007700">;<br />    }<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+  </div>
+ </div>
+
+  
+ <div class="sect2" id="language.types.declarations.strict">
+  <h3 class="title">严格类型</h3>
+
+  <p class="para">
+   默认如果可能，PHP 会强制转化不合适的类型为想要的标量类型。
+   比如，参数想要 <span class="type">string</span>，传入的是 <span class="type">int</span>，
+   则会获取 <span class="type">string</span> 类型的变量。
+  </p>
+
+  <p class="para">
+   可以按文件开启严格模式。
+   在严格模式下，只能接受完全匹配的类型，否则会抛出 <span class="classname"><a href="class.typeerror.html" class="classname">TypeError</a></span>。
+   唯一的例外是 <span class="type">int</span> 值也可以传入声明为 <span class="type">float</span> 的类型。
+  </p>
+
+  <div class="warning"><strong class="warning">警告</strong>
+   <p class="simpara">
+    通过内部函数调用函数时，不会受 <code class="literal">strict_types</code> 声明影响。
+   </p>
+  </div>
+
+  <p class="para">
+   要开启严格模式，使用 <a href="control-structures.declare.html" class="link"><code class="literal">declare</code></a> 开启
+   <code class="literal">strict_types</code>：
+  </p>
+
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    文件开启严格类型后的<em>内部</em>调用函数将应用严格类型，
+    而不是在声明函数的文件内开启。
+    如果文件没有声明开启严格类型，而被调用的函数所在文件有严格类型声明，
+    那将遵循调用者的设置（开启类型强制转化），
+    值也会强制转化。
+   </p>
+  </p></blockquote>
+
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    只有为标量类型的声明开启严格类型。
+   </p>
+  </p></blockquote>
+
+  <div class="example" id="language.oop5.interfaces.examples.variance.multiple.interfaces">
+   <p><strong>示例 #10 参数值的严格类型</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">declare(</span><span style="color: #0000BB">strict_types</span><span style="color: #007700">=</span><span style="color: #0000BB">1</span><span style="color: #007700">);<br /><br />function </span><span style="color: #0000BB">sum</span><span style="color: #007700">(</span><span style="color: #0000BB">int $a</span><span style="color: #007700">, </span><span style="color: #0000BB">int $b</span><span style="color: #007700">) {<br />    return </span><span style="color: #0000BB">$a </span><span style="color: #007700">+ </span><span style="color: #0000BB">$b</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">sum</span><span style="color: #007700">(</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">sum</span><span style="color: #007700">(</span><span style="color: #0000BB">1.5</span><span style="color: #007700">, </span><span style="color: #0000BB">2.5</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例在 PHP 8 中的输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+int(3)
+
+Fatal error: Uncaught TypeError: sum(): Argument #1 ($a) must be of type int, float given, called in - on line 9 and defined in -:4
+Stack trace:
+#0 -(9): sum(1.5, 2.5)
+#1 {main}
+  thrown in - on line 4
+</pre></div>
+   </div>
+  </div>
+
+  <div class="example" id="language.oop5.interfaces.examples.ex5">
+   <p><strong>示例 #11 参数值的类型强制转化</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">sum</span><span style="color: #007700">(</span><span style="color: #0000BB">int $a</span><span style="color: #007700">, </span><span style="color: #0000BB">int $b</span><span style="color: #007700">) {<br />    return </span><span style="color: #0000BB">$a </span><span style="color: #007700">+ </span><span style="color: #0000BB">$b</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">sum</span><span style="color: #007700">(</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">));<br /><br /></span><span style="color: #FF8000">// 以下会强制转化为整型，注意以下内容输出！<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">sum</span><span style="color: #007700">(</span><span style="color: #0000BB">1.5</span><span style="color: #007700">, </span><span style="color: #0000BB">2.5</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例会输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+int(3)
+int(3)
+</pre></div>
+   </div>
+  </div>
+
+  <div class="example" id="language.oop5.traits.precedence.examples.ex1">
+   <p><strong>示例 #12 返回值的严格类型</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">declare(</span><span style="color: #0000BB">strict_types</span><span style="color: #007700">=</span><span style="color: #0000BB">1</span><span style="color: #007700">);<br /><br />function </span><span style="color: #0000BB">sum</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">, </span><span style="color: #0000BB">$b</span><span style="color: #007700">): </span><span style="color: #0000BB">int </span><span style="color: #007700">{<br />    return </span><span style="color: #0000BB">$a </span><span style="color: #007700">+ </span><span style="color: #0000BB">$b</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">sum</span><span style="color: #007700">(</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">sum</span><span style="color: #007700">(</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2.5</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例会输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+int(3)
+
+Fatal error: Uncaught TypeError: sum(): Return value must be of type int, float returned in -:5
+Stack trace:
+#0 -(9): sum(1, 2.5)
+#1 {main}
+  thrown in - on line 5
+</pre></div>
+   </div>
+  </div>
+ </div>
+
+
+</div></div></div></body></html>

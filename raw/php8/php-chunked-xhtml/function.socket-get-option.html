@@ -1,0 +1,656 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>获取套接字的套接字选项</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.socket-export-stream.html">« socket_export_stream</a></li>
+      <li style="float: right;"><a href="function.socket-getopt.html">socket_getopt »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.sockets.html">Socket 函数</a></li>
+    <li>获取套接字的套接字选项</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.socket-get-option" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">socket_get_option</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.3.0, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">socket_get_option</span> &mdash; <span class="dc-title">获取套接字的套接字选项</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.socket-get-option-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>socket_get_option</strong></span>(<span class="methodparam"><span class="type"><a href="class.socket.html" class="type Socket">Socket</a></span> <code class="parameter">$socket</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$level</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$option</code></span>): <span class="type"><span class="type">array</span>|<span class="type">int</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>socket_get_option()</strong></span> 函数检索指定 <code class="parameter">socket</code> 
+   中由 <code class="parameter">option</code> 参数指定的选项值。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.socket-get-option-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">socket</code></dt>
+
+     <dd>
+
+      <p class="para">
+       由 <span class="function"><a href="function.socket-create.html" class="function">socket_create()</a></span> 或 <span class="function"><a href="function.socket-accept.html" class="function">socket_accept()</a></span> 
+       创建的 <span class="classname"><a href="class.socket.html" class="classname">Socket</a></span> 实例。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">level</code></dt>
+
+     <dd>
+
+      <p class="para">
+       <code class="parameter">level</code> 参数定义选项所在的协议级别。例如，在 socket 级别检索选项，将使用 <strong><code>SOL_SOCKET</code></strong> 
+       作为 <code class="parameter">level</code> 参数值。在其它级别，例如 TCP，可以使用该级别指定的协议号。协议号可以通过 <span class="function"><a href="function.getprotobyname.html" class="function">getprotobyname()</a></span> 
+       获取。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">option</code></dt>
+
+     <dd>
+
+      <table class="doctable table">
+       <caption><strong>套接字可用选项</strong></caption>
+       
+        <thead>
+         <tr>
+          <th>选项</th>
+          <th>描述</th>
+          <th>类型</th>
+         </tr>
+
+        </thead>
+
+        <tbody class="tbody">
+         <tr>
+          <td><strong><code>SO_DEBUG</code></strong></td>
+          <td>
+           是否记录调试信息。
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>SO_BROADCAST</code></strong></td>
+          <td>
+           是否支持传输广播消息。
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>SO_REUSEADDR</code></strong></td>
+          <td>
+           是否可以复用本地地址。
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>SO_REUSEPORT</code></strong></td>
+          <td>
+           是否可以复用本地端口。
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>SO_KEEPALIVE</code></strong></td>
+          <td>
+           是否通过定期传输消息来为连接保活。如果连接的套接字对消息未响应，连接将断开，并且正在写入套接字的进程会收到 SIGPIPE 信号。
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>SO_LINGER</code></strong></td>
+          <td>
+           <p class="para">
+            <code class="parameter">socket</code> 执行 <span class="function"><a href="function.socket-close.html" class="function">socket_close()</a></span> 
+            时是否滞留残留数据。默认情况下，当关闭 socket 时，将尝试发送所有还未发送的数据。在面向连接的套接字中，<span class="function"><a href="function.socket-close.html" class="function">socket_close()</a></span> 
+            会等待对端确认接收数据。
+           </p>
+           <p class="para">
+            如果 <var class="varname">l_onoff</var> 不为零，且 <var class="varname">l_linger</var> 
+            为零，对于面向连接的套接字，将丢弃所有未发送的数据，并发送给对端一个 RST（reset）报文。
+           </p>
+           <p class="para">
+            另外，如果 <var class="varname">l_onoff</var> 不为零，且 <var class="varname">l_linger</var> 
+            不为零，<span class="function"><a href="function.socket-close.html" class="function">socket_close()</a></span> 将阻塞，直到数据被发送完或者超过 <var class="varname">l_linger</var> 
+            指定的时间。如果 socket 设置为非阻塞，<span class="function"><a href="function.socket-close.html" class="function">socket_close()</a></span> 将执行失败并返回错误。
+           </p>
+          </td>
+          <td>
+           <span class="type">array</span>。数组包含两个键：
+           <var class="varname">l_onoff</var> 和 <var class="varname">l_linger</var>。
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>SO_OOBINLINE</code></strong></td>
+          <td>
+           <code class="parameter">socket</code> 是否保留带外数据在正常的数据输入队列中。
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>SO_SNDBUF</code></strong></td>
+          <td>
+           发送缓冲区大小。
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>          
+         </tr>
+
+         <tr>
+          <td><strong><code>SO_RCVBUF</code></strong></td>
+          <td>
+           接收缓冲区大小。
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>         
+         </tr>
+
+         <tr>
+          <td><strong><code>SO_ERROR</code></strong></td>
+          <td>
+           获取错误状态信息并复位。
+          </td>
+          <td>
+           <span class="type">int</span> (不能被 <span class="function"><a href="function.socket-set-option.html" class="function">socket_set_option()</a></span> 设置)
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>SO_TYPE</code></strong></td>
+          <td>
+           <code class="parameter">socket</code> 类型（例如 <strong><code>SOCK_STREAM</code></strong>）。
+          </td>
+          <td>
+           <span class="type">int</span> (不能被 <span class="function"><a href="function.socket-set-option.html" class="function">socket_set_option()</a></span> 设置）
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>SO_DONTROUTE</code></strong></td>
+          <td>
+           发出的消息是否绕过标准路由机制。
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>SO_RCVLOWAT</code></strong></td>
+          <td>
+           <code class="parameter">socket</code> 写入操作要处理的最小字节数。
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>SO_RCVTIMEO</code></strong></td>
+          <td>
+           接收超时时间。
+          </td>
+          <td>
+           <span class="type">array</span>。数组包含两个键：<var class="varname">sec</var> 
+           是超时时间的秒部分，<var class="varname">usec</var> 是微秒部分。
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>SO_SNDTIMEO</code></strong></td>
+          <td>
+           指定输出功能阻塞的超时时长，因为流量控制会阻止数据发送。
+          </td>
+          <td>
+           <span class="type">array</span>。数组包含两个键：<var class="varname">sec</var> 
+           是超时时间的秒部分，<var class="varname">usec</var> 是微秒部分。
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>SO_SNDLOWAT</code></strong></td>
+          <td>
+           <code class="parameter">socket</code> 输出操作要处理的最小字节数。
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>TCP_NODELAY</code></strong></td>
+          <td>
+           是否禁用 TCP Nagle 算法。
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>MCAST_JOIN_GROUP</code></strong></td>
+          <td>
+           加入多播组。
+          </td>
+          <td>
+           <span class="type">array</span> 包含 <code class="literal">&quot;group&quot;</code> 键，指定 <span class="type">string</span> 
+           类型的 IPv4 或 IPv6 多播地址；另一个键 <code class="literal">&quot;interface&quot;</code> 
+           指定（<span class="type">int</span> 类型）接口编号或是 <code class="literal">string</code> 
+           类型的接口名称，比如 <code class="literal">&quot;eth0&quot;</code>。可以指定 <code class="literal">0</code> 
+           来使用路由规则选择接口。（仅在 <span class="function"><a href="function.socket-set-option.html" class="function">socket_set_option()</a></span> 中使用）
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>MCAST_LEAVE_GROUP</code></strong></td>
+          <td>
+           离开多播组。
+          </td>
+          <td>
+           <span class="type">array</span>。详情见 <strong><code>MCAST_JOIN_GROUP</code></strong>。（仅在 <span class="function"><a href="function.socket-set-option.html" class="function">socket_set_option()</a></span> 中使用）
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>MCAST_BLOCK_SOURCE</code></strong></td>
+          <td>
+           在已加入的多播组上阻塞接收来自指定源的数据包。
+          </td>
+          <td>
+           <span class="type">array</span> 与 <strong><code>MCAST_JOIN_GROUP</code></strong> 
+           有相同的键，额外增加 <span class="type">string</span> 
+           类型的 <code class="literal">source</code> 键，指定要阻塞的 IPv4 或 IPv6 源地址。（仅在 <span class="function"><a href="function.socket-set-option.html" class="function">socket_set_option()</a></span> 中使用）
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>MCAST_UNBLOCK_SOURCE</code></strong></td>
+          <td>
+           在已加入的多播组取消阻塞（继续接收）接收来自指定源的数据包。
+          </td>
+          <td>
+           <span class="type">array</span> 与 <strong><code>MCAST_BLOCK_SOURCE</code></strong> 格式相同。（仅在 <span class="function"><a href="function.socket-set-option.html" class="function">socket_set_option()</a></span> 中使用）
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>MCAST_JOIN_SOURCE_GROUP</code></strong></td>
+          <td>
+           接收源地址与指定多播组匹配的数据包。
+          </td>
+          <td>
+           <span class="type">array</span> 与 <strong><code>MCAST_BLOCK_SOURCE</code></strong> 格式相同。（仅在 <span class="function"><a href="function.socket-set-option.html" class="function">socket_set_option()</a></span> 中使用）
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>MCAST_LEAVE_SOURCE_GROUP</code></strong></td>
+          <td>
+           停止接收源地址与指定多播组匹配的数据包。
+          </td>
+          <td>
+           <span class="type">array</span> 与 <strong><code>MCAST_BLOCK_SOURCE</code></strong> 格式相同。（仅在 <span class="function"><a href="function.socket-set-option.html" class="function">socket_set_option()</a></span> 中使用）
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>IP_MULTICAST_IF</code></strong></td>
+          <td>
+           IPv4 多播数据包的输出接口。
+          </td>
+          <td>
+           使用 <span class="type">int</span> 类型指定接口编号或使用 <span class="type">string</span> 
+           类型指定接口名，例如 <code class="literal">eth0</code>。<span class="type"><span class="type 0">0</span></span> 
+           表示选择接口时使用路由表。<span class="function"><a href="function.socket-set-option.html" class="function">socket_set_option()</a></span> 
+           函数返回接口索引。注意，不像 C API，此选项无需提供 IP 地址。这样就消除了 <strong><code>IP_MULTICAST_IF</code></strong> 
+           和 <strong><code>IPV6_MULTICAST_IF</code></strong> 之间的接口差异。
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>IPV6_MULTICAST_IF</code></strong></td>
+          <td>
+           IPv6 多播数据包的输出接口。
+          </td>
+          <td>
+           与 <strong><code>IP_MULTICAST_IF</code></strong> 相同。
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>IP_MULTICAST_LOOP</code></strong></td>
+          <td>
+           在已加入的多播组开启或禁用 IPv4 报文的组播环回策略。类 Unix 中作用于发送路径，Windows 中作用于接收路径。
+          </td>
+          <td>
+           <span class="type">int</span>（<code class="literal">0</code> 或 <code class="literal">1</code>）。<span class="function"><strong>socket_get_option()</strong></span>
+           可以接受任何值，并按照常规 PHP 规则转换为布尔值。
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>IPV6_MULTICAST_LOOP</code></strong></td>
+          <td>
+           与 <strong><code>IP_MULTICAST_LOOP</code></strong> 类似，但用于 IPv6。
+          </td>
+          <td>
+           <span class="type">int</span>。详情见 <strong><code>IP_MULTICAST_LOOP</code></strong>。
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>IP_MULTICAST_TTL</code></strong></td>
+          <td>
+           传出 IPv4 多播数据包的生存时间。这个值需要在 0（数据不传出）到 255 之间。默认值是 1（仅到达本地网络）。
+          </td>
+          <td>
+           <span class="type">int</span> 0 到 255 之间。
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>IPV6_MULTICAST_HOPS</code></strong></td>
+          <td>
+           与 <strong><code>IP_MULTICAST_TTL</code></strong> 类似，但用于 IPv6 数据包。-1 也可以被接受，表示使用默认路由。
+          </td>
+          <td>
+           <span class="type">int</span> -1 到 255 之间。
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>SO_MARK</code></strong></td>
+          <td>
+           在套接字上设置标识符，用于过滤 Linux 中的数据包。 
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>SO_ACCEPTFILTER</code></strong></td>
+          <td>
+           在（FreeBSD 或 NetBSD）监听套接字上添加接受过滤器。FreeBSD 中，需要预先加载接受过滤器内核模块（例如 accf_http）。
+          </td>
+          <td>
+           <span class="type">string</span> 过滤器名称（最大长度 15）。
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>SO_USER_COOKIE</code></strong></td>
+          <td>
+           在套接字上设置标识符，用于过滤 FreeBSD 中的数据包。 
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>SO_RTABLE</code></strong></td>
+          <td>
+           在套接字上设置标识符，用于过滤 OpenBSD 中的数据包。 
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>SO_DONTTRUNC</code></strong></td>
+          <td>
+           保留未读数据。
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>SO_WANTMORE</code></strong></td>
+          <td>
+           当准备好更多数据时给出提示。
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>TCP_DEFER_ACCEPT</code></strong></td>
+          <td>
+           在数据准备好之前不通知监听套接字。
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>SO_INCOMING_CPU</code></strong></td>
+          <td>
+           获取或设置套接字的 CPU 亲和性。
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>SO_MEMINFO</code></strong></td>
+          <td>
+           获取套接字的内存信息。
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>SO_BPF_EXTENSIONS</code></strong></td>
+          <td>
+           为套接字附加内核支持的 BPF 扩展。
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>SO_SETFIB</code></strong></td>
+          <td>
+           为套接字设置路由表（FIB）。（仅 FreeBSD）
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>SOL_FILTER</code></strong></td>
+          <td>
+           过滤套接字的属性。（仅 Solaris/Illumos）
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>TCP_KEEPCNT</code></strong></td>
+          <td>
+           设置 TCP 在断开连接前的最大保活探测次数。
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>TCP_KEEPIDLE</code></strong></td>
+          <td>
+           设置连接需要保持空闲的时间。
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>TCP_KEEPINTVL</code></strong></td>
+          <td>
+           设置各个保活探针的间隔时间。
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>TCP_KEEPALIVE</code></strong></td>
+          <td>
+           设置连接需要保持空闲的时间。（仅 macOS）
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>TCP_NOTSENT_LOWAT</code></strong></td>
+          <td>
+           设置套接字流数据队列中未发送数据的数量限制。（仅 Linux）
+          </td>
+          <td>
+           <span class="type">int</span>
+          </td>
+         </tr>
+
+        </tbody>
+       
+      </table>
+
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.socket-get-option-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回给定选项的值， 或者在失败时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.socket-get-option-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+  <td>8.0.0</td>
+  <td>
+   现在 <code class="parameter">socket</code> 是 <span class="classname"><a href="class.socket.html" class="classname">Socket</a></span> 实例，
+   之前是 <span class="type">resource</span>。
+  </td>
+ </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.socket-get-option-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 <span class="function"><strong>socket_get_option()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$socket </span><span style="color: #007700">= </span><span style="color: #0000BB">socket_create_listen</span><span style="color: #007700">(</span><span style="color: #0000BB">1223</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$linger </span><span style="color: #007700">= array(</span><span style="color: #DD0000">'l_linger' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #DD0000">'l_onoff' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">1</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">socket_set_option</span><span style="color: #007700">(</span><span style="color: #0000BB">$socket</span><span style="color: #007700">, </span><span style="color: #0000BB">SOL_SOCKET</span><span style="color: #007700">, </span><span style="color: #0000BB">SO_LINGER</span><span style="color: #007700">, </span><span style="color: #0000BB">$linger</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">socket_get_option</span><span style="color: #007700">(</span><span style="color: #0000BB">$socket</span><span style="color: #007700">, </span><span style="color: #0000BB">SOL_SOCKET</span><span style="color: #007700">, </span><span style="color: #0000BB">SO_REUSEADDR</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.socket-get-option-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.socket-create-listen.html" class="function" rel="rdfs-seeAlso">socket_create_listen()</a> - 在端口上打开一个套接字以接受连接</span></li>
+    <li class="member"><span class="function"><a href="function.socket-set-option.html" class="function" rel="rdfs-seeAlso">socket_set_option()</a> - 为套接字设置套接字选项</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

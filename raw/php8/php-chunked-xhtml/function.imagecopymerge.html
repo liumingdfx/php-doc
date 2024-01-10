@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>拷贝并合并图像的一部分</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.imagecopy.html">« imagecopy</a></li>
+      <li style="float: right;"><a href="function.imagecopymergegray.html">imagecopymergegray »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.image.html">GD 和图像处理 函数</a></li>
+    <li>拷贝并合并图像的一部分</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.imagecopymerge" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">imagecopymerge</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.0.1, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">imagecopymerge</span> &mdash; <span class="dc-title">拷贝并合并图像的一部分</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.imagecopymerge-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>imagecopymerge</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><a href="class.gdimage.html" class="type GdImage">GdImage</a></span> <code class="parameter">$dst_image</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><a href="class.gdimage.html" class="type GdImage">GdImage</a></span> <code class="parameter">$src_image</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$dst_x</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$dst_y</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$src_x</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$src_y</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$src_width</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$src_height</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$pct</code></span><br>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   从 x、y 坐标 <code class="parameter">src_x</code>、<code class="parameter">src_y</code> 开始，将 <code class="parameter">src_image</code>
+   的一部分复制到 <code class="parameter">dst_image</code> 上，宽度为 <code class="parameter">src_width</code>，高度为
+   <code class="parameter">src_height</code>。定义的部分将被复制到 x、y 坐标 <code class="parameter">dst_x</code> 和 <code class="parameter">dst_y</code> 上。
+  </p>
+ </div>
+
+ <div class="refsect1 parameters" id="refsect1-function.imagecopymerge-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">dst_image</code></dt>
+
+     <dd>
+
+      <p class="para">目标图象资源。</p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">src_image</code></dt>
+
+     <dd>
+
+      <p class="para">源图象资源。</p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">dst_x</code></dt>
+
+     <dd>
+
+      <p class="para">
+       目标点的 x 坐标。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">dst_y</code></dt>
+
+     <dd>
+
+      <p class="para">
+       目标点的 y 坐标。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">src_x</code></dt>
+
+     <dd>
+
+      <p class="para">
+       源点的 x 坐标。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">src_y</code></dt>
+
+     <dd>
+
+      <p class="para">
+       源点的 y 坐标。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">src_width</code></dt>
+
+     <dd>
+
+      <p class="para">源图象的宽度。</p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">src_height</code></dt>
+
+     <dd>
+
+      <p class="para">源图象的高度。</p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">pct</code></dt>
+
+     <dd>
+
+      <p class="para">
+       两个图像将根据 <code class="parameter">pct</code> 合并，范围是 0 到 100。当 <code class="parameter">pct</code> =
+       0，不采取任何操作，当 100 时，此函数的行为与调色板图像的 <span class="function"><a href="function.imagecopy.html" class="function">imagecopy()</a></span> 相同，除了忽略
+       alpha alpha 组件（components），其实现了真彩色图像的 alpha 透明度。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+ <div class="refsect1 returnvalues" id="refsect1-function.imagecopymerge-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   成功时返回 <strong><code>true</code></strong>， 或者在失败时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.imagecopymerge-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       <code class="parameter">dst_image</code> 和 <code class="parameter">src_image</code> 现在需要
+       <span class="classname"><a href="class.gdimage.html" class="classname">GdImage</a></span> 实例；之前需要 <span class="type">resource</span>。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.imagecopymerge-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 使用 75% 透明度合并 PHP.net logo 的两个副本</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// Create image instances<br /></span><span style="color: #0000BB">$dest </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecreatefromgif</span><span style="color: #007700">(</span><span style="color: #DD0000">'php.gif'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$src </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecreatefromgif</span><span style="color: #007700">(</span><span style="color: #DD0000">'php.gif'</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// Copy and merge<br /></span><span style="color: #0000BB">imagecopymerge</span><span style="color: #007700">(</span><span style="color: #0000BB">$dest</span><span style="color: #007700">, </span><span style="color: #0000BB">$src</span><span style="color: #007700">, </span><span style="color: #0000BB">10</span><span style="color: #007700">, </span><span style="color: #0000BB">10</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">100</span><span style="color: #007700">, </span><span style="color: #0000BB">47</span><span style="color: #007700">, </span><span style="color: #0000BB">75</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// Output and free from memory<br /></span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">'Content-Type: image/gif'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagegif</span><span style="color: #007700">(</span><span style="color: #0000BB">$dest</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">imagedestroy</span><span style="color: #007700">(</span><span style="color: #0000BB">$dest</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagedestroy</span><span style="color: #007700">(</span><span style="color: #0000BB">$src</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+</div></div></div></body></html>

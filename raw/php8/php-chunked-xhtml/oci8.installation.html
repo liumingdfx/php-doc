@@ -1,0 +1,525 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>安装</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="oci8.requirements.html">« 需求</a></li>
+      <li style="float: right;"><a href="oci8.test.html">Testing »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="oci8.setup.html">安装/配置</a></li>
+    <li>安装</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="oci8.installation" class="section">
+ <h2 class="title">安装</h2>
+
+
+<div class="section" id="oci8.configure">
+<h2 class="title">使用 OCI8 配置 PHP</h2>
+ <p class="para">
+  在配置 OCI8 之前查看前面的<a href="oci8.requirements.html" class="link">要求</a>部分。
+ </p>
+ <p class="para">
+  在启动 Web 服务器之前，OCI8 通常需要几个 Oracle 环境变量（见下文）来定位库、指向配置文件并设置一些基本属性，例如
+  Oracle 库使用的字符集。必须在 PHP 进程启动<em>之前</em>设置变量。
+ </p>
+ <p class="para">
+  PHP 二进制文件必须链接到与其配置时相同或更高的主要 Oracle 库版本。例如，如果使用 Oracle 19 库编译 OCI8，那么
+  PHP 也应该使用 Oracle 19 库部署和运行。PHP 应用程序可以连接到其他版本的 Oracle 数据库，因为 Oracle
+  具有客户端-服务器跨版本兼容性。
+ </p>
+</div>
+<div class="section">
+ <h2 class="title">使用 pecl 命令从 PECL 安装 OCI8</h2>
+ <p class="para">
+  可以使用 <a href="https://pecl.php.net/package/oci8" class="link external">&raquo;&nbsp;PECL</a> 存储库将 OCI8 扩展添加到已安装的现有 PHP 中。
+ </p>
+ <p class="para">
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     如果在防火墙的后面，设置 PEAR 代理，例如：
+    </p>
+    <p class="para">
+     <div class="informalexample">
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+pear config-set http_proxy http://my-proxy.example.com:80/
+</pre></div>
+      </div>
+     </div>
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     运行
+    </p>
+    <p class="para">
+     <div class="informalexample">
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+pecl install oci8
+</pre></div>
+      </div>
+     </div>
+    </p>
+    <p class="para">
+     对于 PHP 7，使用 <code class="literal">pecl install oci8-2.2.0</code>
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     出现提示时，输入 <code class="literal">$ORACLE_HOME</code> 的值或 <code class="literal">instantclient,/path/to/instant/client/lib</code>。
+    </p>
+    <p class="para">
+      注意：不要输入 <code class="literal">$ORACLE_HOME</code> 或 <code class="literal">$HOME</code> 之类的变量名，因为 <code class="literal">pecl</code>
+      不会展开它们。反而应该输入展开后的路径，例如 <code class="literal">/opt/oracle/product/19c/dbhome_1</code> 或
+      <code class="literal">instantclient,/Users/myname/Downloads/instantclient_19_8</code>
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     如果收到错误 <code class="literal">oci8_dtrace_gen.h: No such file or directory</code>，这意味着 PHP 是在启用 <a href="features.dtrace.html" class="link">DTrace
+     动态跟踪</a>的情况下编译的。使用如下安装：
+    </p>
+   <p class="para">
+    <div class="informalexample">
+     <div class="example-contents screen">
+<div class="cdata"><pre>
+$ export PHP_DTRACE=yes
+$ pecl install oci8
+</pre></div>
+     </div>
+    </div>
+   </p>    
+   </li>   
+   <li class="listitem">
+    <p class="para">
+      编辑 <var class="filename">php.ini</var> 文件并添加以下行：
+    </p>
+    <p class="para">
+      <div class="informalexample">
+        <div class="example-contents screen">
+          <div class="cdata"><pre>
+extension=oci8.so
+</pre></div>
+        </div>
+      </div>
+    </p>
+    <p class="para">
+      确保 <var class="filename">php.ini</var> 指令 <a href="ini.core.html#ini.extension-dir" class="link">extension_dir</a> 设置为安装 <var class="filename">oci8.so</var> 的目录。
+    </p>
+   </li>
+  </ul>
+ </p>
+</div>
+<div class="section">
+ <h2 class="title">使用 phpize 从 PECL 安装 OCI8</h2>
+ <p class="para">
+  要在无法使用 <code class="literal">pecl</code> 命令时在已安装的现有 PHP 上安装 OCI8，请手动下载 <a href="https://pecl.php.net/package/oci8" class="link external">&raquo;&nbsp;PECL</a> OCI8 包，例如 <var class="filename">oci8-3.0.0.tgz</var>。
+ </p>
+ <p class="para">
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     解压包：
+    </p>
+    <p class="para">
+     <div class="informalexample">
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+tar -zxf oci8-3.0.0.tgz
+cd oci8-3.0.0
+</pre></div>
+      </div>
+     </div>
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     预处理包：
+    </p>
+    <p class="para">
+     <div class="informalexample">
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+phpize
+</pre></div>
+      </div>
+     </div>
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     使用 <code class="literal">$ORACLE_HOME</code> 或 Instant Client 配置包
+    </p>
+    <p class="para">
+     <div class="informalexample">
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+./configure -with-oci8=shared,$ORACLE_HOME
+</pre></div>
+      </div>
+     </div>
+    </p>
+    <p class="para">
+     或
+    </p>
+    <p class="para">
+     <div class="informalexample">
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+./configure -with-oci8=shared,instantclient,/path/to/instant/client/lib
+</pre></div>
+      </div>
+     </div>
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     安装包：
+    </p>
+    <p class="para">
+     <div class="informalexample">
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+make install
+</pre></div>
+      </div>
+     </div>
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     如果收到错误 <code class="literal">oci8_dtrace_gen.h: No such file or directory</code>，这意味着 PHP
+     是在启用 <a href="features.dtrace.html" class="link">DTrace 动态跟踪</a>的情况下编译的。设置此环境变量后重新运行
+     <code class="literal">configure</code> 和 <code class="literal">make</code> 命令：
+    </p>
+    <p class="para">
+     <div class="informalexample">
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+$ export PHP_DTRACE=yes
+</pre></div>
+     </div>
+    </div>
+   </p>    
+   </li>
+   <li class="listitem">
+    <p class="para">
+      编辑 <var class="filename">php.ini</var> 文件并添加以下行：
+    </p>
+    <p class="para">
+      <div class="informalexample">
+        <div class="example-contents screen">
+          <div class="cdata"><pre>
+extension=oci8.so
+</pre></div>
+        </div>
+      </div>
+    </p>
+    <p class="para">
+      确保 <var class="filename">php.ini</var> 指令 <a href="ini.core.html#ini.extension-dir" class="link">extension_dir</a> 设置为安装 <var class="filename">oci8.so</var> 的目录。
+    </p>
+   </li>
+  </ul>
+ </p>
+</div>
+<div class="section">
+ <h2 class="title">编译 PHP 时将 OCI8 作为共享扩展安装</h2>
+ <p class="para">
+  如果从源代码编译 PHP，则可以使用 <code class="literal">shared</code> 配置选项将 OCI8 编译为共享库，可以动态加载到
+  PHP。编译共享扩展可以轻松升级 OCI8 ，而不会影响 PHP 的其它部分。
+ </p>
+ <p class="para">
+  使用以下任一配置选项配置 OCI8。
+ </p>
+ <p class="para">
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     如果使用免费的 <a href="https://www.oracle.com/database/technologies/instant-client.html" class="link external">&raquo;&nbsp;Oracle Instant Client</a> 库，则执行以下操作：
+    </p>
+    <p class="para">
+     <div class="informalexample">
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+./configure --with-oci8=shared,instantclient,/path/to/instant/client/lib
+</pre></div>
+      </div>
+     </div>
+    </p>
+    <p class="para">
+     如果 Instant Client 12.2（或更早版本）是从 ZIP 文件安装的，请首先确保创建库符号链接，例如
+     <code class="literal">ln -s libclntsh.so.12.1 libclntsh.so</code>。
+    </p>
+    <p class="para">
+     如果使用基于 RPM 的 Oracle Instant Client 安装，配置行将如下所示：
+    </p>
+    <p class="para">
+     <div class="informalexample">
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+./configure --with-oci8=shared,instantclient,/usr/lib/oracle/&lt;version&gt;/client/lib
+</pre></div>
+      </div>
+     </div>
+    </p>
+    <p class="para">
+     例如：<strong class="option configure">--with-oci8=shared,instantclient,/usr/lib/oracle/19.9/client/lib</strong>
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     如果使用 Oracle 数据库或完整的 Oracle 客户端安装，则执行以下操作：
+    </p>
+    <p class="para">
+     <div class="informalexample">
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+./configure --with-oci8=shared,$ORACLE_HOME
+</pre></div>
+      </div>
+     </div>
+    </p>
+    <p class="para">
+     确保 Web 服务器用户（<code class="literal">nobody</code>、<code class="literal">www</code>）可以访问 <code class="literal">$ORACLE_HOME</code>
+     目录下的库、初始化文件和 <var class="filename">tnsnames.ora</var>（如果使用）。对于 Oracle 10<em>g</em>R2，可能需要运行
+     <var class="filename">$ORACLE_HOME/install/changePerm.sh</var> 实用程序来授予目录访问权限。
+    </p>
+   </li>
+  </ul>
+ </p>
+ <p class="para">
+  配置后，遵循通用的 PHP 编译过程，例如 <em>make install</em>。将创建 OCI8 共享扩展 <var class="filename">oci8.so</var>
+  库。可能需要手动移动到 PHP 扩展目录，由 <var class="filename">php.ini</var> 文件中的 <a href="ini.core.html#ini.extension-dir" class="link">extension_dir</a> 选项指定。
+ </p>
+ <p class="para">
+  要完成 OCI8 的安装，请编辑 <var class="filename">php.ini</var> 并添加以下行：
+ </p>
+ <p class="para">
+  <div class="informalexample">
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+extension=oci8.so
+</pre></div>
+   </div>
+  </div>
+ </p>
+</div>
+<div class="section">
+ <h2 class="title">编译 PHP 时将 OCI8 作为静态编译扩展安装</h2>
+ <p class="para">
+  如果从源代码编译 PHP，则可以使用以下任一配置选项，配置 PHP 为包含 OCI8 静态扩展的 PHP。
+ </p>
+ <p class="para">
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     如果使用 Oracle Instant Client，则执行以下操作：
+    </p>
+    <p class="para">
+     <div class="informalexample">
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+./configure --with-oci8=instantclient,/path/to/instant/client/lib
+</pre></div>
+      </div>
+     </div>
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     如果使用 Oracle 数据库或完整的 Oracle 客户端安装，则执行以下操作：
+    </p>
+    <p class="para">
+     <div class="informalexample">
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+./configure --with-oci8=$ORACLE_HOME
+</pre></div>
+      </div>
+     </div>
+    </p>
+   </li>
+  </ul>
+ </p>
+ <p class="para">
+  配置后，遵循通用的 PHP 编译过程，例如 <em>make install</em>。编译成功后，不需要在
+  <var class="filename">php.ini</var> 中加入 <var class="filename">oci8.so</var>。不需要额外的编译步骤。
+ </p>
+</div>
+<div class="section">
+ <h2 class="title">在 Windows 上安装 OCI8</h2>
+ <p class="para">
+  通过使用 <a href="https://pecl.php.net/package/oci8" class="link external">&raquo;&nbsp;PECL</a> 存储库或函数库（library）中的
+  DLL，在已安装 PHP 的 <code class="literal">ext</code> 中，将 OCI8 扩展添加到现有的 PHP 安装中。
+ </p>
+ <p class="para">
+  对于 Oracle 12<em>c</em>（或更高版本）的库，取消注释其中 <var class="filename">php.ini</var> 行 <code class="literal">extension=php_oci8_12c.dll</code>
+  或 <code class="literal">extension=php_oci8_11g.dll</code> 或 <code class="literal">extension=php_oci8.dll</code> 中的一个。一次只能启用这些 DLL 中的一个。更高版本的 DLL
+  可能包含更多功能。并非所有 DLL 都适用于所有版本的 PHP。确保将 <a href="ini.core.html#ini.extension-dir" class="link">extension_dir</a> 设置为包含 PHP 扩展 DLL 的目录。
+ </p>
+ <p class="para">
+  如果使用 Instant Client，请将系统 <var class="envar">PATH</var> 环境变量设置为 Oracle 库目录。
+ </p>
+</div>
+<div class="section">
+ <h2 class="title">设置 Oracle 环境</h2>
+ <p class="para">
+  在使用此扩展之前，请确保为 Web 守护程序用户正确设置了 Oracle 环境变量。 如果 Web 服务器在启动时自动启动，请确保启动时环境也已正确配置。
+ </p>
+ <blockquote class="note"><p><strong class="note">注意</strong>: 
+  <p class="para">
+   不要在 PHP 脚本中使用 <span class="function"><a href="function.putenv.html" class="function">putenv()</a></span> 设置 Oracle 环境变量，因为 Oracle 库可能会在脚本运行之前加载和初始化。使用 <span class="function"><a href="function.putenv.html" class="function">putenv()</a></span>
+   设置的变量可能会导致冲突、崩溃或不可预知的行为。有些函数可能有效，但其它函数可能会出现细微的错误。应在启动 Web 服务器<em>之前</em>设置变量。
+  </p>
+ </p></blockquote>
+ <p class="para">
+  在 Red Hat Linux 及其变体上，在 <var class="filename">/etc/sysconfig/httpd</var> 末尾导出变量。其他带有 Apache 2 的系统可能会使用 Apache <var class="filename">bin</var>
+  目录中的 <var class="filename">envvars</var> 脚本。 A third option, the
+  Apache <code class="literal">SetEnv</code> directive
+  in <var class="filename">httpd.conf</var>, may work in some systems but is
+  known to be insufficient in others.
+ </p>
+ <p class="para">
+  要检查环境变量是否设置正确，请使用 <span class="function"><a href="function.phpinfo.html" class="function">phpinfo()</a></span> 并检查 <em>Environment</em>（不是 <em>Apache Environment</em>）部分是否包含预期变量。
+ </p>
+ <p class="para">
+  可能需要的变量包含在下表中。有关所有可用变量的更多信息，请参阅 Oracle 文档。
+  <table class="doctable table">
+   <caption><strong>常见的 Oracle 环境变量</strong></caption>
+   
+    <thead>
+     <tr>
+      <th>Name</th>
+      <th>Purpose</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>ORACLE_HOME</td>
+      <td>包含完整 Oracle 数据库软件的目录。使用 Oracle Instant Client
+      时不要设置它，因为它是不必要的并且可能会导致安装问题。</td>
+     </tr>
+
+     <tr>
+      <td>ORACLE_SID</td>
+      <td>包含要连接到的本地计算机上的数据库的名称。如果使用 Oracle Instant Client
+      或始终将连接参数传递给 <span class="function"><a href="function.oci-connect.html" class="function">oci_connect()</a></span> 时，则无需设置此项。</td>
+     </tr>
+
+     <tr>
+      <td>LD_LIBRARY_PATH</td>
+      <td>将其（或其平台等效项，例如 <code class="literal">LIBPATH</code> 或 <code class="literal">SHLIB_PATH</code>）设置为 Oracle 库的位置，例如 <var class="filename">$ORACLE_HOME/lib</var>
+      或 <var class="filename">/usr/lib/oracle/18.5/client/lib</var>。请注意，对于 Linux 上的 Instant Client ZIP 文件，使用 <var class="filename">ldconfig</var> 更可靠，请参阅
+      Instant Client 安装说明。对于 Instant Client 19（或更高版本）RPM 文件，<var class="filename">ldconfig</var> 会自动运行。有些用户使用 <code class="literal">LD_PRELOAD</code>
+      而不是 <code class="literal">LD_LIBRARY_PATH</code>。</td>
+     </tr>
+
+     <tr>
+      <td>NLS_LANG</td>
+      <td>这是设置 Oracle 库使用的字符集和国际化信息的主要变量。</td>
+     </tr>
+
+     <tr>
+      <td>ORA_SDTZ</td>
+      <td>设置 Oracle 会话时区。</td>
+     </tr>
+
+     <tr>
+      <td>TNS_ADMIN</td>
+      <td>Contains the directory where the Oracle Net Services configuration
+      files such as <var class="filename">tnsnames.ora</var>
+      and <var class="filename">sqlnet.ora</var> are kept.  Not needed if
+      the <span class="function"><a href="function.oci-connect.html" class="function">oci_connect()</a></span> connection string uses the Easy
+      Connect naming syntax such as <code class="literal">localhost/XE</code>.  Not needed
+      if the network configuration files are in one of the default locations
+      such
+      as <var class="filename">/usr/lib/oracle/VERSION/client/lib/network/admin</var>, <var class="filename">$ORACLE_HOME/network/admin</var>
+      or <var class="filename">/etc</var>.</td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+   不太常用的 Oracle 环境变量包括 <code class="literal">TWO_TASK</code>、<code class="literal">ORA_TZFILE</code> 和各种 Oracle 全局设置，如 <code class="literal">NLS*</code> 和 <code class="literal">ORA_NLS_*</code> 变量。
+ </p>
+</div>
+<div class="section">
+ <h2 class="title">故障排除</h2>
+ <p class="para">
+  安装 OCI8 最常见的问题是没有正确设置 Oracle 环境。这通常表现为使用 <span class="function"><a href="function.oci-connect.html" class="function">oci_connect()</a></span> 或 <span class="function"><a href="function.oci-pconnect.html" class="function">oci_pconnect()</a></span>
+  的问题。该错误可能是 PHP 错误，例如 <em>Call to undefined function oci_connect()</em>，Oracle 错误（例如 ORA-12705），甚至是
+  Apache 崩溃。检查 Apache 日志文件中的启动错误，并查看以上部分以解决此问题。
+ </p>
+ <p class="para">
+  虽然 ORA-12154 或 ORA-12514 等网络错误表示是 Oracle 网络命名或配置问题，但根本原因可能是因为 PHP 环境设置不正确，Oracle 库无法找到
+  <var class="filename">tnsnames.ora</var> 配置文件。
+ </p>
+ <p class="para">
+  在 Windows 上，在一台机器上安装多个版本的 Oracle 很容易导致库冲突，除非注意确保 PHP 只使用正确版本的 Oracle。
+ </p>
+ <p class="para">
+  用于检查查找和加载哪些库的实用程序可以帮助解决库丢失或冲突问题，尤其是在 Windows 上。
+ </p>
+ <blockquote class="note"><p><strong class="note">注意</strong>: 
+  <strong>如果 Web 服务器未启动或在启动时崩溃</strong><br />
+  <p class="para">
+   检查 Apache 是否与 pthread 库链接：
+  </p>
+  <p class="para">
+   <div class="informalexample">
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+# ldd /www/apache/bin/httpd
+  libpthread.so.0 =&gt; /lib/libpthread.so.0 (0x4001c000)
+  libm.so.6 =&gt; /lib/libm.so.6 (0x4002f000)
+  libcrypt.so.1 =&gt; /lib/libcrypt.so.1 (0x4004c000)
+  libdl.so.2 =&gt; /lib/libdl.so.2 (0x4007a000)
+  libc.so.6 =&gt; /lib/libc.so.6 (0x4007e000)
+  /lib/ld-linux.so.2 =&gt; /lib/ld-linux.so.2 (0x40000000)
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   如果未列出 libpthread，则需要重新安装 Apache：
+  </p>
+  <p class="para">
+   <div class="informalexample">
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+# cd /usr/src/apache_1.3.xx
+# make clean
+# LIBS=-lpthread ./config.status
+# make
+# make install
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   请注意，在某些系统（如 UnixWare）上，它是 libthread 而不是 libpthread PHP 和 Apache 必须配置 EXTRA_LIBS=-lthread。
+  </p>
+ </p></blockquote>
+</div>
+
+
+</div></div></div></body></html>

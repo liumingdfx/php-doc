@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>验证值是否可以在当前范围内作为函数调用。</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.is-bool.html">« is_bool</a></li>
+      <li style="float: right;"><a href="function.is-countable.html">is_countable »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.var.html">变量处理函数</a></li>
+    <li>验证值是否可以在当前范围内作为函数调用。</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.is-callable" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">is_callable</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.0.6, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">is_callable</span> &mdash; <span class="dc-title">
+   验证值是否可以在当前范围内作为函数调用。
+  </span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.is-callable-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>is_callable</strong></span>(<span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$value</code></span>, <span class="methodparam"><span class="type">bool</span> <code class="parameter">$syntax_only</code><span class="initializer"> = <strong><code>false</code></strong></span></span>, <span class="methodparam"><span class="type">string</span> <code class="parameter reference">&$callable_name</code><span class="initializer"> = <strong><code>null</code></strong></span></span>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   验证值是 <span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.is-callable-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">value</code></dt>
+
+     <dd>
+
+      <p class="para">
+       要验证的值
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">syntax_only</code></dt>
+
+     <dd>
+
+      <p class="para">
+       如果设置为 <strong><code>true</code></strong>，则函数仅验证 <code class="parameter">value</code>
+       可能是函数或方法。它仅拒绝不是字符串的简单变量，或者不能用作回调的有效结构的数组。只有
+       2 个条目有效，一个是对象或者字符串，其次是字符串。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">callable_name</code></dt>
+
+     <dd>
+
+      <p class="para">
+       接受“可调用的名称”。下面的例子是“someClass::someMethod”。注意，尽管 
+       someClass::SomeMethod() 暗示是可调用的静态方法，但事实并非如此。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.is-callable-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   如果 <code class="parameter">value</code> 可调用则返回 <strong><code>true</code></strong>，否则返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.is-callable-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 <span class="function"><strong>is_callable()</strong></span> 例子</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//  如何检测变量以查看是否可以作为函数调用。<br /><br />//<br />//  包含函数的简单变量<br />//<br /><br /></span><span style="color: #007700">function </span><span style="color: #0000BB">someFunction</span><span style="color: #007700">() <br />{<br />}<br /><br /></span><span style="color: #0000BB">$functionVariable </span><span style="color: #007700">= </span><span style="color: #DD0000">'someFunction'</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">is_callable</span><span style="color: #007700">(</span><span style="color: #0000BB">$functionVariable</span><span style="color: #007700">, </span><span style="color: #0000BB">false</span><span style="color: #007700">, </span><span style="color: #0000BB">$callable_name</span><span style="color: #007700">));  </span><span style="color: #FF8000">// bool(true)<br /><br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">$callable_name</span><span style="color: #007700">, </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;  </span><span style="color: #FF8000">// someFunction<br /><br />//<br />//  包含方法的数组<br />//<br /><br /></span><span style="color: #007700">class </span><span style="color: #0000BB">someClass </span><span style="color: #007700">{<br /><br />  function </span><span style="color: #0000BB">someMethod</span><span style="color: #007700">() <br />  {<br />  }<br /><br />}<br /><br /></span><span style="color: #0000BB">$anObject </span><span style="color: #007700">= new </span><span style="color: #0000BB">someClass</span><span style="color: #007700">();<br /><br /></span><span style="color: #0000BB">$methodVariable </span><span style="color: #007700">= array(</span><span style="color: #0000BB">$anObject</span><span style="color: #007700">, </span><span style="color: #DD0000">'someMethod'</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">is_callable</span><span style="color: #007700">(</span><span style="color: #0000BB">$methodVariable</span><span style="color: #007700">, </span><span style="color: #0000BB">true</span><span style="color: #007700">, </span><span style="color: #0000BB">$callable_name</span><span style="color: #007700">));  </span><span style="color: #FF8000">//  bool(true)<br /><br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">$callable_name</span><span style="color: #007700">, </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;  </span><span style="color: #FF8000">//  someClass::someMethod<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>   
+   <div class="example" id="">
+    <p><strong>示例 #2 <span class="function"><strong>is_callable()</strong></span> 和构造函数</strong></p>
+    <div class="example-contents"><p>
+     <span class="function"><strong>is_callable()</strong></span> 报告构造函数不可调用。
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">class </span><span style="color: #0000BB">Foo<br /></span><span style="color: #007700">{<br />    public function </span><span style="color: #0000BB">__construct</span><span style="color: #007700">() {}<br />    public function </span><span style="color: #0000BB">foo</span><span style="color: #007700">() {}<br />}<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(<br />    </span><span style="color: #0000BB">is_callable</span><span style="color: #007700">(array(</span><span style="color: #DD0000">'Foo'</span><span style="color: #007700">, </span><span style="color: #DD0000">'__construct'</span><span style="color: #007700">)),<br />    </span><span style="color: #0000BB">is_callable</span><span style="color: #007700">(array(</span><span style="color: #DD0000">'Foo'</span><span style="color: #007700">, </span><span style="color: #DD0000">'foo'</span><span style="color: #007700">))<br />);</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+bool(false)
+bool(false)
+</pre></div>
+    </div>
+   </div>
+  </p>   
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.is-callable-notes">
+  <h3 class="title">注释</h3>
+  <ul class="simplelist">
+   <li class="member">
+    如果对象实现了 <a href="language.oop5.magic.html#object.invoke" class="link">__invoke()</a> 且该方法在当前作用域可见，则始终可调用。
+   </li>
+   <li class="member">
+    如果类名实现了 <a href="language.oop5.overloading.html#object.callstatic" class="link">__callStatic()</a>，则可调用。
+   </li>
+   <li class="member">
+    如果对象实现 <a href="language.oop5.overloading.html#object.call" class="link">__call()</a>，则此函数对该对象的任何方法将返回
+    <strong><code>true</code></strong>，即使该方法没有定义。
+   </li>
+   <li class="member">
+    如果使用类名调用此函数，则会触发自动加载。
+   </li>
+  </ul>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.is-callable-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.function-exists.html" class="function" rel="rdfs-seeAlso">function_exists()</a> - 如果给定的函数已经被定义就返回 true</span></li>
+    <li class="member"><span class="function"><a href="function.method-exists.html" class="function" rel="rdfs-seeAlso">method_exists()</a> - 检查类的方法是否存在</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div></div></div></body></html>

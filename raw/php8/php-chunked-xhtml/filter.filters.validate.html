@@ -1,0 +1,266 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>验证过滤器</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="filter.filters.html">« 过滤器类型</a></li>
+      <li style="float: right;"><a href="filter.filters.sanitize.html">清理过滤器 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="filter.filters.html">过滤器类型</a></li>
+    <li>验证过滤器</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="filter.filters.validate" class="section">
+  <h2 class="title">验证过滤器</h2>
+   <p class="para">
+    <table class="doctable table">
+     <caption><strong>用于验证的过滤器列表</strong></caption>
+     
+      <thead>
+       <tr>
+        <th>ID</th>
+        <th>名称</th>
+        <th>选项</th>
+        <th>flag</th>
+        <th>说明</th>
+       </tr>
+
+      </thead>
+
+      <tbody class="tbody">
+       <tr>
+        <td>
+         <strong><code>FILTER_VALIDATE_BOOLEAN</code></strong>、<strong><code>FILTER_VALIDATE_BOOL</code></strong>
+        </td>
+        <td>&quot;boolean&quot;</td>
+        <td>
+         <code class="parameter">default</code>
+        </td>
+        <td>
+          <strong><code>FILTER_NULL_ON_FAILURE</code></strong>
+        </td>
+        <td>
+         <p class="para">
+          &quot;1&quot;、&quot;true&quot;、&quot;on&quot; 和 &quot;yes&quot; 时返回 <strong><code>true</code></strong>，否则返回 <strong><code>false</code></strong>。
+         </p>
+         <p class="para">
+          如果设置了 <strong><code>FILTER_NULL_ON_FAILURE</code></strong>，仅当 &quot;0&quot;、&quot;false&quot;、&quot;off&quot;、&quot;no&quot;
+          和 &quot;&quot; 时才会返回 <strong><code>false</code></strong>，其它非布尔值都会返回 <strong><code>null</code></strong>。
+         </p>
+         <p class="para">
+          字符串在对比前会使用 <span class="function"><a href="function.trim.html" class="function">trim()</a></span> 修剪。
+         </p>
+        </td>
+       </tr>
+
+       <tr>
+        <td><strong><code>FILTER_VALIDATE_DOMAIN</code></strong></td>
+        <td>&quot;validate_domain&quot;</td>
+        <td>
+         <code class="parameter">default</code>
+        </td>
+        <td>
+         <strong><code>FILTER_FLAG_HOSTNAME</code></strong>、<strong><code>FILTER_NULL_ON_FAILURE</code></strong>
+        </td>
+        <td>
+         <p class="para">
+          验证域名标签的长度是否有效。
+         </p>
+         <p class="para">
+          根据 RFC 1034、RFC 1035、RFC 952、RFC 1123、RFC 2732、RFC 2181 和 RFC 1123 的规范验证域名。可选的 flag
+          <strong><code>FILTER_FLAG_HOSTNAME</code></strong> 会添加验证主机名的能力（它们必须以字母数字字符开头，并且只能包含字母数字字符或连字符）。
+         </p>
+        </td>
+       </tr>
+
+       <tr>
+        <td><strong><code>FILTER_VALIDATE_EMAIL</code></strong></td>
+        <td>&quot;validate_email&quot;</td>
+        <td>
+         <code class="parameter">default</code>
+        </td>
+        <td>
+         <strong><code>FILTER_FLAG_EMAIL_UNICODE</code></strong>、<strong><code>FILTER_NULL_ON_FAILURE</code></strong>
+        </td>
+        <td>
+         <p class="para">
+          验证值是否是有效的电子邮件地址。
+         </p>
+         <p class="para">
+          一般情况下，这将根据 <a href="http://www.faqs.org/rfcs/rfc822" class="link external">&raquo;&nbsp;RFC 822</a> 对电子邮件地址进行验证，使用
+          <code class="literal">addr-spec</code> 语法，并且不支持注释、空白折叠和无点域名的例外情况。
+         </p>
+        </td>
+       </tr>
+
+       <tr>
+        <td><strong><code>FILTER_VALIDATE_FLOAT</code></strong></td>
+        <td>&quot;float&quot;</td>
+        <td>
+         <code class="parameter">default</code>、<code class="parameter">decimal</code>、<code class="parameter">min_range</code>、<code class="parameter">max_range</code>
+        </td>
+        <td>
+         <strong><code>FILTER_FLAG_ALLOW_THOUSAND</code></strong>、<strong><code>FILTER_NULL_ON_FAILURE</code></strong>
+        </td>
+        <td>
+         <p class="para">
+          将值作为浮点数验证，并且可选择在指定范围内进行验证，在验证成功后将其转换为浮点数。
+         </p>
+         <p class="para">
+          字符串在对比前会使用 <span class="function"><a href="function.trim.html" class="function">trim()</a></span> 修剪。
+         </p>
+        </td>
+       </tr>
+
+       <tr>
+        <td><strong><code>FILTER_VALIDATE_INT</code></strong></td>
+        <td>&quot;int&quot;</td>
+        <td>
+         <code class="parameter">default</code>、<code class="parameter">min_range</code>、<code class="parameter">max_range</code>
+        </td>
+        <td>
+         <strong><code>FILTER_FLAG_ALLOW_OCTAL</code></strong>、<strong><code>FILTER_FLAG_ALLOW_HEX</code></strong>、<strong><code>FILTER_NULL_ON_FAILURE</code></strong>
+        </td>
+        <td>
+         <p class="para">
+          将值作为整数验证，并且可选择在指定范围内进行验证，在验证成功后将其转换为整数。
+         </p>
+         <p class="para">
+          字符串在对比前会使用 <span class="function"><a href="function.trim.html" class="function">trim()</a></span> 修剪。
+         </p>
+        </td>
+       </tr>
+
+       <tr>
+        <td><strong><code>FILTER_VALIDATE_IP</code></strong></td>
+        <td>&quot;validate_ip&quot;</td>
+        <td>
+         <code class="parameter">default</code>
+        </td>
+        <td>
+         <strong><code>FILTER_FLAG_IPV4</code></strong>、<strong><code>FILTER_FLAG_IPV6</code></strong>、<strong><code>FILTER_FLAG_NO_PRIV_RANGE</code></strong>、<strong><code>FILTER_FLAG_NO_RES_RANGE</code></strong>、<strong><code>FILTER_FLAG_GLOBAL_RANGE</code></strong>、<strong><code>FILTER_NULL_ON_FAILURE</code></strong>
+        </td>
+        <td>
+         将值作为 IP 地址验证，可选择仅验证 IPv4、IPv6 或不验证私有、保留范围。
+        </td>
+       </tr>
+
+       <tr>
+        <td><strong><code>FILTER_VALIDATE_MAC</code></strong></td>
+        <td>&quot;validate_mac_address&quot;</td>
+        <td>
+         <code class="parameter">default</code>
+        </td>
+        <td>
+         <strong><code>FILTER_NULL_ON_FAILURE</code></strong>
+        </td>
+        <td>将值作为 MAC 地址验证。</td>
+       </tr>
+
+       <tr>
+        <td><strong><code>FILTER_VALIDATE_REGEXP</code></strong></td>
+        <td>&quot;validate_regexp&quot;</td>
+        <td>
+         <code class="parameter">default</code>、<code class="parameter">regexp</code>
+        </td>
+        <td>
+         <strong><code>FILTER_NULL_ON_FAILURE</code></strong>
+        </td>
+        <td>
+         根据 <code class="parameter">regexp</code>（<a href="book.pcre.html" class="link">Perl 兼容</a>的正则表达式）验证值。
+        </td>
+       </tr>
+
+       <tr>
+        <td><strong><code>FILTER_VALIDATE_URL</code></strong></td>
+        <td>&quot;validate_url&quot;</td>
+        <td>
+         <code class="parameter">default</code>
+        </td>
+        <td>
+         <strong><code>FILTER_FLAG_SCHEME_REQUIRED</code></strong>、<strong><code>FILTER_FLAG_HOST_REQUIRED</code></strong>、<strong><code>FILTER_FLAG_PATH_REQUIRED</code></strong>、<strong><code>FILTER_FLAG_QUERY_REQUIRED</code></strong>、<strong><code>FILTER_NULL_ON_FAILURE</code></strong>
+        </td>
+        <td>
+         验证值是否为 URL（根据 <a href="http://www.faqs.org/rfcs/rfc2396" class="link external">&raquo;&nbsp;http://www.faqs.org/rfcs/rfc2396</a>），并可选择验证 URL 所需的组件。请注意，有效的
+         URL 可能不会指定 HTTP 协议（<code class="literal">http://</code>），因此可能需要进一步验证以确定 URL 是否使用了期望的协议，如 <code class="literal">ssh://</code>
+         或<code class="literal">mailto:</code>。请注意，该函数只会认为 ASCII 编码的 URL 是有效的；国际化域名（包含非 ASCII 字符）将无法通过验证。
+        </td>
+       </tr>
+
+      </tbody>
+     
+    </table>
+
+   </p>
+   <blockquote class="note"><p><strong class="note">注意</strong>: 
+    <p class="para">
+     当将 <code class="parameter">default</code> 设置到选项，如果值未通过验证，将使用 <code class="parameter">default</code> 的值。
+    </p>
+   </p></blockquote>
+
+  <div class="simplesect">
+   <h3 class="title">更新日志</h3>
+   <p class="para">
+    <table class="doctable informaltable">
+     
+      <thead>
+       <tr>
+        <th>版本</th>
+        <th>说明</th>
+       </tr>
+
+      </thead>
+
+      <tbody class="tbody">
+       <tr>
+        <td>8.0.0</td>
+        <td>
+         <strong><code>FILTER_VALIDATE_URL</code></strong> 过滤器移除 <strong><code>FILTER_FLAG_SCHEME_REQUIRED</code></strong>
+         和 <strong><code>FILTER_FLAG_HOST_REQUIRED</code></strong> flag。
+         <code class="literal">scheme</code> 和 <code class="literal">host</code> 始终（一直以来）必需。
+        </td>
+       </tr>
+
+       <tr>
+        <td>8.0.0</td>
+        <td>
+         新增 <strong><code>FILTER_VALIDATE_BOOL</code></strong> 作为 <strong><code>FILTER_VALIDATE_BOOLEAN</code></strong>
+         的别名。优先使用 <strong><code>FILTER_VALIDATE_BOOL</code></strong>。
+        </td>
+       </tr>
+
+       <tr>
+        <td>7.4.0</td>
+        <td>
+         <strong><code>FILTER_VALIDATE_FLOAT</code></strong> 新增 <code class="parameter">min_range</code> 和 <code class="parameter">max_range</code> 选项。
+        </td>
+       </tr>
+
+       <tr>
+        <td>7.0.0</td>
+        <td>
+         新增 <strong><code>FILTER_FLAG_HOSTNAME</code></strong> 和 <strong><code>FILTER_VALIDATE_DOMAIN</code></strong>。
+        </td>
+       </tr>
+
+      </tbody>
+     
+    </table>
+
+   </p>
+  </div>
+
+ </div></div></div></body></html>

@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>取得某像素的颜色索引值</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.imagecolorallocatealpha.html">« imagecolorallocatealpha</a></li>
+      <li style="float: right;"><a href="function.imagecolorclosest.html">imagecolorclosest »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.image.html">GD 和图像处理 函数</a></li>
+    <li>取得某像素的颜色索引值</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.imagecolorat" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">imagecolorat</h1>
+   <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">imagecolorat</span> &mdash; <span class="dc-title">取得某像素的颜色索引值</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.imagecolorat-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>imagecolorat</strong></span>(<span class="methodparam"><span class="type"><a href="class.gdimage.html" class="type GdImage">GdImage</a></span> <code class="parameter">$image</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$x</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$y</code></span>): <span class="type"><span class="type">int</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   返回 <code class="parameter">image</code> 所指定的图像中指定位置像素的颜色索引值。
+   </p>
+   <p class="para">
+    如果图像是真彩色图像，此函数以整数返回该点的 RGB
+    值。用位移加掩码来取得红，绿，蓝各自的值：
+  </p>
+ </div>
+
+ <div class="refsect1 parameters" id="refsect1-function.imagecolorat-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    <dt>
+
+<code class="parameter">image</code></dt>
+<dd>
+<p class="para">由图象创建函数(例如<span class="function"><a href="function.imagecreatetruecolor.html" class="function">imagecreatetruecolor()</a></span>)返回的 
+<span class="classname"><a href="class.gdimage.html" class="classname">GdImage</a></span> 对象。</p></dd>
+
+    
+     <dt>
+<code class="parameter">x</code></dt>
+
+     <dd>
+
+      <p class="para">
+       点的 x 坐标。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">y</code></dt>
+
+     <dd>
+
+      <p class="para">
+       点的 y 坐标。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+ <div class="refsect1 returnvalues" id="refsect1-function.imagecolorat-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回颜色的索引 或者在失败时返回 <strong><code>false</code></strong>。
+  </p>
+  <div class="warning"><strong class="warning">警告</strong><p class="simpara">此函数可能返回布尔值
+<strong><code>false</code></strong>，但也可能返回等同于 <strong><code>false</code></strong> 的非布尔值。请阅读 <a href="language.types.boolean.html" class="link">布尔类型</a>章节以获取更多信息。应使用
+<a href="language.operators.comparison.html" class="link">===
+运算符</a>来测试此函数的返回值。</p></div>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.imagecolorat-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+ <td>8.0.0</td>
+ <td>
+  <code class="parameter">image</code> 现在需要 <span class="classname"><a href="class.gdimage.html" class="classname">GdImage</a></span> 实例；之前需要有效的 <code class="literal">gd</code> <span class="type">resource</span>。
+ </td>
+</tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.imagecolorat-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 访问不同的 RGB 值</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$im </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecreatefrompng</span><span style="color: #007700">(</span><span style="color: #DD0000">"php.png"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$rgb </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecolorat</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">, </span><span style="color: #0000BB">10</span><span style="color: #007700">, </span><span style="color: #0000BB">15</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$r </span><span style="color: #007700">= (</span><span style="color: #0000BB">$rgb </span><span style="color: #007700">&gt;&gt; </span><span style="color: #0000BB">16</span><span style="color: #007700">) &amp; </span><span style="color: #0000BB">0xFF</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$g </span><span style="color: #007700">= (</span><span style="color: #0000BB">$rgb </span><span style="color: #007700">&gt;&gt; </span><span style="color: #0000BB">8</span><span style="color: #007700">) &amp; </span><span style="color: #0000BB">0xFF</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$b </span><span style="color: #007700">= </span><span style="color: #0000BB">$rgb </span><span style="color: #007700">&amp; </span><span style="color: #0000BB">0xFF</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$r</span><span style="color: #007700">, </span><span style="color: #0000BB">$g</span><span style="color: #007700">, </span><span style="color: #0000BB">$b</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例的输出类似于：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+int(119)
+int(123)
+int(180)
+</pre></div>
+    </div>
+   </div>
+   <div class="example" id="">
+    <p><strong>示例 #2 使用 <span class="function"><a href="function.imagecolorsforindex.html" class="function">imagecolorsforindex()</a></span> 获取可读的 RGB 值</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$im </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecreatefrompng</span><span style="color: #007700">(</span><span style="color: #DD0000">"php.png"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$rgb </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecolorat</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">, </span><span style="color: #0000BB">10</span><span style="color: #007700">, </span><span style="color: #0000BB">15</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$colors </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecolorsforindex</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">, </span><span style="color: #0000BB">$rgb</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$colors</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例的输出类似于：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+array(4) {
+  [&quot;red&quot;]=&gt;
+  int(119)
+  [&quot;green&quot;]=&gt;
+  int(123)
+  [&quot;blue&quot;]=&gt;
+  int(180)
+  [&quot;alpha&quot;]=&gt;
+  int(127)
+}
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+ <div class="refsect1 seealso" id="refsect1-function.imagecolorat-seealso">
+  <h3 class="title">参见</h3>
+  <ul class="simplelist">
+   <li class="member"><span class="function"><a href="function.imagecolorset.html" class="function" rel="rdfs-seeAlso">imagecolorset()</a> - 给指定调色板索引设定颜色</span></li>
+   <li class="member"><span class="function"><a href="function.imagecolorsforindex.html" class="function" rel="rdfs-seeAlso">imagecolorsforindex()</a> - 获取索引的颜色</span></li>
+   <li class="member"><span class="function"><a href="function.imagesetpixel.html" class="function" rel="rdfs-seeAlso">imagesetpixel()</a> - 设置单个像素</span></li>
+  </ul>
+ </div>
+
+</div></div></div></body></html>

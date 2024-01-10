@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>简介</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="book.datetime.html">« 日期/时间</a></li>
+      <li style="float: right;"><a href="datetime.setup.html">安装/配置 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="book.datetime.html">日期/时间</a></li>
+    <li>简介</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="intro.datetime" class="preface">
+  <h1 class="title">简介</h1>
+  <p class="para">
+   <span class="classname"><a href="class.datetimeimmutable.html" class="classname">DateTimeImmutable</a></span>
+   和关联类允许表示日期/时间信息。通过传递字符串表述的日期/时间信息或从当前系统时间来创建这些对象。
+  </p>
+  <p class="para">
+   还提供了丰富的方法来修改和格式化这些信息，包括处理时区和 DST（夏令时）转换。
+  </p>
+  <p class="para">
+   PHP 中的日期/时间功能实现了 ISO 8601 历法，这是<a href="https://en.wikipedia.org/wiki/Proleptic_Gregorian_calendar" class="link external">&raquo;&nbsp;前公历</a>，实现了公历之前的当前闰日规则，并且还包括 <code class="literal">0</code>
+   年作为介于两者之间的年份——<code class="literal">公元前 1 年</code>和<code class="literal">公元 1 年</code>。不支持闰秒。
+  </p>
+  <p class="para">
+   日期和时间信息在内部是以 64 位数字存储的，所以支持所有可能有用的日期（包括负数年份）。其范围覆盖当前时间前后
+   2920 亿年的时间。
+  </p>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <span class="simpara">
+    本节中用到的时区可以从<a href="timezones.html" class="xref">所支持的时区列表</a>获取。
+   </span>
+  </p></blockquote>
+ </div></div></div></body></html>

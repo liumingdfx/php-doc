@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>根据区域设置格式化 GMT/UTC 时间/日期</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.gmmktime.html">« gmmktime</a></li>
+      <li style="float: right;"><a href="function.idate.html">idate »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.datetime.html">Date/Time 函数</a></li>
+    <li>根据区域设置格式化 GMT/UTC 时间/日期</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.gmstrftime" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">gmstrftime</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">gmstrftime</span> &mdash; <span class="dc-title">根据区域设置格式化 GMT/UTC 时间/日期</span></p>
+
+ </div>
+
+ <div id="function.gmstrftime-refsynopsisdiv">
+  <div class="warning"><strong class="warning">警告</strong><p class="simpara"> 该函数自 PHP 8.1
+起<em>弃用</em>。强烈建议不要依赖此函数。</p>
+</div>
+<p class="para">
+ 此函数可以使用如下替代：
+</p>
+
+  <ul class="simplelist">
+   <li class="member"><span class="function"><a href="function.gmdate.html" class="function">gmdate()</a></span></li>
+   <li class="member"><span class="methodname"><a href="intldateformatter.format.html" class="methodname">IntlDateFormatter::format()</a></span></li>
+  </ul>
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.gmstrftime-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>gmstrftime</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$format</code></span>, <span class="methodparam"><span class="type">?</span><span class="type"><span class="type">int</span><span class="type"></span></span> <code class="parameter">$timestamp</code><span class="initializer"> = <strong><code>null</code></strong></span></span>): <span class="type"><span class="type">string</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   行为和 <span class="function"><a href="function.strftime.html" class="function">strftime()</a></span> 相同，只是返回的时间是格林威治标准时（GMT）。例如，在东部标准时（EST，GMT
+   -0500）运行时，下面第一行显示“Dec 31 1998 20:00:00”，而第二行显示“Jan 01 1999
+   01:00:00”。
+  </p>
+  <div class="warning"><strong class="warning">警告</strong>
+   <p class="para">
+    此函数依赖于操作系统区域设置信息，这些信息可能彼此不一致，或者根本不能用。而是使用
+    <span class="methodname"><a href="intldateformatter.format.html" class="methodname">IntlDateFormatter::format()</a></span> 方法。
+   </p>
+  </div>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.gmstrftime-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">format</code></dt>
+
+     <dd>
+
+      <p class="para">
+       See description in <span class="function"><a href="function.strftime.html" class="function">strftime()</a></span>.
+      </p>
+     </dd>
+
+    
+    <dt>
+<code class="parameter">timestamp</code></dt>
+<dd>
+<p class="para">
+可选的 <code class="parameter">timestamp</code> 参数是一个 <span class="type">int</span> 的 Unix
+时间戳，如未指定或是 <strong><code>null</code></strong>，参数值默认为当前本地时间。也就是说，其值默认为
+<span class="function"><a href="function.time.html" class="function">time()</a></span> 的返回值。</p></dd>
+
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.gmstrftime-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   Returns a string formatted according to the given format string
+   using the given <code class="parameter">timestamp</code> or the current
+   local time if no timestamp is given.  Month and weekday names and
+   other language dependent strings respect the current locale set
+   with <span class="function"><a href="function.setlocale.html" class="function">setlocale()</a></span>.
+   On failure, <strong><code>false</code></strong> is returned.
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.gmstrftime-changelog">
+  <h3 class="title">更新日志</h3>
+  <p class="para">
+   <table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>8.0.0</td>
+       <td>
+        现在 <code class="parameter">timestamp</code> 允许为 null。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.gmstrftime-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 <span class="function"><strong>gmstrftime()</strong></span> 例子</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />setlocale</span><span style="color: #007700">(</span><span style="color: #0000BB">LC_TIME</span><span style="color: #007700">, </span><span style="color: #DD0000">'en_US'</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">strftime</span><span style="color: #007700">(</span><span style="color: #DD0000">"%b %d %Y %H:%M:%S"</span><span style="color: #007700">, </span><span style="color: #0000BB">mktime</span><span style="color: #007700">(</span><span style="color: #0000BB">20</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">12</span><span style="color: #007700">, </span><span style="color: #0000BB">31</span><span style="color: #007700">, </span><span style="color: #0000BB">98</span><span style="color: #007700">)) . </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />echo </span><span style="color: #0000BB">gmstrftime</span><span style="color: #007700">(</span><span style="color: #DD0000">"%b %d %Y %H:%M:%S"</span><span style="color: #007700">, </span><span style="color: #0000BB">mktime</span><span style="color: #007700">(</span><span style="color: #0000BB">20</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">12</span><span style="color: #007700">, </span><span style="color: #0000BB">31</span><span style="color: #007700">, </span><span style="color: #0000BB">98</span><span style="color: #007700">)) . </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.gmstrftime-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="methodname"><a href="intldateformatter.format.html" class="methodname" rel="rdfs-seeAlso">IntlDateFormatter::format()</a> - Format the date/time value as a string</span></li>
+    <li class="member"><span class="methodname"><a href="datetime.format.html" class="methodname" rel="rdfs-seeAlso">DateTimeInterface::format()</a> - 按照指定格式返回格式化后的日期</span></li>
+    <li class="member"><span class="function"><a href="function.strftime.html" class="function" rel="rdfs-seeAlso">strftime()</a> - 根据区域设置格式化本地时间/日期</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div></div></div></body></html>

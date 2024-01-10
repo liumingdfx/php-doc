@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>返回资源类型</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.get-resource-id.html">« get_resource_id</a></li>
+      <li style="float: right;"><a href="function.gettype.html">gettype »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.var.html">变量处理函数</a></li>
+    <li>返回资源类型</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.get-resource-type" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">get_resource_type</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.0.2, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">get_resource_type</span> &mdash; <span class="dc-title">
+   返回资源类型
+  </span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.get-resource-type-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>get_resource_type</strong></span>(<span class="methodparam"><span class="type">resource</span> <code class="parameter">$resource</code></span>): <span class="type">string</span></div>
+
+  <p class="para rdfs-comment">
+   此函数获取指定资源的类型。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.get-resource-type-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">resource</code></dt>
+
+     <dd>
+
+      <p class="para">
+       要求值的资源句柄。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+ <div class="refsect1 returnvalues" id="refsect1-function.get-resource-type-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   如果指定 <code class="parameter">resource</code> 
+   是资源，则此函数将返回表示其类型的字符串。如果此函数未识别类型，则返回值是字符串
+   <code class="literal">Unknown</code>。
+  </p>
+  <p class="para">
+   如果 <code class="parameter">resource</code> 不是 <span class="type">resource</span>，则此函数将返回
+   <strong><code>null</code></strong> 并生成错误。
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.get-resource-type-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 <span class="function"><strong>get_resource_type()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$fp </span><span style="color: #007700">= </span><span style="color: #0000BB">fopen</span><span style="color: #007700">(</span><span style="color: #DD0000">"foo"</span><span style="color: #007700">, </span><span style="color: #DD0000">"w"</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">get_resource_type</span><span style="color: #007700">(</span><span style="color: #0000BB">$fp</span><span style="color: #007700">) . </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// 从 PHP 8.0.0 开始，以下内容不再起作用。curl_init 函数现在返回 CurlHandle 对象。<br /></span><span style="color: #0000BB">$c </span><span style="color: #007700">= </span><span style="color: #0000BB">curl_init</span><span style="color: #007700">();<br />echo </span><span style="color: #0000BB">get_resource_type</span><span style="color: #007700">(</span><span style="color: #0000BB">$c</span><span style="color: #007700">) . </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例在 PHP 7 中的输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+stream
+curl
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.get-resource-type-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.get-resource-id.html" class="function" rel="rdfs-seeAlso">get_resource_id()</a> - 返回给定资源的整数标识符</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div></div></div></body></html>

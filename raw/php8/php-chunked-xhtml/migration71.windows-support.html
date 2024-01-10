@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Windows 支持</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="migration71.other-changes.html">« 其它变更</a></li>
+      <li style="float: right;"><a href="migration70.html">从 PHP 5.6.x 移植到 PHP 7.0.x »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="migration71.html">从 PHP 7.0.x 移植到 PHP 7.1.x</a></li>
+    <li>Windows 支持</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="migration71.windows-support" class="sect1">
+ <h2 class="title">Windows 支持</h2>
+
+ <div class="sect2" id="migration71.windows-support.long-and-utf8-path">
+  <h3 class="title">支持长路径和 UTF-8 路径</h3>
+  <p class="para">
+    如果 Web 应用程序符合 UTF-8 编码，则不需要采取进一步的操作。对于依赖非 UTF-8 编码路径进行
+    I/O 的应用程序，必须设置明确的 INI 指令。编码 INI 设置的检查依赖于核心的顺序：
+  </p>
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <span class="simpara">
+     internal_encoding
+    </span>
+   </li>
+    <li class="listitem">
+    <span class="simpara">
+     default_charset
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     zend.multibyte
+    </span>
+   </li>
+  </ul>
+  <p class="para">
+    引入了几个用于处理代码页的函数：
+  </p>
+      <ul class="itemizedlist">
+       <li class="listitem">
+        <span class="simpara">
+         sapi_windows_cp_set() 用于设置默认的代码页
+        </span>
+       </li>
+       <li class="listitem">
+        <span class="simpara">
+         sapi_windows_cp_get() 用于检索当前代码页
+        </span>
+       </li>
+       <li class="listitem">
+        <span class="simpara">
+         sapi_windows_cp_is_utf8()
+        </span>
+       </li>
+       <li class="listitem">
+        <span class="simpara">
+         sapi_windows_cp_conv() 使用 iconv() 兼容签名在代码页之间进行转换
+        </span>
+       </li>
+      </ul>
+  <p class="para">
+   这些函数是线程安全的。
+  </p>
+  <p class="para">
+    控制台输出代码页根据 PHP 中使用的编码进行调整。具体取决于系统的 OEM 代码页，可见输出可能正确，也可能不正确。例如，在默认
+    cmd.exe 和 OEM 代码页为 437 的系统上，使用 UTF-8 时可以正确显示代码页 1251、1252、1253
+    和其它一些代码页中的输出。在同一系统上，代码页中的字符（例如 20932）可能无法正确显示。这是指代码页、字体兼容性和所使用的特定控制台程序的特定系统规则。PHP
+    根据 php.ini 中的编码规则自动设置控制台代码页。在某些情况下，使用替代控制台而不是直接使用 cmd.exe 可能会带来更好的体验。
+  </p>
+  <p class="para">
+    不过请注意，请求开始后切换运行时代码页可能会给 CLI 带来意想不到的副作用。更好的方法是 php.ini，当在不支持
+    Unicode 的控制台模拟器中使用 PHP CLI 时，可能需要这样做，以避免更改控制台代码页。实现此目的的最佳方式是将默认编码或内部编码设置为相应的
+    ANSI 代码页。另一种方法是将 INI 指令 output_encoding 和 input_encoding 设置为所需的代码页，但在这种情况下，内部代码页和 I/O
+    代码页之间的差异可能会导致乱码。在极少数情况下，如果 PHP 碰巧优雅崩溃，原始的控制台代码页可能无法恢复。在这种情况下，可以使用
+    chcp 命令，手动恢复。
+  </p>
+  <p class="para">
+   对于 DBCS 系统需要特别注意——在运行时使用 <span class="function"><a href="function.ini-set.html" class="function">ini_set()</a></span> 切换代码页可能会导致显示问题。与非 DBCS
+   系统的区别在于，扩展字符需要两个控制台单元格才能显示。在某些情况下，只有将字符映射到字体的字形集才能发生，而不会实际更改字体。这是
+   DBCS 系统的本质，预防显示问题的最简单方法是避免使用 <span class="function"><a href="function.ini-set.html" class="function">ini_set()</a></span> 进行代码页更改。
+  </p>
+  <p class="para">
+   由于 stream 支持 UTF-8，PHP 脚本不再局限于 ASCII 或 ANSI 文件名。CLI 上开箱即用的支持此功能。对于其它 SAPI，相应服务器的文档很有用。
+  </p>
+  <p class="para">
+   长路径支持是公开的。超过 260 字节的路径会自动添加前缀 <code class="literal">\\?\</code>。最大路径长度限制为 2048 字节。路径片断限制（文件名长度）仍然存在。
+  </p>
+  <p class="para">
+    为了获得最佳的可移植性，强烈推荐使用 UTF-8 处理文件名、I/O 和其它相关主题。此外，对于控制台应用程序，最好使用 TrueType 字体，并且不鼓励使用 ini_set() 来更改代码页。
+  </p>
+  <p class="para">
+  </p>
+  <p class="para">
+  </p>
+ </div>
+
+ <div class="sect2" id="migration71.windows-support.readline">
+  <h3 class="title">readline</h3>
+
+  <p class="para">
+   <a href="book.readline.html" class="link">readline 扩展</a> 现在通过 <a href="http://mingweditline.sourceforge.net/" class="link external">&raquo;&nbsp;WinEditLine
+   库</a> 来实现了支持。因此，一个交互式的 <abbr title="Command Line Interpreter/Interface">CLI</abbr> 命令行也得到了支持。(<code class="literal">php.exe -a</code>)。
+  </p>
+ </div>
+
+  <div class="sect2" id="migration71.windows-support.php-fcgi-children">
+  <h3 class="title">PHP_FCGI_CHILDREN</h3>
+  <p class="para">
+   <var class="varname">PHP_FCGI_CHILDREN</var> 现在收到重视。如果定义了此环境变量，第一个 <var class="filename">php-cgi.exe</var>
+   进程将执行指定数量的子进程。它们将共享相同的 TCP socket。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration71.windows-support.ftok">
+  <h3 class="title">ftok()</h3>
+  <p class="para">
+   新增 <span class="function"><a href="function.ftok.html" class="function">ftok()</a></span> 支持
+  </p>
+ </div>
+
+</div></div></div></body></html>

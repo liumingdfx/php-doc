@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>获取参数的 ReflectionClass 对象或为 null</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="reflectionparameter.getattributes.html">« ReflectionParameter::getAttributes</a></li>
+      <li style="float: right;"><a href="reflectionparameter.getdeclaringclass.html">ReflectionParameter::getDeclaringClass »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="class.reflectionparameter.html">ReflectionParameter</a></li>
+    <li>获取参数的 ReflectionClass 对象或为 null</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="reflectionparameter.getclass" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">ReflectionParameter::getClass</h1>
+  <p class="verinfo">(PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">ReflectionParameter::getClass</span> &mdash; <span class="dc-title">获取参数的 <span class="classname"><a href="class.reflectionclass.html" class="classname">ReflectionClass</a></span> 对象或为 <strong><code>null</code></strong></span></p>
+
+ </div>
+
+ <div id="reflectionparameter.getclass-refsynopsisdiv">
+   <div class="warning"><strong class="warning">警告</strong><p class="simpara">本函数已自 PHP 8.0.0
+ 起被<em>废弃</em>。强烈建议不要依赖本函数。</p></div>
+ </div>
+
+ <div class="refsect1 description" id="refsect1-reflectionparameter.getclass-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="modifier">public</span> <span class="methodname"><strong>ReflectionParameter::getClass</strong></span>(): <span class="type"><span class="type">?</span><span class="type"><a href="class.reflectionclass.html" class="type ReflectionClass">ReflectionClass</a></span></span></div>
+
+  <p class="para rdfs-comment">
+   获取参数的 <span class="classname"><a href="class.reflectionclass.html" class="classname">ReflectionClass</a></span> 对象或为 <strong><code>null</code></strong>。
+  </p>
+  <p class="para">
+   自 PHP 8.0.0 起，弃用此函数且不推荐使用。反而应该使用 <span class="methodname"><a href="reflectionparameter.gettype.html" class="methodname">ReflectionParameter::getType()</a></span>
+   获取参数的 <span class="classname"><a href="class.reflectiontype.html" class="classname">ReflectionType</a></span>，然后询问该对象以确定参数类型。
+  </p>
+
+  <div class="warning"><strong class="warning">警告</strong><p class="simpara">本函数还未编写文档，仅有参数列表。</p></div>
+
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-reflectionparameter.getclass-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">此函数没有参数。</p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-reflectionparameter.getclass-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   <span class="classname"><a href="class.reflectionclass.html" class="classname">ReflectionClass</a></span> 对象，如果没有声明类型或者声明的类型为类或接口则为 <strong><code>null</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-reflectionparameter.getclass-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 使用 <span class="classname"><a href="class.reflectionparameter.html" class="classname">ReflectionParameter</a></span> 类</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">foo</span><span style="color: #007700">(</span><span style="color: #0000BB">Exception $a</span><span style="color: #007700">) { }<br /><br /></span><span style="color: #0000BB">$functionReflection </span><span style="color: #007700">= new </span><span style="color: #0000BB">ReflectionFunction</span><span style="color: #007700">(</span><span style="color: #DD0000">'foo'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$parameters </span><span style="color: #007700">= </span><span style="color: #0000BB">$functionReflection</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getParameters</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$aParameter </span><span style="color: #007700">= </span><span style="color: #0000BB">$parameters</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">];<br /><br />echo </span><span style="color: #0000BB">$aParameter</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getClass</span><span style="color: #007700">()-&gt;</span><span style="color: #0000BB">name</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-reflectionparameter.getclass-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="methodname"><a href="reflectionparameter.getdeclaringclass.html" class="methodname" rel="rdfs-seeAlso">ReflectionParameter::getDeclaringClass()</a> - Gets declaring class</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

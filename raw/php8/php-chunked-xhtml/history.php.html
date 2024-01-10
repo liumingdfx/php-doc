@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>PHP 的历史</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="history.html">« PHP 及其相关项目的历史</a></li>
+      <li style="float: right;"><a href="history.php.related.html">PHP 相关项目的历史 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="history.html">PHP 及其相关项目的历史</a></li>
+    <li>PHP 的历史</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="history.php" class="sect1">
+  <h2 class="title">PHP 的历史</h2>
+
+  <div class="sect2" id="history.phpfi">
+   <h3 class="title">PHP 工具、FI、构造工具包和 PHP/FI</h3>
+   <p class="para">
+    众所周知，今天的 PHP 实际上是名为 PHP/FI 的产品的继承作品。PHP 的第一个化身由 Rasmus Lerdorf 于 1994 年创建，是一组用
+    C 编程语言编写的简单的通用网关接口（Common Gateway Interface，简称 CGI）二进制文件，最初用于追踪对其在线简历的访问，其将这套脚本套件命名为“Personal
+    Home Page Tools”，更多的引用为“PHP Tools”。随着时间的推移，需要更多的功能，Rasmus 重写了 PHP
+    Tool，创造出更大更丰富的实现。这种新模型能够进行数据库交互等等，提供了框架，用户可以在该框架上开发简单且动态的
+    Web 应用程序，比如留言簿。1995 年 6 月，Rasmus 向公众 <a href="http://groups.google.com/group/comp.infosystems.www.authoring.cgi/msg/cc7d43454d64d133" class="link external">&raquo;&nbsp;发布</a>了
+    PHP Tool 的源代码，允许开发者按照他们认为合适的方式使用它。这也允许且鼓励用户为代码中的错误提供修复，并对其进行整体改进。
+   </p>
+   <p class="para">
+    同年 9 月，Rasmus 扩展了 PHP，在很短的时间内放弃了 PHP 这个名称。现在将这些工具称为 FI（“Forms
+    Interpreter”的缩写），新的实现包含今天所知道的 PHP 的一些基础功能。具有类 Perl 的变量、表单变量的自动解释和 HTML
+    嵌入式语法。语法本身跟 Perl 的语法相似，虽然更加有限、简单且有些不一致。事实上，要将代码嵌入到 HTML 文件中，开发人员必须使用
+    HTML 注释。虽然这种做法并没有完全接受，但 FI 作为 CGI 工具继续享受增长和认可，但仍然不能等同于编程语言。然而，在接下来的一个月内发生了变化；1995
+    年 10 月，Rasmus 发布了完全重写的代码。恢复 PHP 名称，现在（暂时）称为“Personal Home Page Construction
+    Kit”，是第一个拥有在当时认为是先进脚本接口的版本。该语言特意设计为结构上类似 C，使熟悉 C、Perl 和类似语言的开发人员可以轻松接受。到目前为止仅限于
+    UNIX 和 POSIX 兼容的系统，正在探索 Windows NT 实施的可能性。
+   </p>
+   <p class="para">
+    1996 年 4 月，结合过去的版本名称，Rasmus 引入了 PHP/FI，代码又得到了彻底的改造。第二代真正实现了将 PHP 从一套工具发展为一种独立的语言。包含对
+    DBM、mSQL 和 Postgres95 数据库、cookie、用户定义函数等的内置支持。同年 6 月，PHP/FI 发行版本 2.0。然而，一个有趣的事实是，仅有一个 PHP 2.0
+    的完整版本。当其最后于 1997 年 11 月从 Beta 状态毕业时，已经完全重写底层解析引擎。
+   </p>
+   <p class="para">
+    尽管开发周期很短，但仍然在年轻的 Web 开发世界中继续享有越来越高的知名度。在 1997 年和 1998 年，PHP/FI 在全球拥有数千名用户。截止到 1998 年 5
+    月的一项 Netcraft 调查表明，将近 60000 个域名报告中报头包含“PHP”，表明宿主服务器确实安装了它。这个数字大约相当于当时 Internet 上所有域名的
+    1%。尽管有这些令人深刻的数字，但 PHP/FI 的成熟注定是有限的；虽然有几个次要贡献者，但还是大部分由个人开发。
+   </p>
+   <p class="para">
+    <div class="example" id="">
+     <p><strong>示例 #1 PHP/FI 代码示例</strong></p>
+     <div class="example-contents">
+<div class="htmlcode"><pre class="htmlcode">&lt;!--include /text/header.html--&gt;
+
+&lt;!--getenv HTTP_USER_AGENT--&gt;
+&lt;!--ifsubstr $exec_result Mozilla--&gt;
+  Hey, you are using Netscape!&lt;p&gt;
+&lt;!--endif--&gt;
+
+&lt;!--sql database select * from table where user=&#039;$username&#039;--&gt;
+&lt;!--ifless $numentries 1--&gt;
+  Sorry, that record does not exist&lt;p&gt;
+&lt;!--endif exit--&gt;
+  Welcome &lt;!--$user--&gt;!&lt;p&gt;
+  You have &lt;!--$index:0--&gt; credits left in your account.&lt;p&gt;
+
+&lt;!--include /text/footer.html--&gt;</pre>
+</div>
+     </div>
+
+    </div>
+   </p>
+  </div>
+
+  <div class="sect2" id="history.php3">
+   <h3 class="title">PHP 3</h3>
+   <p class="para">
+    PHP 3.0 是第一个跟现在 PHP 非常类似的版本。1997 年，以色列特拉维夫的 Andi Gutmans 和 Zeev Suraski 在为大学的项目中开发电子商务程序时发现 PHP/FI 2.0
+    效率仍然低下且功能明显不足，于是对底层解析器进行了一次完全重写。在线与 Rasmus 交谈，讨论了当前各个方面的实施以及对 PHP 重新开发。为了改进引擎并开始建设
+    PHP/FI 现有用户群，Andi、Rasmus 和 Zeev 决定合作开发一种新的独立（independent）编程语言。这种全新的语言以新名称发布，消除 PHP/FI 2.0
+    名字所包含的本语言只限于个人使用的含义。将其简单的重命名为“PHP”，其含义变成了递归缩写——PHP：Hypertext Preprocessor。
+   </p>
+   <p class="para">
+    PHP 3.0 的一个最强大的优势是其强大的可扩展性。除了给最终用户提供适用于多种数据库、协议和 API 的成熟接口外，语言本身的可扩展性还吸引了数十名的开发人员提交各种模块。可以说，这是
+    PHP 3.0 取得巨大成功的关键。PHP 3.0 中引入的其它主要特性还包括支持面向对象编程和更强大和一致的语法结构。
+   </p>
+   <p class="para">
+    1998 年 6 月，随着来自世界各地的许多新开发人员的加入，新的 PHP 开发团队宣布 PHP 3.0 作为 PHP/FI 2.0 的正式继承者。PHP/FI 2.0 的积极开发在去年 11
+    月几乎停止，现在正式结束。经过大概 9 个月的公开测试，当 PHP 3.0 正式发布的消息来临时，其已经安装在全球超过 70000 个域名中，不再局限于 POSIX
+    兼容的操作系统。在已安装 PHP 的域名报告中，有一小部分托管在运行 Windows 95、98、NT 和 Macintosh 的服务器上。在鼎盛时期，PHP 3.0 安装在 Internet
+    上大约 10% 的 Web 服务器上。
+   </p>
+  </div>
+
+  <div class="sect2" id="history.php4">
+   <h3 class="title">PHP 4</h3>
+   <p class="para">
+    1998 年的冬天，PHP 3.0 官方发布不久，Andi Gutmans 和 Zeev Suraski 开始着手重写 PHP 核心。设计目标是增强复杂程序的性能并改进 PHP 代码库的模块化。PHP
+    3.0 的新特性和对各种第三方数据库和 API 的支持使得这样的程序成为可能，但 PHP 3.0 并不是为有效处理此类复杂程序而设计的。
+   </p>
+   <p class="para">
+    新的引擎称为“Zend Engine”（由它们的名字 Zeev 和 Andi 组成）成功实现了这些设计目标，并在 1999 年年中首次推出。PHP 4.0 以该引擎为基础，并结合大量附加新功能，于
+    2000 年 5 月正式发布，比前代产品晚了近两年。此版本除了性能大幅提升以外，PHP 4.0 还包含了其它关键功能，例如支持更多的 web 服务器、HTTP
+    Session、输出缓冲、更安全的处理用户输入的方式以及几种新的语言结构。
+   </p>
+  </div>
+
+  <div class="sect2" id="history.php5">
+   <h3 class="title">PHP 5</h3>
+   <p class="para">
+    经过长时间的开发及几次预发布后，PHP 5 于 2004 年 7 月发布。主要由 <code class="literal">Zend Engine 2.0</code> 核心驱动，具有新的对象模型和数十个新功能。
+  </p>
+   <p class="para">
+    PHP 的开发团队包括数十名开发人员，以及从事 PHP 相关和支持项目（例如 PEAR、PECL 和文档）的数十名其他人员，以及由分布在世界七个大洲中的六个的 100 多个独立 Web
+    服务器组成的底层网络基础设施。虽然只是基于前几年统计数据的估计，但可以安全地假设 PHP 现在已安装在全球数千万甚至数亿个域名中。
+   </p>
+  </div>
+ </div></div></div></body></html>

@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>从一组 cURL 句柄中移除一个多句柄</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.curl-multi-init.html">« curl_multi_init</a></li>
+      <li style="float: right;"><a href="function.curl-multi-select.html">curl_multi_select »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.curl.html">cURL 函数</a></li>
+    <li>从一组 cURL 句柄中移除一个多句柄</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.curl-multi-remove-handle" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">curl_multi_remove_handle</h1>
+  <p class="verinfo">(PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">curl_multi_remove_handle</span> &mdash; <span class="dc-title">从一组 cURL 句柄中移除一个多句柄</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.curl-multi-remove-handle-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>curl_multi_remove_handle</strong></span>(<span class="methodparam"><span class="type"><a href="class.curlmultihandle.html" class="type CurlMultiHandle">CurlMultiHandle</a></span> <code class="parameter">$multi_handle</code></span>, <span class="methodparam"><span class="type"><a href="class.curlhandle.html" class="type CurlHandle">CurlHandle</a></span> <code class="parameter">$handle</code></span>): <span class="type">int</span></div>
+
+  <p class="para rdfs-comment">
+   从指定的 <code class="parameter">multi_handle</code> 中移除指定的 <code class="parameter">handle</code> 句柄。当移除 <code class="parameter">handle</code>
+   后，在此句柄上运行 <span class="function"><a href="function.curl-exec.html" class="function">curl_exec()</a></span> 也是完全允许的。移除正在使用的 <code class="parameter">handle</code>
+   句柄，涉及该句柄的正在进行的传输将有效停止。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.curl-multi-remove-handle-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    <dt>
+<code class="parameter">multi_handle</code>
+</dt>
+<dd>
+<p class="para">由 
+<span class="function"><a href="function.curl-multi-init.html" class="function">curl_multi_init()</a></span> 返回的 cURL 多个句柄。</p></dd>
+
+    <dt>
+<code class="parameter">handle</code>
+</dt>
+<dd>
+<p class="para">由 <span class="function"><a href="function.curl-init.html" class="function">curl_init()</a></span> 返回的 cURL 句柄。</p></dd>
+
+   </dl>
+
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 returnvalues" id="refsect1-function.curl-multi-remove-handle-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   成功时返回 0，失败时返回 <strong><code>CURLM_XXX</code></strong> 错误代码中的一个。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.curl-multi-remove-handle-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+ <td>8.0.0</td>
+ <td>
+  <code class="parameter">multi_handle</code> expects a <span class="classname"><a href="class.curlmultihandle.html" class="classname">CurlMultiHandle</a></span>
+  instance now; previously, a <span class="type">resource</span> was expected.
+ </td>
+</tr>
+
+     <tr>
+ <td>8.0.0</td>
+ <td>
+  <code class="parameter">handle</code> 现在接受 <span class="classname"><a href="class.curlhandle.html" class="classname">CurlHandle</a></span>
+  实例；之前接受 <span class="type">resource</span>。
+ </td>
+</tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.curl-multi-remove-handle-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.curl-init.html" class="function" rel="rdfs-seeAlso">curl_init()</a> - 初始化 cURL 会话</span></li>
+    <li class="member"><span class="function"><a href="function.curl-multi-init.html" class="function" rel="rdfs-seeAlso">curl_multi_init()</a> - 返回新 cURL 批处理句柄</span></li>
+    <li class="member"><span class="function"><a href="function.curl-multi-add-handle.html" class="function" rel="rdfs-seeAlso">curl_multi_add_handle()</a> - 添加普通 cURL 句柄到 cURL 多句柄</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

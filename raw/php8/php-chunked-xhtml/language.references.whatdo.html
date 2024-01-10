@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>引用做什么</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="language.references.whatare.html">« 引用是什么</a></li>
+      <li style="float: right;"><a href="language.references.arent.html">引用不是什么 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="language.references.html">引用的解释</a></li>
+    <li>引用做什么</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="language.references.whatdo" class="sect1">
+  <h2 class="title">引用做什么</h2>
+  <p class="para">
+     使用引用执行有三种基本操作： <a href="language.references.whatdo.html#language.references.whatdo.assign" class="link">引用赋值</a> 、
+     <a href="language.references.whatdo.html#language.references.whatdo.pass" class="link">传引用</a> 、
+     <a href="language.references.whatdo.html#language.references.whatdo.return" class="link">引用返回</a> 。
+     本节介绍这些操作，并提供进一步阅读的链接。
+  </p>
+  <div class="sect2" id="language.references.whatdo.assign">
+    <h3 class="title">引用赋值</h3>
+    <p class="para">
+     PHP 的引用允许用两个变量来指向同一个内容。意思是，当这样做时：
+     <div class="informalexample">
+      <div class="example-contents">
+  <div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />  $a </span><span style="color: #007700">=&amp; </span><span style="color: #0000BB">$b</span><span style="color: #007700">;<br />  </span><span style="color: #0000BB">?&gt;</span></span></code></div>
+      </div>
+
+     </div>
+     这意味着 <var class="varname">$a</var> 和 <var class="varname">$b</var> 指向了同一个变量。
+     <blockquote class="note"><p><strong class="note">注意</strong>: 
+      <p class="para">
+       <var class="varname">$a</var> 和 <var class="varname">$b</var> 在这里是完全相同的，这并不是
+       <var class="varname">$a</var> 指向了 <var class="varname">$b</var> 或者相反，而是
+       <var class="varname">$a</var> 和 <var class="varname">$b</var> 指向了同一个地方。
+      </p>
+     </p></blockquote>
+    </p>
+   <blockquote class="note"><p><strong class="note">注意</strong>: 
+    <p class="para">
+    如果对一个未定义的变量进行引用赋值、引用参数传递或引用返回，则会自动创建该变量。
+     <div class="example" id="example-1067">
+      <p><strong>示例 #1 对未定义的变量使用引用</strong></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">foo</span><span style="color: #007700">(&amp;</span><span style="color: #0000BB">$var</span><span style="color: #007700">) { }<br /><br /></span><span style="color: #0000BB">foo</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">); </span><span style="color: #FF8000">// 创建 $a 并赋值为 null<br /><br /></span><span style="color: #0000BB">$b </span><span style="color: #007700">= array();<br /></span><span style="color: #0000BB">foo</span><span style="color: #007700">(</span><span style="color: #0000BB">$b</span><span style="color: #007700">[</span><span style="color: #DD0000">'b'</span><span style="color: #007700">]);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">array_key_exists</span><span style="color: #007700">(</span><span style="color: #DD0000">'b'</span><span style="color: #007700">, </span><span style="color: #0000BB">$b</span><span style="color: #007700">)); </span><span style="color: #FF8000">// bool(true)<br /><br /></span><span style="color: #0000BB">$c </span><span style="color: #007700">= new </span><span style="color: #0000BB">stdClass</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">foo</span><span style="color: #007700">(</span><span style="color: #0000BB">$c</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">d</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">property_exists</span><span style="color: #007700">(</span><span style="color: #0000BB">$c</span><span style="color: #007700">, </span><span style="color: #DD0000">'d'</span><span style="color: #007700">)); </span><span style="color: #FF8000">// bool(true)<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+      </div>
+
+     </div>
+    </p>
+   </p></blockquote>  
+  <p class="para">
+   同样的语法可以用在返回引用的函数中：
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$foo </span><span style="color: #007700">=&amp; </span><span style="color: #0000BB">find_var</span><span style="color: #007700">(</span><span style="color: #0000BB">$bar</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+     在函数内使用相同的语法 <em>不</em> 通过引用返回将会产生错误，
+     就像将它与 <a href="language.oop5.basic.html#language.oop5.basic.new" class="link">new</a> 运算符的结果一起使用一样。
+     正如
+     <a href="language.oop5.references.html" class="link">对象和引用</a> 中所述，
+     尽管对象是通过指针传递的，但是它们与引用不同。
+    </p>
+  <div class="warning"><strong class="warning">警告</strong>
+   <p class="para">
+    如果在一个函数内部给一个声明为 <code class="literal">global</code>
+    的变量赋于一个引用，该引用只在函数内部可见。可以通过使用
+    <var class="varname"><a href="reserved.variables.globals.html" class="classname">$GLOBALS</a></var> 数组避免这一点。
+    <div class="example" id="example-1070">
+     <p><strong>示例 #2 在函数内引用全局变量</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$var1 </span><span style="color: #007700">= </span><span style="color: #DD0000">"Example variable"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$var2 </span><span style="color: #007700">= </span><span style="color: #DD0000">""</span><span style="color: #007700">;<br /><br />function </span><span style="color: #0000BB">global_references</span><span style="color: #007700">(</span><span style="color: #0000BB">$use_globals</span><span style="color: #007700">)<br />{<br />    global </span><span style="color: #0000BB">$var1</span><span style="color: #007700">, </span><span style="color: #0000BB">$var2</span><span style="color: #007700">;<br />    if (!</span><span style="color: #0000BB">$use_globals</span><span style="color: #007700">) {<br />        </span><span style="color: #0000BB">$var2 </span><span style="color: #007700">=&amp; </span><span style="color: #0000BB">$var1</span><span style="color: #007700">; </span><span style="color: #FF8000">// 仅在函数内部可见<br />    </span><span style="color: #007700">} else {<br />        </span><span style="color: #0000BB">$GLOBALS</span><span style="color: #007700">[</span><span style="color: #DD0000">"var2"</span><span style="color: #007700">] =&amp; </span><span style="color: #0000BB">$var1</span><span style="color: #007700">; </span><span style="color: #FF8000">// 全局上下文可见<br />    </span><span style="color: #007700">}<br />}<br /><br /></span><span style="color: #0000BB">global_references</span><span style="color: #007700">(</span><span style="color: #0000BB">false</span><span style="color: #007700">);<br />echo </span><span style="color: #DD0000">"var2 is set to '</span><span style="color: #0000BB">$var2</span><span style="color: #DD0000">'\n"</span><span style="color: #007700">; </span><span style="color: #FF8000">// var2 is set to ''<br /></span><span style="color: #0000BB">global_references</span><span style="color: #007700">(</span><span style="color: #0000BB">true</span><span style="color: #007700">);<br />echo </span><span style="color: #DD0000">"var2 is set to '</span><span style="color: #0000BB">$var2</span><span style="color: #DD0000">'\n"</span><span style="color: #007700">; </span><span style="color: #FF8000">// var2 is set to 'Example variable'<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </div>
+    把 <code class="literal">global $var;</code> 当成是 <code class="literal">$var
+    =&amp; $GLOBALS[&#039;var&#039;];</code> 的简写。从而将其它引用赋给
+    <code class="literal">$var</code> 只改变了本地变量的引用。
+   </p>
+  </div>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    如果在 <a href="control-structures.foreach.html" class="link">foreach</a>
+    语句中给一个具有引用的变量赋值，被引用的对象也被改变。
+    <div class="example" id="example-1073">
+     <p><strong>示例 #3 引用与 foreach 语句</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$ref </span><span style="color: #007700">= </span><span style="color: #0000BB">0</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$row </span><span style="color: #007700">=&amp; </span><span style="color: #0000BB">$ref</span><span style="color: #007700">;<br />foreach (array(</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #0000BB">3</span><span style="color: #007700">) as </span><span style="color: #0000BB">$row</span><span style="color: #007700">) {<br />    </span><span style="color: #FF8000">// 做点什么<br /></span><span style="color: #007700">}<br />echo </span><span style="color: #0000BB">$ref</span><span style="color: #007700">; </span><span style="color: #FF8000">// 3 - 迭代数组的最后一个元素<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </div>
+   </p>
+  </p></blockquote>
+    <p class="para">
+      虽然不是严格意义上的引用赋值，但使用语言构造
+      <a href="function.array.html" class="link"><code class="literal">array()</code></a>
+      创建的表达式也可以通过在要添加的数组元素加上 <code class="literal">&amp;</code> 
+      前缀来表现为这样。例如：
+      <div class="informalexample">
+        <div class="example-contents">
+          <div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$a </span><span style="color: #007700">= </span><span style="color: #0000BB">1</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$b </span><span style="color: #007700">= array(</span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #0000BB">3</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$arr </span><span style="color: #007700">= array(&amp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">, &amp;</span><span style="color: #0000BB">$b</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">], &amp;</span><span style="color: #0000BB">$b</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">]);<br /></span><span style="color: #0000BB">$arr</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">]++; </span><span style="color: #0000BB">$arr</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">]++; </span><span style="color: #0000BB">$arr</span><span style="color: #007700">[</span><span style="color: #0000BB">2</span><span style="color: #007700">]++;<br /></span><span style="color: #FF8000">/* $a == 2, $b == array(3, 4); */<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+        </div>
+
+      </div>
+    </p>
+    <p class="para">
+      但是请注意，数组内的引用具有潜在的危险。
+      在右侧引用正常的赋值（不是通过引用）不会将左侧变为引用，
+      但是数组内部的引用会保留在这些正常赋值中。
+      这也适用于调用函数时按值传递数组的情况。例如：
+      <div class="informalexample">
+        <div class="example-contents">
+          <div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">/* 标量变量赋值 */<br /></span><span style="color: #0000BB">$a </span><span style="color: #007700">= </span><span style="color: #0000BB">1</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$b </span><span style="color: #007700">=&amp; </span><span style="color: #0000BB">$a</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$c </span><span style="color: #007700">= </span><span style="color: #0000BB">$b</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$c </span><span style="color: #007700">= </span><span style="color: #0000BB">7</span><span style="color: #007700">; </span><span style="color: #FF8000">//$c 不是引用；不会改变 $a 或者 $b<br /><br />/* 数组变量赋值 */<br /></span><span style="color: #0000BB">$arr </span><span style="color: #007700">= array(</span><span style="color: #0000BB">1</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$a </span><span style="color: #007700">=&amp; </span><span style="color: #0000BB">$arr</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">]; </span><span style="color: #FF8000">//$a 和 $arr[0] 设置了相同的引用<br /></span><span style="color: #0000BB">$arr2 </span><span style="color: #007700">= </span><span style="color: #0000BB">$arr</span><span style="color: #007700">; </span><span style="color: #FF8000">//不是引用赋值！<br /></span><span style="color: #0000BB">$arr2</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">]++;<br /></span><span style="color: #FF8000">/* $a == 2, $arr == array(2) */<br />/* 尽量 $arr 不是引用，但是它的内容已经更改！ */<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+        </div>
+
+      </div>
+      换句话说，数组的引用行为是在逐个元素的基础上定义；
+      单个元素的引用行为与数组容器的引用状态分离。
+    </p>
+  </div>
+  <div class="sect2" id="language.references.whatdo.pass">
+  <h3 class="title">传引用</h3>
+  <p class="para">
+   引用做的第二件事是用引用传递变量。这是通过在函数内建立一个本地变量并且该变量在呼叫范围内引用了同一个内容来实现的。例如：
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">foo</span><span style="color: #007700">(&amp;</span><span style="color: #0000BB">$var</span><span style="color: #007700">)<br />{<br />    </span><span style="color: #0000BB">$var</span><span style="color: #007700">++;<br />}<br /><br /></span><span style="color: #0000BB">$a</span><span style="color: #007700">=</span><span style="color: #0000BB">5</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">foo</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+   将使 <var class="varname">$a</var> 变成 6。这是因为在 <var class="varname">foo</var> 函数中变量
+   <var class="varname">$var</var> 指向了和 <var class="varname">$a</var> 指向的同一个内容。更多详细解释见<a href="language.references.pass.html" class="link">引用传递</a>。
+  </p>
+  </div>
+  <div class="sect2" id="language.references.whatdo.return">
+   <h3 class="title">引用返回</h3>
+  <p class="para">
+   引用做的第三件事是<a href="language.references.return.html" class="link">引用返回</a>。
+  </p>
+  </div>
+ </div></div></div></body></html>

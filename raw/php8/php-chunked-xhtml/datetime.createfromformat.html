@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>根据指定格式解析时间字符串</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="datetime.construct.html">« DateTime::__construct</a></li>
+      <li style="float: right;"><a href="datetime.createfromimmutable.html">DateTime::createFromImmutable »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="class.datetime.html">DateTime</a></li>
+    <li>根据指定格式解析时间字符串</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="datetime.createfromformat" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">DateTime::createFromFormat</h1>
+  <h1 class="refname">date_create_from_format</h1>
+  <p class="verinfo">(PHP 5 &gt;= 5.3.0, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">DateTime::createFromFormat</span> -- <span class="refname">date_create_from_format</span> &mdash; <span class="dc-title">根据指定格式解析时间字符串</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-datetime.createfromformat-description">
+  <h3 class="title">说明</h3>
+  <p class="para">面向对象风格</p>
+  <div class="methodsynopsis dc-description">
+   <span class="modifier">public</span> <span class="modifier">static</span> <span class="methodname"><strong>DateTime::createFromFormat</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$format</code></span>, <span class="methodparam"><span class="type">string</span> <code class="parameter">$datetime</code></span>, <span class="methodparam"><span class="type">?</span><span class="type"><span class="type"><a href="class.datetimezone.html" class="type DateTimeZone">DateTimeZone</a></span><span class="type"></span></span> <code class="parameter">$timezone</code><span class="initializer"> = <strong><code>null</code></strong></span></span>): <span class="type"><span class="type"><a href="class.datetime.html" class="type DateTime">DateTime</a></span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">过程化风格</p>
+  <div class="methodsynopsis dc-description"><span class="methodname"><a href="function.date-create-from-format.html" class="methodname">date_create_from_format</a></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$format</code></span>, <span class="methodparam"><span class="type">string</span> <code class="parameter">$datetime</code></span>, <span class="methodparam"><span class="type">?</span><span class="type"><span class="type"><a href="class.datetimezone.html" class="type DateTimeZone">DateTimeZone</a></span><span class="type"></span></span> <code class="parameter">$timezone</code><span class="initializer"> = <strong><code>null</code></strong></span></span>): <span class="type"><span class="type"><a href="class.datetime.html" class="type DateTime">DateTime</a></span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   返回新的 DateTime 对象，该对象是通过指定 <code class="parameter">format</code> 将表示日期和时间的
+   <code class="parameter">datetime</code> 格式化生成。
+  </p>
+  <p class="para">
+   类似于 <span class="methodname"><a href="datetimeimmutable.createfromformat.html" class="methodname">DateTimeImmutable::createFromFormat()</a></span>
+   和 <span class="function"><a href="function.date-create-immutable-from-format.html" class="function">date_create_immutable_from_format()</a></span>，但创建的是
+   <span class="classname"><a href="class.datetime.html" class="classname">DateTime</a></span> 对象。
+  </p>
+  <p class="para">
+   此方法（包括参数、示例和注意事项）记录在 <a href="datetimeimmutable.createfromformat.html" class="link">DateTimeImmutable::createFromFormat</a> 页面上。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-datetime.createfromformat-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   参阅 <a href="datetimeimmutable.createfromformat.html" class="link">DateTimeImmutable::createFromFormat</a>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-datetime.createfromformat-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回 DateTime 对象 或者在失败时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 errors" id="refsect1-datetime.createfromformat-errors">
+  <h3 class="title">错误／异常</h3>
+  <p class="para">
+   当 <code class="parameter">datetime</code> 包含 NULL 字节时，此方法抛出 <span class="exceptionname"><a href="class.valueerror.html" class="exceptionname">ValueError</a></span>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-datetime.createfromformat-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>8.0.21、8.1.8、8.2.0</td>
+      <td>
+       现在，当将 NULL 字节传递到 <code class="parameter">datetime</code> 时，会引发
+       <span class="exceptionname"><a href="class.valueerror.html" class="exceptionname">ValueError</a></span>，而之前会默默忽略该错误。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-datetime.createfromformat-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   有关大量示例，请参阅 <a href="datetimeimmutable.createfromformat.html" class="link">DateTimeImmutable::createFromFormat</a>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-datetime.createfromformat-seealso">
+  <h3 class="title">参见</h3>
+  <ul class="simplelist">
+   <li class="member"><span class="function"><a href="datetimeimmutable.createfromformat.html" class="function" rel="rdfs-seeAlso">DateTimeImmutable::createFromFormat()</a> - Parses a time string according to a specified format</span></li>
+  </ul>
+ </div>
+
+</div></div></div></body></html>

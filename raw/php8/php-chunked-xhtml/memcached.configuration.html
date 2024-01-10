@@ -1,0 +1,798 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>运行时配置</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="memcached.installation.html">« 安装</a></li>
+      <li style="float: right;"><a href="memcached.resources.html">资源类型 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="memcached.setup.html">安装/配置</a></li>
+    <li>运行时配置</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="memcached.configuration" class="section">
+ <h2 class="title">运行时配置</h2>
+ <p class="simpara">
+这些函数的行为受 <var class="filename">php.ini</var> 中的设置影响。
+</p>
+ <p class="para">
+  <table class="doctable table">
+   <caption><strong>Memcached 配置选项</strong></caption>
+   
+    <thead>
+     <tr>
+      <th>名字</th>
+      <th>默认</th>
+      <th>可修改范围</th>
+      <th>更新日志</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.sess-locking" class="link">memcached.sess_locking</a></td>
+      <td>On</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 0.1.0 起可用。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.sess-consistent-hash" class="link">memcached.sess_consistent_hash</a></td>
+      <td>On</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 2.1.0 起可用。自 memcached 3.0.0 起默认值为 <code class="literal">On</code>。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.sess-binary" class="link">memcached.sess_binary</a></td>
+      <td>Off</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 2.0.0 起可用。自 memcached 3.0.0 起改用 <code class="literal">memcached.sess_binary_protocol</code>。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.sess-lock-wait" class="link">memcached.sess_lock_wait</a></td>
+      <td>150000</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 0.1.0 起可用。自 memcached 3.0.0 起移除。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.sess-prefix" class="link">memcached.sess_prefix</a></td>
+      <td>memc.sess.key.</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 0.1.0 起可用。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.sess-number-of-replicas" class="link">memcached.sess_number_of_replicas</a></td>
+      <td>0</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 2.1.0 起可用。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.sess-randomize-replica-read" class="link">memcached.sess_randomize_replica_read</a></td>
+      <td>Off</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 2.1.0 起可用。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.sess-remove-failed" class="link">memcached.sess_remove_failed</a></td>
+      <td>On</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 2.1.0 起可用。自 memcached 3.0.0 起改用 <code class="literal">memcached.sess_remove_failed_servers</code>。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.compression-type" class="link">memcached.compression_type</a></td>
+      <td>fastlz</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 0.1.0 起可用。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.compression-factor" class="link">memcached.compression_factor</a></td>
+      <td>1.3</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 0.1.0 起可用。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.compression-threshold" class="link">memcached.compression_threshold</a></td>
+      <td>2000</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 0.1.0 起可用。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.serializer" class="link">memcached.serializer</a></td>
+      <td>igbinary</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 0.1.0 起可用。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.use-sasl" class="link">memcached.use_sasl</a></td>
+      <td>Off</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 2.2.0 起可用。自 memcached 3.0.0 起移除。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.default-binary-protocol" class="link">memcached.default_binary_protocol</a></td>
+      <td>Off</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 3.0.0 起可用。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.default-connect-timeout" class="link">memcached.default_connect_timeout</a></td>
+      <td>0</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 3.0.0 起可用。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.default-consistent-hash" class="link">memcached.default_consistent_hash</a></td>
+      <td>Off</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 3.0.0 起可用。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.sess-binary-protocol" class="link">memcached.sess_binary_protocol</a></td>
+      <td>On</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 3.0.0 起可用。替换 <code class="literal">memcached.sess_binary</code>。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.sess-connect-timeout" class="link">memcached.sess_connect_timeout</a></td>
+       <td>1000</td>
+       <td>PHP_INI_ALL</td>
+       <td>自 memcached 2.2.0 起可用。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.sess-consistent-hash-type" class="link">memcached.sess_consistent_hash_type</a></td>
+      <td>ketama</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 3.1.0 起可用。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.sess-lock-expire" class="link">memcached.sess_lock_expire</a></td>
+      <td>0</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 2.2.0 起可用。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.sess-lock-retries" class="link">memcached.sess_lock_retries</a></td>
+      <td>5</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 3.0.0 起可用。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.sess-lock-wait-max" class="link">memcached.sess_lock_wait_max</a></td>
+      <td>150</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 3.0.0 起可用。自 memcached 3.1.0 起默认值为 <code class="literal">150</code>（之前 <code class="literal">2000</code>）。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.sess-lock-wait-min" class="link">memcached.sess_lock_wait_min</a></td>
+      <td>150</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 3.0.0 起可用。自 memcached 3.1.0 起默认值为 <code class="literal">150</code>（之前 <code class="literal">1000</code>）。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.sess-persistent" class="link">memcached.sess_persistent</a></td>
+      <td>Off</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 3.0.0 起可用。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.sess-remove-failed-servers" class="link">memcached.sess_remove_failed_servers</a></td>
+      <td>Off</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 3.0.0 起可用。替换 <code class="literal">memcached.sess_remove_failed</code>。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.sess-server-failure-limit" class="link">memcached.sess_server_failure_limit</a></td>
+      <td>0</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 3.0.0 起可用。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.sess-sasl-password" class="link">memcached.sess_sasl_password</a></td>
+      <td>null</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 2.2.0 起可用。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.sess-sasl-username" class="link">memcached.sess_sasl_username</a></td>
+      <td>null</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 memcached 2.2.0 起可用。</td>
+     </tr>
+
+     <tr>
+      <td><a href="memcached.configuration.html#ini.memcached.store-retry-count" class="link">memcached.store_retry_count</a></td>
+      <td>0</td>
+      <td>PHP_INI_ALL</td>
+      <td>
+       自 memcached 2.2.0 起可用。自 memcached 3.2.0 起默认值为 <code class="literal">0</code>（之前是 <code class="literal">2</code>）。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </p>
+
+ <p class="para">这是配置指令的简短说明。</p>
+
+ <p class="para">
+  <dl>
+   
+     <dt id="ini.memcached.sess-locking">
+      <code class="parameter">memcached.sess_locking</code>
+      <span class="type">bool</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       开启 session 支持。有效值: <code class="literal">On</code>、<code class="literal">Off</code>，默认值 <code class="literal">On</code>。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.sess-consistent-hash">
+      <code class="parameter">memcached.sess_consistent_hash</code>
+      <span class="type">bool</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       如果为 <code class="literal">On</code>，session 处理程序则使用一致性哈希（libketama）。
+       使用一致性哈希，可以保证你在增加或删除 memcached 服务器节点的时候不会导致 session 大规模的失效。
+       默认是 <code class="literal">On</code>。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.sess-binary">
+      <code class="parameter">memcached.sess_binary</code>
+      <span class="type">bool</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       Memcached session 是否使用二进制模式。如果 Libmemcached 开启二进制模式。默认值是 <code class="literal">Off</code>。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.sess-lock-wait">
+      <code class="parameter">memcached.sess_lock_wait</code>
+      <span class="type">int</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       Session 自旋锁等待时间（微秒）。请小心设置此值。值的类型是整数，当此值被设置为 <code class="literal">0</code> 的时候，lock wait 的时间将会使用系统默认值，Memcached 扩展中默认值是 <code class="literal">150000</code>。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.sess-prefix">
+      <code class="parameter">memcached.sess_prefix</code>
+      <span class="type">string</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       设置 memcached session key 的前缀。session 前缀最长为 219 字节长的字符串。默认值是 <code class="literal">memc.sess.key</code>。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.sess-number-of-replicas">
+      <code class="parameter">memcached.sess_number_of_replicas</code>
+      <span class="type">int</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       Write data to a number of additional memcached servers. This is &quot;poor man&#039;s HA&quot; as libmemcached calls it.
+       If this value is positive and <code class="literal">sess_remove_failed_servers</code> is enabled
+       when a memcached server fails the session will continue to be available from a replica.
+       However, if the failed memcache server becomes available again it will read the session
+       from there which could have old data or no data at all.
+       Default is <code class="literal">0</code>.
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.sess-randomize-replica-read">
+      <code class="parameter">memcached.sess_randomize_replica_read</code>
+      <span class="type">bool</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       Memcached session 是否随机复制读。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.sess-remove-failed">
+      <code class="parameter">memcached.sess_remove_failed</code>
+      <span class="type">int</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       是否允许自动剔除出故障的 memcached 服务器。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.compression-type">
+      <code class="parameter">memcached.compression_type</code>
+      <span class="type">string</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       设置 memcached 的压缩类型，允许的值为 <code class="literal">fastlz</code>、<code class="literal">zlib</code>。默认值是 <code class="literal">fastlz</code>（快速无损压缩，性能不错）。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.compression-factor">
+      <code class="parameter">memcached.compression_factor</code>
+      <span class="type">float</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       压缩因子。保存时压缩因子超过设置的极限才会将数据压缩存储。存储压缩条件：<code class="literal">plain_len &gt; comp_len * factor</code>。默认是 <code class="literal">1.3</code>（节省 23% 的空间）。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.compression-threshold">
+      <code class="parameter">memcached.compression_threshold</code>
+      <span class="type">int</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       压缩阈值。不压缩的序列化值低于此阈值。默认值是 <code class="literal">2000</code> 字节。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.serializer">
+      <code class="parameter">memcached.serializer</code>
+      <span class="type">string</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       设置缓存对象的默认序列化程序。有效值：<code class="literal">php</code>、<code class="literal">igbinary</code>、<code class="literal">json</code>、<code class="literal">json_array</code>、<code class="literal">msgpack</code>。
+      </p>
+      <dl>
+       
+        <dt>
+json</dt>
+
+        <dd>
+
+         <p class="para">
+          标准的 PHP JSON 编码。此序列化程序快速而且是压缩后的数据，但是处理 UTF-8 编码数据时会不完全实现序列化。请查看 JSON 扩展。自 memcached 0.2.0 起可用。
+         </p>
+        </dd>
+
+       
+       
+        <dt>
+json_array</dt>
+
+        <dd>
+
+         <p class="para">
+          <code class="literal">json</code>，但是反序列化的时候返回数组。自 memcached 2.0.0 起可用。
+         </p>
+        </dd>
+
+       
+       
+        <dt>
+php</dt>
+
+        <dd>
+
+         <p class="para">
+          PHP 标准序列化
+         </p>
+        </dd>
+
+       
+       
+        <dt>
+igbinary</dt>
+
+        <dd>
+
+         <p class="para">
+          二进制序列化。自 memcached 0.1.4 起可用。
+         </p>
+        </dd>
+
+       
+       
+        <dt>
+msgpack</dt>
+
+        <dd>
+
+         <p class="para">
+          一个跨语言的二进制序列化器。自 memcached 2.2.0 起可用。
+         </p>
+        </dd>
+
+       
+      </dl>
+
+      <p class="para">
+       如果 <code class="literal">igbinary</code> 有效则默认使用它，然后如果 <code class="literal">msgpack</code> 有效则使用它，否则使用 <code class="literal">php</code>。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.use-sasl">
+      <code class="parameter">memcached.use_sasl</code>
+      <span class="type">bool</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       链接 memcached 服务器时启用 SASL 认证。有效值 <code class="literal">On</code>、<code class="literal">Off</code>。默认值是 <code class="literal">Off</code>。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.default-binary-protocol">
+      <code class="parameter">memcached.default_binary_protocol</code>
+      <span class="type">bool</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       为新连接设置默认 memcached 协议。（如果要为 session 使用配置 memcached 协议，请改用 <code class="literal">memcached.sess_binary_protocol</code>。）
+
+       如果设置为 <code class="literal">On</code>，则默认使用 memcached 二进制协议。如果设置为 <code class="literal">Off</code>，则使用 memcached 文本协议。默认为 <code class="literal">Off</code>。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.default-connect-timeout">
+      <code class="parameter">memcached.default_connect_timeout</code>
+      <span class="type">int</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       为新连接设置默认的 memcached 连接超时。（要为会话配置 memcached 连接超时，请改用 <code class="literal">memcached.sess_connect_timeout</code>。）
+
+       在非阻塞模式下，这会更改超时值。以毫秒为单位的套接字连接期间。指定 <code class="literal">-1</code> 意味着无限超时。指定 <code class="literal">0</code> 意味着使用 memcached 库的默认连接超时。默认为 <code class="literal">0</code>。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.default-consistent-hash">
+      <code class="parameter">memcached.default_consistent_hash</code>
+      <span class="type">bool</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       Sets the default for consistent hashing for new connections.
+       (To configure consistent hashing for session connections,
+       use <code class="literal">memcached.sess_consistent_hash</code> instead.)
+
+       If set to <code class="literal">On</code>, consistent hashing (libketama) is used for
+       session handling. When consistent hashing is used, one can add or remove cache node(s)
+       without messing up too much with existing keys default is <code class="literal">Off</code>.
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.sess-binary-protocol">
+      <code class="parameter">memcached.sess_binary_protocol</code>
+      <span class="type">bool</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       Use the memcached binary protocol for memcached sessions instead of the text protocol.
+       libmemcached replicas only work if the binary mode is enabled.
+       However, certain proxies (such as twemproxy) will only work if the binary protocol is disabled.
+       Default is <code class="literal">On</code> as of libmemcached 1.0.18.
+       Prior to libmemcached 1.0.18, the default was <code class="literal">Off</code>.
+      </p>
+      <blockquote class="note"><p><strong class="note">注意</strong>: 
+       <span class="simpara">
+        在以前的 php-memcached 版本中，此设置称为
+        <code class="literal">memcached.sess_binary</code>。
+       </span>
+      </p></blockquote>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.sess-connect-timeout">
+      <code class="parameter">memcached.sess_connect_timeout</code>
+      <span class="type">int</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       memcached connect timeout value
+       In non-blocking mode this changes the value of the timeout
+       during socket connection in milliseconds.
+       Specifying <code class="literal">-1</code> means an infinite timeout.
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.sess-consistent-hash-type">
+      <code class="parameter">memcached.sess_consistent_hash_type</code>
+      <span class="type">string</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       Memcached session consistent hash type.
+       If set to <code class="literal">ketama</code>, consistent hashing (libketama)
+       is used for session handling.
+       If set to <code class="literal">ketama_weighted</code>, weighted consistent hashing (libketama)
+       is used for session handling.
+       Default is <code class="literal">ketama</code>.
+       Prior to php-memcached 3.0, the default was <code class="literal">ketama_weighted</code>.
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.sess-lock-expire">
+      <code class="parameter">memcached.sess_lock_expire</code>
+      <span class="type">int</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       The time, in seconds, before a lock should release itself.
+       Setting to <code class="literal">0</code> results in the default behaviour,
+       which is to use PHP&#039;s <code class="literal">max_execution_time</code>.
+       Default is <code class="literal">0</code>.
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.sess-lock-retries">
+      <code class="parameter">memcached.sess_lock_retries</code>
+      <span class="type">int</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       The number of times to retry locking the session lock, not including the first attempt.
+       Default is <code class="literal">5</code>.
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.sess-lock-wait-max">
+      <code class="parameter">memcached.sess_lock_wait_max</code>
+      <span class="type">int</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       The maximum time, in milliseconds, to wait between session lock attempts.
+       The default is <code class="literal">150</code>.
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.sess-lock-wait-min">
+      <code class="parameter">memcached.sess_lock_wait_min</code>
+      <span class="type">int</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       The minimum time, in milliseconds, to wait between session lock attempts.
+       This value is double on each lock retry until <code class="literal">memcached.sess_lock_wait_max</code> is
+       reached, after which any further retries will take
+       <code class="literal">memcached.sess_lock_wait_max</code> seconds.
+       The default is <code class="literal">150</code>.
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.sess-persistent">
+      <code class="parameter">memcached.sess_persistent</code>
+      <span class="type">bool</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       Whether or not to re-use the memcached connections corresponding to the value(s) of
+       <code class="literal">session.save_path</code> after the execution of the script ends. Don&#039;t use this if
+       certain settings (e.g. SASL settings, sess_binary_protocol) would be overridden between requests.
+       Default is <code class="literal">Off</code>.
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.sess-remove-failed-servers">
+      <code class="parameter">memcached.sess_remove_failed_servers</code>
+      <span class="type">bool</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       允许自动移除失败的 memcached 服务器。默认值是 <code class="literal">Off</code>。
+      </p>
+      <blockquote class="note"><p><strong class="note">注意</strong>: 
+       <span class="simpara">
+        在以前的 php-memcached 版本中，此设置称为
+        <code class="literal">memcached.sess_remove_failed</code>。
+       </span>
+      </p></blockquote>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.sess-server-failure-limit">
+      <code class="parameter">memcached.sess_server_failure_limit</code>
+      <span class="type">int</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       Set this value to enable the server be removed after
+       configured number of continuous times connection failure.
+       Default is <code class="literal">0</code>.
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.sess-sasl-password">
+      <code class="parameter">memcached.sess_sasl_password</code>
+      <span class="type">string</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       Session SASL 密码。
+       Both username and password need to be set for SASL to be enabled.
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.sess-sasl-username">
+      <code class="parameter">memcached.sess_sasl_username</code>
+      <span class="type">string</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       Session SASL 用户名。
+       Both username and password need to be set for SASL to be enabled.
+      </p>
+     </dd>
+
+    
+    
+     <dt id="ini.memcached.store-retry-count">
+      <code class="parameter">memcached.store_retry_count</code>
+      <span class="type">int</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       存储命令失败后的重试次数。
+       This mechanism allows transparent fail-over to secondary servers when
+       set/increment/decrement/setMulti operations fail on
+       the desired server in a multi-server environment.
+       The default is <code class="literal">2</code>.
+      </p>
+     </dd>
+
+    
+  </dl>
+
+ </p>
+</div></div></div></body></html>

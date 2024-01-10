@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>简介</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="book.phar.html">« Phar</a></li>
+      <li style="float: right;"><a href="phar.setup.html">安装/配置 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="book.phar.html">Phar</a></li>
+    <li>简介</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="intro.phar" class="preface">
+  <h1 class="title">简介</h1>
+  <p class="para">
+   phar 扩展提供了一种将整个 PHP 应用程序放入单个叫做“phar”（PHP 归档）文件的方法，以便于分发和安装。 
+   除了提供此服务外，phar 扩展还提供了一种文件格式抽象方法，用于通过 <span class="classname"><a href="class.phardata.html" class="classname">PharData</a></span> 类创建和操作
+   tar 和 zip 文件，就像 PDO 提供访问不同数据库的统一接口一样。与不能在不同数据库之间转换的 PDO 不同，phar
+   还可以使用一行代码在 tar、zip 和 phar 文件格式之间进行转换。参见 <span class="function"><a href="phar.converttoexecutable.html" class="function">Phar::convertToExecutable()</a></span> 中的示例。
+  </p>
+  <p class="para">
+   什么是 phar？phar 归档的最佳特征是可以将多个文件组合成一个文件。 因此，phar 归档提供了在单个文件中分发完整的 PHP
+   应用程序并无需将其解压缩到磁盘而直接运行文件的方法。此外，phar 归档可以像任何其他文件一样由 PHP 在命令行和 Web
+   服务器上执行。phar 有点像 PHP 应用程序的移动存储器。
+  </p>
+  <p class="para">
+   phar 通过 <a href="book.stream.html" class="link">stream 封装协议</a>实现这个功能。通常，要在 PHP 脚本中使用外部文件，将使用 <span class="function"><a href="function.include.html" class="function">include</a></span>：
+  </p>
+  <p class="para">
+   <div class="example" id="example-2123">
+    <p><strong>示例 #1 使用外部文件</strong></p>
+    <div class="example-contents">
+     <div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /> </span><span style="color: #007700">include </span><span style="color: #DD0000">'/path/to/external/file.php'</span><span style="color: #007700">;<br /> </span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   PHP 实际上将 <code class="literal">/path/to/external/file.php</code> 转换为 stream
+   封装协议<code class="literal">file:///path/to/external/file.php</code>，在底层，实际上使用普通文件 stream
+   封装协议 stream 函数访问所有的本地文件。
+  </p>
+  <p class="para">
+   要使用 phar 归档 <code class="literal">/path/to/myphar.phar</code> 中名为 <code class="literal">file.php</code>
+   的文件，语法跟上面的 <code class="literal">file://</code> 语法非常相似。
+  </p>
+  <p class="para">
+   <div class="example" id="example-2126">
+    <p><strong>示例 #2 使用 phar 归档内部文件</strong></p>
+    <div class="example-contents">
+     <div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /> </span><span style="color: #007700">include </span><span style="color: #DD0000">'phar:///path/to/myphar.phar/file.php'</span><span style="color: #007700">;<br /> </span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   实际上可以将 phar 归档完全视为外部磁盘，可以使用任何 <span class="function"><a href="function.fopen.html" class="function">fopen()</a></span> 相关函数，<span class="function"><a href="function.opendir.html" class="function">opendir()</a></span>
+   和 <span class="function"><a href="function.mkdir.html" class="function">mkdir()</a></span> 相关函数在 phar 归档内读取、更改、创建新文件或目录。这将允许完整 PHP
+   应用程序分布在单个文件中，并直接从该文件中运行。
+  </p>
+  <p class="para">
+   phar 归档最常见的用法是在单个文件中分发完整的应用程序。例如，PEAR 安装程序与 PHP 版本捆绑作为 phar
+   归档分发。要使用以这种方式分发 phar 归档，可以在命令行或通过 Web 服务器执行归档操作。
+  </p>
+  <p class="para">
+   phar 归档可以作为 <code class="literal">tar</code> 归档、<code class="literal">zip</code> 归档或专门为 phar 扩展设计的自定义
+   <code class="literal">phar</code> 文件格式分发。每种文件格式都有优点和缺点。tar 和 zip 文件格式可以由任何可以读取格式的第三方工具读取或提取，但需要
+   PHP 和 phar 扩展才能运行。phar 文件格式是针对 phar 扩展定制和独有的，只能由 phar 扩展或 PEAR 包 <a href="https://pear.php.net/package/PHP_Archive" class="link external">&raquo;&nbsp;PHP_Archive</a> 创建，优点是以这种格式创建的应用程序即使未启用 phar 扩展也能运行。
+  </p>
+  <p class="para">
+   换句话说，即使禁用了 phar 扩展，也可以执行或包含基于 phar 的归档。只有使用 phar 扩展才能访问 phar 归档中的单个文件，除非 phar 归档是由 PHP_Archive 创建的。
+  </p>
+  <p class="para">
+   phar 扩展还能够在单个命令中将 phar 归档从 tar 转换为 zip 或 phar 文件格式：
+  </p>
+  <p class="para">
+   <div class="example" id="example-2129">
+    <p><strong>示例 #3 将 phar 归档从 phar 转换为 tar 文件格式</strong></p>
+    <div class="example-contents">
+     <div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /> $phar </span><span style="color: #007700">= new </span><span style="color: #0000BB">Phar</span><span style="color: #007700">(</span><span style="color: #DD0000">'myphar.phar'</span><span style="color: #007700">);<br /> </span><span style="color: #0000BB">$pgz </span><span style="color: #007700">= </span><span style="color: #0000BB">$phar</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">convertToExecutable</span><span style="color: #007700">(</span><span style="color: #0000BB">Phar</span><span style="color: #007700">::</span><span style="color: #0000BB">TAR</span><span style="color: #007700">, </span><span style="color: #0000BB">Phar</span><span style="color: #007700">::</span><span style="color: #0000BB">GZ</span><span style="color: #007700">); </span><span style="color: #FF8000">// makes myphar.phar.tar.gz<br /> </span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   phar 可以使用 <a href="book.zlib.html" class="link">gzip</a> 或 <a href="book.bzip2.html" class="link">bzip2</a>
+   来压缩单个文件或整个归档，并且可以通过使用 MD5、SHA-1、SHA-256 或 SHA-512 签名自动验证归档完整性。
+  </p>
+  <p class="para">
+   最后，phar 扩展有安全意识，默认禁用对可执行 phar 归档的写访问，并且需要系统级禁用 <code class="literal">phar.readonly</code>
+   php.ini 设置才能创建或修改 phar 归档。没有可执行存根（executable stub）的普通 tar 和 zip 归档始终可以使用
+   <span class="classname"><a href="class.phardata.html" class="classname">PharData</a></span> 类创建或修改。
+  </p>
+  <p class="para">
+   如果正在创建用于分发的应用程序，需要阅读<a href="phar.creating.html" class="link">如何创建 phar 归档</a>。如果想了解关于 phar
+   支持的三种文件格式之间差异的更多信息，应该阅读 <a href="phar.fileformat.html" class="link">Phar、Tar 和 Zip</a>。
+  </p>
+  <p class="para">
+   如果使用的是 phar 应用程序，那么在<a href="phar.using.html" class="link">如何使用 phar 归档</a>中有一些有用的提示。
+  </p>
+  <p class="para">
+   <code class="literal">phar</code> 是 <code class="literal">PHP</code> 和 <code class="literal">Archive</code>
+   的合成词，大致上基于 Java 开发人员熟悉的 <code class="literal">jar</code>（Java 归档）。
+  </p>
+  <p class="para">
+   phar 归档的实现基于 PEAR 包 <a href="https://pear.php.net/package/PHP_Archive" class="link external">&raquo;&nbsp;PHP_Archive</a>，尽管实现细节相似，但是
+   phar 扩展功能更强大。此外，phar 扩展允许大多数 PHP 应用程序不加修改地运行，而基于 PHP_Archive 的 phar 归档通常需要大量修改才能工作。
+  </p>
+ </div></div></div></body></html>

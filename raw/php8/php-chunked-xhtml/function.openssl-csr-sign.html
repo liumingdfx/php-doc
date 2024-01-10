@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>用另一个证书签署 CSR（或者本身）并且生成一个证书</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.openssl-csr-new.html">« openssl_csr_new</a></li>
+      <li style="float: right;"><a href="function.openssl-decrypt.html">openssl_decrypt »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.openssl.html">OpenSSL 函数</a></li>
+    <li>用另一个证书签署 CSR（或者本身）并且生成一个证书</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.openssl-csr-sign" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">openssl_csr_sign</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.2.0, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">openssl_csr_sign</span> &mdash; <span class="dc-title">用另一个证书签署 <abbr title="Certificate Signing Request">CSR</abbr>（或者本身）并且生成一个证书</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.openssl-csr-sign-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>openssl_csr_sign</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><span class="type"><a href="class.opensslcertificatesigningrequest.html" class="type OpenSSLCertificateSigningRequest">OpenSSLCertificateSigningRequest</a></span>|<span class="type">string</span></span> <code class="parameter">$csr</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><span class="type"><a href="class.opensslcertificate.html" class="type OpenSSLCertificate">OpenSSLCertificate</a></span>|<span class="type">string</span>|<span class="type">null</span></span> <code class="parameter">$ca_certificate</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><span class="type"><a href="class.opensslasymmetrickey.html" class="type OpenSSLAsymmetricKey">OpenSSLAsymmetricKey</a></span>|<span class="type"><a href="class.opensslcertificate.html" class="type OpenSSLCertificate">OpenSSLCertificate</a></span>|<span class="type">array</span>|<span class="type">string</span></span> <code class="parameter">$private_key</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$days</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">array</span><span class="type"></span></span> <code class="parameter">$options</code><span class="initializer"> = <strong><code>null</code></strong></span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$serial</code><span class="initializer"> = 0</span></span><br>): <span class="type"><span class="type"><a href="class.opensslcertificate.html" class="type OpenSSLCertificate">OpenSSLCertificate</a></span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>openssl_csr_sign()</strong></span> 从给定的 <abbr title="Certificate Signing Request">CSR</abbr> 生成 x509 证书。
+  </p>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+<span class="simpara">
+ 必须安装有效的 <var class="filename">openssl.cnf</var> 以保证此函数正确运行。参考有关<a href="openssl.installation.html" class="link">安装</a>的说明以获得更多信息。
+</span>
+</p></blockquote>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.openssl-csr-sign-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">csr</code></dt>
+
+     <dd>
+
+      <p class="para">
+       由 <span class="function"><a href="function.openssl-csr-new.html" class="function">openssl_csr_new()</a></span> 函数生成的 <abbr title="Certificate Signing Request">CSR</abbr>。
+       也可以是由类似<var class="filename">file://path/to/csr</var>格式指定的指向 <abbr title="Privacy-Enhanced Mail">PEM</abbr> 编码的 <abbr title="Certificate Signing Request">CSR</abbr> 路径，或者是一个由<span class="function"><a href="function.openssl-csr-export.html" class="function">openssl_csr_export()</a></span>函数生成的字符串。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">ca_certificate</code></dt>
+
+     <dd>
+
+      <p class="para">
+       生成的证书将由<code class="parameter">ca_certificate</code>签名。
+       如果<code class="parameter">ca_certificate</code> 为 <strong><code>null</code></strong>, 生成的证书将是自签名证书。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">private_key</code></dt>
+
+     <dd>
+
+      <p class="para">
+       <code class="parameter">private_key</code> 是 <code class="parameter">ca_certificate</code> 证书对应的私钥。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">days</code></dt>
+
+     <dd>
+
+      <p class="para">
+       <code class="parameter">days</code> 指定生成的证书在几天内有效的时间长度。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">options</code></dt>
+
+     <dd>
+
+      <p class="para">
+       可以通过 <code class="parameter">options</code> 确定 <abbr title="Certificate Signing Request">CSR</abbr> 签名。
+       查看 <span class="function"><a href="function.openssl-csr-new.html" class="function">openssl_csr_new()</a></span> 方法获取
+       <code class="parameter">options</code> 的更多相关信息。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">serial</code></dt>
+
+     <dd>
+
+      <p class="para">
+       可选的发行证书编号。如果没有指定默认值为0.
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.openssl-csr-sign-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   成功时返回 <span class="classname"><a href="class.opensslcertificate.html" class="classname">OpenSSLCertificate</a></span>，失败则返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.openssl-csr-sign-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       成功时，此函数现在返回 <span class="classname"><a href="class.opensslcertificate.html" class="classname">OpenSSLCertificate</a></span>
+       实例；之前返回类型 <code class="literal">OpenSSL X.509</code> 的 <a href="language.types.resource.html" class="link">resource</a>。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       <code class="parameter">csr</code> 现在接受 <span class="classname"><a href="class.opensslcertificatesigningrequest.html" class="classname">OpenSSLCertificateSigningRequest</a></span>
+       实例；之前接受类型 <code class="literal">OpenSSL X.509 CSR</code> 的 <a href="language.types.resource.html" class="link">resource</a>。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       <code class="parameter">ca_certificate</code> 现在接受 <span class="classname"><a href="class.opensslcertificate.html" class="classname">OpenSSLCertificate</a></span>
+       实例；之前接受类型 <code class="literal">OpenSSL X.509</code> 的 <a href="language.types.resource.html" class="link">resource</a>。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       <code class="parameter">private_key</code> 现在接受 <span class="classname"><a href="class.opensslasymmetrickey.html" class="classname">OpenSSLAsymmetricKey</a></span>
+       或 <span class="classname"><a href="class.opensslcertificate.html" class="classname">OpenSSLCertificate</a></span> 实例；之前接受类型 <code class="literal">OpenSSL key</code> 或
+       <code class="literal">OpenSSL X.509</code> 的 <a href="language.types.resource.html" class="link">resource</a>。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.openssl-csr-sign-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="example-2801">
+    <p><strong>示例 #1 <span class="function"><strong>openssl_csr_sign()</strong></span> 示例——签署 <abbr title="Certificate Signing Request">CSR</abbr>（如何实现自己的 CA）</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// Let's assume that this script is set to receive a CSR that has<br />// been pasted into a textarea from another page<br /></span><span style="color: #0000BB">$csrdata </span><span style="color: #007700">= </span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">"CSR"</span><span style="color: #007700">];<br /><br /></span><span style="color: #FF8000">// We will sign the request using our own "certificate authority"<br />// certificate.  You can use any certificate to sign another, but<br />// the process is worthless unless the signing certificate is trusted<br />// by the software/users that will deal with the newly signed certificate<br /><br />// We need our CA cert and its private key<br /></span><span style="color: #0000BB">$cacert </span><span style="color: #007700">= </span><span style="color: #DD0000">"file://path/to/ca.crt"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$privkey </span><span style="color: #007700">= array(</span><span style="color: #DD0000">"file://path/to/ca.key"</span><span style="color: #007700">, </span><span style="color: #DD0000">"your_ca_key_passphrase"</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$usercert </span><span style="color: #007700">= </span><span style="color: #0000BB">openssl_csr_sign</span><span style="color: #007700">(</span><span style="color: #0000BB">$csrdata</span><span style="color: #007700">, </span><span style="color: #0000BB">$cacert</span><span style="color: #007700">, </span><span style="color: #0000BB">$privkey</span><span style="color: #007700">, </span><span style="color: #0000BB">365</span><span style="color: #007700">, array(</span><span style="color: #DD0000">'digest_alg'</span><span style="color: #007700">=&gt;</span><span style="color: #DD0000">'sha256'</span><span style="color: #007700">) );<br /><br /></span><span style="color: #FF8000">// Now display the generated certificate so that the user can<br />// copy and paste it into their local configuration (such as a file<br />// to hold the certificate for their SSL server)<br /></span><span style="color: #0000BB">openssl_x509_export</span><span style="color: #007700">(</span><span style="color: #0000BB">$usercert</span><span style="color: #007700">, </span><span style="color: #0000BB">$certout</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">$certout</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// Show any errors that occurred here<br /></span><span style="color: #007700">while ((</span><span style="color: #0000BB">$e </span><span style="color: #007700">= </span><span style="color: #0000BB">openssl_error_string</span><span style="color: #007700">()) !== </span><span style="color: #0000BB">false</span><span style="color: #007700">) {<br />    echo </span><span style="color: #0000BB">$e </span><span style="color: #007700">. </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

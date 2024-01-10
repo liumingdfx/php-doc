@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>不向后兼容的变更</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="migration82.constants.html">« 新全局常量</a></li>
+      <li style="float: right;"><a href="migration82.deprecated.html">废弃的功能 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="migration82.html">从 PHP 8.1.x 移植到 PHP 8.2.x</a></li>
+    <li>不向后兼容的变更</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="migration82.incompatible" class="sect1">
+ <h2 class="title">不向后兼容的变更</h2>
+
+ <div class="sect2" id="migration82.incompatible.date">
+  <h3 class="title">Date</h3>
+
+  <p class="para">
+   现 <span class="methodname"><a href="datetime.createfromimmutable.html" class="methodname">DateTime::createFromImmutable()</a></span> 返回类型暂定为
+   <span class="type"><span class="type static">static</span></span>，之前是 <span class="type"><a href="class.datetime.html" class="type DateTime">DateTime</a></span>。
+  </p>
+
+  <p class="para">
+   现 <span class="methodname"><a href="datetimeimmutable.createfrommutable.html" class="methodname">DateTimeImmutable::createFromMutable()</a></span> 返回类型暂定为
+   <span class="type"><span class="type static">static</span></span>，之前是 <span class="type"><a href="class.datetimeimmutable.html" class="type DateTimeImmutable">DateTimeImmutable</a></span>。
+  </p>
+
+  <p class="para">
+   <a href="" class="link">相对格式</a>的 <code class="literal">number</code> 符号不再接受多个符号，比如 <code class="literal">+-2</code>。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration82.incompatible.odbc">
+  <h3 class="title">ODBC</h3>
+
+  <p class="para">
+   ODBC 扩展对于 connection 字符串和 username/password 一起传递时，会对 username 和 password
+   进行转义，并将其追加。之前，包含需要转义的用户值可能会创建格式错误的 connection
+   字符串，或从用户提供的数据中注入值。转义规则应与 .NET BCL DbConnectionOptions 的行为相同。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration82.incompatible.pdo-odbc">
+  <h3 class="title">PDO_ODBC</h3>
+
+  <p class="para">
+   当传递连接字符串时，PDO_ODBC 扩展也会转义用户名和密码。参阅 <a href="migration82.incompatible.html#migration82.incompatible.odbc" class="link">ODBC 扩展的更改</a>获取更多相信信息。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration82.incompatible.standard">
+  <h3 class="title">标准</h3>
+
+  <p class="para">
+   如果所有路径都受到 <a href="ini.core.html#ini.open-basedir" class="link">open_basedir</a>
+   限制，现在 <span class="function"><a href="function.glob.html" class="function">glob()</a></span> 会返回空 <span class="type">array</span>。此外，即便只有一些路径受到
+   <a href="ini.core.html#ini.open-basedir" class="link">open_basedir</a> 限制，也会发出警告。
+  </p>
+
+  <p class="para">
+   <span class="methodname"><a href="filesystemiterator.construct.html" class="methodname">FilesystemIterator::__construct()</a></span>：在 PHP 8.2.0 之前，<strong><code>FilesystemIterator::SKIP_DOTS</code></strong>
+   常量始终设置且无法禁用。当使用 <code class="parameter">flags</code> 参数时，为了保持之前的行为，常量必须显式设置。<code class="parameter">flags</code>
+   参数的默认值并未修改。
+  </p>
+
+  <p class="para">
+   <span class="function"><a href="function.strtolower.html" class="function">strtolower()</a></span>、<span class="function"><a href="function.strtoupper.html" class="function">strtoupper()</a></span>、<span class="function"><a href="function.stristr.html" class="function">stristr()</a></span>、<span class="function"><a href="function.stripos.html" class="function">stripos()</a></span>、<span class="function"><a href="function.strripos.html" class="function">strripos()</a></span>、<span class="function"><a href="function.lcfirst.html" class="function">lcfirst()</a></span>、<span class="function"><a href="function.ucfirst.html" class="function">ucfirst()</a></span>、<span class="function"><a href="function.ucwords.html" class="function">ucwords()</a></span>
+   和 <span class="function"><a href="function.str-ireplace.html" class="function">str_ireplace()</a></span> 不再对区域设置敏感。现在执行 ASCII
+   大小写转换，就好像区域设置是“C”一样。这些函数的本地化版本在 <a href="book.mbstring.html" class="link">MBString
+   扩展</a> 可以使用。此外 <span class="function"><a href="function.array-change-key-case.html" class="function">array_change_key_case()</a></span>
+   使用 <strong><code>SORT_FLAG_CASE</code></strong> 排序现在也是用 ASCII 大小写转换。 
+  </p>
+
+  <p class="para">
+   <span class="function"><a href="function.str-split.html" class="function">str_split()</a></span> 现在 <span class="type">string</span> 将返回空
+   <span class="type">array</span>。之前会返回带有一个空字符串条目的数组。<span class="function"><a href="function.mb-str-split.html" class="function">mb_str_split()</a></span> 
+   不受更改的影响，因为它的行为就是如此。
+  </p>
+
+  <p class="para">
+   <span class="function"><a href="function.ksort.html" class="function">ksort()</a></span> 和 <span class="function"><a href="function.krsort.html" class="function">krsort()</a></span> 现在使用 PHP 8 标准规则在
+   <strong><code>SORT_REGULAR</code></strong> 下进行数字字符串比较。
+  </p>
+
+  <p class="para">
+   <span class="function"><a href="function.var-export.html" class="function">var_export()</a></span> 不再省略导出类的开头斜线，也就是说，这些类现在完全合格。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration82.incompatible.spl">
+  <h3 class="title">PHP 标准库（SPL）</h3>
+
+  <p class="para">
+   下列方法现在强制执行其签名：
+   <ul class="simplelist">
+    <li class="member"><span class="methodname"><strong>SplFileInfo::_bad_state_ex()</strong></span></li>
+    <li class="member"><span class="methodname"><a href="splfileobject.getcsvcontrol.html" class="methodname">SplFileObject::getCsvControl()</a></span></li>
+    <li class="member"><span class="methodname"><a href="splfileobject.fflush.html" class="methodname">SplFileObject::fflush()</a></span></li>
+    <li class="member"><span class="methodname"><a href="splfileobject.ftell.html" class="methodname">SplFileObject::ftell()</a></span></li>
+    <li class="member"><span class="methodname"><a href="splfileobject.fgetc.html" class="methodname">SplFileObject::fgetc()</a></span></li>
+    <li class="member"><span class="methodname"><a href="splfileobject.fpassthru.html" class="methodname">SplFileObject::fpassthru()</a></span></li>
+   </ul>
+  </p>
+
+  <p class="para">
+   现 <span class="methodname"><a href="splfileobject.haschildren.html" class="methodname">SplFileObject::hasChildren()</a></span> 返回类型暂定为
+   <span class="type"><span class="type false">false</span></span>，之前是 <span class="type">bool</span>。
+  </p>
+
+  <p class="para">
+   现 <span class="methodname"><a href="splfileobject.getchildren.html" class="methodname">SplFileObject::getChildren()</a></span> 返回类型暂定为
+   <span class="type">null</span>，之前是
+   <span class="type">?</span><span class="type"><span class="type"><a href="class.recursiveiterator.html" class="type RecursiveIterator">RecursiveIterator</a></span><span class="type"></span></span>。
+  </p>
+
+  <p class="para">
+   如果所有路径都受到 <a href="ini.core.html#ini.open-basedir" class="link">open_basedir</a> 的影响，<span class="classname"><a href="class.globiterator.html" class="classname">GlobIterator</a></span>
+   现在将返回空 <span class="type">array</span>。之前返回 <strong><code>false</code></strong>。此外，即使只有一些路径受
+   <a href="ini.core.html#ini.open-basedir" class="link">open_basedir</a> 限制，现在也会发出警告。
+  </p>
+ </div>
+
+</div></div></div></body></html>

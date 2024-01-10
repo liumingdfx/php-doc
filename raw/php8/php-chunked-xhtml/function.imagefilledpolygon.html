@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>绘制多边形并填充</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.imagefilledellipse.html">« imagefilledellipse</a></li>
+      <li style="float: right;"><a href="function.imagefilledrectangle.html">imagefilledrectangle »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.image.html">GD 和图像处理 函数</a></li>
+    <li>绘制多边形并填充</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.imagefilledpolygon" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">imagefilledpolygon</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">imagefilledpolygon</span> &mdash; <span class="dc-title">绘制多边形并填充</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.imagefilledpolygon-description">
+  <h3 class="title">说明</h3>
+  <p class="simpara">自 PHP 8.0.0 起的签名（不支持命名参数）</p>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>imagefilledpolygon</strong></span>(<span class="methodparam"><span class="type"><a href="class.gdimage.html" class="type GdImage">GdImage</a></span> <code class="parameter">$image</code></span>, <span class="methodparam"><span class="type">array</span> <code class="parameter">$points</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$color</code></span>): <span class="type">bool</span></div>
+
+  <p class="simpara">替代签名（从 PHP 8.1.0 起弃用）</p>
+  <div class="methodsynopsis dc-description"><span class="methodname"><strong>imagefilledpolygon</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><a href="class.gdimage.html" class="type GdImage">GdImage</a></span> <code class="parameter">$image</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">array</span> <code class="parameter">$points</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$num_points</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$color</code></span><br>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>imagefilledpolygon()</strong></span> 在指定 <code class="parameter">image</code> 中创建多边形并填充。
+  </p>
+ </div>
+
+ <div class="refsect1 parameters" id="refsect1-function.imagefilledpolygon-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    <dt>
+
+<code class="parameter">image</code></dt>
+<dd>
+<p class="para">由图象创建函数(例如<span class="function"><a href="function.imagecreatetruecolor.html" class="function">imagecreatetruecolor()</a></span>)返回的 
+<span class="classname"><a href="class.gdimage.html" class="classname">GdImage</a></span> 对象。</p></dd>
+
+    
+     <dt>
+<code class="parameter">points</code></dt>
+
+     <dd>
+
+      <p class="para">
+       包含连续多边形顶点的 <code class="literal">x</code> 和 <code class="literal">y</code> 坐标的数组。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">num_points</code></dt>
+
+     <dd>
+
+      <p class="para">
+       点（顶点）的总数，必须最少为 3。
+      </p>
+      <span class="simpara">
+       如果根据第二个签名省略此参数，则 <code class="parameter">points</code> 必须具有偶数个元素，并且假定
+       <code class="parameter">num_points</code> 为 <code class="code">count($points)/2</code>。
+      </span>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">color</code></dt>
+
+     <dd>
+
+      <p class="para">
+       颜色标识符使用 <span class="function"><a href="function.imagecolorallocate.html" class="function">imagecolorallocate()</a></span> 创建。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+ <div class="refsect1 returnvalues" id="refsect1-function.imagefilledpolygon-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   成功时返回 <strong><code>true</code></strong>， 或者在失败时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.imagefilledpolygon-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>8.1.0</td>
+      <td>
+       弃用参数 <code class="parameter">num_points</code>。
+      </td>
+     </tr>
+
+     <tr>
+ <td>8.0.0</td>
+ <td>
+  <code class="parameter">image</code> 现在需要 <span class="classname"><a href="class.gdimage.html" class="classname">GdImage</a></span> 实例；之前需要有效的 <code class="literal">gd</code> <span class="type">resource</span>。
+ </td>
+</tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.imagefilledpolygon-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 <span class="function"><strong>imagefilledpolygon()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// 为多边形设置点数组<br /></span><span style="color: #0000BB">$values </span><span style="color: #007700">= array(<br />            </span><span style="color: #0000BB">40</span><span style="color: #007700">,  </span><span style="color: #0000BB">50</span><span style="color: #007700">,  </span><span style="color: #FF8000">// Point 1 (x, y)<br />            </span><span style="color: #0000BB">20</span><span style="color: #007700">,  </span><span style="color: #0000BB">240</span><span style="color: #007700">, </span><span style="color: #FF8000">// Point 2 (x, y)<br />            </span><span style="color: #0000BB">60</span><span style="color: #007700">,  </span><span style="color: #0000BB">60</span><span style="color: #007700">,  </span><span style="color: #FF8000">// Point 3 (x, y)<br />            </span><span style="color: #0000BB">240</span><span style="color: #007700">, </span><span style="color: #0000BB">20</span><span style="color: #007700">,  </span><span style="color: #FF8000">// Point 4 (x, y)<br />            </span><span style="color: #0000BB">50</span><span style="color: #007700">,  </span><span style="color: #0000BB">40</span><span style="color: #007700">,  </span><span style="color: #FF8000">// Point 5 (x, y)<br />            </span><span style="color: #0000BB">10</span><span style="color: #007700">,  </span><span style="color: #0000BB">10   </span><span style="color: #FF8000">// Point 6 (x, y)<br />            </span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 创建图像<br /></span><span style="color: #0000BB">$image </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecreatetruecolor</span><span style="color: #007700">(</span><span style="color: #0000BB">250</span><span style="color: #007700">, </span><span style="color: #0000BB">250</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 分配颜色<br /></span><span style="color: #0000BB">$bg   </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$blue </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 填充背景<br /></span><span style="color: #0000BB">imagefilledrectangle</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">249</span><span style="color: #007700">, </span><span style="color: #0000BB">249</span><span style="color: #007700">, </span><span style="color: #0000BB">$bg</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 绘制多边形<br /></span><span style="color: #0000BB">imagefilledpolygon</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">$values</span><span style="color: #007700">, </span><span style="color: #0000BB">6</span><span style="color: #007700">, </span><span style="color: #0000BB">$blue</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 输出图像<br /></span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">'Content-type: image/png'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagepng</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagedestroy</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例的输出类似于：</p></div>
+    <div class="mediaobject">
+     
+     <div class="imageobject">
+      <img src="images/21009b70229598c6a80eef8b45bf282b-imagefilledpolygon.png" alt="示例输出：imagefilledpolygon()" width="250" height="250" />
+     </div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.imagefilledpolygon-seealso">
+  <h3 class="title">参见</h3>
+  <ul class="simplelist">
+   <li class="member"><span class="function"><a href="function.imagepolygon.html" class="function" rel="rdfs-seeAlso">imagepolygon()</a> - 绘制多边形</span></li>
+  </ul>
+ </div>
+
+</div></div></div></body></html>

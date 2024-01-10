@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Ping 服务器连接的状态，如果没有连接则重新连接</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.mysql-pconnect.html">« mysql_pconnect</a></li>
+      <li style="float: right;"><a href="function.mysql-query.html">mysql_query »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.mysql.html">MySQL 函数</a></li>
+    <li>Ping 服务器连接的状态，如果没有连接则重新连接</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.mysql-ping" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">mysql_ping</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.3.0, PHP 5)</p><p class="refpurpose"><span class="refname">mysql_ping</span> &mdash; <span class="dc-title">Ping 服务器连接的状态，如果没有连接则重新连接</span></p>
+
+ </div>
+
+ <div id="function.mysql-ping-refsynopsisdiv">
+  <div class="warning"><strong class="warning">警告</strong>
+   <p class="para">本扩展自 PHP 5.5.0
+起已废弃，并在自 PHP 7.0.0 开始被移除。应使用 <a href="book.mysqli.html" class="link">MySQLi</a>
+或 <a href="ref.pdo-mysql.html" class="link">PDO_MySQL</a> 扩展来替换之。参见 <a href="mysqlinfo.api.choosing.html" class="link">MySQL：选择 API</a> 
+指南来获取更多信息。用以替代本函数的有：</p>
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="mysqli.ping.html" class="function">mysqli_ping()</a></span></li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.mysql-ping-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>mysql_ping</strong></span>(<span class="methodparam"><span class="type">resource</span> <code class="parameter">$link_identifier</code><span class="initializer"> = NULL</span></span>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   检查到服务器的连接是否正常。如果断开，则自动尝试连接。本函数可用于空闲很久的脚本来检查服务器是否关闭了连接，如果有必要则重新连接上。。
+  </p>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    从 MySQL 版本 5.0.3 开始，默认情况下不启用自动重新连接功能。
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.mysql-ping-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    <dt>
+
+<code class="parameter">link_identifier</code></dt>
+<dd>
+<p class="para">MySQL
+连接。如不指定连接标识，则使用由 <span class="function"><a href="function.mysql-connect.html" class="function">mysql_connect()</a></span>
+最近打开的连接。如果没有找到该连接，会尝试不带参数调用
+<span class="function"><a href="function.mysql-connect.html" class="function">mysql_connect()</a></span>
+来创建。如没有找到连接或无法建立连接，则会生成
+<strong><code>E_WARNING</code></strong> 级别的错误。</p></dd>
+
+
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.mysql-ping-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   如果到服务器的连接可用则，返回 <strong><code>true</code></strong>，否则返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.mysql-ping-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="example-5363">
+    <p><strong>示例 #1 <span class="function"><strong>mysql_ping()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />set_time_limit</span><span style="color: #007700">(</span><span style="color: #0000BB">0</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$conn </span><span style="color: #007700">= </span><span style="color: #0000BB">mysql_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">'localhost'</span><span style="color: #007700">, </span><span style="color: #DD0000">'mysqluser'</span><span style="color: #007700">, </span><span style="color: #DD0000">'mypass'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$db   </span><span style="color: #007700">= </span><span style="color: #0000BB">mysql_select_db</span><span style="color: #007700">(</span><span style="color: #DD0000">'mydb'</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">/* Assuming this query will take a long time */<br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">mysql_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$sql</span><span style="color: #007700">);<br />if (!</span><span style="color: #0000BB">$result</span><span style="color: #007700">) {<br />    echo </span><span style="color: #DD0000">'Query #1 failed, exiting.'</span><span style="color: #007700">;<br />    exit;<br />}<br /><br /></span><span style="color: #FF8000">/* Make sure the connection is still alive, if not, try to reconnect */<br /></span><span style="color: #007700">if (!</span><span style="color: #0000BB">mysql_ping</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">)) {<br />    echo </span><span style="color: #DD0000">'Lost connection, exiting after query #1'</span><span style="color: #007700">;<br />    exit;<br />}<br /></span><span style="color: #0000BB">mysql_free_result</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">/* So the connection is still alive, let's run another query */<br /></span><span style="color: #0000BB">$result2 </span><span style="color: #007700">= </span><span style="color: #0000BB">mysql_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$sql2</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.mysql-ping-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.mysql-thread-id.html" class="function" rel="rdfs-seeAlso">mysql_thread_id()</a> - 返回当前线程的 ID</span></li>
+    <li class="member"><span class="function"><a href="function.mysql-list-processes.html" class="function" rel="rdfs-seeAlso">mysql_list_processes()</a> - 列出 MySQL 进程</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div></div></div></body></html>

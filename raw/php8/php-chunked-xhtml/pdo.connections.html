@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>连接与连接管理</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="pdo.constants.html">« 预定义常量</a></li>
+      <li style="float: right;"><a href="pdo.transactions.html">事务与自动提交 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="book.pdo.html">PDO</a></li>
+    <li>连接与连接管理</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="pdo.connections" class="chapter">
+ <h1>连接与连接管理</h1>
+
+ <p class="para">
+  连接是通过创建 PDO 基类的实例而建立的。使用哪种驱动程序并不重要，始终都会用 PDO
+  类名。构造函数接受用于指定数据库源（也称为 DSN）以及可选的用户名和密码（如果有）的参数。
+ </p>
+ <p class="para">
+  <div class="example" id="example-3065">
+   <p><strong>示例 #1 连接到 MySQL</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$dbh </span><span style="color: #007700">= new </span><span style="color: #0000BB">PDO</span><span style="color: #007700">(</span><span style="color: #DD0000">'mysql:host=localhost;dbname=test'</span><span style="color: #007700">, </span><span style="color: #0000BB">$user</span><span style="color: #007700">, </span><span style="color: #0000BB">$pass</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div> 
+   </div>
+
+  </div>
+ </p>
+ <p class="para">
+  如果有任何连接错误，将抛出 <code class="literal">PDOException</code> 对象。如果想处理错误状态，可以捕获异常，或者选择将其留给
+  <span class="function"><a href="function.set-exception-handler.html" class="function">set_exception_handler()</a></span> 设置的应用程序全局异常处理程序。
+ </p>
+ <p class="para">
+  <div class="example" id="example-3068"><p><strong>示例 #2 处理连接错误</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">try {<br />    </span><span style="color: #0000BB">$dbh </span><span style="color: #007700">= new </span><span style="color: #0000BB">PDO</span><span style="color: #007700">(</span><span style="color: #DD0000">'mysql:host=localhost;dbname=test'</span><span style="color: #007700">, </span><span style="color: #0000BB">$user</span><span style="color: #007700">, </span><span style="color: #0000BB">$pass</span><span style="color: #007700">);<br />} catch (</span><span style="color: #0000BB">PDOException $e</span><span style="color: #007700">) {<br />    </span><span style="color: #FF8000">// 对于示例，尝试在超时后重新连接<br /></span><span style="color: #007700">}</span></span></code></div>
+   </div>
+
+  </div>
+ </p>
+ <div class="warning"><strong class="warning">警告</strong>
+  <p class="para">
+   就像其它任一 <a href="language.exceptions.html" class="link">exception</a> 一样，<span class="classname"><a href="class.pdoexception.html" class="classname">PDOException</a></span>
+   可以通过 <a href="" class="link"><code class="literal">catch</code></a> 语句手动捕获，也可以通过 <span class="function"><a href="function.set-exception-handler.html" class="function">set_exception_handler()</a></span> 自动捕获。否则，默认行为是将未捕获的异常转换为
+   <strong><code>E_FATAL_ERROR</code></strong>。fatal 错误可能会包含泄漏连接详情的 backtrace。因此，生产服务器上的 <var class="filename">php.ini</var>
+   选项 <a href="errorfunc.configuration.html#ini.display-errors" class="link"><code class="literal">display_errors</code></a> 应设置为 <code class="literal">0</code>。
+  </p>
+ </div>
+ <p class="para">
+  连接数据库成功后，返回 PDO 类的实例给脚本。此连接在 PDO
+  对象的生存周期中保持有效状态。要关闭连接，需要确保删除它的所有剩余引用来销毁对象——可以通过对对象变量赋值 <strong><code>null</code></strong>
+  来实现。如果没有明确这么做，PHP 在脚本结束时会自动关闭连接。
+ </p>
+ <blockquote class="note"><p><strong class="note">注意</strong>: 
+  <span class="simpara">
+   如果还有其它对此 PDO 实例的引用（比如来自 PDOStatement 实例，或来自其它同一 PDO 实例的其它变量），也必须删除这些引用（例如，通过将
+   <strong><code>null</code></strong> 赋值给引用 PDOStatement 的变量）。
+  </span>
+ </p></blockquote>
+ <p class="para">
+  <div class="example" id="example-3071">
+   <p><strong>示例 #3 关闭连接</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$dbh </span><span style="color: #007700">= new </span><span style="color: #0000BB">PDO</span><span style="color: #007700">(</span><span style="color: #DD0000">'mysql:host=localhost;dbname=test'</span><span style="color: #007700">, </span><span style="color: #0000BB">$user</span><span style="color: #007700">, </span><span style="color: #0000BB">$pass</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">// 在此使用连接<br /></span><span style="color: #0000BB">$sth </span><span style="color: #007700">= </span><span style="color: #0000BB">$dbh</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">query</span><span style="color: #007700">(</span><span style="color: #DD0000">'SELECT * FROM foo'</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 使用完毕，关闭连接<br /></span><span style="color: #0000BB">$sth </span><span style="color: #007700">= </span><span style="color: #0000BB">null</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$dbh </span><span style="color: #007700">= </span><span style="color: #0000BB">null</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+  </div>
+ </p>
+ <p class="para">
+  很多 web 
+  应用程序通过与数据库建立持久连接获得好处。持久连接不会在脚本结束时关闭，而是会缓存，且当另一个脚本使用相同凭证请求连接时重用。持久连接缓存可以避免每次脚本需要与数据库通信时建立新连接的开销，从而让
+  web 应用程序更快。
+ </p>
+ <p class="para">
+  <div class="example" id="example-3074">
+   <p><strong>示例 #4 持久化连接</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$dbh </span><span style="color: #007700">= new </span><span style="color: #0000BB">PDO</span><span style="color: #007700">(</span><span style="color: #DD0000">'mysql:host=localhost;dbname=test'</span><span style="color: #007700">, </span><span style="color: #0000BB">$user</span><span style="color: #007700">, </span><span style="color: #0000BB">$pass</span><span style="color: #007700">, array(<br />    </span><span style="color: #0000BB">PDO</span><span style="color: #007700">::</span><span style="color: #0000BB">ATTR_PERSISTENT </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">true<br /></span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+  </div>
+ </p>
+ <p class="para">
+  <strong><code>PDO::ATTR_PERSISTENT</code></strong> 选项的值转换为 <span class="type">bool</span>（启用/禁用持久连接），除非它不是数字
+  <span class="type">string</span>，在这种情况下允许使用多个持久连接池。如果不同的链接使用不兼容的设置，非常有用，例如
+  <strong><code>PDO::MYSQL_ATTR_USE_BUFFERED_QUERY</code></strong> 的值不同。
+ </p>
+ <blockquote class="note"><p><strong class="note">注意</strong>: 
+  <p class="para">
+   如果想使用持久连接，必须在传递给 PDO 构造函数的驱动程序选项数组中设置
+   <strong><code>PDO::ATTR_PERSISTENT</code></strong>。如果在对象实例化后用
+   <span class="methodname"><a href="pdo.setattribute.html" class="methodname">PDO::setAttribute()</a></span> 设置此属性，驱动程序将不会使用持久连接。
+  </p>
+ </p></blockquote>
+ <blockquote class="note"><p><strong class="note">注意</strong>: 
+  <p class="para">
+   如果使用 PDO ODBC 驱动程序且 ODBC 库支持 ODBC 连接池（有 unixODBC 和 Windows 是其中的两个；可能会有更多），建议不要使用持久
+   PDO 连接，而是把连接缓存留给 ODBC 连接池层。ODBC 连接池在进程中与其它模块共享；如果 PDO 缓存连接，则此连接永远不会被返回到
+   ODBC 连接池，从而导致创建额外的连接来服务其它模块。
+  </p>
+ </p></blockquote>
+</div>
+</div></div></body></html>

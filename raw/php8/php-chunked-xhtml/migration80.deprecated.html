@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>PHP 8.0 废弃的功能</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="migration80.incompatible.html">« 不向后兼容的变更</a></li>
+      <li style="float: right;"><a href="migration80.other-changes.html">其他变更 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="migration80.html">从 PHP 7.4.x 移植到 PHP 8.0.x</a></li>
+    <li>PHP 8.0 废弃的功能</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="migration80.deprecated" class="sect1">
+ <h2 class="title">PHP 8.0 废弃的功能</h2>
+
+ <div class="sect2" id="migration80.deprecated.core">
+  <h3 class="title">PHP 核心中废弃的功能</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     如果带有默认值的参数后面跟着一个必要的参数，那么默认值就会无效。这在
+     PHP 8.0.0 中已被废弃，通常可以通过删除默认值，不影响现有功能：
+    </p>
+    <p class="para">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">test</span><span style="color: #007700">(</span><span style="color: #0000BB">$a </span><span style="color: #007700">= [], </span><span style="color: #0000BB">$b</span><span style="color: #007700">) {} </span><span style="color: #FF8000">// 之前<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">test</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">, </span><span style="color: #0000BB">$b</span><span style="color: #007700">) {}      </span><span style="color: #FF8000">// 之后<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </p>
+    <p class="para">
+      这条规则的一个例外是 <code class="code">Type $param = null</code>
+      形式的参数，其中 null
+      的默认值使得类型隐式为空。这种用法仍然是允许的，但仍建议使用显式可空类型。
+    </p>
+    <p class="para">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">test</span><span style="color: #007700">(</span><span style="color: #0000BB">A $a </span><span style="color: #007700">= </span><span style="color: #0000BB">null</span><span style="color: #007700">, </span><span style="color: #0000BB">$b</span><span style="color: #007700">) {} </span><span style="color: #FF8000">// 旧写法，仍可用<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">test</span><span style="color: #007700">(?</span><span style="color: #0000BB">A $a</span><span style="color: #007700">, </span><span style="color: #0000BB">$b</span><span style="color: #007700">) {}       </span><span style="color: #FF8000">// 推荐写法<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     参数 <code class="parameter">exclude_disabled</code> 不能设置为 <strong><code>false</code></strong>
+     来调用 <span class="function"><a href="function.get-defined-functions.html" class="function">get_defined_functions()</a></span>，该参数已被废弃，不再起作用。
+     <span class="function"><a href="function.get-defined-functions.html" class="function">get_defined_functions()</a></span> 绝不会再包含禁用的函数。
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.deprecated.enchant">
+  <h3 class="title">Enchant</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     弃用 <span class="function"><a href="function.enchant-broker-set-dict-path.html" class="function">enchant_broker_set_dict_path()</a></span> 和
+     <span class="function"><a href="function.enchant-broker-get-dict-path.html" class="function">enchant_broker_get_dict_path()</a></span>
+     ，因为此功能在 libenchant &lt; 1.5 和 libenchant-2 中均不可用。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     弃用 <span class="function"><a href="function.enchant-dict-add-to-personal.html" class="function">enchant_dict_add_to_personal()</a></span>，使用
+     <span class="function"><a href="function.enchant-dict-add.html" class="function">enchant_dict_add()</a></span> 替代。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     弃用 <span class="function"><a href="function.enchant-dict-is-in-session.html" class="function">enchant_dict_is_in_session()</a></span>，使用
+     <span class="function"><a href="function.enchant-dict-is-added.html" class="function">enchant_dict_is_added()</a></span> 替代。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     弃用 <span class="function"><a href="function.enchant-broker-free.html" class="function">enchant_broker_free()</a></span> 和 <span class="function"><a href="function.enchant-broker-free-dict.html" class="function">enchant_broker_free_dict()</a></span>，取而代之的是取消对象。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     弃用 <strong><code>ENCHANT_MYSPELL</code></strong> 和 <strong><code>ENCHANT_ISPELL</code></strong> 常量。
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.deprecated.libxml">
+  <h3 class="title">LibXML</h3>
+
+  <p class="para">
+   弃用 <span class="function"><a href="function.libxml-disable-entity-loader.html" class="function">libxml_disable_entity_loader()</a></span>。由于现在需要 libxml 
+   2.9.0，默认情况下会禁用外部实体加载并且不再需要此函数来防止 XXE 攻击，除非使用（仍然易受攻击的）
+   <strong><code>LIBXML_NOENT</code></strong>。在这种情况下，建议使用  
+   <span class="function"><a href="function.libxml-set-external-entity-loader.html" class="function">libxml_set_external_entity_loader()</a></span> 重构代码以抑制外部实体加载。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.deprecated.pgsql">
+  <h3 class="title">PGSQL / PDO PGSQL</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     现在常量 <strong><code>PGSQL_LIBPQ_VERSION_STR</code></strong> 的值与
+     <strong><code>PGSQL_LIBPQ_VERSION</code></strong>相同，因此废弃。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     pgsql 扩展中的函数别名已废弃。请参阅以下列表了解应该使用那些函数：
+    </p>
+    <p class="para">
+     <ul class="simplelist">
+      <li class="member"><span class="function"><strong>pg_errormessage()</strong></span> → <span class="function"><a href="function.pg-last-error.html" class="function">pg_last_error()</a></span></li>
+      <li class="member"><span class="function"><strong>pg_numrows()</strong></span> → <span class="function"><a href="function.pg-num-rows.html" class="function">pg_num_rows()</a></span></li>
+      <li class="member"><span class="function"><strong>pg_numfields()</strong></span> → <span class="function"><a href="function.pg-num-fields.html" class="function">pg_num_fields()</a></span></li>
+      <li class="member"><span class="function"><strong>pg_cmdtuples()</strong></span> → <span class="function"><a href="function.pg-affected-rows.html" class="function">pg_affected_rows()</a></span></li>
+      <li class="member"><span class="function"><strong>pg_fieldname()</strong></span> → <span class="function"><a href="function.pg-field-name.html" class="function">pg_field_name()</a></span></li>
+      <li class="member"><span class="function"><strong>pg_fieldsize()</strong></span> → <span class="function"><a href="function.pg-field-size.html" class="function">pg_field_size()</a></span></li>
+      <li class="member"><span class="function"><strong>pg_fieldtype()</strong></span> → <span class="function"><a href="function.pg-field-type.html" class="function">pg_field_type()</a></span></li>
+      <li class="member"><span class="function"><strong>pg_fieldnum()</strong></span> → <span class="function"><a href="function.pg-field-num.html" class="function">pg_field_num()</a></span></li>
+      <li class="member"><span class="function"><strong>pg_result()</strong></span> → <span class="function"><a href="function.pg-fetch-result.html" class="function">pg_fetch_result()</a></span></li>
+      <li class="member"><span class="function"><strong>pg_fieldprtlen()</strong></span> → <span class="function"><a href="function.pg-field-prtlen.html" class="function">pg_field_prtlen()</a></span></li>
+      <li class="member"><span class="function"><strong>pg_fieldisnull()</strong></span> → <span class="function"><a href="function.pg-field-is-null.html" class="function">pg_field_is_null()</a></span></li>
+      <li class="member"><span class="function"><strong>pg_freeresult()</strong></span> → <span class="function"><a href="function.pg-free-result.html" class="function">pg_free_result()</a></span></li>
+      <li class="member"><span class="function"><strong>pg_getlastoid()</strong></span> → <span class="function"><a href="function.pg-last-oid.html" class="function">pg_last_oid()</a></span></li>
+      <li class="member"><span class="function"><strong>pg_locreate()</strong></span> → <span class="function"><a href="function.pg-lo-create.html" class="function">pg_lo_create()</a></span></li>
+      <li class="member"><span class="function"><strong>pg_lounlink()</strong></span> → <span class="function"><a href="function.pg-lo-unlink.html" class="function">pg_lo_unlink()</a></span></li>
+      <li class="member"><span class="function"><strong>pg_loopen()</strong></span> → <span class="function"><a href="function.pg-lo-open.html" class="function">pg_lo_open()</a></span></li>
+      <li class="member"><span class="function"><strong>pg_loclose()</strong></span> → <span class="function"><a href="function.pg-lo-close.html" class="function">pg_lo_close()</a></span></li>
+      <li class="member"><span class="function"><strong>pg_loread()</strong></span> → <span class="function"><a href="function.pg-lo-read.html" class="function">pg_lo_read()</a></span></li>
+      <li class="member"><span class="function"><strong>pg_lowrite()</strong></span> → <span class="function"><a href="function.pg-lo-write.html" class="function">pg_lo_write()</a></span></li>
+      <li class="member"><span class="function"><strong>pg_loreadall()</strong></span> → <span class="function"><a href="function.pg-lo-read-all.html" class="function">pg_lo_read_all()</a></span></li>
+      <li class="member"><span class="function"><strong>pg_loimport()</strong></span> → <span class="function"><a href="function.pg-lo-import.html" class="function">pg_lo_import()</a></span></li>
+      <li class="member"><span class="function"><strong>pg_loexport()</strong></span> → <span class="function"><a href="function.pg-lo-export.html" class="function">pg_lo_export()</a></span></li>
+      <li class="member"><span class="function"><strong>pg_setclientencoding()</strong></span> → <span class="function"><a href="function.pg-set-client-encoding.html" class="function">pg_set_client_encoding()</a></span></li>
+      <li class="member"><span class="function"><strong>pg_clientencoding()</strong></span> -&gt; <span class="function"><a href="function.pg-client-encoding.html" class="function">pg_client_encoding()</a></span></li>
+     </ul>
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.deprecated.standard">
+  <h3 class="title">标准库</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     排序比较函数现在返回 <strong><code>true</code></strong> 或者 <strong><code>false</code></strong> 将会引发弃用警告，应替换为返回小于、等于或者大于零的 int 值。
+    </p>
+    <p class="para">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// 替换<br /></span><span style="color: #0000BB">usort</span><span style="color: #007700">(</span><span style="color: #0000BB">$array</span><span style="color: #007700">, fn(</span><span style="color: #0000BB">$a</span><span style="color: #007700">, </span><span style="color: #0000BB">$b</span><span style="color: #007700">) =&gt; </span><span style="color: #0000BB">$a </span><span style="color: #007700">&gt; </span><span style="color: #0000BB">$b</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">// 为<br /></span><span style="color: #0000BB">usort</span><span style="color: #007700">(</span><span style="color: #0000BB">$array</span><span style="color: #007700">, fn(</span><span style="color: #0000BB">$a</span><span style="color: #007700">, </span><span style="color: #0000BB">$b</span><span style="color: #007700">) =&gt; </span><span style="color: #0000BB">$a </span><span style="color: #007700">&lt;=&gt; </span><span style="color: #0000BB">$b</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+ 
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.deprecated.zip">
+  <h3 class="title">Zip</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     弃用使用空文件作为 ZipArchive。Libzip 1.6.0 不再接受空文件作为有效的 zip 
+     归档。现有的解决方案将在下个版本删除。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     弃用面向过程的 Zip API。使用 <span class="classname"><a href="class.ziparchive.html" class="classname">ZipArchive</a></span>
+     替代。可以使用 <span class="methodname"><a href="ziparchive.statindex.html" class="methodname">ZipArchive::statIndex()</a></span> 和 
+     <a href="control-structures.for.html" class="link">for</a> 循环完成对所有条目的迭代：
+    </p>
+    <p class="para">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// 使用面向过程 API 进行迭代<br /></span><span style="color: #0000BB">assert</span><span style="color: #007700">(</span><span style="color: #0000BB">is_resource</span><span style="color: #007700">(</span><span style="color: #0000BB">$zip</span><span style="color: #007700">));<br />while (</span><span style="color: #0000BB">$entry </span><span style="color: #007700">= </span><span style="color: #0000BB">zip_read</span><span style="color: #007700">(</span><span style="color: #0000BB">$zip</span><span style="color: #007700">)) {<br />    echo </span><span style="color: #0000BB">zip_entry_name</span><span style="color: #007700">(</span><span style="color: #0000BB">$entry</span><span style="color: #007700">);<br />}<br /><br /></span><span style="color: #FF8000">// 使用面向对象 API 进行迭代<br /></span><span style="color: #0000BB">assert</span><span style="color: #007700">(</span><span style="color: #0000BB">$zip </span><span style="color: #007700">instanceof </span><span style="color: #0000BB">ZipArchive</span><span style="color: #007700">);<br />for (</span><span style="color: #0000BB">$i </span><span style="color: #007700">= </span><span style="color: #0000BB">0</span><span style="color: #007700">; </span><span style="color: #0000BB">$entry </span><span style="color: #007700">= </span><span style="color: #0000BB">$zip</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">statIndex</span><span style="color: #007700">(</span><span style="color: #0000BB">$i</span><span style="color: #007700">); </span><span style="color: #0000BB">$i</span><span style="color: #007700">++) {<br />    echo </span><span style="color: #0000BB">$entry</span><span style="color: #007700">[</span><span style="color: #DD0000">'name'</span><span style="color: #007700">];<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.deprecated.reflection">
+  <h3 class="title">反射</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     弃用 <span class="methodname"><a href="reflectionfunction.isdisabled.html" class="methodname">ReflectionFunction::isDisabled()</a></span>，因为不可能再为禁用的函数创建
+     <span class="classname"><a href="class.reflectionfunction.html" class="classname">ReflectionFunction</a></span>。此方法现在总是返回 <strong><code>false</code></strong>。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     弃用 <span class="methodname"><a href="reflectionparameter.getclass.html" class="methodname">ReflectionParameter::getClass()</a></span>、
+     <span class="methodname"><a href="reflectionparameter.isarray.html" class="methodname">ReflectionParameter::isArray()</a></span>、
+     <span class="methodname"><a href="reflectionparameter.iscallable.html" class="methodname">ReflectionParameter::isCallable()</a></span>。
+     应该使用 <span class="methodname"><a href="reflectionparameter.gettype.html" class="methodname">ReflectionParameter::getType()</a></span> 和
+     <span class="classname"><a href="class.reflectiontype.html" class="classname">ReflectionType</a></span> API 替代。
+    </p>
+   </li>
+  </ul>
+ </div>
+
+</div></div></div></body></html>

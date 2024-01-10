@@ -1,0 +1,474 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>其它变更</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="migration83.deprecated.html">« 弃用功能</a></li>
+      <li style="float: right;"><a href="migration83.windows-support.html">Windows 支持 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="migration83.html">从 PHP 8.2.x 移植到 PHP 8.3.x</a></li>
+    <li>其它变更</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="migration83.other-changes" class="sect1">
+ <h2 class="title">其它变更</h2>
+
+ <div class="sect2" id="migration83.other-changes.core">
+  <h3 class="title">核心变化</h3>
+
+  <div class="sect3" id="migration83.other-changes.core.ffi">
+   <h4 class="title">FFI</h4>
+
+   <p class="para">
+    当 <a href="opcache.configuration.html#ini.opcache.preload-user" class="link">opcache.preload_user</a> 是当前系统用户时，现在允许在预加载期间使用
+    <span class="methodname"><a href="ffi.load.html" class="methodname">FFI::load()</a></span>。以前，如果设置了 <a href="opcache.configuration.html#ini.opcache.preload-user" class="link">opcache.preload_user</a>
+    指令，则预加载期间无法调用 <span class="methodname"><a href="ffi.load.html" class="methodname">FFI::load()</a></span>。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.other-changes.core.fpm">
+   <h4 class="title">FPM</h4>
+
+   <p class="para">
+    如果 socket 路径比操作系统支持的路径长度更长，则 FPM CLI 测试现在会失败。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.other-changes.core.opcache">
+   <h4 class="title">Opcache</h4>
+
+   <p class="para">
+    在 CLI 和 phpdbg SAPI 中，以 root 身份运行时，不再需要设置 <a href="opcache.configuration.html#ini.opcache.preload-user" class="link">opcache.preload_user</a>
+    指令来进行预加载。在其它 SAPI 中，以 root 身份运行时需要此指令，因为在 SAPI 切换到非特权用户之前进行预加载。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.other-changes.core.streams">
+   <h4 class="title">Streams</h4>
+
+   <p class="para">
+    如果在 socket 连接上有任何缓冲数据，而不是等待更多数据，<span class="function"><a href="function.fread.html" class="function">fread()</a></span> 阻塞会立即返回。
+   </p>
+
+   <p class="para">
+    内存流在偏移量超过末尾时不会失败。而是在下次写入时内存会增加，并且旧末尾和偏移量之间的数据会以与文件相同的方式填充零字节。
+   </p>
+
+   <p class="para">
+    现在，<span class="function"><a href="function.stat.html" class="function">stat()</a></span> 访问操作（像 <span class="function"><a href="function.file-exists.html" class="function">file_exists()</a></span>
+    及其类似这样）将使用真实路径而不是实际的 stream 路径。这与 stream 的打开方式保持一致。
+   </p>
+  </div>
+ </div>
+
+ <div class="sect2" id="migration83.other-changes.sapi">
+  <h3 class="title">SAPI 模块的变更</h3>
+
+  <div class="sect3" id="migration83.other-changes.sapi.cli">
+   <h4 class="title">CLI</h4>
+
+   <p class="para">
+    <strong><code>STDOUT</code></strong>、<strong><code>STDERR</code></strong> 和 <strong><code>STDIN</code></strong> 流不再因资源销毁而关闭，这主要是在
+    CLI 完成时关闭。然而，仍然可以使用 <span class="function"><a href="function.fclose.html" class="function">fclose()</a></span> 和类似函数明确关闭这些流。
+   </p>
+  </div>
+ </div>
+
+ <div class="sect2" id="migration83.other-changes.functions">
+  <h3 class="title">函数变更</h3>
+
+  <div class="sect3" id="migration83.other-changes.functions.core">
+   <h4 class="title">核心</h4>
+
+   <p class="para">
+    <span class="function"><a href="function.gc-status.html" class="function">gc_status()</a></span> 添加下列 8 个字段：
+
+    <ul class="simplelist">
+     <li class="member"><code class="literal">&quot;running&quot;</code> =&gt; bool</li>
+     <li class="member"><code class="literal">&quot;protected&quot;</code> =&gt; bool</li>
+     <li class="member"><code class="literal">&quot;full&quot;</code> =&gt; bool</li>
+     <li class="member"><code class="literal">&quot;buffer_size&quot;</code> =&gt; int</li>
+     <li class="member"><code class="literal">&quot;application_time&quot;</code> =&gt; float：总的应用时间，以秒为单位（包含 collector_time）</li>
+     <li class="member"><code class="literal">&quot;collector_time&quot;</code> =&gt; float：垃圾回收所花费的时间，单位为秒（包括 destructor_time 和 free_time）</li>
+     <li class="member"><code class="literal">&quot;destructor_time&quot;</code> =&gt; float：在垃圾回收期间执行析构方法的时间，单位为秒</li>
+     <li class="member"><code class="literal">&quot;free_time&quot;</code> =&gt; float：在垃圾回收期间花费在释放值上的时间，单位为秒</li>
+    </ul>
+   </p>
+
+   <p class="para">
+    <span class="function"><a href="function.class-alias.html" class="function">class_alias()</a></span> 现在支持创建内部类的别名。
+   </p>
+
+   <p class="para">
+    在运行时使用 <code class="code">ini_set(&#039;open_basedir&#039;, ...);</code> 设置 <a href="ini.core.html#ini.open-basedir" class="link">open_basedir</a> 时，不再接受包含父目录(<code class="literal">..</code>)的路径。以前只禁止以
+    <code class="literal">..</code> 开头的路径。这可以通过在路径前加上<code class="literal">./</code> 来轻松规避。
+   </p>
+
+   <p class="para">
+    用户异常处理程序现在可以在关闭期间捕获异常。
+   </p>
+
+   <p class="para">
+    <span class="function"><a href="function.highlight-string.html" class="function">highlight_string()</a></span> 和 <span class="function"><a href="function.highlight-file.html" class="function">highlight_file()</a></span> 的 HTML 结果已经改变。外部
+    HTML 标签之间的空格已移除。换行符和空格不再转换为 HTML 实体。整个 HTML 现在包装在 <code class="literal">&lt;pre&gt;</code>
+    标签中。外部的 <code class="literal">&lt;span&gt;</code> 标签已经与 <code class="literal">&lt;code&gt;</code> 标签合并。
+   </p>
+
+  </div>
+
+  <div class="sect3" id="migration83.other-changes.functions.calendar">
+   <h4 class="title">Calendar</h4>
+
+   <p class="para">
+    <span class="function"><a href="function.easter-date.html" class="function">easter_date()</a></span> 现在在 64 位系统上支持 1970 到 20 亿年，以前它只支持 1970 到 2037 年。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.other-changes.functions.curl">
+   <h4 class="title">Curl</h4>
+
+   <p class="para">
+    <span class="function"><a href="function.curl-getinfo.html" class="function">curl_getinfo()</a></span> 现在支持两个新常量：<strong><code>CURLINFO_CAPATH</code></strong> 和
+    <strong><code>CURLINFO_CAINFO</code></strong>。如果 option 为 <strong><code>null</code></strong>，则会显示以下两个额外的键：<code class="literal">&quot;capath&quot;</code>
+    和 <code class="literal">&quot;cainfo&quot;</code>。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.other-changes.functions.dom">
+   <h4 class="title">DOM</h4>
+
+   <p class="para">
+    <span class="methodname"><a href="domcharacterdata.appenddata.html" class="methodname">DOMCharacterData::appendData()</a></span> 的返回值临时修改为 <span class="type"><span class="type true">true</span></span>。
+   </p>
+
+   <p class="para">
+    <span class="methodname"><a href="domdocument.loadhtml.html" class="methodname">DOMDocument::loadHTML()</a></span>、<span class="methodname"><a href="domdocument.loadhtmlfile.html" class="methodname">DOMDocument::loadHTMLFile()</a></span>、
+    和 <span class="methodname"><a href="domdocument.loadxml.html" class="methodname">DOMDocument::loadXML()</a></span> 现在有了临时返回类型 <span class="type">bool</span>。之前，返回类型是
+    <code class="code">DOMDocument|bool</code>，但是自 PHP 8.0.0 起，<span class="classname"><a href="class.domdocument.html" class="classname">DOMDocument</a></span> 不再是静态可调用，所以不能返回。
+   </p>
+
+  </div>
+
+  <div class="sect3" id="migration83.other-changes.functions.gd">
+   <h4 class="title">Gd</h4>
+
+   <p class="para">
+    <span class="function"><a href="function.imagerotate.html" class="function">imagerotate()</a></span> 的签名已经更改。已经移除 <code class="parameter">$ignore_transparent</code> 参数，因为自 PHP 5.5.0 起已忽略。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.other-changes.functions.intl">
+   <h4 class="title">Intl</h4>
+
+   <p class="para">
+    <span class="function"><a href="intldateformatter.settimezone.html" class="function">datefmt_set_timezone()</a></span>（及其别名 <span class="methodname"><a href="intldateformatter.settimezone.html" class="methodname">IntlDateformatter::setTimeZone()</a></span>）现在在成功时返回
+    <strong><code>true</code></strong>，以前返回 <strong><code>null</code></strong>。
+   </p>
+
+   <p class="para">
+    <span class="methodname"><a href="intlbreakiterator.settext.html" class="methodname">IntlBreakiterator::setText()</a></span> 现在在失败时返回 <strong><code>false</code></strong>，之前返回 <strong><code>null</code></strong>。现在在成功时返回 <strong><code>true</code></strong>，以前返回 <strong><code>null</code></strong>。
+   </p>
+
+   <p class="para">
+    <span class="methodname"><a href="intlchar.enumcharnames.html" class="methodname">IntlChar::enumCharNames()</a></span> 现在返回 bool。之前成功时返回 <strong><code>null</code></strong>，失败时返回 <strong><code>false</code></strong>。
+   </p>
+
+   <p class="para">
+    当设置了无效的区域，<span class="methodname"><a href="intldateformatter.create.html" class="methodname">IntlDateFormatter::__construct()</a></span> 将抛出 <strong><code>U_ILLEGAL_ARGUMENT_ERROR</code></strong>。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.other-changes.functions.mbstring">
+   <h4 class="title">MBString</h4>
+
+   <p class="para">
+    <span class="function"><a href="function.mb-strtolower.html" class="function">mb_strtolower()</a></span> 和 <span class="function"><a href="function.mb-convert-case.html" class="function">mb_convert_case()</a></span> 实现了对希腊字母 sigma
+    的条件转换规则，条件转换只适用于 <strong><code>MB_CASE_LOWER</code></strong> 和 <strong><code>MB_CASE_TITLE</code></strong>
+    模式，不适用于 <strong><code>MB_CASE_LOWER_SIMPLE</code></strong> 和 <strong><code>MB_CASE_TITLE_SIMPLE</code></strong>。
+   </p>
+
+   <p class="para">
+    <span class="function"><a href="function.mb-decode-mimeheader.html" class="function">mb_decode_mimeheader()</a></span> 根据 RFC 2047 的要求解释 QPrint 编码的 MIME 编码单词中的下划线，它们将转换为空格。在这样的
+    MIME 编码单词中，下划线必须被编码为 <code class="literal">&quot;=5F&quot;</code>。
+   </p>
+
+   <p class="para">
+    在极少数情况下，<span class="function"><a href="function.mb-encode-mimeheader.html" class="function">mb_encode_mimeheader()</a></span> 会对输入字符串进行传输编码，在 PHP 8.2 中会将输入字符串作为原始 ASCII 传递。
+   </p>
+
+   <p class="para">
+    当输入字符串使用 QPrint 编码时，<span class="function"><a href="function.mb-encode-mimeheader.html" class="function">mb_encode_mimeheader()</a></span>
+    不再丢弃 NUL（零）字节。之前会导致某些文本编码的字符串，特别是 UTF-16 和
+    UTF-32，会被 mb_encode_mimeheader 破坏。
+   </p>
+
+   <p class="para">
+    <span class="function"><a href="function.mb-detect-encoding.html" class="function">mb_detect_encoding()</a></span> 现在的的“非严格”模式行为如文档中所述。之前，如果在所有候选编码中输入字符串的相同字节（比如，第一个字节）是无效的，将会返回
+    <strong><code>false</code></strong>。一般来说，当看到无效字节时，将会从考虑（consideration）中剔除候选编码，如果相同的输入字节剔除了考虑中的所有剩余编码，将返回
+    <strong><code>false</code></strong>。另一方面，如果所有的候选编码一个个都剔除了，它将返回最后剔除的那个，而不考虑字符串中可能遇到的编码错误。这与文档中描述的行为不同，文档中说：“如果 strict
+    设置为 false，将返回最接近的匹配编码”。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.other-changes.functions.mysqli">
+   <h4 class="title">mysqli</h4>
+
+   <p class="para">
+    当 <code class="parameter">$constructor_args</code> 参数不为空且类没有构造方法时，<span class="function"><a href="mysqli-result.fetch-object.html" class="function">mysqli_fetch_object()</a></span>
+    现在抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span> 而不是 <span class="classname"><a href="class.exception.html" class="classname">Exception</a></span>。
+   </p>
+
+   <p class="para">
+    当都没有传递 <code class="parameter">$read</code> 和 <code class="parameter">$error</code> 参数时，<span class="function"><a href="mysqli.poll.html" class="function">mysqli_poll()</a></span> 现在会抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。
+   </p>
+
+   <p class="para">
+    <span class="function"><a href="mysqli-result.field-seek.html" class="function">mysqli_field_seek()</a></span> 和 <span class="methodname"><a href="mysqli-result.field-seek.html" class="methodname">mysqli_result::field_seek()</a></span> 现在返回类型指定为 <span class="type"><span class="type true">true</span></span> 而不是 <span class="type">bool</span>。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.other-changes.functions.odbc">
+   <h4 class="title">ODBC</h4>
+
+   <p class="para">
+    <span class="function"><a href="function.odbc-autocommit.html" class="function">odbc_autocommit()</a></span> 现在接受 <code class="parameter">$enable</code> 参数为 <strong><code>null</code></strong>。传递 <strong><code>null</code></strong>
+    与只传递 1 个参数的行为相同，即表明是否启用自动提交功能。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.other-changes.functions.pgsql">
+   <h4 class="title">PGSQL</h4>
+
+   <p class="para">
+    当 <code class="parameter">$constructor_args</code> 参数不为空且类没有构造方法时，<span class="function"><a href="function.pg-fetch-object.html" class="function">pg_fetch_object()</a></span>
+    现在抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span> 而不是 <span class="classname"><a href="class.exception.html" class="classname">Exception</a></span>。
+   </p>
+
+   <p class="para">
+    当指定的表无效时，<span class="function"><a href="function.pg-insert.html" class="function">pg_insert()</a></span> 现在抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span> 而不是 <strong><code>E_WARNING</code></strong>。
+   </p>
+
+   <p class="para">
+    当字段的值/类型与 PostgreSQL 的类型不匹配时，<span class="function"><a href="function.pg-insert.html" class="function">pg_insert()</a></span> 和 <span class="function"><a href="function.pg-convert.html" class="function">pg_convert()</a></span> 会抛出
+    <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span> 或 <span class="classname"><a href="class.typeerror.html" class="classname">TypeError</a></span>，而不是 <strong><code>E_WARNING</code></strong>。
+   </p>
+
+   <p class="para">
+    <span class="function"><a href="function.pg-fetch-result.html" class="function">pg_fetch_result()</a></span>、<span class="function"><a href="function.pg-field-prtlen.html" class="function">pg_field_prtlen()</a></span> 和
+    <span class="function"><a href="function.pg-field-is-null.html" class="function">pg_field_is_null()</a></span> 的 <code class="parameter">$row</code> 参数现在可以为 null。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.other-changes.functions.random">
+   <h4 class="title">Random</h4>
+
+   <p class="para">
+    <span class="function"><a href="function.mt-srand.html" class="function">mt_srand()</a></span> 和<span class="function"><a href="function.srand.html" class="function">srand()</a></span> 变更为不使用检查参数的数量的方式来确定是否应该使用随机种子。传递 <strong><code>null</code></strong>
+    将生成随机种子，<code class="literal">0</code> 将使用 0 作为种子。函数现在与 <span class="methodname"><a href="random-engine-mt19937.construct.html" class="methodname">Random\Engine\Mt19937::__construct()</a></span> 一致。
+   </p>
+
+  </div>
+
+  <div class="sect3" id="migration83.other-changes.functions.reflection">
+   <h4 class="title">Reflection</h4>
+
+   <p class="para">
+    <span class="methodname"><a href="reflectionclass.getstaticproperties.html" class="methodname">ReflectionClass::getStaticProperties()</a></span> 的返回类型不再可为 null。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.other-changes.functions.standard">
+   <h4 class="title">标准</h4>
+
+   <p class="para">
+    <span class="function"><a href="function.unserialize.html" class="function">unserialize()</a></span> 所触发的 <strong><code>E_NOTICE</code></strong> 被提升为 <strong><code>E_WARNING</code></strong>。
+    
+   </p>
+
+   <p class="para">
+    如果输入包含未使用的字节，<span class="function"><a href="function.unserialize.html" class="function">unserialize()</a></span> 现在会抛出新的 <strong><code>E_WARNING</code></strong>。
+    
+   </p>
+
+   <p class="para">
+    <span class="function"><a href="function.array-pad.html" class="function">array_pad()</a></span> 现在只接受数组元素可拥有的最大数量限制，以前每次最多只能添加 1048576 个元素。
+   </p>
+
+   <p class="para">
+    <span class="function"><a href="function.strtok.html" class="function">strtok()</a></span> 在开始标切分时，如果没有提供 token，则引发 <strong><code>E_WARNING</code></strong>。
+   </p>
+
+   <p class="para">
+    当生成 salt 失败时，<span class="function"><a href="function.password-hash.html" class="function">password_hash()</a></span> 现在将底层的 <span class="classname"><a href="class.random-randomexception.html" class="classname">Random\RandomException</a></span> 链到
+    <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span> 的 <code class="parameter">$previous</code> <span class="classname"><a href="class.exception.html" class="classname">Exception</a></span>。
+   </p>
+
+   <p class="para">
+    如果使用数组作为 <span class="function"><a href="function.proc-open.html" class="function">proc_open()</a></span> 的 <code class="parameter">$command</code>，则现在必须至少有一个非空元素。否则会抛出
+    <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。
+   </p>
+
+   <p class="para">
+    如果 <code class="parameter">$command</code> 数组是无效命令，<span class="function"><a href="function.proc-open.html" class="function">proc_open()</a></span> 将返回 false，而不是随后产生警告的资源对象。
+    Windows 系统已经是这种行为，但如果使用 posix_spawn 实现（大多数 Linux、BSD 和 MacOS 平台），也会是这种行为。
+    在一些旧平台上，由于不支持 posix_spawn，因此这种行为不会改变。
+   </p>
+
+   <p class="para">
+    <span class="function"><a href="function.array-sum.html" class="function">array_sum()</a></span> 和 <span class="function"><a href="function.array-product.html" class="function">array_product()</a></span> 现在会在数组中的值不能转换为 int/float
+    时发出警告。之前会忽略数组和对象，而其他所有值都被强制转换为 int。此外，定义了数字转换的对象（例如 GMP）现在会强制转换，而不是忽略。
+    
+   </p>
+
+   <p class="para">
+    现在 <span class="function"><a href="function.number-format.html" class="function">number_format()</a></span> 的 <code class="parameter">$decimal</code> 可以正确处理负整数。<code class="parameter">$decimal</code>
+    为负数时，<code class="parameter">$num</code> 值会四舍五入到小数点前 <code class="parameter">$decimals</code> 位，而之前的 <code class="parameter">$decimals</code>
+    会忽略负数，并且四舍五入到小数点后 0 位。
+   </p>
+
+   <p class="para">
+    在 <span class="function"><a href="function.strrchr.html" class="function">strrchr()</a></span> 中增加了新的参数 <code class="parameter">$before_needle</code>，它的行为与 <span class="function"><a href="function.strstr.html" class="function">strstr()</a></span> 或
+    <span class="function"><a href="function.stristr.html" class="function">stristr()</a></span> 函数中的对应参数类似。
+   </p>
+
+   <p class="para">
+    对于未包含关闭引号的最后一个字段，<span class="function"><a href="function.str-getcsv.html" class="function">str_getcsv()</a></span> 和 <span class="function"><a href="function.fgetcsv.html" class="function">fgetcsv()</a></span>
+    现在返回空字符串，而不是带单个 null 字节的字符串。
+   </p>
+  </div>
+
+ </div>
+
+ <div class="sect2" id="migration83.other-changes.extensions">
+  <h3 class="title">其它扩展变更</h3>
+
+  <div class="sect3" id="migration83.other-changes.extensions.core">
+   <h4 class="title">核心</h4>
+
+   <p class="para">
+    在类型 <span class="type">bool</span> 的值上使用
+    <a href="language.operators.increment.html" class="link">自增/减</a>运算符（<code class="literal">++</code>/<code class="literal">--</code>）将会抛出警告。这是因为虽然目前没有效果，但是将来行为将是
+    <code class="code">$bool += 1</code>。
+   </p>
+
+   <p class="para">
+    在类型 <span class="type">null</span> 的值上使用
+    <a href="language.operators.increment.html" class="link">自减</a>运算符（<code class="literal">--</code>）将会抛出警告。这是因为虽然目前没有效果，但是将来行为将是
+    <code class="code">$null -= 1</code>。
+   </p>
+
+   <p class="para">
+    内部对象实现 _IS_NUMBER 转换，但不是重写加减法的 do_operator 处理程序，现在可以像 <code class="code">$o += 1</code> 或 <code class="code">$o -= 1</code> 一样递增和递减。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.other-changes.extensions.dom">
+   <h4 class="title">DOM</h4>
+
+   <p class="para">
+    DOM 的生命周期机制已经被重写，这样默默删除的节点仍然可以获取，之前这样做会导致异常。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.other-changes.extensions.sqlite3">
+   <h4 class="title">SQLite3</h4>
+
+   <p class="para">
+    <span class="classname"><a href="class.sqlite3.html" class="classname">SQLite3</a></span> 类现在抛出 <span class="classname"><strong class="classname">SQLite3Exception</strong></span>（继承 <span class="classname"><a href="class.exception.html" class="classname">Exception</a></span>）而不是 <span class="classname"><a href="class.exception.html" class="classname">Exception</a></span>。
+   </p>
+
+   <p class="para">
+    SQLite 错误代码现在在 exception error code 中传递，而不是包含在错误消息中。
+   </p>
+
+  </div>
+ </div>
+
+ <div class="sect2" id="migration83.other-changes.ini">
+  <h3 class="title">INI 文件处理更变</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     已弃用 <code class="literal">assert.*</code> INI 设置。这包括以下 INI 设置：
+     <ul class="simplelist">
+      <li class="member"><a href="info.configuration.html#ini.assert.active" class="link">assert.active</a></li>
+      <li class="member"><a href="info.configuration.html#ini.assert.bail" class="link">assert.bail</a></li>
+      <li class="member"><a href="info.configuration.html#ini.assert.callback" class="link">assert.callback</a></li>
+      <li class="member"><a href="info.configuration.html#ini.assert.exception" class="link">assert.exception</a></li>
+      <li class="member"><a href="info.configuration.html#ini.assert.warning" class="link">assert.warning</a></li>
+     </ul>
+     如果设置的值等于默认值，则不会发出弃用通知。应该使用 <a href="ini.core.html#ini.zend.assertions" class="link">zend.assertions</a> INI 设置。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     zend.max_allowed_stack_size 是新的 INI
+     指令，用于设置允许的最大栈大小。可能的值是
+     <code class="literal">0</code>（检测进程或线程的最大栈大小）、-1（无限制）或正数的单位为字节的值。默认值为
+     <code class="literal">0</code>。当无法检测到进程或线程的最大的栈大小时，使用已知的系统默认值。设置的值过高效果等同于不限制栈的大小。Fiber
+     使用 fiber.stack_size 作为允许的最大栈大小。当进程调用栈超过 
+     zend.max_allowed_stack_size-zend.reserved_stack_size 个字节时，将抛出
+     <span class="classname"><a href="class.error.html" class="classname">Error</a></span>，以防止栈溢出引发分段错误，目的是使调试更容易。在没有控制递归调用内部函数或者魔术方法 <a href="language.oop5.magic.html#object.tostring" class="link">__toString()</a>、<a href="language.oop5.cloning.html#object.clone" class="link">__clone()</a>、<a href="language.oop5.magic.html#object.sleep" class="link">__sleep()</a>、<a href="language.oop5.decon.html#object.destruct" class="link">__destruct()</a>
+     期间，栈的大小会增加。这与栈缓冲区溢出无关，也不是安全特性。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     zend.reserved_stack_size 是新的 INI
+     指令，用于设置预留的栈大小（以字节为单位）。当检查栈大小时，会从最大允许的栈大小中减去，作为缓冲区。
+    </p>
+   </li>
+   </ul>
+ </div>
+
+ <div class="sect2" id="migration83.other-changes.performance">
+  <h3 class="title">性能</h3>
+
+  <div class="sect3" id="migration83.other-changes.performance.dom">
+   <h4 class="title">DOM</h4>
+
+   <p class="para">
+    现在遍历 <span class="classname"><a href="class.domnodelist.html" class="classname">DOMNodeList</a></span> 时使用了缓存，因此默认情况下请求元素不再需要花费两次的时间。
+   </p>
+
+   <p class="para">
+    从节点获取文本内容现在避免了分配，从而提高了性能。
+   </p>
+
+   <p class="para">
+    <span class="methodname"><a href="domchildnode.remove.html" class="methodname">DOMChildNode::remove()</a></span> 现在运行性能是 O(1)。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.other-changes.performance.standard">
+   <h4 class="title">标准</h4>
+
+   <p class="para">
+    <span class="function"><a href="function.file.html" class="function">file()</a></span> flags 错误检查现在快了大约 7%。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.other-changes.performance.spl">
+   <h4 class="title">SPL</h4>
+
+   <p class="para">
+    <span class="classname"><a href="class.recursivedirectoryiterator.html" class="classname">RecursiveDirectoryIterator</a></span> 现在循环目录时执行更少的 I/O。
+   </p>
+  </div>
+ </div>
+
+</div></div></div></body></html>

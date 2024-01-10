@@ -1,0 +1,342 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>DatePeriod 类</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="dateinterval.format.html">« DateInterval::format</a></li>
+      <li style="float: right;"><a href="dateperiod.construct.html">DatePeriod::__construct »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="book.datetime.html">日期/时间</a></li>
+    <li>DatePeriod 类</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="class.dateperiod" class="reference">
+
+ <h1 class="title">DatePeriod 类</h1>
+ 
+
+ <div class="partintro"><p class="verinfo">(PHP 5 &gt;= 5.3.0, PHP 7, PHP 8)</p>
+
+
+  <div class="section" id="dateperiod.intro">
+   <h2 class="title">简介</h2>
+   <p class="para">
+    DatePeriod 类表示一个时间周期。
+   </p>
+   <p class="para">
+    时间周期内允许对一组日期和时间进行迭代，在指定的时间间隔内定期重复。
+   </p>
+  </div>
+
+
+  <div class="section" id="dateperiod.synopsis">
+   <h2 class="title">类摘要</h2>
+
+
+   <div class="classsynopsis"><div class="classsynopsisinfo">
+    
+     <span class="modifier">class</span> <strong class="classname"><strong class="classname">DatePeriod</strong></strong>
+    
+
+    
+     <span class="modifier">implements</span>
+      <a href="class.iteratoraggregate.html" class="interfacename">IteratorAggregate</a> {</div>
+
+    <div class="classsynopsisinfo classsynopsisinfo_comment">/* 常量 */</div>
+    <div class="fieldsynopsis">
+     <span class="modifier">public</span>
+     <span class="modifier">const</span>
+     <span class="type">int</span>
+      <var class="fieldsynopsis_varname"><a href="class.dateperiod.html#dateperiod.constants.exclude-start-date"><var class="varname">EXCLUDE_START_DATE</var></a></var>;</div>
+
+    <div class="fieldsynopsis"><span class="modifier">public</span>
+     <span class="modifier">const</span>
+     <span class="type">int</span>
+      <var class="fieldsynopsis_varname"><a href="class.dateperiod.html#dateperiod.constants.include-end-date"><var class="varname">INCLUDE_END_DATE</var></a></var>;</div>
+
+
+    <div class="classsynopsisinfo classsynopsisinfo_comment">/* 属性 */</div>
+    <div class="fieldsynopsis"><span class="modifier">public</span>
+     <span class="modifier">readonly</span>
+     <span class="type">?</span><span class="type"><span class="type"><a href="class.datetimeinterface.html" class="type DateTimeInterface">DateTimeInterface</a></span><span class="type"></span></span>
+      <var class="varname"><a href="class.dateperiod.html#dateperiod.props.start">$<var class="varname">start</var></a></var>;</div>
+
+    <div class="fieldsynopsis"><span class="modifier">public</span>
+     <span class="modifier">readonly</span>
+     <span class="type">?</span><span class="type"><span class="type"><a href="class.datetimeinterface.html" class="type DateTimeInterface">DateTimeInterface</a></span><span class="type"></span></span>
+      <var class="varname"><a href="class.dateperiod.html#dateperiod.props.current">$<var class="varname">current</var></a></var>;</div>
+
+    <div class="fieldsynopsis"><span class="modifier">public</span>
+     <span class="modifier">readonly</span>
+     <span class="type">?</span><span class="type"><span class="type"><a href="class.datetimeinterface.html" class="type DateTimeInterface">DateTimeInterface</a></span><span class="type"></span></span>
+      <var class="varname"><a href="class.dateperiod.html#dateperiod.props.end">$<var class="varname">end</var></a></var>;</div>
+
+    <div class="fieldsynopsis"><span class="modifier">public</span>
+     <span class="modifier">readonly</span>
+     <span class="type">?</span><span class="type"><span class="type"><a href="class.dateinterval.html" class="type DateInterval">DateInterval</a></span><span class="type"></span></span>
+      <var class="varname"><a href="class.dateperiod.html#dateperiod.props.interval">$<var class="varname">interval</var></a></var>;</div>
+
+    <div class="fieldsynopsis"><span class="modifier">public</span>
+     <span class="modifier">readonly</span>
+     <span class="type">int</span>
+      <var class="varname"><a href="class.dateperiod.html#dateperiod.props.recurrences">$<var class="varname">recurrences</var></a></var>;</div>
+
+    <div class="fieldsynopsis"><span class="modifier">public</span>
+     <span class="modifier">readonly</span>
+     <span class="type">bool</span>
+      <var class="varname"><a href="class.dateperiod.html#dateperiod.props.include-start-date">$<var class="varname">include_start_date</var></a></var>;</div>
+
+    <div class="fieldsynopsis"><span class="modifier">public</span>
+     <span class="modifier">readonly</span>
+     <span class="type">bool</span>
+      <var class="varname"><a href="class.dateperiod.html#dateperiod.props.include-end-date">$<var class="varname">include_end_date</var></a></var>;</div>
+
+
+    <div class="classsynopsisinfo classsynopsisinfo_comment">/* 方法 */</div>
+    <div class="constructorsynopsis dc-description">
+   <span class="modifier">public</span> <span class="methodname"><a href="dateperiod.construct.html" class="methodname">__construct</a></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><a href="class.datetimeinterface.html" class="type DateTimeInterface">DateTimeInterface</a></span> <code class="parameter">$start</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><a href="class.dateinterval.html" class="type DateInterval">DateInterval</a></span> <code class="parameter">$interval</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$recurrences</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$options</code><span class="initializer"> = 0</span></span><br>)</div>
+<div class="constructorsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="dateperiod.construct.html" class="methodname">__construct</a></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><a href="class.datetimeinterface.html" class="type DateTimeInterface">DateTimeInterface</a></span> <code class="parameter">$start</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><a href="class.dateinterval.html" class="type DateInterval">DateInterval</a></span> <code class="parameter">$interval</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><a href="class.datetimeinterface.html" class="type DateTimeInterface">DateTimeInterface</a></span> <code class="parameter">$end</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$options</code><span class="initializer"> = 0</span></span><br>)</div>
+<div class="constructorsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="dateperiod.construct.html" class="methodname">__construct</a></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$isostr</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$options</code><span class="initializer"> = 0</span></span>)</div>
+
+    <div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="modifier">static</span> <span class="methodname"><a href="dateperiod.createfromiso8601string.html" class="methodname">createFromISO8601String</a></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$specification</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$options</code><span class="initializer"> = 0</span></span>): <span class="type"><span class="type static">static</span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="dateperiod.getdateinterval.html" class="methodname">getDateInterval</a></span>(): <span class="type"><a href="class.dateinterval.html" class="type DateInterval">DateInterval</a></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="dateperiod.getenddate.html" class="methodname">getEndDate</a></span>(): <span class="type"><span class="type">?</span><span class="type"><a href="class.datetimeinterface.html" class="type DateTimeInterface">DateTimeInterface</a></span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="dateperiod.getrecurrences.html" class="methodname">getRecurrences</a></span>(): <span class="type"><span class="type">?</span><span class="type">int</span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="dateperiod.getstartdate.html" class="methodname">getStartDate</a></span>(): <span class="type"><a href="class.datetimeinterface.html" class="type DateTimeInterface">DateTimeInterface</a></span></div>
+
+   }</div>
+
+
+  </div>
+  
+
+  <div class="section" id="dateperiod.constants">
+   <h2 class="title">预定义常量</h2>
+   <dl>
+    
+     <dt id="dateperiod.constants.exclude-start-date"><strong><code>DatePeriod::EXCLUDE_START_DATE</code></strong></dt>
+
+     <dd>
+
+      <p class="para">在 <span class="function"><a href="dateperiod.construct.html" class="function">DatePeriod::__construct()</a></span> 构造函数中使用，排除开始时间。</p>
+     </dd>
+
+    
+
+    
+     <dt id="dateperiod.constants.include-end-date"><strong><code>DatePeriod::INCLUDE_END_DATE</code></strong></dt>
+
+     <dd>
+
+      <p class="para">在 <span class="function"><a href="dateperiod.construct.html" class="function">DatePeriod::__construct()</a></span> 构造函数中使用，包含结束时间。</p>
+     </dd>
+
+    
+
+   </dl>
+
+  </div>
+
+
+  <div class="section" id="dateperiod.props">
+   <h2 class="title">属性</h2>
+   <dl>
+    
+     <dt id="dateperiod.props.recurrences"><var class="varname">recurrences</var></dt>
+
+     <dd>
+
+      <p class="para">
+       迭代器返回的最小实例数。
+      </p>
+      <p class="para">
+       如果在 <span class="classname"><strong class="classname">DatePeriod</strong></span> 实例的构造函数中显式通过 <var class="varname">recurrences</var>
+       参数传递重复次数，然后此属性将包含该值，如果开始时间没有通过 <strong><code>DatePeriod::EXCLUDE_START_DATE</code></strong>
+       禁用，则该属性<em>加</em> 1，如果结束时间已经通过 <strong><code>DatePeriod::INCLUDE_END_DATE</code></strong>
+       启用，则该属性<em>加</em> 1。
+      </p>
+      <p class="para">
+       如果没有显式传递重复次数，则此属性包含返回实例的最小数量。这将是 
+       <code class="literal">0</code>，如果开始时间没有通过 <strong><code>DatePeriod::EXCLUDE_START_DATE</code></strong>
+       禁用，则该属性<em>加</em> 1，如果结束时间已经通过 <strong><code>DatePeriod::INCLUDE_END_DATE</code></strong>
+       启用，则该属性<em>加</em> 1。
+      </p>
+      <p class="para">
+       <div class="example" id="">
+        <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$start </span><span style="color: #007700">= new </span><span style="color: #0000BB">DateTime</span><span style="color: #007700">(</span><span style="color: #DD0000">'2018-12-31 00:00:00'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$end   </span><span style="color: #007700">= new </span><span style="color: #0000BB">DateTime</span><span style="color: #007700">(</span><span style="color: #DD0000">'2021-12-31 00:00:00'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$interval </span><span style="color: #007700">= new </span><span style="color: #0000BB">DateInterval</span><span style="color: #007700">(</span><span style="color: #DD0000">'P1M'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$recurrences </span><span style="color: #007700">= </span><span style="color: #0000BB">5</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// 通过构造函数显式设置重复次数<br /></span><span style="color: #0000BB">$period </span><span style="color: #007700">= new </span><span style="color: #0000BB">DatePeriod</span><span style="color: #007700">(</span><span style="color: #0000BB">$start</span><span style="color: #007700">, </span><span style="color: #0000BB">$interval</span><span style="color: #007700">, </span><span style="color: #0000BB">$recurrences</span><span style="color: #007700">, </span><span style="color: #0000BB">DatePeriod</span><span style="color: #007700">::</span><span style="color: #0000BB">EXCLUDE_START_DATE</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">$period</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">recurrences</span><span style="color: #007700">, </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$period </span><span style="color: #007700">= new </span><span style="color: #0000BB">DatePeriod</span><span style="color: #007700">(</span><span style="color: #0000BB">$start</span><span style="color: #007700">, </span><span style="color: #0000BB">$interval</span><span style="color: #007700">, </span><span style="color: #0000BB">$recurrences</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">$period</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">recurrences</span><span style="color: #007700">, </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$period </span><span style="color: #007700">= new </span><span style="color: #0000BB">DatePeriod</span><span style="color: #007700">(</span><span style="color: #0000BB">$start</span><span style="color: #007700">, </span><span style="color: #0000BB">$interval</span><span style="color: #007700">, </span><span style="color: #0000BB">$recurrences</span><span style="color: #007700">, </span><span style="color: #0000BB">DatePeriod</span><span style="color: #007700">::</span><span style="color: #0000BB">INCLUDE_END_DATE</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">$period</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">recurrences</span><span style="color: #007700">, </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// 构造函数中没有设置重复次数<br /></span><span style="color: #0000BB">$period </span><span style="color: #007700">= new </span><span style="color: #0000BB">DatePeriod</span><span style="color: #007700">(</span><span style="color: #0000BB">$start</span><span style="color: #007700">, </span><span style="color: #0000BB">$interval</span><span style="color: #007700">, </span><span style="color: #0000BB">$end</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">$period</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">recurrences</span><span style="color: #007700">, </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$period </span><span style="color: #007700">= new </span><span style="color: #0000BB">DatePeriod</span><span style="color: #007700">(</span><span style="color: #0000BB">$start</span><span style="color: #007700">, </span><span style="color: #0000BB">$interval</span><span style="color: #007700">, </span><span style="color: #0000BB">$end</span><span style="color: #007700">, </span><span style="color: #0000BB">DatePeriod</span><span style="color: #007700">::</span><span style="color: #0000BB">EXCLUDE_START_DATE</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">$period</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">recurrences</span><span style="color: #007700">, </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+         </div>
+
+         <div class="example-contents"><p>以上示例会输出：</p></div>
+         <div class="example-contents screen"><br />
+5<br />
+6<br />
+7<br />
+1<br />
+0<br />
+         </div>
+        </div>
+       </p>
+      <p class="para">
+       参见：<span class="methodname"><a href="dateperiod.getrecurrences.html" class="methodname">DatePeriod::getRecurrences()</a></span>。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="dateperiod.props.include-end-date"><var class="varname">include_end_date</var></dt>
+
+     <dd>
+
+      <p class="para">
+       在循环过程中，是否包含结束时间。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="dateperiod.props.include-start-date"><var class="varname">include_start_date</var></dt>
+
+     <dd>
+
+      <p class="para">
+       在循环过程中，是否包含开始时间。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="dateperiod.props.start"><var class="varname">start</var></dt>
+
+     <dd>
+
+      <p class="para">
+        时间周期的开始时间。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="dateperiod.props.current"><var class="varname">current</var></dt>
+
+     <dd>
+
+      <p class="para">
+       表示在时间周期内迭代的时候，当前的时间。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="dateperiod.props.end"><var class="varname">end</var></dt>
+
+     <dd>
+
+      <p class="para">
+       时间周期的结束时间。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="dateperiod.props.interval"><var class="varname">interval</var></dt>
+
+     <dd>
+
+      <p class="para">
+       ISO 8601 格式的间隔。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </div>
+
+  <div class="section">
+   <h2 class="title">更新日志</h2>
+   <table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>8.2.0</td>
+       <td>
+        新增 <strong><code>DatePeriod::INCLUDE_END_DATE</code></strong> 常量和
+        <span class="property">include_end_date</span> 属性。
+       </td>
+      </tr>
+
+      <tr>
+       <td>8.0.0</td>
+       <td>
+        现在 <span class="classname"><strong class="classname">DatePeriod</strong></span> 实现了（implement）
+        <span class="interfacename"><a href="class.iteratoraggregate.html" class="interfacename">IteratorAggregate</a></span>。之前实现的是
+        <span class="interfacename"><a href="class.traversable.html" class="interfacename">Traversable</a></span>。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </div>
+
+ </div>
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>目录</h2><ul class="chunklist chunklist_reference"><li><a href="dateperiod.construct.html">DatePeriod::__construct</a> — Creates a new DatePeriod object</li><li><a href="dateperiod.createfromiso8601string.html">DatePeriod::createFromISO8601String</a> — Creates a new DatePeriod object from an ISO8601 string</li><li><a href="dateperiod.getdateinterval.html">DatePeriod::getDateInterval</a> — Gets the interval</li><li><a href="dateperiod.getenddate.html">DatePeriod::getEndDate</a> — Gets the end date</li><li><a href="dateperiod.getrecurrences.html">DatePeriod::getRecurrences</a> — Gets the number of recurrences</li><li><a href="dateperiod.getstartdate.html">DatePeriod::getStartDate</a> — Gets the start date</li></ul>
+</div>
+</div></div></body></html>

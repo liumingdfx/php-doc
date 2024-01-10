@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>运行时配置</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="datetime.installation.html">« 安装</a></li>
+      <li style="float: right;"><a href="datetime.resources.html">资源类型 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="datetime.setup.html">安装/配置</a></li>
+    <li>运行时配置</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="datetime.configuration" class="section">
+ <h2 class="title">运行时配置</h2>
+ <p class="simpara">
+这些函数的行为受 <var class="filename">php.ini</var> 中的设置影响。
+</p>
+ <p class="para">
+  <table class="doctable table">
+   <caption><strong>日期/时间配置选项</strong></caption>
+   
+    <thead>
+     <tr>
+      <th>名字</th>
+      <th>默认</th>
+      <th>可修改范围</th>
+      <th>更新日志</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td><a href="datetime.configuration.html#ini.date.default-latitude" class="link">date.default_latitude</a></td>
+      <td>&quot;31.7667&quot;</td>
+      <td>PHP_INI_ALL</td>
+      <td class="empty">&nbsp;</td>
+     </tr>
+
+     <tr>
+      <td><a href="datetime.configuration.html#ini.date.default-longitude" class="link">date.default_longitude</a></td>
+      <td>&quot;35.2333&quot;</td>
+      <td>PHP_INI_ALL</td>
+      <td class="empty">&nbsp;</td>
+     </tr>
+
+     <tr>
+      <td><a href="datetime.configuration.html#ini.date.sunrise-zenith" class="link">date.sunrise_zenith</a></td>
+      <td>&quot;90.833333&quot;</td>
+      <td>PHP_INI_ALL</td>
+      <td>在 PHP 8.0.0 之前，默认值是“90.583333”</td>
+     </tr>
+
+     <tr>
+      <td><a href="datetime.configuration.html#ini.date.sunset-zenith" class="link">date.sunset_zenith</a></td>
+      <td>&quot;90.833333&quot;</td>
+      <td>PHP_INI_ALL</td>
+      <td>在 PHP 8.0.0 之前，默认值是“90.583333”</td>
+     </tr>
+
+     <tr>
+      <td><a href="datetime.configuration.html#ini.date.timezone" class="link">date.timezone</a></td>
+      <td>&quot;UTC&quot;</td>
+      <td>PHP_INI_ALL</td>
+      <td>自 PHP 8.2.0 起，将其设置为无效值或者空字符串时将发出警告。</td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+  有关 PHP_INI_* 样式的更多详情与定义，见 <a href="configuration.changes.modes.html" class="xref">配置可被设定范围</a>。
+ </p>
+
+ <p class="para">这是配置指令的简短说明。</p>
+
+ <p class="para">
+  <dl>
+   
+    <dt id="ini.date.default-latitude">
+     <code class="parameter">date.default_latitude</code>
+     <span class="type">float</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      默认纬度范围从赤道的 <code class="literal">0</code> 到向北 <code class="literal">+90</code> 和向南 <code class="literal">-90</code>。
+     </p>
+    </dd>
+
+   
+
+   
+    <dt id="ini.date.default-longitude">
+     <code class="parameter">date.default_longitude</code>
+     <span class="type">float</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      默认经度范围从本初子午线的 <code class="literal">0</code> 到向东 <code class="literal">+180</code> 和向西 <code class="literal">−180</code>。
+     </p>
+    </dd>
+
+   
+
+   
+    <dt id="ini.date.sunrise-zenith">
+     <code class="parameter">date.sunrise_zenith</code>
+     <span class="type">float</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      日出时默认天顶。
+     </p>
+     <p class="para">
+      默认值是 90°50&#039;。额外的 50&#039; 是因为两个部分：太阳半径（即 16&#039;）及大气折射（即 34&#039;）。
+     </p>
+    </dd>
+
+   
+
+   
+    <dt id="ini.date.sunset-zenith">
+     <code class="parameter">date.sunset_zenith</code>
+     <span class="type">float</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      日落时默认天顶。
+     </p>
+    </dd>
+
+   
+
+   
+    <dt id="ini.date.timezone">
+     <code class="parameter">date.timezone</code>
+     <span class="type">string</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      所有日期/时间函数使用的默认时区。<span class="function"><a href="function.date-default-timezone-get.html" class="function">date_default_timezone_get()</a></span>
+      页面中描述了在没有明确提及时区的情况下使用时区的优先顺序。参见<a href="timezones.html" class="xref">所支持的时区列表</a>以获得支持的时区列表。
+     </p>
+    </dd>
+
+   
+  </dl>
+
+ </p>
+ <blockquote class="note"><p><strong class="note">注意</strong>: 
+  <span class="simpara">
+   前四个配置选项目前仅用于
+   <span class="function"><a href="function.date-sunrise.html" class="function">date_sunrise()</a></span> 和 <span class="function"><a href="function.date-sunset.html" class="function">date_sunset()</a></span>。
+  </span>
+ </p></blockquote>
+</div></div></div></body></html>

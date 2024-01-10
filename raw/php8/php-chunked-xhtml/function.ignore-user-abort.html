@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>设置客户端断开连接时是否中断脚本的执行</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.hrtime.html">« hrtime</a></li>
+      <li style="float: right;"><a href="function.pack.html">pack »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.misc.html">杂项 函数</a></li>
+    <li>设置客户端断开连接时是否中断脚本的执行</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.ignore-user-abort" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">ignore_user_abort</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">ignore_user_abort</span> &mdash; <span class="dc-title">设置客户端断开连接时是否中断脚本的执行</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.ignore-user-abort-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>ignore_user_abort</strong></span>(<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">bool</span><span class="type"></span></span> <code class="parameter">$enable</code><span class="initializer"> = <strong><code>null</code></strong></span></span>): <span class="type">int</span></div>
+
+  <p class="para rdfs-comment">
+    设置客户端断开连接时是否中断脚本的执行
+  </p>
+  <p class="para">
+   PHP 以命令行脚本执行时，当脚本终端结束，脚本不会被立即中止，除非设置
+   <code class="parameter">enable</code>为 <strong><code>true</code></strong>，否则脚本输出任意字符时会被中止。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.ignore-user-abort-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">enable</code></dt>
+
+     <dd>
+
+      <p class="para">
+       如果设置了该值且不为 <strong><code>null</code></strong>，函数会设置 <a href="misc.configuration.html#ini.ignore-user-abort" class="link">ignore_user_abort</a>
+       ini 为 <code class="parameter">enable</code>。否则，函数不会改变设置，仅会返回之前的设置。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.ignore-user-abort-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   以整型返回之前的设置
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.ignore-user-abort-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       <code class="parameter">enable</code> 现在允许为 null。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.ignore-user-abort-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 <span class="function"><strong>ignore_user_abort()</strong></span>例子</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// 忽略用户中止并允许脚本<br />// 永远运行<br /></span><span style="color: #0000BB">ignore_user_abort</span><span style="color: #007700">(</span><span style="color: #0000BB">true</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">set_time_limit</span><span style="color: #007700">(</span><span style="color: #0000BB">0</span><span style="color: #007700">);<br /><br />echo </span><span style="color: #DD0000">'Testing connection handling in PHP'</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// Run a pointless loop that sometime <br />// hopefully will make us click away from <br />// page or click the "Stop" button.<br /></span><span style="color: #007700">while(</span><span style="color: #0000BB">1</span><span style="color: #007700">)<br />{<br />    </span><span style="color: #FF8000">// 连接失败？<br />    </span><span style="color: #007700">if(</span><span style="color: #0000BB">connection_status</span><span style="color: #007700">() != </span><span style="color: #0000BB">CONNECTION_NORMAL</span><span style="color: #007700">)<br />    {<br />        break;<br />    }<br /><br />    </span><span style="color: #FF8000">// 睡眠 10 秒<br />    </span><span style="color: #0000BB">sleep</span><span style="color: #007700">(</span><span style="color: #0000BB">10</span><span style="color: #007700">);<br />}<br /><br /></span><span style="color: #FF8000">// If this is reached, then the 'break' <br />// was triggered from inside the while loop<br /><br />// So here we can log, or perform any other tasks<br />// we need without actually being dependent on the <br />// browser.<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.ignore-user-abort-notes">
+  <h3 class="title">注释</h3>
+  <p class="para">
+   在PHP尝试发送信息到客户端之前，不会检测到用户是否已中断连接。
+   仅使用 echo 语句不能确保信息已发送，参见 <span class="function"><a href="function.flush.html" class="function">flush()</a></span> 函数。 
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.ignore-user-abort-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.connection-aborted.html" class="function" rel="rdfs-seeAlso">connection_aborted()</a> - 检查客户端是否已经断开</span></li>
+    <li class="member"><span class="function"><a href="function.connection-status.html" class="function" rel="rdfs-seeAlso">connection_status()</a> - 返回连接的状态位</span></li>
+    <li class="member">
+     <a href="features.connection-handling.html" class="link">Connection Handling</a>
+     关于PHP连接处理的完整描述。
+    </li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

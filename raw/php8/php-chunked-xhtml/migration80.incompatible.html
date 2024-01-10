@@ -1,0 +1,1493 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>不向后兼容的变更</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="migration80.new-features.html">« 新特性</a></li>
+      <li style="float: right;"><a href="migration80.deprecated.html">PHP 8.0 废弃的功能 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="migration80.html">从 PHP 7.4.x 移植到 PHP 8.0.x</a></li>
+    <li>不向后兼容的变更</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="migration80.incompatible" class="sect1">
+ <h2 class="title">不向后兼容的变更</h2>
+
+ <div class="sect2" id="migration80.incompatible.core">
+  <h3 class="title">PHP 核心中不向后兼容的变更</h3>
+
+  <div class="sect3" id="migration80.incompatible.core.string-number-comparision">
+   <h4 class="title">字符串与数字的比较</h4>
+
+   <p class="para">
+    数字与非数字形式的字符串之间的非严格比较现在将首先将数字转为字符串，然后比较这两个字符串。
+    数字与数字形式的字符串之间的比较仍然像之前那样进行。
+    请注意，这意味着 <code class="code">0 == &quot;not-a-number&quot;</code> 现在将被认为是 false 。
+    <table class="doctable informaltable">
+     
+      <thead>
+       <tr>
+        <th>比较</th>
+        <th>之前</th>
+        <th>之后</th>
+       </tr>
+
+      </thead>
+
+      <tbody class="tbody">
+       <tr>
+        <td><code class="code">0 == &quot;0&quot;</code></td>
+        <td><strong><code>true</code></strong></td>
+        <td><strong><code>true</code></strong></td>
+       </tr>
+
+       <tr>
+        <td><code class="code">0 == &quot;0.0&quot;</code></td>
+        <td><strong><code>true</code></strong></td>
+        <td><strong><code>true</code></strong></td>
+       </tr>
+
+       <tr>
+        <td><code class="code">0 == &quot;foo&quot;</code></td>
+        <td><strong><code>true</code></strong></td>
+        <td><strong><code>false</code></strong></td>
+       </tr>
+
+       <tr>
+        <td><code class="code">0 == &quot;&quot;</code></td>
+        <td><strong><code>true</code></strong></td>
+        <td><strong><code>false</code></strong></td>
+       </tr>
+
+       <tr>
+        <td><code class="code">42 == &quot;   42&quot;</code></td>
+        <td><strong><code>true</code></strong></td>
+        <td><strong><code>true</code></strong></td>
+       </tr>
+
+       <tr>
+        <td><code class="code">42 == &quot;42foo&quot;</code></td>
+        <td><strong><code>true</code></strong></td>
+        <td><strong><code>false</code></strong></td>
+       </tr>
+
+      </tbody>
+     
+    </table>
+
+    
+   </p>
+  </div>
+
+  <div class="sect3" id="migration80.incompatible.core.other">
+   <h4 class="title">其它不向后兼容的变更</h4>
+
+   <ul class="itemizedlist">
+    <li class="listitem">
+     <p class="para">
+      <code class="literal">match</code> 现在是一个保留字。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      断言（Assertion）失败现在默认抛出异常。如果想要改回之前的行为，可以在 INI 设置中设置
+      <code class="code">assert.exception=0</code> 。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      <code class="literal">mixed</code> 现在是保留字，所以不能用于类，接口或者
+      trait，也禁止在命名空间中使用。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      与类名相同的方法名将不再被当做构造方法。应该使用 <a href="language.oop5.decon.html#object.construct" class="link">__construct()</a>
+      来取代它。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      不再允许通过静态调用的方式去调用非静态方法。因此 <span class="function"><a href="function.is-callable.html" class="function">is_callable()</a></span> 在检查一个类名与非静态方法时将返回失败（应当检查一个类的实例）。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+     <code class="code">(real)</code> 和 <code class="code">(unset)</code> 转换已被移除。
+     </p>
+    </li>
+    <li class="listitem">
+      <p class="para">
+       移除 <a href="errorfunc.configuration.html#ini.track-errors" class="link">track_errors</a> 执行。这意味着不能再用 <var class="varname">php_errormsg</var>。可以改用
+       <span class="function"><a href="function.error-get-last.html" class="function">error_get_last()</a></span> 函数。
+      </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      移除定义不区分大小写的常量功能。<span class="function"><a href="function.define.html" class="function">define()</a></span> 的第三个参数可能不再为 <strong><code>true</code></strong>。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      移除使用 <span class="function"><a href="function.autoload.html" class="function">__autoload()</a></span> 函数指定自动加载器的功能。应该改用 <span class="function"><a href="function.spl-autoload-register.html" class="function">spl_autoload_register()</a></span>。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      <code class="parameter">errcontext</code> 参数将不再传递给使用 <span class="function"><a href="function.set-error-handler.html" class="function">set_error_handler()</a></span> 设置的自定义错误处理程序。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      移除 <span class="function"><a href="function.create-function.html" class="function">create_function()</a></span>。应该改用匿名函数。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      移除 <span class="function"><a href="function.each.html" class="function">each()</a></span>。应该改用 <a href="control-structures.foreach.html" class="link">foreach</a> 或者 <span class="classname"><a href="class.arrayiterator.html" class="classname">ArrayIterator</a></span>。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      移除在方法中使用 <span class="methodname"><a href="closure.fromcallable.html" class="methodname">Closure::fromCallable()</a></span> 或 <span class="methodname"><a href="reflectionmethod.getclosure.html" class="methodname">ReflectionMethod::getClosure()</a></span>
+      创建的匿名函数中解绑 <var class="varname">this</var> 的能力。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      移除了从包含 <var class="varname">this</var> 使用的正常闭包中解绑 <var class="varname">this</var> 的能力。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      移除对对象使用 <span class="function"><a href="function.array-key-exists.html" class="function">array_key_exists()</a></span> 的能力。应该改用 <span class="function"><a href="function.isset.html" class="function">isset()</a></span> 或 <span class="function"><a href="function.property-exists.html" class="function">property_exists()</a></span>。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      <span class="function"><a href="function.array-key-exists.html" class="function">array_key_exists()</a></span> 中 <code class="parameter">key</code> 参数类型的行为已经和 <span class="function"><a href="function.isset.html" class="function">isset()</a></span> 和正常数组访问一致。所有的
+      key 类型现在使用通用的强制转换，数组/对象 key 会抛出 <span class="classname"><a href="class.typeerror.html" class="classname">TypeError</a></span>。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      任意一个数组，将数字 <span class="replaceable">n</span> 作为第一个数字 key，下一个隐式键将会是 <span class="replaceable">n+1</span>。即使
+      <span class="replaceable">n</span> 为负数也是如此。
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      error_reporting 默认级别现在是 <strong><code>E_ALL</code></strong>。之前排除 <strong><code>E_NOTICE</code></strong> 和 <strong><code>E_DEPRECATED</code></strong>。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      现在默认启用 <a href="errorfunc.configuration.html#ini.display-startup-errors" class="link">display_startup_errors</a>。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      在没有父级的类中使用 <span class="type"><span class="type parent">parent</span></span> 将会导致 fatal compile-time 错误。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      <code class="literal">@</code> 操作将不再屏蔽 fatal 
+      错误（<strong><code>E_ERROR</code></strong>、<strong><code>E_CORE_ERROR</code></strong>、<strong><code>E_COMPILE_ERROR</code></strong>、<strong><code>E_USER_ERROR</code></strong>、<strong><code>E_RECOVERABLE_ERROR</code></strong>、<strong><code>E_PARSE</code></strong>）。当使用
+      <code class="literal">@</code> 时，接受 error_reporting 为 <code class="literal">0</code> 的错误处理程序，应该调整为使用位掩码检查：
+     </p>
+     <p class="para">
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// 之前<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">my_error_handler</span><span style="color: #007700">(</span><span style="color: #0000BB">$err_no</span><span style="color: #007700">, </span><span style="color: #0000BB">$err_msg</span><span style="color: #007700">, </span><span style="color: #0000BB">$filename</span><span style="color: #007700">, </span><span style="color: #0000BB">$linenum</span><span style="color: #007700">) {<br />    if (</span><span style="color: #0000BB">error_reporting</span><span style="color: #007700">() == </span><span style="color: #0000BB">0</span><span style="color: #007700">) {<br />        return </span><span style="color: #0000BB">false</span><span style="color: #007700">;<br />    }<br />    </span><span style="color: #FF8000">// ...<br /></span><span style="color: #007700">}<br /><br /></span><span style="color: #FF8000">// 现在<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">my_error_handler</span><span style="color: #007700">(</span><span style="color: #0000BB">$err_no</span><span style="color: #007700">, </span><span style="color: #0000BB">$err_msg</span><span style="color: #007700">, </span><span style="color: #0000BB">$filename</span><span style="color: #007700">, </span><span style="color: #0000BB">$linenum</span><span style="color: #007700">) {<br />    if (!(</span><span style="color: #0000BB">error_reporting</span><span style="color: #007700">() &amp; </span><span style="color: #0000BB">$err_no</span><span style="color: #007700">)) {<br />        return </span><span style="color: #0000BB">false</span><span style="color: #007700">;<br />    }<br />    </span><span style="color: #FF8000">// ...<br /></span><span style="color: #007700">}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+      </div>
+
+     </p>
+     <p class="para">
+      此外，应注意在生产环境中不显示错误消息，这可能会导致信息泄露。确保 <code class="code">display_errors=Off</code> 与错误记录一起使用。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      <code class="literal">#[</code> 不再解释为注释的开头，因为此语法现在用于注解。
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      由于不兼容的方法签名（违反 LSP）导致的继承错误现在将始终生成致命错误。以前在某些情况下会生成警告。
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      相对于位移、加法还有减法，连接运算符的优先级已经更改。
+     </p>
+     <p class="para">
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">echo </span><span style="color: #DD0000">"Sum: " </span><span style="color: #007700">. </span><span style="color: #0000BB">$a </span><span style="color: #007700">+ </span><span style="color: #0000BB">$b</span><span style="color: #007700">;<br /></span><span style="color: #FF8000">// 之前解释为：<br /></span><span style="color: #007700">echo (</span><span style="color: #DD0000">"Sum: " </span><span style="color: #007700">. </span><span style="color: #0000BB">$a</span><span style="color: #007700">) + </span><span style="color: #0000BB">$b</span><span style="color: #007700">;<br /></span><span style="color: #FF8000">// 现在解释为：<br /></span><span style="color: #007700">echo </span><span style="color: #DD0000">"Sum:" </span><span style="color: #007700">. (</span><span style="color: #0000BB">$a </span><span style="color: #007700">+ </span><span style="color: #0000BB">$b</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+      </div>
+
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      在运行时默认值解析为 <strong><code>null</code></strong> 的参数，将不在默默将参数类型标记为可为 null。必须改用指定可为 null 类型或者默认值为 <strong><code>null</code></strong>。
+     </p>
+     <p class="para">
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// 之前：<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">test</span><span style="color: #007700">(</span><span style="color: #0000BB">int $arg </span><span style="color: #007700">= </span><span style="color: #0000BB">CONST_RESOLVING_TO_NULL</span><span style="color: #007700">) {}<br /></span><span style="color: #FF8000">// 之后：<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">test</span><span style="color: #007700">(?</span><span style="color: #0000BB">int $arg </span><span style="color: #007700">= </span><span style="color: #0000BB">CONST_RESOLVING_TO_NULL</span><span style="color: #007700">) {}<br /></span><span style="color: #FF8000">// 或者是<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">test</span><span style="color: #007700">(</span><span style="color: #0000BB">int $arg </span><span style="color: #007700">= </span><span style="color: #0000BB">null</span><span style="color: #007700">) {}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+      </div>
+
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      一些警告已转换为 <span class="classname"><a href="class.error.html" class="classname">Error</a></span> 异常：
+     </p>
+     <p class="para">
+      <ul class="simplelist">
+       <li class="member">
+        尝试向非对象写入属性。之前会默默的为 null、false 和空字符串创建 stdClass 对象。
+       </li>
+       <li class="member">
+        尝试追加元素到已使用 PHP_INT_MAX 作为 key 的数组。
+       </li>
+       <li class="member">
+        尝试使用无效类型（array 或 object）作为数组的 key 或者字符串的 offset。
+       </li>
+       <li class="member">尝试向标量值写入数组索引。</li>
+       <li class="member">尝试解包非数组或 Traversable。</li>
+       <li class="member">
+        尝试访问未定义的常量，之前，访问未定义的常量将会导致警告并解释为字符串。
+       </li>
+       <li class="member">
+        传递错误的参数数量到非可变参数内置函数将引发 <span class="classname"><a href="class.argumentcounterror.html" class="classname">ArgumentCountError</a></span>。
+       </li>
+      </ul>
+     </p>
+     <p class="para">
+      一些通知已转换为警告：
+     </p>
+     <p class="para">
+      <ul class="simplelist">
+       <li class="member">尝试读取未定义的变量。</li>
+       <li class="member">尝试读取未定义的属性。</li>
+       <li class="member">尝试读取未定义的数组 key。</li>
+       <li class="member">尝试读取非对象的属性。</li>
+       <li class="member">尝试读取非数组的数组索引。</li>
+       <li class="member">尝试转换数组为字符串。</li>
+       <li class="member">尝试使用资源作为数组 key。</li>
+       <li class="member">尝试使用 null、bool、float 作为字符串 offset。</li>
+       <li class="member">尝试读取越界的字符串 offset。</li>
+       <li class="member">尝试将空字符串分配给字符串 offset。</li>
+      </ul>
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      尝试将多字节字符串分配给字符串 offset 现在将发出警告。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      源文件中的异常字符（比如字符串边界外的 NUL 字节）现在将导致 <span class="classname"><a href="class.parseerror.html" class="classname">ParseError</a></span> 异常而不是编译警告。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      未捕获异常现在会经过“clean shutdown”，这意味着未捕获的异常之后调用析构方法。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      编译时 fatal error“Only variables can be passed by reference”已延迟到运行时，并转换为“Argument cannot be passed by reference”<span class="classname"><a href="class.error.html" class="classname">Error</a></span> 异常。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      一些“Only variables should be passed by reference”通知已转换为“Argument
+      cannot be passed by reference”异常。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      匿名类生成的名称已经发生了改变。现在生成的名称将包括第一个父类或接口的名称：
+     </p>
+     <p class="para">
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">new class extends </span><span style="color: #0000BB">ParentClass </span><span style="color: #007700">{};<br /></span><span style="color: #FF8000">// -&gt; ParentClass@anonymous<br /></span><span style="color: #007700">new class implements </span><span style="color: #0000BB">FirstInterface</span><span style="color: #007700">, </span><span style="color: #0000BB">SecondInterface </span><span style="color: #007700">{};<br /></span><span style="color: #FF8000">// -&gt; FirstInterface@anonymous<br /></span><span style="color: #007700">new class {};<br /></span><span style="color: #FF8000">// -&gt; class@anonymous<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+      </div>
+
+     </p>
+     <p class="para">
+      上面显示的名称仍然后跟 NUL 字节和唯一的后缀。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      trait 别名适配中的非绝对 trait 方法引用现在必须明确：
+     </p>
+     <p class="para">
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">X </span><span style="color: #007700">{<br />    use </span><span style="color: #0000BB">T1</span><span style="color: #007700">, </span><span style="color: #0000BB">T2 </span><span style="color: #007700">{<br />        </span><span style="color: #0000BB">func </span><span style="color: #007700">as </span><span style="color: #0000BB">otherFunc</span><span style="color: #007700">;<br />    }<br />    function </span><span style="color: #0000BB">func</span><span style="color: #007700">() {}<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+      </div>
+
+     </p>
+     <p class="para">
+      如果同时存在 <code class="code">T1::func()</code> 和 <code class="code">T2::func()</code>，以前此代码会默默接受，并且 func 指向
+      <code class="code">T1::func</code>。现在则会生成 fatal error，必须明确编写 <code class="code">T1::func</code> or <code class="code">T2::func</code>。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      trait 中定义的 abstract 方法签名现在会检查类中实现的方法：
+     </p>
+     <p class="para">
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">trait </span><span style="color: #0000BB">MyTrait </span><span style="color: #007700">{<br />    abstract private function </span><span style="color: #0000BB">neededByTrait</span><span style="color: #007700">(): </span><span style="color: #0000BB">string</span><span style="color: #007700">;<br />}<br /><br />class </span><span style="color: #0000BB">MyClass </span><span style="color: #007700">{<br />    use </span><span style="color: #0000BB">MyTrait</span><span style="color: #007700">;<br /><br />    </span><span style="color: #FF8000">// 错误，因为返回类型不匹配。<br />    </span><span style="color: #007700">private function </span><span style="color: #0000BB">neededByTrait</span><span style="color: #007700">(): </span><span style="color: #0000BB">int </span><span style="color: #007700">{ return </span><span style="color: #0000BB">42</span><span style="color: #007700">; }<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+      </div>
+
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      现在将禁用的函数视为不存在的函数，调用禁用函数将报告未知，并且现在可以重新定义已禁用的函数。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      <code class="literal">data://</code> 流封装协议不在可写，这与文档中的行为相匹配。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      算术和位操作符 <code class="literal">+</code>、<code class="literal">-</code>、<code class="literal">*</code>、<code class="literal">/</code>、<code class="literal">**</code>、<code class="literal">%</code>、<code class="literal">&lt;&lt;</code>、<code class="literal">&gt;&gt;</code>、<code class="literal">&amp;</code>、<code class="literal">|</code>、<code class="literal">^</code>、<code class="literal">~</code>、<code class="literal">++</code>、<code class="literal">--</code>
+      的其中一个操作符是 <span class="type">array</span>、<a href="language.types.resource.html" class="link">resource</a> 或非重载 <span class="type">object</span> 时，现在将始终抛出
+      <span class="classname"><a href="class.typeerror.html" class="classname">TypeError</a></span>。唯一的例外是仍然支持 array <code class="literal">+</code> array 的合并操作。
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      浮点数到字符串的强制转换现在始终不会受到独立 locale 的影响。
+     </p>
+     <p class="para">
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />setlocale</span><span style="color: #007700">(</span><span style="color: #0000BB">LC_ALL</span><span style="color: #007700">, </span><span style="color: #DD0000">"de_DE"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$f </span><span style="color: #007700">= </span><span style="color: #0000BB">3.14</span><span style="color: #007700">;<br />echo </span><span style="color: #0000BB">$f</span><span style="color: #007700">, </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /></span><span style="color: #FF8000">// Previously: 3,14<br />// Now:        3.14<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+      </div>
+
+     </p>
+     <p class="para">
+      参阅 <span class="function"><a href="function.printf.html" class="function">printf()</a></span>、<span class="function"><a href="function.number-format.html" class="function">number_format()</a></span> 和
+      <span class="methodname"><strong>NumberFormatter()</strong></span> 了解自定义数字格式的方法。
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      已经移除对使用大括号（花括号）进行偏移量访问的弃用支持。
+     </p>
+     <p class="para">
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// 将：<br /></span><span style="color: #0000BB">$array</span><span style="color: #007700">{</span><span style="color: #0000BB">0</span><span style="color: #007700">};<br /></span><span style="color: #0000BB">$array</span><span style="color: #007700">{</span><span style="color: #DD0000">"key"</span><span style="color: #007700">};<br /></span><span style="color: #FF8000">// 改为：<br /></span><span style="color: #0000BB">$array</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">];<br /></span><span style="color: #0000BB">$array</span><span style="color: #007700">[</span><span style="color: #DD0000">"key"</span><span style="color: #007700">];<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+      </div>
+
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      在私有方法上应用 final 修饰符现在将产生警告，除非该方法是构造方法。
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      如果对象的构造方法 <span class="function"><a href="function.exit.html" class="function">exit()</a></span>，那么将不再调用对象的析构方法，这与构造方法抛出异常时的行为相匹配。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      命名空间名不能再包含空格：<code class="code">Foo\Bar</code> 将识别为命名空间名称，而 <code class="code">Foo \ Bar</code>
+      则不能。相反，保留关键字现在允许作为命名空间片段，这可能也会改变代码的解释：<code class="code">new\x</code> 现在与
+      <code class="code">constant(&#039;new\x&#039;)</code> 相同，而不是 <code class="code">new \x()</code>。
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      嵌套的三元表达式现在需要的括号。
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      <span class="function"><a href="function.debug-backtrace.html" class="function">debug_backtrace()</a></span> 和 <span class="methodname"><a href="exception.gettrace.html" class="methodname">Exception::getTrace()</a></span> 将不再提供对参数的引用。通过回溯将不可能更改函数参数。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      数字字符串的处理方式已经更改，以便更直观和更少出错。现在允许在数字字符串中使用尾随空格，以便与起始空格的处理方式保持一致。这主要影响：
+     </p>
+     <p class="para">
+      <ul class="simplelist">
+       <li class="member"><span class="function"><a href="function.is-numeric.html" class="function">is_numeric()</a></span> 函数</li>
+       <li class="member">字符串间的比较</li>
+       <li class="member">类型声明</li>
+       <li class="member">递增/减操作</li>
+      </ul>
+     </p>
+     <p class="para">
+      “前置数字字符串”的概念已删除大部分；仍然存在的目的是为了简化迁移。发出 <strong><code>E_NOTICE</code></strong>“A non well-formed numeric value
+      encountered”的字符串现在将发出 <strong><code>E_WARNING</code></strong>“A non-numeric value encountered”，并且所有发出
+      <strong><code>E_WARNING</code></strong>“A non-numeric value encountered”的字符串现在将抛出 <span class="classname"><a href="class.typeerror.html" class="classname">TypeError</a></span>。这主要会影响：
+     </p>
+     <p class="para">
+      <ul class="simplelist">
+       <li class="member">算术运算</li>
+       <li class="member">位运算</li>
+      </ul>
+     </p>
+     <p class="para">
+      <strong><code>E_WARNING</code></strong> 到 <span class="classname"><a href="class.typeerror.html" class="classname">TypeError</a></span> 的变更也影响了 <strong><code>E_WARNING</code></strong>“Illegal string
+      offset &#039;string&#039;”的非法字符串偏移。从字符串到 int/float 的明确强制转换的行为没有改变。
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      如果魔术方法声明了参数和返回类型，那么它们现在将会检查这些。签名应该与以下列表匹配：
+     </p>
+     <p class="para">
+      <ul class="simplelist">
+       <li class="member"><code class="code">__call(string $name, array $arguments): mixed</code></li>
+       <li class="member"><code class="code">__callStatic(string $name, array $arguments): mixed</code></li>
+       <li class="member"><code class="code">__clone(): void</code></li>
+       <li class="member"><code class="code">__debugInfo(): ?array</code></li>
+       <li class="member"><code class="code">__get(string $name): mixed</code></li>
+       <li class="member"><code class="code">__invoke(mixed $arguments): mixed</code></li>
+       <li class="member"><code class="code">__isset(string $name): bool</code></li>
+       <li class="member"><code class="code">__serialize(): array</code></li>
+       <li class="member"><code class="code">__set(string $name, mixed $value): void</code></li>
+       <li class="member"><code class="code">__set_state(array $properties): object</code></li>
+       <li class="member"><code class="code">__sleep(): array</code></li>
+       <li class="member"><code class="code">__unserialize(array $data): void</code></li>
+       <li class="member"><code class="code">__unset(string $name): void</code></li>
+       <li class="member"><code class="code">__wakeup(): void</code></li>
+      </ul>
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      <span class="function"><a href="function.call-user-func-array.html" class="function">call_user_func_array()</a></span> 数组的键现在将解释为参数名，而不是默默忽略。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      不再允许在命名空间内声明名为 <code class="literal">assert()</code> 的函数，并发出 <strong><code>E_COMPILE_ERROR</code></strong>。<span class="function"><a href="function.assert.html" class="function">assert()</a></span>
+      函数受引擎的特殊处理，当定义具有相同名称的命名空间函数时，可能会导致不一致的行为。
+     </p>
+    </li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.resource2object">
+  <h3 class="title">迁移资源到对象</h3>
+
+  <p class="para">
+   一些 <a href="language.types.resource.html" class="link">resource</a> 已经迁移到了 <span class="type">object</span>。返回值检测从使用 <span class="function"><a href="function.is-resource.html" class="function">is_resource()</a></span> 替换为是否是 <strong><code>false</code></strong>。
+  </p>
+  <ul class="itemizedlist">
+    <li class="listitem">
+     <p class="para">
+      <span class="function"><a href="function.curl-init.html" class="function">curl_init()</a></span> 现在将返回 <span class="classname"><a href="class.curlhandle.html" class="classname">CurlHandle</a></span> 对象而不是 <a href="language.types.resource.html" class="link">resource</a>。<span class="function"><a href="function.curl-close.html" class="function">curl_close()</a></span>
+      函数不再有作用，相反，如果不再引用，<span class="classname"><a href="class.curlhandle.html" class="classname">CurlHandle</a></span> 实例将自动销毁。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      <span class="function"><a href="function.curl-multi-init.html" class="function">curl_multi_init()</a></span> 现在将返回 <span class="classname"><a href="class.curlmultihandle.html" class="classname">CurlMultiHandle</a></span> 对象而不是 <a href="language.types.resource.html" class="link">resource</a>。<span class="function"><a href="function.curl-multi-close.html" class="function">curl_multi_close()</a></span>
+      函数不再有作用，相反，如果不再引用，<span class="classname"><a href="class.curlmultihandle.html" class="classname">CurlMultiHandle</a></span> 实例将自动销毁。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      <span class="function"><a href="function.curl-share-init.html" class="function">curl_share_init()</a></span> 现在将返回 <span class="classname"><a href="class.curlsharehandle.html" class="classname">CurlShareHandle</a></span> 对象而不是 <a href="language.types.resource.html" class="link">resource</a>。<span class="function"><a href="function.curl-share-close.html" class="function">curl_share_close()</a></span>
+      函数不再有作用，相反，如果不再引用，<span class="classname"><a href="class.curlsharehandle.html" class="classname">CurlShareHandle</a></span> 实例将自动销毁。
+     </p>
+    </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.enchant-broker-init.html" class="function">enchant_broker_init()</a></span> 现在将返回 <span class="classname"><a href="class.enchantbroker.html" class="classname">EnchantBroker</a></span> 对象而不是 <a href="language.types.resource.html" class="link">resource</a>。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.enchant-broker-request-dict.html" class="function">enchant_broker_request_dict()</a></span> 和
+     <span class="function"><a href="function.enchant-broker-request-pwl-dict.html" class="function">enchant_broker_request_pwl_dict()</a></span> 现在将返回
+     <span class="classname"><a href="class.enchantdictionary.html" class="classname">EnchantDictionary</a></span> 对象而不是 <a href="language.types.resource.html" class="link">resource</a>。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     GD 扩展现在使用 <span class="classname"><a href="class.gdimage.html" class="classname">GdImage</a></span> 对象作为图像的底层数据结构，而不是 <a href="language.types.resource.html" class="link">resource</a>。<span class="function"><a href="function.imagedestroy.html" class="function">imagedestroy()</a></span>
+     函数不再有作用，相反，如果不再引用，<span class="classname"><a href="class.gdimage.html" class="classname">GdImage</a></span> 实例将自动销毁。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.openssl-x509-read.html" class="function">openssl_x509_read()</a></span> 和 <span class="function"><a href="function.openssl-csr-sign.html" class="function">openssl_csr_sign()</a></span> 现在将返回 <span class="classname"><a href="class.opensslcertificate.html" class="classname">OpenSSLCertificate</a></span>
+     对象而不是 <a href="language.types.resource.html" class="link">resource</a>。弃用 <span class="function"><a href="function.openssl-x509-free.html" class="function">openssl_x509_free()</a></span> 函数且不再起作用，相反，如果不再引用，<span class="classname"><a href="class.opensslcertificate.html" class="classname">OpenSSLCertificate</a></span>
+     实例将自动销毁。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.openssl-csr-new.html" class="function">openssl_csr_new()</a></span> 现在将返回
+     <span class="classname"><a href="class.opensslcertificatesigningrequest.html" class="classname">OpenSSLCertificateSigningRequest</a></span> 对象而不是 <a href="language.types.resource.html" class="link">resource</a>。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.openssl-pkey-new.html" class="function">openssl_pkey_new()</a></span> 现在将返回 <span class="classname"><a href="class.opensslasymmetrickey.html" class="classname">OpenSSLAsymmetricKey</a></span> 对象而不是 <a href="language.types.resource.html" class="link">resource</a>。弃用
+     <span class="function"><a href="function.openssl-pkey-free.html" class="function">openssl_pkey_free()</a></span> 函数且不再起作用，相反，如果不再引用，<span class="classname"><a href="class.opensslasymmetrickey.html" class="classname">OpenSSLAsymmetricKey</a></span>
+     实例将自动销毁。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.shmop-open.html" class="function">shmop_open()</a></span> 现在将返回 <span class="classname"><a href="class.shmop.html" class="classname">Shmop</a></span> 对象而不是 <a href="language.types.resource.html" class="link">resource</a>。弃用
+     <span class="function"><a href="function.shmop-close.html" class="function">shmop_close()</a></span> 函数且不再起作用，相反，如果不再引用，<span class="classname"><a href="class.shmop.html" class="classname">Shmop</a></span> 实例将自动销毁。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.socket-create.html" class="function">socket_create()</a></span>、<span class="function"><a href="function.socket-create-listen.html" class="function">socket_create_listen()</a></span>、<span class="function"><a href="function.socket-accept.html" class="function">socket_accept()</a></span>、<span class="function"><a href="function.socket-import-stream.html" class="function">socket_import_stream()</a></span>、<span class="function"><a href="function.socket-addrinfo-connect.html" class="function">socket_addrinfo_connect()</a></span>、<span class="function"><a href="function.socket-addrinfo-bind.html" class="function">socket_addrinfo_bind()</a></span>
+     和 <span class="function"><a href="function.socket-wsaprotocol-info-import.html" class="function">socket_wsaprotocol_info_import()</a></span> 现在将返回 <span class="classname"><a href="class.socket.html" class="classname">Socket</a></span> 对象而不是
+     <a href="language.types.resource.html" class="link">resource</a>。<span class="function"><a href="function.socket-addrinfo-lookup.html" class="function">socket_addrinfo_lookup()</a></span> 现在将返回 <span class="classname"><a href="class.addressinfo.html" class="classname">AddressInfo</a></span> 对象组成的数组，而不是 <a href="language.types.resource.html" class="link">resource</a>。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.msg-get-queue.html" class="function">msg_get_queue()</a></span> 现在将返回 <span class="classname"><a href="class.sysvmessagequeue.html" class="classname">SysvMessageQueue</a></span>
+     对象而不是 <a href="language.types.resource.html" class="link">resource</a>。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.sem-get.html" class="function">sem_get()</a></span> 现在将返回 <span class="classname"><a href="class.sysvsemaphore.html" class="classname">SysvSemaphore</a></span>
+     对象而不是 <a href="language.types.resource.html" class="link">resource</a>。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.shm-attach.html" class="function">shm_attach()</a></span> 现在将返回 <span class="classname"><a href="class.sysvsharedmemory.html" class="classname">SysvSharedMemory</a></span>
+     对象而不是 <a href="language.types.resource.html" class="link">resource</a>。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.xml-parser-create.html" class="function">xml_parser_create()</a></span> 和 <span class="function"><a href="function.xml-parser-create-ns.html" class="function">xml_parser_create_ns()</a></span> 现在将返回 <span class="classname"><a href="class.xmlparser.html" class="classname">XMLParser</a></span>
+     对象而不是 <a href="language.types.resource.html" class="link">resource</a>。<span class="function"><a href="function.xml-parser-free.html" class="function">xml_parser_free()</a></span> 函数不再有作用，相反，如果不再引用，<span class="classname"><a href="class.xmlparser.html" class="classname">XmlParser</a></span> 实例将自动销毁。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <a href="book.xmlwriter.html" class="link">XMLWriter</a> 函数现在分别接受和返回 <span class="classname"><a href="class.xmlwriter.html" class="classname">XMLWriter</a></span> 对象而不是 <a href="language.types.resource.html" class="link">resource</a>。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.inflate-init.html" class="function">inflate_init()</a></span> 现在将返回 <span class="classname"><a href="class.inflatecontext.html" class="classname">InflateContext</a></span> 对象而不是 <a href="language.types.resource.html" class="link">resource</a>。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.deflate-init.html" class="function">deflate_init()</a></span> 现在将返回 <span class="classname"><a href="class.deflatecontext.html" class="classname">DeflateContext</a></span> 对象而不是 <a href="language.types.resource.html" class="link">resource</a>。
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.com">
+  <h3 class="title">COM 和 .Net (Windows)</h3>
+
+  <p class="para">
+   移除从类型库导入不区分大小写常量的功能。<span class="function"><a href="function.com-load-typelib.html" class="function">com_load_typelib()</a></span> 的第二个参数不再是 false；不再禁用 <a href="com.configuration.html#ini.com.autoregister-casesensitive" class="link">com.autoregister_casesensitive</a>；忽略 <a href="com.configuration.html#ini.com.typelib-file" class="link">com.typelib_file</a> 中的不区分大小写标记。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.curl">
+  <h3 class="title">CURL</h3>
+
+  <p class="para">
+   <strong><code>CURLOPT_POSTFIELDS</code></strong> 不再接受对象作为数组。要将对象解释为数组，手动执行 <code class="code">(array)</code> 转换。这同样适用于接受数组的其它选项。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.datetime">
+  <h3 class="title">日期和时间</h3>
+
+  <p class="para">
+   <span class="function"><a href="function.mktime.html" class="function">mktime()</a></span> 和 <span class="function"><a href="function.gmmktime.html" class="function">gmmktime()</a></span> 现在强制需要至少一个参数。<span class="function"><a href="function.time.html" class="function">time()</a></span> 可以用来获取当前时间戳。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.dom">
+  <h3 class="title">DOM</h3>
+
+  <p class="para">
+   已移除 DOM 扩展中无行为和包含测试数据的的未实现类。这些类也已在最新版本的 DOM 标准中移除：
+  </p>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="classname"><strong class="classname">DOMNameList</strong></span></li>
+    <li class="member"><span class="classname"><strong class="classname">DomImplementationList</strong></span></li>
+    <li class="member"><span class="classname"><strong class="classname">DOMConfiguration</strong></span></li>
+    <li class="member"><span class="classname"><strong class="classname">DomError</strong></span></li>
+    <li class="member"><span class="classname"><strong class="classname">DomErrorHandler</strong></span></li>
+    <li class="member"><span class="classname"><strong class="classname">DOMImplementationSource</strong></span></li>
+    <li class="member"><span class="classname"><strong class="classname">DOMLocator</strong></span></li>
+    <li class="member"><span class="classname"><strong class="classname">DOMUserDataHandler</strong></span></li>
+    <li class="member"><span class="classname"><strong class="classname">DOMTypeInfo</strong></span></li>
+    <li class="member"><span class="classname"><strong class="classname">DOMStringExtend</strong></span></li>
+   </ul>
+  </p>
+  <p class="para">
+   已移除 DOM 扩展中没有实现行为的方法：
+  </p>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="methodname"><strong>DOMNamedNodeMap::setNamedItem()</strong></span></li>
+    <li class="member"><span class="methodname"><strong>DOMNamedNodeMap::removeNamedItem()</strong></span></li>
+    <li class="member"><span class="methodname"><strong>DOMNamedNodeMap::setNamedItemNS()</strong></span></li>
+    <li class="member"><span class="methodname"><strong>DOMNamedNodeMap::removeNamedItemNS()</strong></span></li>
+    <li class="member"><span class="methodname"><strong>DOMText::replaceWholeText()</strong></span></li>
+    <li class="member"><span class="methodname"><strong>DOMNode::compareDocumentPosition()</strong></span></li>
+    <li class="member"><span class="methodname"><a href="domnode.isequalnode.html" class="methodname">DOMNode::isEqualNode()</a></span></li>
+    <li class="member"><span class="methodname"><strong>DOMNode::getFeature()</strong></span></li>
+    <li class="member"><span class="methodname"><strong>DOMNode::setUserData()</strong></span></li>
+    <li class="member"><span class="methodname"><strong>DOMNode::getUserData()</strong></span></li>
+    <li class="member"><span class="methodname"><strong>DOMDocument::renameNode()</strong></span></li>
+   </ul>
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.enchant">
+  <h3 class="title">Enchant</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.enchant-broker-list-dicts.html" class="function">enchant_broker_list_dicts()</a></span>、<span class="function"><a href="function.enchant-broker-describe.html" class="function">enchant_broker_describe()</a></span> 和
+     <span class="function"><a href="function.enchant-dict-suggest.html" class="function">enchant_dict_suggest()</a></span> 现在将返回空数组而不是 <strong><code>null</code></strong>。
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.exif">
+  <h3 class="title">Exif</h3>
+
+  <p class="para">
+   已移除 <span class="function"><a href="function.read-exif-data.html" class="function">read_exif_data()</a></span>；应该使用 <span class="function"><a href="function.exif-read-data.html" class="function">exif_read_data()</a></span> 替代。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.filter">
+  <h3 class="title">Filter</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     已移除 <strong><code>FILTER_VALIDATE_URL</code></strong> 过滤中的 <strong><code>FILTER_FLAG_SCHEME_REQUIRED</code></strong> 和
+     <strong><code>FILTER_FLAG_HOST_REQUIRED</code></strong> flag。<code class="literal">scheme</code>
+     和 <code class="literal">host</code> 始终（并且一直）必需。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.filter-input.html" class="function">filter_input()</a></span> 等函数的 <strong><code>INPUT_REQUEST</code></strong> 和 <strong><code>INPUT_SESSION</code></strong>
+     源码已经移除。这些从未实现过，并且使用它们将始终生成警告。
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.gd">
+  <h3 class="title">GD</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     移除弃用函数 <span class="function"><a href="function.image2wbmp.html" class="function">image2wbmp()</a></span>。
+     
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     移除弃用函数 <span class="function"><a href="function.png2wbmp.html" class="function">png2wbmp()</a></span> 和 <span class="function"><a href="function.jpeg2wbmp.html" class="function">jpeg2wbmp()</a></span>。
+     
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.imagecropauto.html" class="function">imagecropauto()</a></span> 的 <code class="parameter">mode</code> 参数默认不再接受
+     <code class="literal">-1</code>。而是应该使用 <strong><code>IMG_CROP_DEFAULT</code></strong>。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     Windows 上，<var class="filename">php_gd2.dll</var> 已经重命名为 <var class="filename">php_gd.dll</var>。
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.gmp">
+  <h3 class="title">GMP</h3>
+
+  <p class="para">
+   已经移除 <span class="function"><a href="function.gmp-random.html" class="function">gmp_random()</a></span>。应该使用 <span class="function"><a href="function.gmp-random-range.html" class="function">gmp_random_range()</a></span> 或
+   <span class="function"><a href="function.gmp-random-bits.html" class="function">gmp_random_bits()</a></span>。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.iconv">
+  <h3 class="title">Iconv</h3>
+
+  <p class="para">
+   不再支持在发生错误时没有正确设置  <var class="varname">errno</var> 的 iconv 实现。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.imap">
+  <h3 class="title">IMAP</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.imap-headerinfo.html" class="function">imap_headerinfo()</a></span> 已移除未使用的 <code class="parameter">default_host</code> 参数。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     已移除 <span class="function"><a href="function.imap-headerinfo.html" class="function">imap_headerinfo()</a></span> 的别名函数 <span class="function"><a href="function.imap-header.html" class="function">imap_header()</a></span>。
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.intl">
+  <h3 class="title">国际化函数</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     已移除弃用常量 <strong><code>INTL_IDNA_VARIANT_2003</code></strong>。
+     
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     移除弃用常量 <strong><code>Normalizer::NONE</code></strong>。
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.ldap">
+  <h3 class="title">LDAP</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     移除弃用函数 <span class="function"><a href="function.ldap-sort.html" class="function">ldap_sort()</a></span>、<span class="function"><a href="function.ldap-control-paged-result.html" class="function">ldap_control_paged_result()</a></span>
+     和 <span class="function"><a href="function.ldap-control-paged-result-response.html" class="function">ldap_control_paged_result_response()</a></span>。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.ldap-set-rebind-proc.html" class="function">ldap_set_rebind_proc()</a></span> 的接口已修改；<code class="parameter">callback</code>
+     不再接受空字符串；应该使用 <strong><code>null</code></strong> 代替。
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.mbstring">
+  <h3 class="title">MBString</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     已移除 <a href="mbstring.configuration.html#ini.mbstring.func-overload" class="link">mbstring.func_overload</a> 指令。与其相关的
+     <strong><code>MB_OVERLOAD_MAIL</code></strong>、<strong><code>MB_OVERLOAD_STRING</code></strong> 和 <strong><code>MB_OVERLOAD_REGEX</code></strong>
+     常量也已移除。最后，<span class="function"><a href="function.mb-get-info.html" class="function">mb_get_info()</a></span> 中的 <code class="literal">&quot;func_overload&quot;</code> 和
+     <code class="literal">&quot;func_overload_list&quot;</code> 条目也已移除。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     使用 <span class="function"><a href="function.mb-parse-str.html" class="function">mb_parse_str()</a></span> 时必须指定结果数组。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     一些弃用的的 mbregex 别名已移除。请参阅下面的列表，以了解应该使用哪些函数：
+    </p>
+    <p class="para">
+     <ul class="simplelist">
+      <li class="member"><span class="function"><strong>mbregex_encoding()</strong></span> → <span class="function"><a href="function.mb-regex-encoding.html" class="function">mb_regex_encoding()</a></span></li>
+      <li class="member"><span class="function"><strong>mbereg()</strong></span> → <span class="function"><a href="function.mb-ereg.html" class="function">mb_ereg()</a></span></li>
+      <li class="member"><span class="function"><strong>mberegi()</strong></span> → <span class="function"><a href="function.mb-eregi.html" class="function">mb_eregi()</a></span></li>
+      <li class="member"><span class="function"><strong>mbereg_replace()</strong></span> → <span class="function"><a href="function.mb-ereg-replace.html" class="function">mb_ereg_replace()</a></span></li>
+      <li class="member"><span class="function"><strong>mberegi_replace()</strong></span> → <span class="function"><a href="function.mb-eregi-replace.html" class="function">mb_eregi_replace()</a></span></li>
+      <li class="member"><span class="function"><strong>mbsplit()</strong></span> → <span class="function"><a href="function.mb-split.html" class="function">mb_split()</a></span></li>
+      <li class="member"><span class="function"><strong>mbereg_match()</strong></span> → <span class="function"><a href="function.mb-ereg-match.html" class="function">mb_ereg_match()</a></span></li>
+      <li class="member"><span class="function"><strong>mbereg_search()</strong></span> → <span class="function"><a href="function.mb-ereg-search.html" class="function">mb_ereg_search()</a></span></li>
+      <li class="member"><span class="function"><strong>mbereg_search_pos()</strong></span> → <span class="function"><a href="function.mb-ereg-search-pos.html" class="function">mb_ereg_search_pos()</a></span></li>
+      <li class="member"><span class="function"><strong>mbereg_search_regs()</strong></span> → <span class="function"><a href="function.mb-ereg-search-regs.html" class="function">mb_ereg_search_regs()</a></span></li>
+      <li class="member"><span class="function"><strong>mbereg_search_init()</strong></span> → <span class="function"><a href="function.mb-ereg-search-init.html" class="function">mb_ereg_search_init()</a></span></li>
+      <li class="member"><span class="function"><strong>mbereg_search_getregs()</strong></span> → <span class="function"><a href="function.mb-ereg-search-getregs.html" class="function">mb_ereg_search_getregs()</a></span></li>
+      <li class="member"><span class="function"><strong>mbereg_search_getpos()</strong></span> → <span class="function"><a href="function.mb-ereg-search-getpos.html" class="function">mb_ereg_search_getpos()</a></span></li>
+      <li class="member"><span class="function"><strong>mbereg_search_setpos()</strong></span> → <span class="function"><a href="function.mb-ereg-search-setpos.html" class="function">mb_ereg_search_setpos()</a></span></li>
+     </ul>
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.mb-ereg-replace.html" class="function">mb_ereg_replace()</a></span> 已移除 <code class="literal">e</code> 修饰符。应该使用 <span class="function"><a href="function.mb-ereg-replace-callback.html" class="function">mb_ereg_replace_callback()</a></span> 代替。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.mb-ereg-replace.html" class="function">mb_ereg_replace()</a></span> 的非字符串模式参数现在将解释为字符串而不是 ASCII 码点。可以通过调用 <span class="function"><a href="function.chr.html" class="function">chr()</a></span> 来恢复以前的行为。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.mb-strpos.html" class="function">mb_strpos()</a></span>、<span class="function"><a href="function.mb-strrpos.html" class="function">mb_strrpos()</a></span>、<span class="function"><a href="function.mb-stripos.html" class="function">mb_stripos()</a></span>、<span class="function"><a href="function.mb-strripos.html" class="function">mb_strripos()</a></span>、<span class="function"><a href="function.mb-strstr.html" class="function">mb_strstr()</a></span>、<span class="function"><a href="function.mb-stristr.html" class="function">mb_stristr()</a></span>、<span class="function"><a href="function.mb-strrchr.html" class="function">mb_strrchr()</a></span>
+     和 <span class="function"><a href="function.mb-strrichr.html" class="function">mb_strrichr()</a></span> 的 <code class="parameter">needle</code> 参数现在可以为空。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     已移除 <span class="function"><a href="function.mb-decode-numericentity.html" class="function">mb_decode_numericentity()</a></span> 内部不使用的 <code class="parameter">is_hex</code> 参数。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.mb-strrpos.html" class="function">mb_strrpos()</a></span> 函数的第三个参数传递编码而不是偏移量的遗留行为已经移除；应该将带编码的 <code class="literal">0</code>
+     偏移量作为第四个参数提供。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <code class="literal">ISO_8859-*</code> 字符编码的别名已替换为 <code class="literal">ISO8859-*</code> 别名，以便与 iconv 扩展实现更好的互操作性。带下划线的 mbregex ISO 8859
+     别名（<code class="literal">ISO_8859_*</code> 和 <code class="literal">ISO8859_*</code>）也已移除。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.mb-ereg.html" class="function">mb_ereg()</a></span> 和 <span class="function"><a href="function.mb-eregi.html" class="function">mb_eregi()</a></span> 现在将在匹配成功时返回布尔值 <strong><code>true</code></strong>。之前，如果未传递
+     <code class="parameter">matches</code>，则返回整数 <code class="literal">1</code>；如果传递了 <code class="parameter">matches</code>，则返回
+     <code class="code">max(1, strlen($matches[0]))</code>。
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.oci8">
+  <h3 class="title">OCI8</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     <span class="classname"><strong class="classname">OCI-Lob</strong></span> 类现在叫做 <span class="classname"><a href="class.ocilob.html" class="classname">OCILob</a></span>，<span class="classname"><strong class="classname">OCI-Collection</strong></span> 类现在叫做
+     <span class="classname"><a href="class.ocicollection.html" class="classname">OCICollection</a></span>，以实现 PHP 8 arginfo 类型注释工具强制执行的名称合规。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     多个别名函数已标记为已弃用。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.oci-internal-debug.html" class="function">oci_internal_debug()</a></span> 及其 <span class="function"><a href="function.ociinternaldebug.html" class="function">ociinternaldebug()</a></span> 已移除。
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.odbc">
+  <h3 class="title">ODBC</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.odbc-connect.html" class="function">odbc_connect()</a></span> no longer reuses connections.
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.odbc-exec.html" class="function">odbc_exec()</a></span> 未使用的 <code class="parameter">flags</code> 参数已移除。
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.openssl">
+  <h3 class="title">OpenSSL</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.openssl-seal.html" class="function">openssl_seal()</a></span> 和 <span class="function"><a href="function.openssl-open.html" class="function">openssl_open()</a></span> 现在需要传递 <code class="parameter">method</code>，现在认为之前的
+     <code class="literal">&quot;RC4&quot;</code> 默认值不安全。
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.pcre">
+  <h3 class="title">正则表达式（Perl 兼容）</h3>
+
+  <p class="para">
+   当传递无效的转义序列时，将不再解释为文字。此行为之前需要 <code class="literal">X</code> 修饰符——现在已忽略。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.pdo">
+  <h3 class="title">PHP 数据对象</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     默认错误处理模式已经从“silent”变更为“exceptions”。参阅<a href="pdo.error-handling.html" class="link">错误和错误处理</a>获取详情。
+
+     
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     一些 PDO 方法的签名已更改：
+    </p>
+    <p class="para">
+     <ul class="simplelist">
+      <li class="member"><code class="code">PDO::query(string $query, ?int $fetchMode  = null, mixed  ...$fetchModeArgs)</code></li>
+      <li class="member"><code class="code">PDOStatement::setFetchMode(int $mode, mixed ...$args)</code></li>
+     </ul>
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.pdo-odbc">
+  <h3 class="title">PDO ODBC</h3>
+
+  <p class="para">
+   <var class="filename">php.ini</var> 指令
+   <a href="ref.pdo-odbc.html#ini.pdo-odbc.db2-instance-name" class="link">pdo_odbc.db2_instance_name</a> 已移除。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.pdo-mysql">
+  <h3 class="title">PDO MySQL</h3>
+
+  <p class="para">
+   <span class="methodname"><a href="pdo.intransaction.html" class="methodname">PDO::inTransaction()</a></span> 现在报告连接的实际事务状态，而不是 PDO
+   维护的近似状态。如果执行的是“隐式事务”查询，<span class="methodname"><a href="pdo.intransaction.html" class="methodname">PDO::inTransaction()</a></span> 将会随后返回
+   <strong><code>false</code></strong>，因为事务不再活动状态。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.pgsql">
+  <h3 class="title">PostgreSQL</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     弃用的 <span class="function"><a href="function.pg-connect.html" class="function">pg_connect()</a></span> 使用多个参数的语法不再支持，而是使用连接字符串。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     弃用的 <span class="function"><a href="function.pg-lo-import.html" class="function">pg_lo_import()</a></span> 和 <span class="function"><a href="function.pg-lo-export.html" class="function">pg_lo_export()</a></span> 将 connection
+     作为最后一个参数传递的签名不再支持。应该将 connection 作为第一个参数传递。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.pg-fetch-all.html" class="function">pg_fetch_all()</a></span> 对于 0 条记录的结果集，现在将返回空数组而不是 <strong><code>false</code></strong>。
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.phar">
+  <h3 class="title">Phar</h3>
+
+  <p class="para">
+   与 phar 关联的元数据将不再自动反序列化，以修复由于对象实例化、自动加载等导致的潜在安全漏洞。
+   
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.reflection">
+  <h3 class="title">Reflection</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     方法签名
+    </p>
+    <p class="para">
+     <ul class="simplelist">
+      <li class="member"><code class="code">ReflectionClass::newInstance($args)</code></li>
+      <li class="member"><code class="code">ReflectionFunction::invoke($args)</code></li>
+      <li class="member"><code class="code">ReflectionMethod::invoke($object, $args)</code></li>
+     </ul>
+    </p>
+    <p class="para">
+     已变更为：
+    </p>
+    <p class="para">
+     <ul class="simplelist">
+      <li class="member"><code class="code">ReflectionClass::newInstance(...$args)</code></li>
+      <li class="member"><code class="code">ReflectionFunction::invoke(...$args)</code></li>
+      <li class="member"><code class="code">ReflectionMethod::invoke($object, ...$args)</code></li>
+     </ul>
+    </p>
+    <p class="para">
+     必须同时兼容 PHP 7 和 PHP 8 的代码可以使用以下签名来兼容这两个版本：
+    </p>
+    <p class="para">
+     <ul class="simplelist">
+      <li class="member"><code class="code">ReflectionClass::newInstance($arg = null, ...$args)</code></li>
+      <li class="member"><code class="code">ReflectionFunction::invoke($arg = null, ...$args)</code></li>
+      <li class="member"><code class="code">ReflectionMethod::invoke($object, $arg = null, ...$args)</code></li>
+     </ul>
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     ReflectionType::__toString() 方法现在将返回该类型的完整调试表示，并且不再弃用。特别是，结果将包括可空类型的可空性指示符。返回值的格式不稳定，并且可能在不同 PHP 版本之间发生变化。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     Reflection export() 方法已经移除。相反，反射对象可以转换为字符串。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="methodname"><a href="reflectionmethod.isconstructor.html" class="methodname">ReflectionMethod::isConstructor()</a></span> 和 <span class="methodname"><a href="reflectionmethod.isdestructor.html" class="methodname">ReflectionMethod::isDestructor()</a></span>
+     现在也为接口的 <a href="language.oop5.decon.html#object.construct" class="link">__construct()</a> 和 <a href="language.oop5.decon.html#object.destruct" class="link">__destruct()</a>
+     方法返回 <strong><code>true</code></strong>。之前只用于类方法和 trait。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="methodname"><strong>ReflectionType::isBuiltin()</strong></span> 方法已移至
+     <span class="classname"><a href="class.reflectionnamedtype.html" class="classname">ReflectionNamedType</a></span>。<span class="classname"><a href="class.reflectionuniontype.html" class="classname">ReflectionUnionType</a></span> 没有。
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.sockets">
+  <h3 class="title">Sockets</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.socket-addrinfo-lookup.html" class="function">socket_addrinfo_lookup()</a></span> 弃用的 <strong><code>AI_IDN_ALLOW_UNASSIGNED</code></strong> 和
+     <strong><code>AI_IDN_USE_STD3_ASCII_RULES</code></strong> <code class="parameter">flags</code> 已移除。
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.spl">
+  <h3 class="title">PHP 标准库（SPL）</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     <span class="methodname"><a href="splfileobject.fgetss.html" class="methodname">SplFileObject::fgetss()</a></span> 已移除。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="methodname"><a href="splfileobject.seek.html" class="methodname">SplFileObject::seek()</a></span> 总是寻找到一行的开头。之前，位置 <code class="literal">&gt;=1</code>
+     会搜索到下一行的开头。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="methodname"><a href="splheap.compare.html" class="methodname">SplHeap::compare()</a></span> 现在指定方法签名。实现此方法的继承类现在必须使用兼容的方法签名。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="methodname"><a href="spldoublylinkedlist.push.html" class="methodname">SplDoublyLinkedList::push()</a></span>、<span class="methodname"><a href="spldoublylinkedlist.unshift.html" class="methodname">SplDoublyLinkedList::unshift()</a></span> 和
+     <span class="methodname"><a href="splqueue.enqueue.html" class="methodname">SplQueue::enqueue()</a></span> 现在返回 <span class="type"><span class="type void">void</span></span> 而不是 <strong><code>true</code></strong>。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.spl-autoload-register.html" class="function">spl_autoload_register()</a></span> 现在将始终对无效参数抛出 <span class="classname"><a href="class.typeerror.html" class="classname">TypeError</a></span>，因此将会忽略第二个参数
+     <code class="parameter">do_throw</code>，并且如果将其设置为 <strong><code>false</code></strong>，则会发出 notice。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="classname"><a href="class.splfixedarray.html" class="classname">SplFixedArray</a></span> 现在是 <span class="interfacename"><a href="class.iteratoraggregate.html" class="interfacename">IteratorAggregate</a></span> 而不是
+     <span class="interfacename"><a href="class.iterator.html" class="interfacename">Iterator</a></span>。<span class="methodname"><a href="splfixedarray.rewind.html" class="methodname">SplFixedArray::rewind()</a></span>、<span class="methodname"><a href="splfixedarray.current.html" class="methodname">SplFixedArray::current()</a></span>、<span class="methodname"><a href="splfixedarray.key.html" class="methodname">SplFixedArray::key()</a></span>、<span class="methodname"><a href="splfixedarray.next.html" class="methodname">SplFixedArray::next()</a></span>
+     和 <span class="methodname"><a href="splfixedarray.valid.html" class="methodname">SplFixedArray::valid()</a></span> 已移除。在其位置上新增了 <span class="methodname"><a href="splfixedarray.getiterator.html" class="methodname">SplFixedArray::getIterator()</a></span>。现在任何在
+     SplFixedArray 上迭代的代码都必须通过 <span class="methodname"><a href="splfixedarray.getiterator.html" class="methodname">SplFixedArray::getIterator()</a></span> 获取
+     <span class="interfacename"><a href="class.iterator.html" class="interfacename">Iterator</a></span>。这意味着 <span class="classname"><a href="class.splfixedarray.html" class="classname">SplFixedArray</a></span> 现在可以安全地在嵌套循环中使用。
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.standard">
+  <h3 class="title">标准库</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.assert.html" class="function">assert()</a></span> will no longer evaluate string arguments, instead they will be
+     treated like any other argument. <code class="code">assert($a == $b)</code> should be used instead of
+     <code class="code">assert(&#039;$a == $b&#039;)</code>. The <a href="info.configuration.html#ini.assert.quiet-eval" class="link">assert.quiet_eval</a> ini directive and the
+     <strong><code>ASSERT_QUIET_EVAL</code></strong> constant have also been removed, as they would no longer
+     have any effect.
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.parse-str.html" class="function">parse_str()</a></span> can no longer be used without specifying a result array.
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     The <a href="filters.string.html#filters.string.strip_tags" class="link">string.strip_tags</a> filter has been removed.
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     The <code class="parameter">needle</code> argument of <span class="function"><a href="function.strpos.html" class="function">strpos()</a></span>,
+     <span class="function"><a href="function.strrpos.html" class="function">strrpos()</a></span>, <span class="function"><a href="function.stripos.html" class="function">stripos()</a></span>, <span class="function"><a href="function.strripos.html" class="function">strripos()</a></span>,
+     <span class="function"><a href="function.strstr.html" class="function">strstr()</a></span>, <span class="function"><a href="function.strchr.html" class="function">strchr()</a></span>, <span class="function"><a href="function.strrchr.html" class="function">strrchr()</a></span>, and
+     <span class="function"><a href="function.stristr.html" class="function">stristr()</a></span> will now always be interpreted as a string. Previously non-string
+     needles were interpreted as an ASCII code point. An explicit call to <span class="function"><a href="function.chr.html" class="function">chr()</a></span> can
+     be used to restore the previous behavior.
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     The <code class="parameter">needle</code> argument for <span class="function"><a href="function.strpos.html" class="function">strpos()</a></span>,
+     <span class="function"><a href="function.strrpos.html" class="function">strrpos()</a></span>, <span class="function"><a href="function.stripos.html" class="function">stripos()</a></span>, <span class="function"><a href="function.strripos.html" class="function">strripos()</a></span>,
+     <span class="function"><a href="function.strstr.html" class="function">strstr()</a></span>, <span class="function"><a href="function.stristr.html" class="function">stristr()</a></span> and <span class="function"><a href="function.strrchr.html" class="function">strrchr()</a></span> can
+     now be empty.
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     The <code class="parameter">length</code> argument for <span class="function"><a href="function.substr.html" class="function">substr()</a></span>,
+     <span class="function"><a href="function.substr-count.html" class="function">substr_count()</a></span>, <span class="function"><a href="function.substr-compare.html" class="function">substr_compare()</a></span>, and
+     <span class="function"><a href="function.iconv-substr.html" class="function">iconv_substr()</a></span> can now be <strong><code>null</code></strong>. <strong><code>null</code></strong> values will behave as if no length
+     argument was provided and will therefore return the remainder of the string instead of an empty
+     string.
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     The <code class="parameter">length</code> argument for <span class="function"><a href="function.array-splice.html" class="function">array_splice()</a></span> can now be
+     <strong><code>null</code></strong>. <strong><code>null</code></strong> values will behave identically to omitting the argument, thus removing everything
+     from the <code class="parameter">offset</code> to the end of the array.
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     The <code class="parameter">args</code> argument of <span class="function"><a href="function.vsprintf.html" class="function">vsprintf()</a></span>,
+     <span class="function"><a href="function.vfprintf.html" class="function">vfprintf()</a></span>, and <span class="function"><a href="function.vprintf.html" class="function">vprintf()</a></span> must now be an array. Previously
+     any type was accepted.
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     The <code class="literal">&#039;salt&#039;</code> option of <span class="function"><a href="function.password-hash.html" class="function">password_hash()</a></span> is no longer
+     supported. If the <code class="literal">&#039;salt&#039;</code> option is used a warning is generated, the provided
+     salt is ignored, and a generated salt is used instead.
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     The <span class="function"><a href="function.quotemeta.html" class="function">quotemeta()</a></span> function will now return an empty string if an empty string
+     was passed. Previously <strong><code>false</code></strong> was returned.
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     The following functions have been removed:
+    </p>
+    <p class="para">
+     <ul class="simplelist">
+      <li class="member"><span class="function"><a href="function.hebrevc.html" class="function">hebrevc()</a></span></li>
+      <li class="member"><span class="function"><a href="function.convert-cyr-string.html" class="function">convert_cyr_string()</a></span></li>
+      <li class="member"><span class="function"><a href="function.money-format.html" class="function">money_format()</a></span></li>
+      <li class="member"><span class="function"><a href="function.ezmlm-hash.html" class="function">ezmlm_hash()</a></span></li>
+      <li class="member"><span class="function"><a href="function.restore-include-path.html" class="function">restore_include_path()</a></span></li>
+      <li class="member"><span class="function"><a href="function.get-magic-quotes-gpc.html" class="function">get_magic_quotes_gpc()</a></span></li>
+      <li class="member"><span class="function"><a href="function.get-magic-quotes-runtime.html" class="function">get_magic_quotes_runtime()</a></span></li>
+      <li class="member"><span class="function"><a href="function.fgetss.html" class="function">fgetss()</a></span></li>
+     </ul>
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <strong><code>FILTER_SANITIZE_MAGIC_QUOTES</code></strong> has been removed.
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     Calling <span class="function"><a href="function.implode.html" class="function">implode()</a></span> with parameters in a reverse order <code class="code">($pieces,
+     $glue)</code> is no longer supported.
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.parse-url.html" class="function">parse_url()</a></span> will now distinguish absent and empty queries and fragments:
+    </p>
+    <p class="para">
+     <ul class="simplelist">
+      <li class="member"><code class="code">http://example.com/foo → query = null, fragment = null</code></li>
+      <li class="member"><code class="code">http://example.com/foo? → query = &quot;&quot;,   fragment = null</code></li>
+      <li class="member"><code class="code">http://example.com/foo# → query = null, fragment = &quot;&quot;</code></li>
+      <li class="member"><code class="code">http://example.com/foo?# → query = &quot;&quot;,   fragment = &quot;&quot;</code></li>
+     </ul>
+      Previously all cases resulted in query and fragment being <strong><code>null</code></strong>.
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.var-dump.html" class="function">var_dump()</a></span> and <span class="function"><a href="function.debug-zval-dump.html" class="function">debug_zval_dump()</a></span> will now print
+     floating-point numbers using <a href="ini.core.html#ini.serialize-precision" class="link">serialize_precision</a>
+     rather than <a href="ini.core.html#ini.precision" class="link">precision</a>. In a default configuration, this
+     means that floating-point numbers are now printed with full accuracy by these debugging
+     functions.
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     If the array returned by <a href="language.oop5.magic.html#object.sleep" class="link">__sleep()</a> contains non-existing
+     properties, these are now silently ignored. Previously, such properties would have been
+     serialized as if they had the value <strong><code>null</code></strong>.
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     The default locale on startup is now always <code class="literal">&quot;C&quot;</code>. No locales are inherited from
+     the environment by default. Previously, <strong><code>LC_ALL</code></strong> was set to
+     <code class="literal">&quot;C&quot;</code>, while <strong><code>LC_CTYPE</code></strong> was inherited from the environment.
+     However, some functions did not respect the inherited locale without an explicit
+     <span class="function"><a href="function.setlocale.html" class="function">setlocale()</a></span> call. An explicit <span class="function"><a href="function.setlocale.html" class="function">setlocale()</a></span> call is now
+     always required if a locale component should be changed from the default.
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     The deprecated DES fallback in <span class="function"><a href="function.crypt.html" class="function">crypt()</a></span> has been removed. If an unknown salt
+     format is passed to <span class="function"><a href="function.crypt.html" class="function">crypt()</a></span>, the function will fail with <code class="literal">*0</code>
+     instead of falling back to a weak DES hash now.
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     Specifying out of range rounds for SHA256/SHA512 <span class="function"><a href="function.crypt.html" class="function">crypt()</a></span> will now fail with
+     <code class="literal">*0</code> instead of clamping to the closest limit. This matches glibc behavior.
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     The result of sorting functions may have changed, if the array contains elements that compare as
+     equal.
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     Any functions accepting callbacks that are not explicitly specified to accept parameters by
+     reference will now warn if a callback with reference parameters is used. Examples include
+     <span class="function"><a href="function.array-filter.html" class="function">array_filter()</a></span> and <span class="function"><a href="function.array-reduce.html" class="function">array_reduce()</a></span>. This was already the
+     case for most, but not all, functions previously.
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     The HTTP stream wrapper as used by functions like <span class="function"><a href="function.file-get-contents.html" class="function">file_get_contents()</a></span>
+     now advertises HTTP/1.1 rather than HTTP/1.0 by default. This does not change the behavior of the
+     client, but may cause servers to respond differently. To retain the old behavior, set the
+     <code class="literal">&#039;protocol_version&#039;</code> stream context option, e.g.
+    </p>
+    <p class="para">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$ctx </span><span style="color: #007700">= </span><span style="color: #0000BB">stream_context_create</span><span style="color: #007700">([</span><span style="color: #DD0000">'http' </span><span style="color: #007700">=&gt; [</span><span style="color: #DD0000">'protocol_version' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'1.0'</span><span style="color: #007700">]]);<br />echo </span><span style="color: #0000BB">file_get_contents</span><span style="color: #007700">(</span><span style="color: #DD0000">'http://example.org'</span><span style="color: #007700">, </span><span style="color: #0000BB">false</span><span style="color: #007700">, </span><span style="color: #0000BB">$ctx</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     Calling <span class="function"><a href="function.crypt.html" class="function">crypt()</a></span> without an explicit salt is no longer supported. If you would
+     like to produce a strong hash with an auto-generated salt, use
+     <span class="function"><a href="function.password-hash.html" class="function">password_hash()</a></span> instead.
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+    <span class="function"><a href="function.substr.html" class="function">substr()</a></span>, <span class="function"><a href="function.mb-substr.html" class="function">mb_substr()</a></span>, <span class="function"><a href="function.iconv-substr.html" class="function">iconv_substr()</a></span> and
+    <span class="function"><a href="function.grapheme-substr.html" class="function">grapheme_substr()</a></span> now consistently clamp out-of-bounds offsets to the string
+    boundary. Previously, <strong><code>false</code></strong> was returned instead of the empty string in some cases.
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     On Windows, the program execution functions (<span class="function"><a href="function.proc-open.html" class="function">proc_open()</a></span>, <span class="function"><a href="function.exec.html" class="function">exec()</a></span>,
+     <span class="function"><a href="function.popen.html" class="function">popen()</a></span> etc.) using the shell, now consistently execute <strong class="command">%comspec% /s
+     /c &quot;$commandline&quot;</strong>, which has the same effect as executing
+     <strong class="command">$commandline</strong> (without additional quotes).
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.sysvsem">
+  <h3 class="title">Sysvsem</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.sem-get.html" class="function">sem_get()</a></span> 的 <code class="parameter">auto_release</code> 参数已从接受 int
+     更改为接受 bool。
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.tidy">
+  <h3 class="title">Tidy</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     从 <span class="function"><a href="tidy.repairstring.html" class="function">tidy_repair_string()</a></span> 中删除内部未使用的 
+     <code class="parameter">use_include_path</code> 参数。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="methodname"><a href="tidy.repairstring.html" class="methodname">tidy::repairString()</a></span> 和 <span class="methodname"><a href="tidy.repairfile.html" class="methodname">tidy::repairFile()</a></span> 成为静态方法。
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.tokenizer">
+  <h3 class="title">Tokenizer</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     <code class="literal">T_COMMENT</code> 记号将不再包含尾随的换行符。换行符将成为以下 <code class="literal">T_WHITESPACE</code>
+     记号的一部分。需要注意的是，<code class="literal">T_COMMENT</code> 后面并不总是跟空格，也可能跟着
+     <code class="literal">T_CLOSE_TAG</code> 或者文件结尾。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     命名空间名称现在使用 <code class="literal">T_NAME_QUALIFIED</code>（<code class="code">Foo\Bar</code>）、<code class="literal">T_NAME_FULLY_QUALIFIED</code>（<code class="code">\Foo\Bar</code>）
+     和 <code class="literal">T_NAME_RELATIVE</code>（<code class="code">namespace\Foo\Bar</code>）记号表示。
+     <code class="literal">T_NS_SEPARATOR</code> is only used for standalone namespace separators, and only
+     syntactially valid in conjunction with group use declarations.
+     
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.xmlreader">
+  <h3 class="title">XMLReader</h3>
+
+  <p class="para">
+   <span class="methodname"><a href="xmlreader.open.html" class="methodname">XMLReader::open()</a></span> 和 <span class="methodname"><a href="xmlreader.xml.html" class="methodname">XMLReader::xml()</a></span>
+   现在是静态方法。也可以作为实例方法调用，但如果继承类需要覆盖这些方法，要声明为 static。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.xmlrpc">
+  <h3 class="title">XML-RPC</h3>
+
+  <p class="para">
+   XML-RPC 扩展已移动到 PECL，不再是 PHP 发行版的一部分。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.zip">
+  <h3 class="title">Zip</h3>
+
+  <p class="para">
+   <strong><code>ZipArchive::OPSYS_Z_CPM</code></strong> 已移除（名字错误）。使用
+   <strong><code>ZipArchive::OPSYS_CPM</code></strong> 代替。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.zlib">
+  <h3 class="title">Zlib</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.gzgetss.html" class="function">gzgetss()</a></span> 已移除。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <a href="zlib.configuration.html#ini.zlib.output-compression" class="link">zlib.output_compression</a> 不再对
+     <code class="literal">Content-Type: image/*</code> 自动禁用。
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.incompatible.php-test-packs">
+  <h3 class="title">Windows PHP 测试包</h3>
+
+  <p class="para">
+   测试运行器从 <var class="filename">run-test.php</var> 重命名为 <var class="filename">run-tests.php</var>，以匹配其在
+   php-src 中的名字。
+  </p>
+ </div>
+</div></div></div></body></html>

@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>设置查询预读取的行数</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.oci-set-prefetch-lob.html">« oci_set_prefetch_lob</a></li>
+      <li style="float: right;"><a href="function.oci-statement-type.html">oci_statement_type »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.oci8.html">OCI8 函数</a></li>
+    <li>设置查询预读取的行数</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.oci-set-prefetch" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">oci_set_prefetch</h1>
+  <p class="verinfo">(PHP 5, PHP 7, PHP 8, PECL OCI8 &gt;= 1.1.0)</p><p class="refpurpose"><span class="refname">oci_set_prefetch</span> &mdash; <span class="dc-title">设置查询预读取的行数</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.oci-set-prefetch-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>oci_set_prefetch</strong></span>(<span class="methodparam"><span class="type">resource</span> <code class="parameter">$statement</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$rows</code></span>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   在调用 <span class="function"><a href="function.oci-execute.html" class="function">oci_execute()</a></span> 成功查询以及对数据库的每个后续内部读取请求之后，设置 Oracle
+   客户端库缓冲的行数。对于返回大量行的查询，可以通过在默认 <a href="oci8.configuration.html#ini.oci8.default-prefetch" class="link">oci8.default_prefetch</a> 值上增加预读取数来显着提高性能。
+  </p>
+  <p class="para">
+   预读取是 Oracle 在每个网络请求中从数据库返回多个数据行的有效方式。这可以提高网络和 CPU 利用率。行缓冲是 OCI8
+   的内部操作，无论预取数如何，OCI8 提取函数的行为都不会改变。例如，<span class="function"><a href="function.oci-fetch-row.html" class="function">oci_fetch_row()</a></span>
+   将始终返回一行。预读取缓冲区是针对单个语句的，不会被重新执行的语句或其他连接使用。
+  </p>
+  <p class="para">
+   在调用 <span class="function"><a href="function.oci-execute.html" class="function">oci_execute()</a></span> 之前调用 <span class="function"><strong>oci_set_prefetch()</strong></span>。
+  </p>
+  <p class="para">
+   调整目标是将预读取值设置为网络和数据库要处理的合理大小。对于返回大量行的查询，如果以多个块的形式从数据库中检索行（即设置预读取值小于行数），则整体系统效率可能会更好。这允许数据库在
+   PHP 脚本处理行的当前集合的同时处理其他用户的语句。
+  </p>
+  <p class="para">
+   Oracle 8<em>i</em> 中引入了查询预读取。REF CURSOR 预读取是在 Oracle 11<em>g</em>R2 中引入的，当 PHP 与 Oracle
+   11<em>g</em>R2（或更高版本）客户端库链接时发生。嵌套游标预读取是在 Oracle 11<em>g</em>R2 中引入的，它要求
+   Oracle Client 库和数据库都是 11<em>g</em>R2 或更高版本。
+  </p>
+  <p class="para">
+   当查询包含 LONG 或 LOB 列时，不支持预读取。预读取值将会忽略，并且在不支持预读取的所有情况下都将使用单行获取。
+  </p>
+  <p class="para">
+   使用 Oracle Database 12<em>c</em> 时，PHP 设置的预读取值可以被 Oracle 的客户端 <code class="literal">oraaccess.xml</code> 配置文件覆盖。有关详细信息，请参阅 Oracle 文档。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.oci-set-prefetch-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">statement</code></dt>
+
+     <dd>
+
+       <p class="para">有效的 OCI8 报表标识符
+由 <span class="function"><a href="function.oci-parse.html" class="function">oci_parse()</a></span> 创建，被 <span class="function"><a href="function.oci-execute.html" class="function">oci_execute()</a></span>
+或 <code class="literal">REF CURSOR</code> statement 标识执行。</p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">rows</code></dt>
+
+     <dd>
+
+      <p class="para">
+       要预读取的行数，&gt;= 0
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.oci-set-prefetch-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   成功时返回 <strong><code>true</code></strong>， 或者在失败时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.oci-set-prefetch-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 更改查询的默认预读取值</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />$conn </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">'hr'</span><span style="color: #007700">, </span><span style="color: #DD0000">'welcome'</span><span style="color: #007700">, </span><span style="color: #DD0000">'localhost/XE'</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$stid </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_parse</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">, </span><span style="color: #DD0000">'SELECT * FROM myverybigtable'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">oci_set_prefetch</span><span style="color: #007700">(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">, </span><span style="color: #0000BB">300</span><span style="color: #007700">);  </span><span style="color: #FF8000">// 调用 oci_execute() 之前设置<br /></span><span style="color: #0000BB">oci_execute</span><span style="color: #007700">(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">);<br /><br />echo </span><span style="color: #DD0000">"&lt;table border='1'&gt;\n"</span><span style="color: #007700">;<br />while (</span><span style="color: #0000BB">$row </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_fetch_array</span><span style="color: #007700">(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">, </span><span style="color: #0000BB">OCI_ASSOC</span><span style="color: #007700">+</span><span style="color: #0000BB">OCI_RETURN_NULLS</span><span style="color: #007700">)) {<br />    echo </span><span style="color: #DD0000">"&lt;tr&gt;\n"</span><span style="color: #007700">;<br />    foreach (</span><span style="color: #0000BB">$row </span><span style="color: #007700">as </span><span style="color: #0000BB">$item</span><span style="color: #007700">) {<br />        echo </span><span style="color: #DD0000">"    &lt;td&gt;"</span><span style="color: #007700">.(</span><span style="color: #0000BB">$item </span><span style="color: #007700">!== </span><span style="color: #0000BB">null </span><span style="color: #007700">? </span><span style="color: #0000BB">htmlentities</span><span style="color: #007700">(</span><span style="color: #0000BB">$item</span><span style="color: #007700">, </span><span style="color: #0000BB">ENT_QUOTES</span><span style="color: #007700">) : </span><span style="color: #DD0000">"&amp;nbsp;"</span><span style="color: #007700">).</span><span style="color: #DD0000">"&lt;/td&gt;\n"</span><span style="color: #007700">;<br />    }<br />    echo </span><span style="color: #DD0000">"&lt;/tr&gt;\n"</span><span style="color: #007700">;<br />}<br />echo </span><span style="color: #DD0000">"&lt;/table&gt;\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">oci_free_statement</span><span style="color: #007700">(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">oci_close</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #2 更改 REF CURSOR 获取的默认预获取值</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">/*<br />  Create the PL/SQL stored procedure as:<br /><br />  CREATE OR REPLACE PROCEDURE myproc(p1 OUT SYS_REFCURSOR) AS<br />  BEGIN<br />    OPEN p1 FOR SELECT * FROM all_objects WHERE ROWNUM &lt; 5000;<br />  END;<br />*/<br /><br /></span><span style="color: #0000BB">$conn </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">'hr'</span><span style="color: #007700">, </span><span style="color: #DD0000">'welcome'</span><span style="color: #007700">, </span><span style="color: #DD0000">'localhost/XE'</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$stid </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_parse</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">, </span><span style="color: #DD0000">'BEGIN myproc(:rc); END;'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$refcur </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_new_cursor</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">oci_bind_by_name</span><span style="color: #007700">(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">, </span><span style="color: #DD0000">':rc'</span><span style="color: #007700">, </span><span style="color: #0000BB">$refcur</span><span style="color: #007700">, -</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">OCI_B_CURSOR</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">oci_execute</span><span style="color: #007700">(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// Change the prefetch before executing the cursor.<br />// REF CURSOR prefetching works when PHP is linked with Oracle 11gR2 or later Client libraries<br /></span><span style="color: #0000BB">oci_set_prefetch</span><span style="color: #007700">(</span><span style="color: #0000BB">$refcur</span><span style="color: #007700">, </span><span style="color: #0000BB">200</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">oci_execute</span><span style="color: #007700">(</span><span style="color: #0000BB">$refcur</span><span style="color: #007700">);<br /><br />echo </span><span style="color: #DD0000">"&lt;table border='1'&gt;\n"</span><span style="color: #007700">;<br />while (</span><span style="color: #0000BB">$row </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_fetch_array</span><span style="color: #007700">(</span><span style="color: #0000BB">$refcur</span><span style="color: #007700">, </span><span style="color: #0000BB">OCI_ASSOC</span><span style="color: #007700">+</span><span style="color: #0000BB">OCI_RETURN_NULLS</span><span style="color: #007700">)) {<br />    echo </span><span style="color: #DD0000">"&lt;tr&gt;\n"</span><span style="color: #007700">;<br />    foreach (</span><span style="color: #0000BB">$row </span><span style="color: #007700">as </span><span style="color: #0000BB">$item</span><span style="color: #007700">) {<br />        echo </span><span style="color: #DD0000">"    &lt;td&gt;"</span><span style="color: #007700">.(</span><span style="color: #0000BB">$item </span><span style="color: #007700">!== </span><span style="color: #0000BB">null </span><span style="color: #007700">? </span><span style="color: #0000BB">htmlentities</span><span style="color: #007700">(</span><span style="color: #0000BB">$item</span><span style="color: #007700">, </span><span style="color: #0000BB">ENT_QUOTES</span><span style="color: #007700">) : </span><span style="color: #DD0000">"&amp;nbsp;"</span><span style="color: #007700">).</span><span style="color: #DD0000">"&lt;/td&gt;\n"</span><span style="color: #007700">;<br />    }<br />    echo </span><span style="color: #DD0000">"&lt;/tr&gt;\n"</span><span style="color: #007700">;<br />}<br />echo </span><span style="color: #DD0000">"&lt;/table&gt;\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">oci_free_statement</span><span style="color: #007700">(</span><span style="color: #0000BB">$refcur</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">oci_free_statement</span><span style="color: #007700">(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">oci_close</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   如果 PHP OCI8 从 REF CURSOR 读取，然后将 REF CURSOR 传递回第二个 PL/SQL 过程以进行进一步处理，则将 REF CURSOR
+   预读取数设置为 0 以避免行从结果集中“丢失”。预读取值是在每个 OCI8 内部请求数据库中提取的额外行数，因此将其设置为 0 意味着一次只提取一行。
+   <div class="example" id="">
+    <p><strong>示例 #3 将 REF CURSOR 传回 Oracle 时设置读取值</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />$conn </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">'hr'</span><span style="color: #007700">, </span><span style="color: #DD0000">'welcome'</span><span style="color: #007700">, </span><span style="color: #DD0000">'localhost/orcl'</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// get the REF CURSOR<br /></span><span style="color: #0000BB">$stid </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_parse</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">, </span><span style="color: #DD0000">'BEGIN myproc(:rc_out); END;'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$refcur </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_new_cursor</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">oci_bind_by_name</span><span style="color: #007700">(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">, </span><span style="color: #DD0000">':rc_out'</span><span style="color: #007700">, </span><span style="color: #0000BB">$refcur</span><span style="color: #007700">, -</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">OCI_B_CURSOR</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">oci_execute</span><span style="color: #007700">(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// Display two rows, but don't prefetch any extra rows otherwise<br />// those extra rows would not be passed back to myproc_use_rc().<br />// A prefetch value of 0 is allowed in PHP 5.3.2 and PECL OCI8 1.4<br /></span><span style="color: #0000BB">oci_set_prefetch</span><span style="color: #007700">(</span><span style="color: #0000BB">$refcur</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">oci_execute</span><span style="color: #007700">(</span><span style="color: #0000BB">$refcur</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$row </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_fetch_array</span><span style="color: #007700">(</span><span style="color: #0000BB">$refcur</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$row</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$row </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_fetch_array</span><span style="color: #007700">(</span><span style="color: #0000BB">$refcur</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$row</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// pass the REF CURSOR to myproc_use_rc() to do more data processing<br />// with the result set<br /></span><span style="color: #0000BB">$stid </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_parse</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">, </span><span style="color: #DD0000">'begin myproc_use_rc(:rc_in); end;'</span><span style="color: #007700">); <br /></span><span style="color: #0000BB">oci_bind_by_name</span><span style="color: #007700">(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">, </span><span style="color: #DD0000">':rc_in'</span><span style="color: #007700">, </span><span style="color: #0000BB">$refcur</span><span style="color: #007700">, -</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">OCI_B_CURSOR</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">oci_execute</span><span style="color: #007700">(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.oci-set-prefetch-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member">
+     <a href="oci8.configuration.html#ini.oci8.default-prefetch" class="link">oci8.default_prefetch</a>
+     ini 选项
+    </li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

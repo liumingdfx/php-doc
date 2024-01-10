@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>创建新 finfo 实例</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.finfo-file.html">« finfo_file</a></li>
+      <li style="float: right;"><a href="function.finfo-set-flags.html">finfo_set_flags »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.fileinfo.html">Fileinfo 函数</a></li>
+    <li>创建新 finfo 实例</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.finfo-open" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">finfo_open</h1>
+  <h1 class="refname">finfo::__construct</h1>
+  <p class="verinfo">(PHP &gt;= 5.3.0, PHP 7, PHP 8, PECL fileinfo &gt;= 0.1.0)</p><p class="refpurpose"><span class="refname">finfo_open</span> -- <span class="refname">finfo::__construct</span> &mdash; <span class="dc-title">创建新 finfo 实例</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.finfo-open-description">
+  <h3 class="title">说明</h3>
+  <p class="para">过程化风格</p>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>finfo_open</strong></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$flags</code><span class="initializer"> = <strong><code>FILEINFO_NONE</code></strong></span></span>, <span class="methodparam"><span class="type">?</span><span class="type"><span class="type">string</span><span class="type"></span></span> <code class="parameter">$magic_database</code><span class="initializer"> = <strong><code>null</code></strong></span></span>): <span class="type"><span class="type"><a href="class.finfo.html" class="type finfo">finfo</a></span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">面向对象风格（构造器）：</p>
+  <div class="constructorsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="finfo.construct.html" class="methodname">finfo::__construct</a></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$flags</code><span class="initializer"> = <strong><code>FILEINFO_NONE</code></strong></span></span>, <span class="methodparam"><span class="type">?</span><span class="type"><span class="type">string</span><span class="type"></span></span> <code class="parameter">$magic_database</code><span class="initializer"> = <strong><code>null</code></strong></span></span>)</div>
+
+  <p class="para rdfs-comment">
+    本函数打开一个魔数数据库并且返回它的实例。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.finfo-open-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">flags</code></dt>
+
+     <dd>
+
+      <p class="para">
+       一个 <a href="fileinfo.constants.html" class="link">Fileinfo
+       常量 </a> 或多个 <a href="fileinfo.constants.html" class="link">Fileinfo 常量 </a> 进行逻辑或运算。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">magic_database</code></dt>
+
+     <dd>
+
+      <p class="para">
+        魔数数据库文件名称，
+        通常是 <var class="filename">/path/to/magic.mime</var>。
+        如果未指定，则使用 <code class="literal">MAGIC</code> 环境变量。
+        如果未指定此环境变量，
+        则使用 PHP 绑定的魔数数据库。
+      </p>
+      <p class="para">
+       传入 <strong><code>null</code></strong> 或者空字符串，等同于使用默认值。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.finfo-open-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   （仅适用于过程化风格）
+   成功时返回 <span class="classname"><a href="class.finfo.html" class="classname">finfo</a></span> 实例，
+    或者在失败时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.finfo-open-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>8.1.0</td>
+      <td>
+       现在返回 <span class="classname"><a href="class.finfo.html" class="classname">finfo</a></span> 实例，之前返回 <a href="language.types.resource.html" class="link">resource</a>。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.0.3</td>
+      <td>
+       <code class="parameter">magic_database</code> 现在可以为 null。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+ 
+ <div class="refsect1 examples" id="refsect1-function.finfo-open-examples">
+  <h3 class="title">示例</h3>
+  <div class="example" id="">
+   <p><strong>示例 #1 面向对象风格</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$finfo </span><span style="color: #007700">= new </span><span style="color: #0000BB">finfo</span><span style="color: #007700">(</span><span style="color: #0000BB">FILEINFO_MIME</span><span style="color: #007700">, </span><span style="color: #DD0000">"/usr/share/misc/magic"</span><span style="color: #007700">); </span><span style="color: #FF8000">// 返回 mime 类型<br /><br />/* get mime-type for a specific file */<br /></span><span style="color: #0000BB">$filename </span><span style="color: #007700">= </span><span style="color: #DD0000">"/usr/local/something.txt"</span><span style="color: #007700">;<br />echo </span><span style="color: #0000BB">$finfo</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">file</span><span style="color: #007700">(</span><span style="color: #0000BB">$filename</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+  </div>
+
+  </div>
+  <div class="example" id="">
+   <p><strong>示例 #2 过程化风格</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$finfo </span><span style="color: #007700">= </span><span style="color: #0000BB">finfo_open</span><span style="color: #007700">(</span><span style="color: #0000BB">FILEINFO_MIME</span><span style="color: #007700">, </span><span style="color: #DD0000">"/usr/share/misc/magic"</span><span style="color: #007700">); </span><span style="color: #FF8000">// 返回 mime 类型<br /><br /></span><span style="color: #007700">if (!</span><span style="color: #0000BB">$finfo</span><span style="color: #007700">) {<br />    echo </span><span style="color: #DD0000">"Opening fileinfo database failed"</span><span style="color: #007700">;<br />    exit();<br />}<br /><br /></span><span style="color: #FF8000">/* 获取指定文件的 mime 类型 */<br /></span><span style="color: #0000BB">$filename </span><span style="color: #007700">= </span><span style="color: #DD0000">"/usr/local/something.txt"</span><span style="color: #007700">;<br />echo </span><span style="color: #0000BB">finfo_file</span><span style="color: #007700">(</span><span style="color: #0000BB">$finfo</span><span style="color: #007700">, </span><span style="color: #0000BB">$filename</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">/* 关闭资源 */<br /></span><span style="color: #0000BB">finfo_close</span><span style="color: #007700">(</span><span style="color: #0000BB">$finfo</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+  </div>
+  <p class="para">以上示例会输出：</p>
+  <div class="example-contents screen">
+<div class="cdata"><pre>
+text/plain; charset=us-ascii
+</pre></div>
+  </div>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.finfo-open-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    通常来说，除非特别需要自定义的魔数数据库。否则使用绑定的魔数数据库（不设置
+    <code class="parameter">magic_file</code> 和 <code class="literal">MAGIC</code> 环境变量）是最好的做法。
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.finfo-open-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.finfo-close.html" class="function" rel="rdfs-seeAlso">finfo_close()</a> - 关闭 finfo 实例</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

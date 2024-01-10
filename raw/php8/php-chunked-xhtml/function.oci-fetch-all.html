@@ -1,0 +1,274 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>从查询中读取多行到二维数组中</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.oci-execute.html">« oci_execute</a></li>
+      <li style="float: right;"><a href="function.oci-fetch-array.html">oci_fetch_array »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.oci8.html">OCI8 函数</a></li>
+    <li>从查询中读取多行到二维数组中</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.oci-fetch-all" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">oci_fetch_all</h1>
+  <p class="verinfo">(PHP 5, PHP 7, PHP 8, PECL OCI8 &gt;= 1.1.0)</p><p class="refpurpose"><span class="refname">oci_fetch_all</span> &mdash; <span class="dc-title">从查询中读取多行到二维数组中</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.oci-fetch-all-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>oci_fetch_all</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">resource</span> <code class="parameter">$statement</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">array</span> <code class="parameter reference">&$output</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$offset</code><span class="initializer"> = 0</span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$limit</code><span class="initializer"> = -1</span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$flags</code><span class="initializer"> = OCI_FETCHSTATEMENT_BY_COLUMN | OCI_ASSOC</span></span><br>): <span class="type">int</span></div>
+
+  <p class="para rdfs-comment">
+   在查询中的读取多行到二维数组中。默认情况下，返回所有行。
+  </p>
+  <p class="para">
+   对于使用 <span class="function"><a href="function.oci-execute.html" class="function">oci_execute()</a></span> 执行的每个查询，此函数只能调用一次。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.oci-fetch-all-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">statement</code></dt>
+
+     <dd>
+
+       <p class="para">有效的 OCI8 报表标识符
+由 <span class="function"><a href="function.oci-parse.html" class="function">oci_parse()</a></span> 创建，被 <span class="function"><a href="function.oci-execute.html" class="function">oci_execute()</a></span>
+或 <code class="literal">REF CURSOR</code> statement 标识执行。</p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">output</code></dt>
+
+     <dd>
+
+      <p class="para">
+       包含返回行的变量。
+      </p>
+      <p class="para">
+        LOB 列作为字符串返回，其中 Oracle 支持转换。
+      </p>
+      <p class="para">
+        有关如何读取数据和类型的更多信息，请参见 <span class="function"><a href="function.oci-fetch-array.html" class="function">oci_fetch_array()</a></span>。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">offset</code></dt>
+
+     <dd>
+
+      <p class="para">
+       读取结果时要丢弃的初始行数。默认值为 0，因此返回第一行。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">limit</code></dt>
+
+     <dd>
+
+      <p class="para">
+       要返回的行数。默认值为 -1，表示返回从 <code class="parameter">offset</code> + 1 开始的所有行。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">flags</code></dt>
+
+     <dd>
+
+      <p class="para">
+       参数 <code class="parameter">flags</code> 表示数组结构以及是否应使用关联数组。
+       <table class="doctable table">
+        <caption><strong><span class="function"><strong>oci_fetch_all()</strong></span> 数组结构模式</strong></caption>
+        
+         <thead>
+          <tr>
+           <th>常量</th>
+           <th>说明</th>
+          </tr>
+
+         </thead>
+
+         <tbody class="tbody">
+          <tr>
+           <td><strong><code>OCI_FETCHSTATEMENT_BY_ROW</code></strong></td>
+           <td>外部数组将包含每个查询行的子数组。</td>
+          </tr>
+
+          <tr>
+           <td><strong><code>OCI_FETCHSTATEMENT_BY_COLUMN</code></strong></td>
+           <td>外部数组将包含每个查询列的子数组。这是默认设置。</td>
+          </tr>
+
+         </tbody>
+        
+       </table>
+
+      </p>
+      <p class="para">
+        数组可以按列标头或数字索引。只会返回一种索引模式。
+       <table class="doctable table">
+        <caption><strong><span class="function"><strong>oci_fetch_all()</strong></span> 数组索引模式</strong></caption>
+        
+         <thead>
+          <tr>
+           <th>常量</th>
+           <th>说明</th>
+          </tr>
+
+         </thead>
+
+         <tbody class="tbody">
+          <tr>
+           <td><strong><code>OCI_NUM</code></strong></td>
+           <td>数字索引用于每一列的数组。</td>
+          </tr>
+
+          <tr>
+           <td><strong><code>OCI_ASSOC</code></strong></td>
+           <td>关联索引用于每一列的数组。这是默认设置。</td>
+          </tr>
+
+         </tbody>
+        
+       </table>
+
+      </p>
+      <p class="para">
+       使用加法运算符“+”选择数组结构和索引模式的组合。
+      </p>
+      <p class="para">
+       Oracle&#039;s default, non-case sensitive column names will have
+       uppercase array keys.  Case-sensitive column names will have
+       array keys using the exact column case.
+       Use <span class="function"><a href="function.var-dump.html" class="function">var_dump()</a></span>
+       on <code class="parameter">output</code> to verify the appropriate case
+       to use for each query.
+      </p>
+      <p class="para">
+        具有多个同名列的查询应使用列别名。否则只有一列会出现在关联数组中。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.oci-fetch-all-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回 <code class="parameter">output</code> 中的行数，可以是 0 或更多。
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.oci-fetch-all-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="example-5534">
+    <p><strong>示例 #1 <span class="function"><strong>oci_fetch_all()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />$conn </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">'hr'</span><span style="color: #007700">, </span><span style="color: #DD0000">'welcome'</span><span style="color: #007700">, </span><span style="color: #DD0000">'localhost/XE'</span><span style="color: #007700">);<br />if (!</span><span style="color: #0000BB">$conn</span><span style="color: #007700">) {<br />    </span><span style="color: #0000BB">$e </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_error</span><span style="color: #007700">();<br />    </span><span style="color: #0000BB">trigger_error</span><span style="color: #007700">(</span><span style="color: #0000BB">htmlentities</span><span style="color: #007700">(</span><span style="color: #0000BB">$e</span><span style="color: #007700">[</span><span style="color: #DD0000">'message'</span><span style="color: #007700">], </span><span style="color: #0000BB">ENT_QUOTES</span><span style="color: #007700">), </span><span style="color: #0000BB">E_USER_ERROR</span><span style="color: #007700">);<br />}<br /><br /></span><span style="color: #0000BB">$stid </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_parse</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">, </span><span style="color: #DD0000">'SELECT POSTAL_CODE, CITY FROM locations WHERE ROWNUM &lt; 3'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">oci_execute</span><span style="color: #007700">(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$nrows </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_fetch_all</span><span style="color: #007700">(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">, </span><span style="color: #0000BB">$res</span><span style="color: #007700">);<br /><br />echo </span><span style="color: #DD0000">"</span><span style="color: #0000BB">$nrows</span><span style="color: #DD0000"> rows fetched&lt;br&gt;\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$res</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// var_dump output is:<br />//    2 rows fetched<br />//    array(2) {<br />//      ["POSTAL_CODE"]=&gt;<br />//      array(2) {<br />//        [0]=&gt;<br />//        string(6) "00989x"<br />//        [1]=&gt;<br />//        string(6) "10934x"<br />//      }<br />//      ["CITY"]=&gt;<br />//      array(2) {<br />//        [0]=&gt;<br />//        string(4) "Roma"<br />//        [1]=&gt;<br />//        string(6) "Venice"<br />//      }<br />//    }<br /><br />// Pretty-print the results<br /></span><span style="color: #007700">echo </span><span style="color: #DD0000">"&lt;table border='1'&gt;\n"</span><span style="color: #007700">;<br />foreach (</span><span style="color: #0000BB">$res </span><span style="color: #007700">as </span><span style="color: #0000BB">$col</span><span style="color: #007700">) {<br />    echo </span><span style="color: #DD0000">"&lt;tr&gt;\n"</span><span style="color: #007700">;<br />    foreach (</span><span style="color: #0000BB">$col </span><span style="color: #007700">as </span><span style="color: #0000BB">$item</span><span style="color: #007700">) {<br />        echo </span><span style="color: #DD0000">"    &lt;td&gt;"</span><span style="color: #007700">.(</span><span style="color: #0000BB">$item </span><span style="color: #007700">!== </span><span style="color: #0000BB">null </span><span style="color: #007700">? </span><span style="color: #0000BB">htmlentities</span><span style="color: #007700">(</span><span style="color: #0000BB">$item</span><span style="color: #007700">, </span><span style="color: #0000BB">ENT_QUOTES</span><span style="color: #007700">) : </span><span style="color: #DD0000">""</span><span style="color: #007700">).</span><span style="color: #DD0000">"&lt;/td&gt;\n"</span><span style="color: #007700">;<br />    }<br />    echo </span><span style="color: #DD0000">"&lt;/tr&gt;\n"</span><span style="color: #007700">;<br />}<br />echo </span><span style="color: #DD0000">"&lt;/table&gt;\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">oci_free_statement</span><span style="color: #007700">(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">oci_close</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="example-5537">
+    <p><strong>示例 #2 带有 <strong><code>OCI_FETCHSTATEMENT_BY_ROW</code></strong> 的 <span class="function"><strong>oci_fetch_all()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />$conn </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">'hr'</span><span style="color: #007700">, </span><span style="color: #DD0000">'welcome'</span><span style="color: #007700">, </span><span style="color: #DD0000">'localhost/XE'</span><span style="color: #007700">);<br />if (!</span><span style="color: #0000BB">$conn</span><span style="color: #007700">) {<br />    </span><span style="color: #0000BB">$e </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_error</span><span style="color: #007700">();<br />    </span><span style="color: #0000BB">trigger_error</span><span style="color: #007700">(</span><span style="color: #0000BB">htmlentities</span><span style="color: #007700">(</span><span style="color: #0000BB">$e</span><span style="color: #007700">[</span><span style="color: #DD0000">'message'</span><span style="color: #007700">], </span><span style="color: #0000BB">ENT_QUOTES</span><span style="color: #007700">), </span><span style="color: #0000BB">E_USER_ERROR</span><span style="color: #007700">);<br />}<br /><br /></span><span style="color: #0000BB">$stid </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_parse</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">, </span><span style="color: #DD0000">'SELECT POSTAL_CODE, CITY FROM locations WHERE ROWNUM &lt; 3'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">oci_execute</span><span style="color: #007700">(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$nrows </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_fetch_all</span><span style="color: #007700">(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">, </span><span style="color: #0000BB">$res</span><span style="color: #007700">, </span><span style="color: #0000BB">null</span><span style="color: #007700">, </span><span style="color: #0000BB">null</span><span style="color: #007700">, </span><span style="color: #0000BB">OCI_FETCHSTATEMENT_BY_ROW</span><span style="color: #007700">);<br /><br />echo </span><span style="color: #DD0000">"</span><span style="color: #0000BB">$nrows</span><span style="color: #DD0000"> rows fetched&lt;br&gt;\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$res</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// Output is:<br />//    2 rows fetched<br />//    array(2) {<br />//      [0]=&gt;<br />//      array(2) {<br />//        ["POSTAL_CODE"]=&gt;<br />//        string(6) "00989x"<br />//        ["CITY"]=&gt;<br />//        string(4) "Roma"<br />//      }<br />//      [1]=&gt;<br />//      array(2) {<br />//        ["POSTAL_CODE"]=&gt;<br />//        string(6) "10934x"<br />//        ["CITY"]=&gt;<br />//        string(6) "Venice"<br />//      }<br />//    }<br /><br /></span><span style="color: #0000BB">oci_free_statement</span><span style="color: #007700">(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">oci_close</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="domdocument.getelementsbytagname.example.basic">
+    <p><strong>示例 #3 带有 <strong><code>OCI_NUM</code></strong> 的 <span class="function"><strong>oci_fetch_all()</strong></span></strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />$conn </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">'hr'</span><span style="color: #007700">, </span><span style="color: #DD0000">'welcome'</span><span style="color: #007700">, </span><span style="color: #DD0000">'localhost/XE'</span><span style="color: #007700">);<br />if (!</span><span style="color: #0000BB">$conn</span><span style="color: #007700">) {<br />    </span><span style="color: #0000BB">$e </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_error</span><span style="color: #007700">();<br />    </span><span style="color: #0000BB">trigger_error</span><span style="color: #007700">(</span><span style="color: #0000BB">htmlentities</span><span style="color: #007700">(</span><span style="color: #0000BB">$e</span><span style="color: #007700">[</span><span style="color: #DD0000">'message'</span><span style="color: #007700">], </span><span style="color: #0000BB">ENT_QUOTES</span><span style="color: #007700">), </span><span style="color: #0000BB">E_USER_ERROR</span><span style="color: #007700">);<br />}<br /><br /></span><span style="color: #0000BB">$stid </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_parse</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">, </span><span style="color: #DD0000">'SELECT POSTAL_CODE, CITY FROM locations WHERE ROWNUM &lt; 3'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">oci_execute</span><span style="color: #007700">(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$nrows </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_fetch_all</span><span style="color: #007700">(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">, </span><span style="color: #0000BB">$res</span><span style="color: #007700">, </span><span style="color: #0000BB">null</span><span style="color: #007700">, </span><span style="color: #0000BB">null</span><span style="color: #007700">, </span><span style="color: #0000BB">OCI_FETCHSTATEMENT_BY_ROW </span><span style="color: #007700">+ </span><span style="color: #0000BB">OCI_NUM</span><span style="color: #007700">);<br /><br />echo </span><span style="color: #DD0000">"</span><span style="color: #0000BB">$nrows</span><span style="color: #DD0000"> rows fetched&lt;br&gt;\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$res</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// Output is:<br />//    2 rows fetched<br />//    array(2) {<br />//      [0]=&gt;<br />//      array(2) {<br />//        [0]=&gt;<br />//        string(6) "00989x"<br />//        [1]=&gt;<br />//        string(4) "Roma"<br />//      }<br />//      [1]=&gt;<br />//      array(2) {<br />//        [0]=&gt;<br />//        string(6) "10934x"<br />//        [1]=&gt;<br />//        string(6) "Venice"<br />//      }<br />//    }<br /><br /></span><span style="color: #0000BB">oci_free_statement</span><span style="color: #007700">(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">oci_close</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.oci-fetch-all-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+     使用 <code class="parameter">offset</code> 非常低效。所有要跳过的行都包含在从数据库返回到 PHP 的结果集中。然后将它们丢弃。使用
+     SQL 限制查询中行的偏移量和范围会更高效。有关示例，请参见 <span class="function"><a href="function.oci-fetch-array.html" class="function">oci_fetch_array()</a></span>。
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    如果使用像 <span class="function"><a href="function.oci-fetch-array.html" class="function">oci_fetch_array()</a></span> 这样的单行读取函数，返回大量行的查询可以提高内存效率。
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+查询返回巨大数量的数据行时，通过增大
+<a href="oci8.configuration.html#ini.oci8.default-prefetch" class="link">oci8.default_prefetch</a>
+值或使用 <span class="function"><a href="function.oci-set-prefetch.html" class="function">oci_set_prefetch()</a></span> 可显著提高性能。</p>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    不会从 Oracle Database 12<em>c</em> 隐式结果集中返回行。请改用 <span class="function"><a href="function.oci-fetch-array.html" class="function">oci_fetch_array()</a></span>。
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.oci-fetch-all-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.oci-fetch.html" class="function" rel="rdfs-seeAlso">oci_fetch()</a> - 从查询中读取下一行到内部缓冲区</span></li>
+    <li class="member"><span class="function"><a href="function.oci-fetch-array.html" class="function" rel="rdfs-seeAlso">oci_fetch_array()</a> - Returns the next row from a query as an associative or numeric array</span></li>
+    <li class="member"><span class="function"><a href="function.oci-fetch-assoc.html" class="function" rel="rdfs-seeAlso">oci_fetch_assoc()</a> - Returns the next row from a query as an associative array</span></li>
+    <li class="member"><span class="function"><a href="function.oci-fetch-object.html" class="function" rel="rdfs-seeAlso">oci_fetch_object()</a> - Returns the next row from a query as an object</span></li>
+    <li class="member"><span class="function"><a href="function.oci-fetch-row.html" class="function" rel="rdfs-seeAlso">oci_fetch_row()</a> - Returns the next row from a query as a numeric array</span></li>
+    <li class="member"><span class="function"><a href="function.oci-set-prefetch.html" class="function" rel="rdfs-seeAlso">oci_set_prefetch()</a> - 设置查询预读取的行数</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

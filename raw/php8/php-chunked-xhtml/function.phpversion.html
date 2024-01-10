@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>获取当前的PHP版本</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.phpinfo.html">« phpinfo</a></li>
+      <li style="float: right;"><a href="function.putenv.html">putenv »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.info.html">PHP 选项/信息 函数</a></li>
+    <li>获取当前的PHP版本</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.phpversion" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">phpversion</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">phpversion</span> &mdash; <span class="dc-title">获取当前的PHP版本</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.phpversion-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>phpversion</strong></span>(<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">string</span><span class="type"></span></span> <code class="parameter">$extension</code><span class="initializer"> = <strong><code>null</code></strong></span></span>): <span class="type"><span class="type">string</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   返回了包含当前运行 PHP 解释器或扩展版本信息的 string。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.phpversion-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">extension</code></dt>
+
+     <dd>
+
+      <p class="para">
+       可选的扩展名。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.phpversion-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   以 <span class="type">string</span> 形式返回当前 PHP 版本。如果为 <code class="parameter">extension</code>
+   提供了 <span class="type">string</span> 类型的参数，<span class="function"><strong>phpversion()</strong></span> 
+   会返回该扩展的版本。如果没有对应的版本信息，或者该扩展未启用，则返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.phpversion-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       <code class="parameter">extension</code> 现在可为 null。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.phpversion-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="example-1763">
+    <p><strong>示例 #1 <span class="function"><strong>phpversion()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// prints e.g. 'Current PHP version: 4.1.1'<br /></span><span style="color: #007700">echo </span><span style="color: #DD0000">'Current PHP version: ' </span><span style="color: #007700">. </span><span style="color: #0000BB">phpversion</span><span style="color: #007700">();<br /><br /></span><span style="color: #FF8000">// prints e.g. '2.0' or nothing if the extension isn't enabled<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">phpversion</span><span style="color: #007700">(</span><span style="color: #DD0000">'tidy'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="example-1766">
+    <p><strong>示例 #2 <strong><code>PHP_VERSION_ID</code></strong> 示例和用法</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// PHP_VERSION_ID 自 PHP 5.2.7 起有效，<br />// 如果我们的版本低于该版本，则用以下代码来模拟 <br /></span><span style="color: #007700">if (!</span><span style="color: #0000BB">defined</span><span style="color: #007700">(</span><span style="color: #DD0000">'PHP_VERSION_ID'</span><span style="color: #007700">)) {<br />    </span><span style="color: #0000BB">$version </span><span style="color: #007700">= </span><span style="color: #0000BB">explode</span><span style="color: #007700">(</span><span style="color: #DD0000">'.'</span><span style="color: #007700">, </span><span style="color: #0000BB">PHP_VERSION</span><span style="color: #007700">);<br /><br />    </span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'PHP_VERSION_ID'</span><span style="color: #007700">, (</span><span style="color: #0000BB">$version</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">] * </span><span style="color: #0000BB">10000 </span><span style="color: #007700">+ </span><span style="color: #0000BB">$version</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">] * </span><span style="color: #0000BB">100 </span><span style="color: #007700">+ </span><span style="color: #0000BB">$version</span><span style="color: #007700">[</span><span style="color: #0000BB">2</span><span style="color: #007700">]));<br />}<br /><br /></span><span style="color: #FF8000">// PHP_VERSION_ID 定义为一个数字，PHP 版本越新，数字越大。<br />// 它的定义是以下的表达式：<br />//<br />// $version_id = $major_version * 10000 + $minor_version * 100 + $release_version;<br />//<br />// 现在我们可以通过 PHP_VERSION_ID 来检查 PHP 版本，<br />// 而不用每次都必须用 version_compare() 来检查 PHP 是否支持某个功能。<br />//<br />// 比如，我们在此可以定义一系列 PHP_VERSION_* constants 常量，<br />// 而在 5.2.7 之前的版本并没有被定义。<br /><br /></span><span style="color: #007700">if (</span><span style="color: #0000BB">PHP_VERSION_ID </span><span style="color: #007700">&lt; </span><span style="color: #0000BB">50207</span><span style="color: #007700">) {<br />    </span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'PHP_MAJOR_VERSION'</span><span style="color: #007700">,   </span><span style="color: #0000BB">$version</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">]);<br />    </span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'PHP_MINOR_VERSION'</span><span style="color: #007700">,   </span><span style="color: #0000BB">$version</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">]);<br />    </span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'PHP_RELEASE_VERSION'</span><span style="color: #007700">, </span><span style="color: #0000BB">$version</span><span style="color: #007700">[</span><span style="color: #0000BB">2</span><span style="color: #007700">]);<br /><br />    </span><span style="color: #FF8000">// 等等， ...<br /></span><span style="color: #007700">}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.phpversion-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    这些信息也存在于预定义常量 <strong><code>PHP_VERSION</code></strong>里。
+    更多版本的信息可以使用常量 <strong><code>PHP_VERSION_*</code></strong>。
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    许多扩展可能会定义它们自己的版本号。然而，大多数捆绑版本将会使用 PHP 版本作为他们的版本号。
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    一些扩展可能会定义他们自己的版本号。
+    然而，大多数内置的扩展会使用 PHP 版本作为它们的版本号。
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.phpversion-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><a href="reserved.constants.html#reserved.constants.core" class="link">常量 PHP_VERSION</a></li>
+    <li class="member"><span class="function"><a href="function.version-compare.html" class="function" rel="rdfs-seeAlso">version_compare()</a> - 对比两个「PHP 规范化」的版本数字字符串</span></li>
+    <li class="member"><span class="function"><a href="function.phpinfo.html" class="function" rel="rdfs-seeAlso">phpinfo()</a> - 输出关于 PHP 配置的信息</span></li>
+    <li class="member"><span class="function"><a href="function.phpcredits.html" class="function" rel="rdfs-seeAlso">phpcredits()</a> - 打印 PHP 贡献者名单</span></li>
+    <li class="member"><span class="function"><a href="function.zend-version.html" class="function" rel="rdfs-seeAlso">zend_version()</a> - 获取当前 Zend 引擎的版本</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

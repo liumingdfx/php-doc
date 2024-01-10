@@ -1,0 +1,260 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>取得图像大小</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.gd-info.html">« gd_info</a></li>
+      <li style="float: right;"><a href="function.getimagesizefromstring.html">getimagesizefromstring »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.image.html">GD 和图像处理 函数</a></li>
+    <li>取得图像大小</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.getimagesize" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">getimagesize</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">getimagesize</span> &mdash; <span class="dc-title">取得图像大小</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.getimagesize-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>getimagesize</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$filename</code></span>, <span class="methodparam"><span class="type">array</span> <code class="parameter reference">&$image_info</code><span class="initializer"> = <strong><code>null</code></strong></span></span>): <span class="type"><span class="type">array</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>getimagesize()</strong></span> 函数将确定任何支持的指定图像文件的大小，并返回尺寸以及文件类型和
+   <code class="literal">height/width</code> 文本字符串，以在标准 <abbr title="Hyper Text Markup Language">HTML</abbr> <code class="tag">IMG</code>
+   标签和对应的 <abbr title="Hypertext Transfer Protocol">HTTP</abbr> 内容类型中使用。
+  </p>
+  <p class="para">
+   <span class="function"><strong>getimagesize()</strong></span> 还可以在 <code class="parameter">image_info</code> 参数中返回更多信息。
+  </p>
+  <div class="caution"><strong class="caution">警告</strong>
+   <p class="para">
+    此函数要求 <code class="parameter">filename</code> 是有效的图像文件。如果提供的是非图像，可能会错误的识别为图像且函数会成功返回，但数组可能包含无意义的值。
+   </p>
+   <p class="para">
+    不要使用 <span class="function"><strong>getimagesize()</strong></span> 识别指定的文件是否是有效的图像。请使用专业解决方案，比如
+    <a href="book.fileinfo.html" class="link">Fileinfo</a> 扩展。
+   </p>
+  </div>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <span class="simpara">
+    注意 JPC 和 JP2 是具有不同位深度的组件。此外，JP2 文件可能包含有<code class="literal">多个 JPEG 2000
+    代码流</code>，此情况下，<span class="function"><strong>getimagesize()</strong></span>
+    返回此文件顶层中碰到的第一个代码流的值。
+   </span>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <span class="simpara">
+    从具有最高比特率的 icon 中检索有关 icon 的信息。
+   </span>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <span class="simpara">
+    GIF 图像由一个或多个帧组成，其中每个帧可能只占据图像的一部分。<span class="function"><strong>getimagesize()</strong></span> 报告的图像大小是整体大小（从逻辑屏幕描述符中读取）。
+   </span>
+  </p></blockquote>
+ </div>
+
+ 
+ <div class="refsect1 parameters" id="refsect1-function.getimagesize-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">filename</code></dt>
+
+     <dd>
+
+      <p class="para">
+       此参数指定希望检索其信息的文件。可以指向本地文件或（配置允许）使用某个<a href="wrappers.html" class="link">支持的流</a>的远程文件。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">image_info</code></dt>
+
+     <dd>
+
+      <p class="para">
+       可选参数允许从图像文件中提取一些扩展信息。目前会将不同的 <abbr>JPG</abbr> APP
+       标记作为关联数组返回。一些程序使用这些 APP 标记在图像中嵌入文本信息。
+       A very common one is to embed 
+       <a href="http://www.iptc.org/" class="link external">&raquo;&nbsp;IPTC</a> information in the APP13 marker.
+       You can use the <span class="function"><a href="function.iptcparse.html" class="function">iptcparse()</a></span> function to parse the
+       binary APP13 marker into something readable.
+      </p>
+      <blockquote class="note"><p><strong class="note">注意</strong>: 
+       <p class="para">
+        <code class="parameter">image_info</code> 仅支持 <abbr>JFIF</abbr> 文件。
+       </p>
+      </p></blockquote>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 returnvalues" id="refsect1-function.getimagesize-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回信息最多包含 7 个元素。并非所有图像类型都包含 <code class="literal">channels</code> 和 <code class="literal">bits</code> 元素。
+  </p>
+  <p class="para">
+   索引 0 和 1 分别包含图像的宽度和高度。
+  </p>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    一些格式可能没有图像或者包含多个图像。在这种情况下，<span class="function"><strong>getimagesize()</strong></span>
+    可能无法正确确定图像大小。<span class="function"><strong>getimagesize()</strong></span> 此时会返回的宽高为 0。
+   </p>
+  </p></blockquote>
+  <p class="para">
+   索引 2 是表示图像类型的某个 <a href="image.constants.html" class="link">IMAGETYPE_XXX 常量</a>。
+  </p>
+  <p class="para">
+   Index 3 is a text string with the correct 
+   <code class="literal">height=&quot;yyy&quot; width=&quot;xxx&quot;</code> string that can be used
+   directly in an <abbr>IMG</abbr> tag.
+  </p>
+  <p class="para">
+   <code class="literal">mime</code> 是图像对应的 MIME 类型。此信息可用于传递具有正确 HTTP 
+   <code class="literal">Content-type</code> 报头的图像：
+   <div class="example" id="">
+    <p><strong>示例 #1 <span class="function"><strong>getimagesize()</strong></span> 和 MIME 类型</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$size </span><span style="color: #007700">= </span><span style="color: #0000BB">getimagesize</span><span style="color: #007700">(</span><span style="color: #0000BB">$filename</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$fp </span><span style="color: #007700">= </span><span style="color: #0000BB">fopen</span><span style="color: #007700">(</span><span style="color: #0000BB">$filename</span><span style="color: #007700">, </span><span style="color: #DD0000">"rb"</span><span style="color: #007700">);<br />if (</span><span style="color: #0000BB">$size </span><span style="color: #007700">&amp;&amp; </span><span style="color: #0000BB">$fp</span><span style="color: #007700">) {<br />    </span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">"Content-type: </span><span style="color: #007700">{</span><span style="color: #0000BB">$size</span><span style="color: #007700">[</span><span style="color: #DD0000">'mime'</span><span style="color: #007700">]}</span><span style="color: #DD0000">"</span><span style="color: #007700">);<br />    </span><span style="color: #0000BB">fpassthru</span><span style="color: #007700">(</span><span style="color: #0000BB">$fp</span><span style="color: #007700">);<br />    exit;<br />} else {<br />    </span><span style="color: #FF8000">// error<br /></span><span style="color: #007700">}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   <code class="literal">channels</code> 对 RGB 图片为 3，对 CMYK 图像为 4。
+  </p>
+  <p class="para">
+   <code class="literal">bits</code> 是每种颜色的位数。
+  </p>
+  <p class="para">
+   对应一些图像类型，<code class="literal">channels</code> 和 <code class="literal">bits</code> 值的存在可能会让人困惑。
+   As an example, <abbr title="Graphic Interchange Format">GIF</abbr> always uses 3 channels
+   per pixel, but the number of bits per pixel cannot be calculated for an
+   animated <abbr title="Graphic Interchange Format">GIF</abbr> with a global color table.
+  </p>
+  <p class="para">
+   失败时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 errors" id="refsect1-function.getimagesize-errors">
+  <h3 class="title">错误／异常</h3>
+  <p class="para">
+   如果无法访问 <code class="parameter">filename</code> 图像，<span class="function"><strong>getimagesize()</strong></span> 将生成 <strong><code>E_WARNING</code></strong>
+   级别的错误。读取错误时，<span class="function"><strong>getimagesize()</strong></span> 将生成 <strong><code>E_NOTICE</code></strong> 级别的错误。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.getimagesize-changelog">
+  <h3 class="title">更新日志</h3>
+  <p class="para">
+   <table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>8.2.0</td>
+       <td>
+        现在将正确返回 AVIF 图像的实际尺寸、bits 和 channels；以前，尺寸报告为 <code class="literal">0x0</code>，并且不会报告 bits 和 channels。
+       </td>
+      </tr>
+
+      <tr>
+       <td>7.1.0</td>
+       <td>
+        新增 WebP 支持。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 examples" id="refsect1-function.getimagesize-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #2 <span class="function"><strong>getimagesize()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">list(</span><span style="color: #0000BB">$width</span><span style="color: #007700">, </span><span style="color: #0000BB">$height</span><span style="color: #007700">, </span><span style="color: #0000BB">$type</span><span style="color: #007700">, </span><span style="color: #0000BB">$attr</span><span style="color: #007700">) = </span><span style="color: #0000BB">getimagesize</span><span style="color: #007700">(</span><span style="color: #DD0000">"img/flag.jpg"</span><span style="color: #007700">);<br />echo </span><span style="color: #DD0000">"&lt;img src=\"img/flag.jpg\" </span><span style="color: #0000BB">$attr</span><span style="color: #DD0000"> alt=\"getimagesize() example\" /&gt;"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+   <div class="example" id="">
+    <p><strong>示例 #3 getimagesize (URL)</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$size </span><span style="color: #007700">= </span><span style="color: #0000BB">getimagesize</span><span style="color: #007700">(</span><span style="color: #DD0000">"http://www.example.com/gifs/logo.gif"</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// if the file name has space in it, encode it properly<br /></span><span style="color: #0000BB">$size </span><span style="color: #007700">= </span><span style="color: #0000BB">getimagesize</span><span style="color: #007700">(</span><span style="color: #DD0000">"http://www.example.com/gifs/lo%20go.gif"</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+   <div class="example" id="">
+    <p><strong>示例 #4 getimagesize() 返回 IPTC</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$size </span><span style="color: #007700">= </span><span style="color: #0000BB">getimagesize</span><span style="color: #007700">(</span><span style="color: #DD0000">"testimg.jpg"</span><span style="color: #007700">, </span><span style="color: #0000BB">$info</span><span style="color: #007700">);<br />if (isset(</span><span style="color: #0000BB">$info</span><span style="color: #007700">[</span><span style="color: #DD0000">"APP13"</span><span style="color: #007700">])) {<br />    </span><span style="color: #0000BB">$iptc </span><span style="color: #007700">= </span><span style="color: #0000BB">iptcparse</span><span style="color: #007700">(</span><span style="color: #0000BB">$info</span><span style="color: #007700">[</span><span style="color: #DD0000">"APP13"</span><span style="color: #007700">]);<br />    </span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$iptc</span><span style="color: #007700">);<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 notes" id="refsect1-function.getimagesize-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">注意</strong>: <p class="para">此函数不需要 GD 图象库。</p></p></blockquote>
+ </div>
+
+ 
+ <div class="refsect1 seealso" id="refsect1-function.getimagesize-seealso">
+  <h3 class="title">参见</h3>
+  <ul class="simplelist">
+   <li class="member"><span class="function"><a href="function.image-type-to-mime-type.html" class="function" rel="rdfs-seeAlso">image_type_to_mime_type()</a> - 取得 getimagesize、exif_read_data、exif_thumbnail、exif_imagetype 所返回的图像类型的 MIME 类型</span></li>
+   <li class="member"><span class="function"><a href="function.exif-imagetype.html" class="function" rel="rdfs-seeAlso">exif_imagetype()</a> - 判断一个图像的类型</span></li>
+   <li class="member"><span class="function"><a href="function.exif-read-data.html" class="function" rel="rdfs-seeAlso">exif_read_data()</a> - 从一个图片文件中读取 EXIF 头信息</span></li>
+   <li class="member"><span class="function"><a href="function.exif-thumbnail.html" class="function" rel="rdfs-seeAlso">exif_thumbnail()</a> - 检索图像的嵌入式缩略图</span></li>
+   <li class="member"><span class="function"><a href="function.imagesx.html" class="function" rel="rdfs-seeAlso">imagesx()</a> - 取得图像宽度</span></li>
+   <li class="member"><span class="function"><a href="function.imagesy.html" class="function" rel="rdfs-seeAlso">imagesy()</a> - 取得图像高度</span></li>
+  </ul>
+ </div>
+
+</div></div></div></body></html>

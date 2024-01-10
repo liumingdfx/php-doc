@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>复制 cURL 句柄及其所有选项</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.curl-close.html">« curl_close</a></li>
+      <li style="float: right;"><a href="function.curl-errno.html">curl_errno »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.curl.html">cURL 函数</a></li>
+    <li>复制 cURL 句柄及其所有选项</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.curl-copy-handle" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">curl_copy_handle</h1>
+  <p class="verinfo">(PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">curl_copy_handle</span> &mdash; <span class="dc-title">复制 cURL 句柄及其所有选项</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.curl-copy-handle-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>curl_copy_handle</strong></span>(<span class="methodparam"><span class="type"><a href="class.curlhandle.html" class="type CurlHandle">CurlHandle</a></span> <code class="parameter">$handle</code></span>): <span class="type"><span class="type"><a href="class.curlhandle.html" class="type CurlHandle">CurlHandle</a></span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   复制 cURL 句柄并保持相同选项。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.curl-copy-handle-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    <dt>
+<code class="parameter">handle</code>
+</dt>
+<dd>
+<p class="para">由 <span class="function"><a href="function.curl-init.html" class="function">curl_init()</a></span> 返回的 cURL 句柄。</p></dd>
+
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.curl-copy-handle-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回新 cURL 句柄， 或者在失败时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.curl-copy-handle-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+ <td>8.0.0</td>
+ <td>
+  <code class="parameter">handle</code> 现在接受 <span class="classname"><a href="class.curlhandle.html" class="classname">CurlHandle</a></span>
+  实例；之前接受 <span class="type">resource</span>。
+ </td>
+</tr>
+
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       现在成功时，此函数返回 <span class="classname"><a href="class.curlhandle.html" class="classname">CurlHandle</a></span> 实例，之前返回 <span class="type">resource</span>。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.curl-copy-handle-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 复制 cURL 句柄</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// 创建新 cURL 资源<br /></span><span style="color: #0000BB">$ch </span><span style="color: #007700">= </span><span style="color: #0000BB">curl_init</span><span style="color: #007700">();<br /><br /></span><span style="color: #FF8000">// 设置 URL 和其它相应的选项<br /></span><span style="color: #0000BB">curl_setopt</span><span style="color: #007700">(</span><span style="color: #0000BB">$ch</span><span style="color: #007700">, </span><span style="color: #0000BB">CURLOPT_URL</span><span style="color: #007700">, </span><span style="color: #DD0000">'http://www.example.com/'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">curl_setopt</span><span style="color: #007700">(</span><span style="color: #0000BB">$ch</span><span style="color: #007700">, </span><span style="color: #0000BB">CURLOPT_HEADER</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 复制句柄<br /></span><span style="color: #0000BB">$ch2 </span><span style="color: #007700">= </span><span style="color: #0000BB">curl_copy_handle</span><span style="color: #007700">(</span><span style="color: #0000BB">$ch</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 抓取 URL（http://www.example.com/）并把它传递给浏览器<br /></span><span style="color: #0000BB">curl_exec</span><span style="color: #007700">(</span><span style="color: #0000BB">$ch2</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 关闭 cURL 资源，并且释放系统资源<br /></span><span style="color: #0000BB">curl_close</span><span style="color: #007700">(</span><span style="color: #0000BB">$ch2</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">curl_close</span><span style="color: #007700">(</span><span style="color: #0000BB">$ch</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+</div></div></div></body></html>

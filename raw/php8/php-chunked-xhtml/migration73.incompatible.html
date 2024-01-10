@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>不向下兼容的变更</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="migration73.constants.html">« 新的全局常量</a></li>
+      <li style="float: right;"><a href="migration73.deprecated.html">PHP 7.3.x 中废弃的功能 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="migration73.html">从 PHP 7.2.x 移植到 PHP 7.3.x</a></li>
+    <li>不向下兼容的变更</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="migration73.incompatible" class="sect1">
+ <h2 class="title">不向下兼容的变更</h2>
+
+ <div class="sect2" id="migration73.incompatible.core">
+  <h3 class="title">PHP 核心</h3>
+
+  <div class="sect3" id="migration73.incompatible.core.heredoc-nowdoc">
+   <h4 class="title">Heredoc/Nowdoc 结束标记解释</h4>
+
+   <p class="para">
+    由于引入了<a href="migration73.new-features.html#migration73.new-features.core.heredoc" class="link">灵活的 heredoc/nowdoc
+    语法</a>，正文中包含结束标记的文档字符串可能会导致语法错误或解释发生变化。例如在：
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$str </span><span style="color: #007700">= &lt;&lt;&lt;FOO<br /></span><span style="color: #DD0000">abcdefg<br /></span><span style="color: #007700">   FOO<br /></span><span style="color: #0000BB">FOO</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </div>
+    <code class="literal">FOO</code> 缩进在出现之前没有任何特殊含义。现在将解释为 heredoc 字符串的结尾，并且之后的 <code class="literal">FOO;</code>
+    将导致语法错误。这个问题始终可以通过选择一个不在字符串内容中出现的标记标签来解决。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration73.incompatible.core.continue-targeting-switch">
+   <h4 class="title">Switch 中使用 Continue 会发出警告</h4>
+
+   <p class="para">
+    <code class="literal">switch</code> 控制流结构使用 <code class="literal">continue</code> 语句现在将生成警告。在 PHP 中，<code class="literal">continue</code> 语句相当于
+    <code class="literal">break</code>，而在其它语言中它们的行为等同于 <code class="literal">continue 2</code>。
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">while (</span><span style="color: #0000BB">$foo</span><span style="color: #007700">) {<br />    switch (</span><span style="color: #0000BB">$bar</span><span style="color: #007700">) {<br />      case </span><span style="color: #DD0000">"baz"</span><span style="color: #007700">:<br />         continue;<br />         </span><span style="color: #FF8000">// Warning: "continue" targeting switch is equivalent to<br />         //          "break". Did you mean to use "continue 2"?<br />   </span><span style="color: #007700">}<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </div>
+   </p>
+  </div>
+
+  <div class="sect3" id="migration73.incompatible.core.arrayaccess">
+   <h4 class="title">Strict Interpretation of Integer String Keys on ArrayAccess</h4>
+
+   <p class="para">
+    Array accesses of type <code class="literal">$obj[&quot;123&quot;]</code>, where
+    <code class="literal">$obj</code> implements <span class="classname"><a href="class.arrayaccess.html" class="classname">ArrayAccess</a></span> and
+    <code class="literal">&quot;123&quot;</code> is an integer <span class="type">string</span> literal will no
+    longer result in an implicit conversion to integer, i.e.,
+    <code class="literal">$obj-&gt;offsetGet(&quot;123&quot;)</code> will be called instead of
+    <code class="literal">$obj-&gt;offsetGet(123)</code>. This matches existing behavior for
+    non-literals. The behavior of arrays is not affected in any way, they
+    continue to implicitly convert integral string keys to integers.
+   </p>
+  </div>
+
+  <div class="sect3" id="migration73.incompatible.core.static-properties">
+   <h4 class="title">Static Properties no longer separated by Reference Assignment</h4>
+
+   <p class="para">
+    In PHP, static properties are shared between inheriting classes, unless the
+    static property is explicitly overridden in a child class. However, due to an
+    implementation artifact it was possible to separate the static properties by
+    assigning a reference. This loophole has been fixed.
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">Test </span><span style="color: #007700">{<br />    public static </span><span style="color: #0000BB">$x </span><span style="color: #007700">= </span><span style="color: #0000BB">0</span><span style="color: #007700">;<br />}<br />class </span><span style="color: #0000BB">Test2 </span><span style="color: #007700">extends </span><span style="color: #0000BB">Test </span><span style="color: #007700">{ }<br /><br /></span><span style="color: #0000BB">Test2</span><span style="color: #007700">::</span><span style="color: #0000BB">$x </span><span style="color: #007700">= &amp;</span><span style="color: #0000BB">$x</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$x </span><span style="color: #007700">= </span><span style="color: #0000BB">1</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">Test</span><span style="color: #007700">::</span><span style="color: #0000BB">$x</span><span style="color: #007700">, </span><span style="color: #0000BB">Test2</span><span style="color: #007700">::</span><span style="color: #0000BB">$x</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">// Previously: int(0), int(1)<br />// Now:        int(1), int(1)<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </div>
+   </p>
+  </div>
+
+  <div class="sect3" id="migration73.incompatible.core.reference-unwrapping">
+   <h4 class="title">References returned by Array and Property Accesses are immediately unwrapped</h4>
+
+   <p class="para">
+    References returned by array and property accesses are now unwrapped as part
+    of the access. This means that it is no longer possible to modify the
+    reference between the access and the use of the accessed value:
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$arr </span><span style="color: #007700">= [</span><span style="color: #0000BB">1</span><span style="color: #007700">];<br /></span><span style="color: #0000BB">$ref </span><span style="color: #007700">=&amp; </span><span style="color: #0000BB">$arr</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">];<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$arr</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">] + (</span><span style="color: #0000BB">$arr</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">] = </span><span style="color: #0000BB">2</span><span style="color: #007700">));<br /></span><span style="color: #FF8000">// Previously: int(4), Now: int(3)<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </div>
+    This makes the behavior of references and non-references consistent. Please
+    note that reading and writing a value inside a single expression remains
+    undefined behavior and may change again in the future.
+   </p>
+  </div>
+
+  <div class="sect3" id="migration73.incompatible.core.traversable-unpacking">
+   <h4 class="title">Argument Unpacking of Traversables with non-Integer Keys no longer supported</h4>
+
+   <p class="para">
+    Argument unpacking stopped working with <span class="classname"><a href="class.traversable.html" class="classname">Traversable</a></span>s
+    with non-integer keys. The following code worked in PHP 5.6-7.2 by accident.
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">foo</span><span style="color: #007700">(...</span><span style="color: #0000BB">$args</span><span style="color: #007700">) {<br />    </span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$args</span><span style="color: #007700">);<br />}<br />function </span><span style="color: #0000BB">gen</span><span style="color: #007700">() {<br />    yield </span><span style="color: #0000BB">1.23 </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">123</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">foo</span><span style="color: #007700">(...</span><span style="color: #0000BB">gen</span><span style="color: #007700">());<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </div>
+   </p>
+  </div>
+
+  <div class="sect3" id="migration73.incompatible.core.misc">
+   <h4 class="title">杂项</h4>
+
+   <p class="para">
+    <var class="filename">ext_skel</var> 应用程序已重新设计，添加了一些新选项并删除了一些旧选项。现在是用 PHP 编写的，没有外部依赖项。
+   </p>
+
+   <p class="para">
+    已弃用对 BeOS 的支持。
+   </p>
+
+   <p class="para">
+    由于在 <code class="literal">EH_THROW</code> 模式下将警告自动转换为异常而引发的异常（例如某些 <span class="classname"><a href="class.datetime.html" class="classname">DateTime</a></span>
+    异常）将不再填充 <span class="function"><a href="function.error-get-last.html" class="function">error_get_last()</a></span> 状态。因此，它们现在的工作方式与手动引发异常相同。
+   </p>
+
+   <p class="para">
+    <span class="classname"><a href="class.typeerror.html" class="classname">TypeError</a></span> 现在将错误类型分别报告为 <code class="literal">int</code> 和
+    <code class="literal">bool</code>，而不是 <code class="literal">integer</code> 和 <code class="literal">boolean</code>。
+   </p>
+
+   <p class="para">
+    未定义变量传递给 <span class="function"><a href="function.compact.html" class="function">compact()</a></span>，现在将报告为 notice。
+   </p>
+
+   <p class="para">
+    <span class="function"><a href="function.getimagesize.html" class="function">getimagesize()</a></span> 和相关函数现在将 BMP 图像的 mime 类型报告为 <code class="literal">image/bmp</code> 而不是
+    <code class="literal">image/x-ms-bmp</code>，因为前者已经在 IANA 注册（参阅 <a href="http://www.faqs.org/rfcs/rfc7903" class="link external">&raquo;&nbsp;RFC 7903</a>）。
+   </p>
+
+   <p class="para">
+    <span class="function"><a href="function.stream-socket-get-name.html" class="function">stream_socket_get_name()</a></span> 现在将返回由中括号括起来的 IPv6 地址。例如，将返回
+    <code class="literal">&quot;[::1]:1337&quot;</code> 而不是 <code class="literal">&quot;::1:1337&quot;</code>。
+   </p>
+  </div>
+ </div>
+
+ <div class="sect2" id="migration73.incompatible.bc">
+  <h3 class="title">BCMath 任意精度数学</h3>
+
+  <p class="para">
+   <a href="ref.bc.html" class="link">BCMath 函数</a>抛出的所有警告现在都使用 PHP 的错误处理。以前，一些警告直接写入了 stderr。
+  </p>
+
+  <p class="para">
+   <span class="function"><a href="function.bcmul.html" class="function">bcmul()</a></span> and <span class="function"><a href="function.bcpow.html" class="function">bcpow()</a></span> now return numbers
+   with the requested scale. Formerly, the returned numbers may have omitted
+   trailing decimal zeroes.
+  </p>
+ </div>
+
+ <div class="sect2" id="migration73.incompatible.imap">
+  <h3 class="title">IMAP、POP3 和 NNTP</h3>
+
+  <p class="para">
+   默认情况下禁用 <strong class="command">rsh</strong>/<strong class="command">ssh</strong> 登录。使用 <a href="imap.configuration.html#ini.imap.enable-insecure-rsh" class="link">imap.enable_insecure_rsh</a>
+   启用它们。请注意，将邮箱名称传递给 <strong class="command">rsh</strong>/<strong class="command">ssh</strong> 命令之前，IMAP 库不会对其进行过滤，因此在启用
+   <strong class="command">rsh</strong>/<strong class="command">ssh</strong> 的情况下将不受信任的数据传递给该函数是不安全的。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration73.incompatible.mbstring">
+  <h3 class="title">多字节字符串</h3>
+
+  <p class="para">
+    由于增加了对命名捕获的支持，使用命名捕获的 <code class="literal">mb_ereg_*()</code> 模式的行为会有所不同。特别是命名捕获将成为匹配的一部分，并且
+    <span class="function"><a href="function.mb-ereg-replace.html" class="function">mb_ereg_replace()</a></span> 将说明额外语法。有关详细信息，请参阅<a href="migration73.new-features.html#migration73.new-features.mbstring.named-captures" class="link">命名捕获</a>。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration73.incompatible.mysqli">
+  <h3 class="title">MySQL 扩展提升</h3>
+
+  <p class="para">
+   预处理语句现在可以正确报告带有小数位数说明符的 <code class="literal">DATETIME</code>、<code class="literal">TIME</code> 和 <code class="literal">TIMESTAMP</code>
+   列的带小数的秒（例如，使用微秒时为 <code class="literal">TIMESTAMP(6)</code>）。以前，返回值中简单地省略了秒的小数部分。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration73.incompatible.pdo-mysql">
+  <h3 class="title">MySQL 函数（PDO_MYSQL）</h3>
+
+  <p class="para">
+   预处理语句现在可以正确报告带有小数位数说明符的 <code class="literal">DATETIME</code>、<code class="literal">TIME</code> 和 <code class="literal">TIMESTAMP</code>
+   列的带小数的秒（例如，使用微秒时为 <code class="literal">TIMESTAMP(6)</code>）。以前，返回值中简单地省略了秒的小数部分。请注意，这仅影响关闭模拟预处理时
+   <a href="ref.pdo-mysql.html" class="link">PDO_MYSQL</a> 的使用（例如使用原生预处理功能）。使用具有
+   <strong><code>PDO::ATTR_EMULATE_PREPARES</code></strong>=<strong><code>true</code></strong>（默认值）的连接的语句不受已修复错误的影响，并且已经从引擎获取了带正确小数的秒值。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration73.incompatible.reflection">
+  <h3 class="title">反射</h3>
+
+  <p class="para">
+   <a href="book.reflection.html" class="link">反射</a>导出为字符串，现在分别使用
+   <code class="literal">int</code> 和 <code class="literal">bool</code> 而不是
+   <code class="literal">integer</code> 和 <code class="literal">boolean</code>。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration73.incompatible.spl">
+  <h3 class="title">PHP 标准库（SPL）</h3>
+
+  <p class="para">
+   如果 <a href="book.spl.html" class="link">SPL</a> 自动加载器抛出异常，则不会执行后面的自动加载器。以前，所有自动加载器都会执行，并且会将异常链接起来。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration73.incompatible.simplexml">
+  <h3 class="title">SimpleXML</h3>
+
+  <p class="para">
+   涉及 <a href="book.simplexml.html" class="link">SimpleXML</a> 对象的数学运算现在会将文本视为 <span class="type">int</span>
+   或 <span class="type">float</span>，以更合适者为准。以前，值会被无条件视为 <span class="type">int</span>。
+  </p>
+ </div>
+
+  <div class="sect2" id="migration73.incompatible.cookie-decode">
+  <h3 class="title">传入 cookie</h3>
+
+  <p class="para">
+   从 PHP 7.3.23 起，出于安全原因，传入 cookie 的 <em>names</em> 不再进行 url 解码。
+  </p>
+ </div>
+ 
+</div></div></div></body></html>

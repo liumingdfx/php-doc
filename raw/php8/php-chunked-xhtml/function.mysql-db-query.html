@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>选择数据库并执行查询</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.mysql-db-name.html">« mysql_db_name</a></li>
+      <li style="float: right;"><a href="function.mysql-drop-db.html">mysql_drop_db »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.mysql.html">MySQL 函数</a></li>
+    <li>选择数据库并执行查询</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.mysql-db-query" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">mysql_db_query</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">mysql_db_query</span> &mdash; <span class="dc-title">选择数据库并执行查询</span></p>
+
+ </div>
+
+ <div id="function.mysql-db-query-refsynopsisdiv">
+  <div class="warning"><strong class="warning">警告</strong>
+   <p class="para">本函数自 PHP 5.3.0
+起已废弃，并且它和整个 <a href="book.mysql.html" class="link">MySQL 扩展</a>自 PHP 7.0.0 开始被移除。
+可以选择出于活跃开发中的 <a href="book.mysqli.html" class="link">MySQLi</a> 或 <a href="ref.pdo-mysql.html" class="link">PDO_MySQL</a> 扩展来作为替代。
+参见 <a href="mysqlinfo.api.choosing.html" class="link">MySQL：选择 API</a> 指南获取更多信息。用以替代本函数的有：</p>
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="mysqli.select-db.html" class="function">mysqli_select_db()</a></span> 然后查询</li>
+    <li class="member"><span class="methodname"><a href="pdo.construct.html" class="methodname">PDO::__construct()</a></span></li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.mysql-db-query-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>mysql_db_query</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$database</code></span>, <span class="methodparam"><span class="type">string</span> <code class="parameter">$query</code></span>, <span class="methodparam"><span class="type">resource</span> <code class="parameter">$link_identifier</code><span class="initializer"> = NULL</span></span>): <span class="type"><span class="type">resource</span>|<span class="type">bool</span></span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>mysql_db_query()</strong></span> 选择数据库并执行查询。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.mysql-db-query-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">database</code></dt>
+
+     <dd>
+
+      <p class="para">
+       要选择的数据库名。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">query</code></dt>
+
+     <dd>
+
+      <p class="para">
+       MySQL 查询。
+      </p>
+      <p class="para">
+       查询中的数据应<a href="function.mysql-real-escape-string.html" class="link">正确转义</a>。
+      </p>
+     </dd>
+
+    
+    <dt>
+
+<code class="parameter">link_identifier</code></dt>
+<dd>
+<p class="para">MySQL
+连接。如不指定连接标识，则使用由 <span class="function"><a href="function.mysql-connect.html" class="function">mysql_connect()</a></span>
+最近打开的连接。如果没有找到该连接，会尝试不带参数调用
+<span class="function"><a href="function.mysql-connect.html" class="function">mysql_connect()</a></span>
+来创建。如没有找到连接或无法建立连接，则会生成
+<strong><code>E_WARNING</code></strong> 级别的错误。</p></dd>
+
+
+   </dl>
+
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 returnvalues" id="refsect1-function.mysql-db-query-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回正的 MySQL 结果资源到查询结果，出错时返回 <strong><code>false</code></strong>。本函数会对
+   <code class="literal">INSERT</code>/<code class="literal">UPDATE</code>/<code class="literal">DELETE</code>
+   查询返回 <strong><code>true</code></strong>/<strong><code>false</code></strong> 来指示成功或失败。
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.mysql-db-query-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="example-5264">
+    <p><strong>示例 #1 替代 <span class="function"><strong>mysql_db_query()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">if (!</span><span style="color: #0000BB">$link </span><span style="color: #007700">= </span><span style="color: #0000BB">mysql_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">'mysql_host'</span><span style="color: #007700">, </span><span style="color: #DD0000">'mysql_user'</span><span style="color: #007700">, </span><span style="color: #DD0000">'mysql_password'</span><span style="color: #007700">)) {<br />    echo </span><span style="color: #DD0000">'Could not connect to mysql'</span><span style="color: #007700">;<br />    exit;<br />}<br /><br />if (!</span><span style="color: #0000BB">mysql_select_db</span><span style="color: #007700">(</span><span style="color: #DD0000">'mysql_dbname'</span><span style="color: #007700">, </span><span style="color: #0000BB">$link</span><span style="color: #007700">)) {<br />    echo </span><span style="color: #DD0000">'Could not select database'</span><span style="color: #007700">;<br />    exit;<br />}<br /><br /></span><span style="color: #0000BB">$sql    </span><span style="color: #007700">= </span><span style="color: #DD0000">'SELECT foo FROM bar WHERE id = 42'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">mysql_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$sql</span><span style="color: #007700">, </span><span style="color: #0000BB">$link</span><span style="color: #007700">);<br /><br />if (!</span><span style="color: #0000BB">$result</span><span style="color: #007700">) {<br />    echo </span><span style="color: #DD0000">"DB Error, could not query the database\n"</span><span style="color: #007700">;<br />    echo </span><span style="color: #DD0000">'MySQL Error: ' </span><span style="color: #007700">. </span><span style="color: #0000BB">mysql_error</span><span style="color: #007700">();<br />    exit;<br />}<br /><br />while (</span><span style="color: #0000BB">$row </span><span style="color: #007700">= </span><span style="color: #0000BB">mysql_fetch_assoc</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">)) {<br />    echo </span><span style="color: #0000BB">$row</span><span style="color: #007700">[</span><span style="color: #DD0000">'foo'</span><span style="color: #007700">];<br />}<br /><br /></span><span style="color: #0000BB">mysql_free_result</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.mysql-db-query-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    注意此函数<strong>不会</strong>切换回先前连接到的数据库。换句话说，不能用此函数<em>临时</em>在另一个数据库上执行
+    sql 查询，只能手工切换回来。强烈建议用户在 sql 查询中使用 <code class="literal">database.table</code> 语法或 <span class="function"><a href="function.mysql-select-db.html" class="function">mysql_select_db()</a></span> 替代此函数。
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.mysql-db-query-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.mysql-query.html" class="function" rel="rdfs-seeAlso">mysql_query()</a> - 发送一条 MySQL 查询</span></li>
+    <li class="member"><span class="function"><a href="function.mysql-select-db.html" class="function" rel="rdfs-seeAlso">mysql_select_db()</a> - 选择 MySQL 数据库</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div></div></div></body></html>

@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>安装</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="image.requirements.html">« 需求</a></li>
+      <li style="float: right;"><a href="image.configuration.html">运行时配置 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="image.setup.html">安装/配置</a></li>
+    <li>安装</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="image.installation" class="section">
+ <h2 class="title">安装</h2>
+ <p class="para">
+  要激活 GD 支持，配置 PHP 时加上
+  <strong class="option configure">--with-gd[=DIR]</strong>，DIR 是 GD
+  的基本安装目录。要使用推荐的绑定的 GD 库版本，使用
+  <strong class="option configure">--with-gd</strong>。要编译
+  GD 库，需要<span class="productname">libpng</span> 和 <span class="productname">libjpeg</span>。
+  自 PHP 7.4.0 起，<strong class="option configure">--with-gd</strong> 变为
+  <strong class="option configure">--enable-gd</strong> （是否启用扩展）
+  和 <strong class="option configure">--with-external-gd</strong>
+  （选择使用外部 <span class="productname">libgd</span>，而不是绑定的）。
+ </p>
+ <p class="para">
+  在 Windows 中，需要将 GD 的 DLL 文件 <var class="filename">php_gd.dll</var>
+  作为一个扩展包含在 <var class="filename">php.ini</var> 中。
+  在 PHP 8.0.0 之前，DLL 被命名为 <var class="filename">php_gd2.dll</var>。
+ </p>
+
+ <p class="para">
+  要增强 GD 的能力以处理更多的图像格式，在配置 PHP 时指定
+  <code class="literal">--with-XXXX</code> 的配置开关。
+  <table class="doctable table">
+   <caption><strong>所支持的图像格式</strong></caption>
+   
+    <thead>
+     <tr>
+      <th>图像格式</th>
+      <th>配置开关</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td><code class="literal">jpeg</code></td>
+      <td>
+       要激活 jpeg 的支持，加上
+       <strong class="option configure">--with-jpeg-dir=DIR</strong>。
+       支持 Jpeg 6b、7 或 8。
+       从 PHP 7.4.0 开始，使用
+       <strong class="option configure">--with-jpeg</strong> 替代。
+      </td>
+     </tr>
+
+     <tr>
+      <td><code class="literal">png</code></td>
+      <td>
+       要激活 png 的支持，加上
+       <strong class="option configure">--with-png-dir=DIR</strong>。注意，libpng
+       需要 <a href="zlib.requirements.html" class="link">zlib library</a>，因此配置中还要加上
+       <strong class="option configure">--with-zlib-dir[=DIR]</strong>。
+       从 PHP 7.4.0 开始，<strong class="option configure">--with-png-dir</strong>
+       和 <strong class="option configure">--with-zlib-dir</strong> 已经移除。
+       需要安装 <span class="productname">libpng</span> 和 <span class="productname">zlib</span>。
+      </td>
+     </tr>
+
+     <tr>
+      <td><code class="literal">xpm</code></td>
+      <td>
+       要激活 xpm 的支持，加上
+       <strong class="option configure">--with-xpm-dir=DIR</strong>。
+       如果配置时提示找不到所需要的库，可以加上 X11 库的路径。
+       从 PHP 7.4.0 开始，使用
+       <strong class="option configure">--with-xpm</strong> 替代。
+      </td>
+     </tr>
+
+     <tr>
+      <td><code class="literal">webp</code></td>
+      <td>
+       要激活 xpm 的支持，加上 <strong class="option configure">--with-webp-dir=DIR</strong>。
+       从 PHP 7.4.0 开始，使用 <strong class="option configure">--with-webp</strong> 替代。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <span class="simpara">
+    当把 PHP 和 libpng 一起编译时，必须使用和 GD 库连接的同一个版本。
+   </span>
+  </p></blockquote>
+ </p>
+ <p class="para">
+  要增强 GD 的能力以处理更多的字体，在配置 PHP 时指定
+  <code class="literal">--with-XXXX</code> 的配置开关。
+  <table class="doctable table">
+   <caption><strong>所支持的字库</strong></caption>
+   
+    <thead>
+     <tr>
+      <th>字库</th>
+      <th>配置开关</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td><code class="literal">FreeType 2</code></td>
+      <td>
+       要激活 FreeType 2 的支持，加上
+       <strong class="option configure">--with-freetype-dir=DIR</strong>。
+       从 PHP 7.4.0 开始使用 <strong class="option configure">--with-freetype</strong>
+       代替，它依赖于 <span class="productname">pkg-config</span>。
+      </td>
+     </tr>
+
+     <tr>
+      <td><code class="literal">本地 TrueType 字符串函数</code></td>
+      <td>
+       要激活本地 TrueType 字符串函数的支持，加上
+       <strong class="option configure">--enable-gd-native-ttf</strong>。
+       （此选项无效，自 PHP 7.2.0 起已被删除。）
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </p>
+</div></div></div></body></html>

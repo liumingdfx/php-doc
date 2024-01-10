@@ -1,0 +1,224 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>mysqli_driver 类</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="mysqli-result.num-rows.html">« mysqli_result::$num_rows</a></li>
+      <li style="float: right;"><a href="mysqli-driver.embedded-server-end.html">mysqli_driver::embedded_server_end »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="book.mysqli.html">MySQLi</a></li>
+    <li>mysqli_driver 类</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="class.mysqli-driver" class="reference">
+ <h1 class="title">mysqli_driver 类</h1>
+ 
+ 
+ <div class="partintro"><p class="verinfo">(PHP 5, PHP 7, PHP 8)</p>
+ 
+
+  <div class="section" id="mysqli-driver.intro">
+   <h2 class="title">简介</h2>
+   <p class="para">
+    <span class="classname"><strong class="classname">mysqli_driver</strong></span> 类是单例模式的实例，即任意数量的
+    <span class="classname"><strong class="classname">mysqli_driver</strong></span> 实例只访问一个驱动。
+   </p>
+  </div>
+
+ 
+  <div class="section" id="mysqli-driver.synopsis">
+   <h2 class="title">类摘要</h2>
+ 
+
+   <div class="classsynopsis"><div class="classsynopsisinfo">
+    
+     <span class="modifier">final</span>
+     <span class="modifier">class</span> <strong class="classname"><strong class="classname">mysqli_driver</strong></strong>
+     {</div>
+
+    <div class="classsynopsisinfo classsynopsisinfo_comment">/* 属性 */</div>
+    <div class="fieldsynopsis">
+     <span class="modifier">public</span>
+     <span class="modifier">readonly</span>
+     <span class="type">string</span>
+      <var class="varname"><a href="class.mysqli-driver.html#mysqli-driver.props.client-info">$<var class="varname">client_info</var></a></var>;</div>
+
+    <div class="fieldsynopsis"><span class="modifier">public</span>
+     <span class="modifier">readonly</span>
+     <span class="type">int</span>
+      <var class="varname"><a href="class.mysqli-driver.html#mysqli-driver.props.client-version">$<var class="varname">client_version</var></a></var>;</div>
+
+    <div class="fieldsynopsis"><span class="modifier">public</span>
+     <span class="modifier">readonly</span>
+     <span class="type">int</span>
+      <var class="varname"><a href="class.mysqli-driver.html#mysqli-driver.props.driver-version">$<var class="varname">driver_version</var></a></var>;</div>
+
+    <div class="fieldsynopsis"><span class="modifier">public</span>
+     <span class="type">int</span>
+      <var class="varname"><a href="class.mysqli-driver.html#mysqli-driver.props.report-mode">$<var class="varname">report_mode</var></a></var>;</div>
+
+   }</div>
+
+ 
+  </div>
+
+  <div class="section" id="mysqli-driver.props">
+   <h2 class="title">属性</h2>
+   <dl>
+    
+     <dt id="mysqli-driver.props.client-info"><var class="varname">client_info</var></dt>
+
+     <dd>
+
+      <p class="para">客户端 API 报头版本</p>
+     </dd>
+
+    
+    
+     <dt id="mysqli-driver.props.client-version"><var class="varname">client_version</var></dt>
+
+     <dd>
+
+      <p class="para">客户端版本</p>
+     </dd>
+
+    
+    
+     <dt id="mysqli-driver.props.driver-version"><var class="varname">driver_version</var></dt>
+
+     <dd>
+
+      <p class="para">MySQLi Driver 版本</p>
+      <div class="warning"><strong class="warning">警告</strong><p class="simpara">自 PHP 8.1.0 起<em>弃用</em>此属性。强烈不推荐依赖此属性。</p></div>
+     </dd>
+
+    
+    
+     <dt id="mysqli-driver.props.embedded"><var class="varname">embedded</var></dt>
+
+     <dd>
+
+      <p class="para">是否开启 MySQLi Embedded 支持</p>
+      <div class="warning"><strong class="warning">警告</strong><p class="simpara">此属性自 PHP 8.0.0 起<em>移除</em>。</p></div>
+     </dd>
+
+    
+    
+     <dt id="mysqli-driver.props.reconnect"><var class="varname">reconnect</var></dt>
+
+     <dd>
+
+      <p class="para">允许或阻止重连（查看 <a href="mysqli.configuration.html#ini.mysqli.reconnect" class="link">mysqli.reconnect</a> INI 指令）</p>
+      <div class="warning"><strong class="warning">警告</strong>
+       <p class="simpara">
+        自 PHP 8.2.0 起，此属性已与 <a href="mysqli.configuration.html#ini.mysqli.reconnect" class="link">mysqli.reconnect</a> INI 指令一起移除。
+       </p>
+      </div>
+     </dd>
+
+    
+    
+     <dt id="mysqli-driver.props.report-mode"><var class="varname">report_mode</var></dt>
+
+     <dd>
+
+      <p class="para">
+       设置 <strong><code>MYSQLI_REPORT_OFF</code></strong>、<strong><code>MYSQLI_REPORT_ALL</code></strong>
+       或为 <strong><code>MYSQLI_REPORT_STRICT</code></strong>（错误抛出异常，译注：需要和 MYSQLI_REPORT_ERROR
+       联合使用）、<strong><code>MYSQLI_REPORT_ERROR</code></strong>（报告错误）和
+       <strong><code>MYSQLI_REPORT_INDEX</code></strong>（关于索引的错误）的任意组合。参阅<span class="function"><a href="function.mysqli-report.html" class="function">mysqli_report()</a></span>。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </div>
+
+
+  <div class="section">
+   <h2 class="title">更新日志</h2>
+   <table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>8.2.0</td>
+       <td>
+         移除 <span class="property">mysqli_driver::$reconnect</span>。
+       </td>
+      </tr>
+
+      <tr>
+       <td>8.1.0</td>
+       <td>
+        弃用 <span class="property">mysqli_driver::$driver_version</span>。
+       </td>
+      </tr>
+
+      <tr>
+       <td>8.0.0</td>
+       <td>
+        移除 <span class="property">mysqli_driver::$embedded</span>。
+       </td>
+      </tr>
+
+      <tr>
+       <td>7.4.0</td>
+       <td>
+        移除 <span class="methodname"><a href="mysqli-driver.embedded-server-start.html" class="methodname">mysqli_driver::embedded_server_start()</a></span> 和
+        <span class="methodname"><strong>mysqli_driver:embedded_server_end()</strong></span>。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </div>
+  
+ </div>
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>目录</h2><ul class="chunklist chunklist_reference"><li><a href="mysqli-driver.embedded-server-end.html">mysqli_driver::embedded_server_end</a> — Stop embedded server</li><li><a href="mysqli-driver.embedded-server-start.html">mysqli_driver::embedded_server_start</a> — Initialize and start embedded server</li><li><a href="mysqli-driver.report-mode.html">mysqli_driver::$report_mode</a> — Sets mysqli error reporting mode</li></ul>
+</div>
+</div></div></body></html>

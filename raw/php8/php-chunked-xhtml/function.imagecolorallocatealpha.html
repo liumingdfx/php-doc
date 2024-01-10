@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>为图像分配颜色</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.imagecolorallocate.html">« imagecolorallocate</a></li>
+      <li style="float: right;"><a href="function.imagecolorat.html">imagecolorat »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.image.html">GD 和图像处理 函数</a></li>
+    <li>为图像分配颜色</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.imagecolorallocatealpha" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">imagecolorallocatealpha</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.3.2, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">imagecolorallocatealpha</span> &mdash; <span class="dc-title">为图像分配颜色</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.imagecolorallocatealpha-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>imagecolorallocatealpha</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><a href="class.gdimage.html" class="type GdImage">GdImage</a></span> <code class="parameter">$image</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$red</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$green</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$blue</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$alpha</code></span><br>): <span class="type"><span class="type">int</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>imagecolorallocatealpha()</strong></span> 的行为和
+   <span class="function"><a href="function.imagecolorallocate.html" class="function">imagecolorallocate()</a></span> 相同，但多了一个额外的透明度参数
+   <code class="parameter">alpha</code>。
+  </p>
+ </div>
+
+ <div class="refsect1 parameters" id="refsect1-function.imagecolorallocatealpha-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    <dt>
+
+<code class="parameter">image</code></dt>
+<dd>
+<p class="para">由图象创建函数(例如<span class="function"><a href="function.imagecreatetruecolor.html" class="function">imagecreatetruecolor()</a></span>)返回的 
+<span class="classname"><a href="class.gdimage.html" class="classname">GdImage</a></span> 对象。</p></dd>
+
+    
+     <dt>
+<code class="parameter">red</code></dt>
+
+     <dd>
+
+      <p class="para">红色成分的值。</p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">green</code></dt>
+
+     <dd>
+
+      <p class="para">绿色成分的值。</p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">blue</code></dt>
+
+     <dd>
+
+      <p class="para">蓝色成分的值。</p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">alpha</code></dt>
+
+     <dd>
+
+      <p class="para">
+       介于 <code class="literal">0</code> 和 <code class="literal">127</code> 之间的值。<code class="literal">0</code>
+       表示完全不透明，而 <code class="literal">127</code> 表示完全透明。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+   <code class="parameter">red</code>、<code class="parameter">green</code> 和 <code class="parameter">blue</code>
+   参数是 0 到 255 之间的整数或 0x00 到 0xFF 之间的十六进制数。
+  </p>
+ </div>
+
+ <div class="refsect1 returnvalues" id="refsect1-function.imagecolorallocatealpha-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   颜色标识符，如果分配失败，则为 <strong><code>false</code></strong>。
+  </p>
+  <div class="warning"><strong class="warning">警告</strong><p class="simpara">此函数可能返回布尔值
+<strong><code>false</code></strong>，但也可能返回等同于 <strong><code>false</code></strong> 的非布尔值。请阅读 <a href="language.types.boolean.html" class="link">布尔类型</a>章节以获取更多信息。应使用
+<a href="language.operators.comparison.html" class="link">===
+运算符</a>来测试此函数的返回值。</p></div>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.imagecolorallocatealpha-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+ <td>8.0.0</td>
+ <td>
+  <code class="parameter">image</code> 现在需要 <span class="classname"><a href="class.gdimage.html" class="classname">GdImage</a></span> 实例；之前需要有效的 <code class="literal">gd</code> <span class="type">resource</span>。
+ </td>
+</tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.imagecolorallocatealpha-examples">
+  <h3 class="title">示例</h3>
+  <div class="example" id="">
+   <p><strong>示例 #1 使用 <span class="function"><strong>imagecolorallocatealpha()</strong></span> 的示例</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$size </span><span style="color: #007700">= </span><span style="color: #0000BB">300</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$image</span><span style="color: #007700">=</span><span style="color: #0000BB">imagecreatetruecolor</span><span style="color: #007700">(</span><span style="color: #0000BB">$size</span><span style="color: #007700">, </span><span style="color: #0000BB">$size</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 白色背景加黑色边框<br /></span><span style="color: #0000BB">$back </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$border </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagefilledrectangle</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">$size </span><span style="color: #007700">- </span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">$size </span><span style="color: #007700">- </span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">$back</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagerectangle</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">$size </span><span style="color: #007700">- </span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">$size </span><span style="color: #007700">- </span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">$border</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$yellow_x </span><span style="color: #007700">= </span><span style="color: #0000BB">100</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$yellow_y </span><span style="color: #007700">= </span><span style="color: #0000BB">75</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$red_x    </span><span style="color: #007700">= </span><span style="color: #0000BB">120</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$red_y    </span><span style="color: #007700">= </span><span style="color: #0000BB">165</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$blue_x   </span><span style="color: #007700">= </span><span style="color: #0000BB">187</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$blue_y   </span><span style="color: #007700">= </span><span style="color: #0000BB">125</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$radius   </span><span style="color: #007700">= </span><span style="color: #0000BB">150</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// 用 alpha 值分配一些颜色<br /></span><span style="color: #0000BB">$yellow </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecolorallocatealpha</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">75</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$red    </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecolorallocatealpha</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">75</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$blue   </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecolorallocatealpha</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">, </span><span style="color: #0000BB">75</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 绘制 3 个重叠的圆<br /></span><span style="color: #0000BB">imagefilledellipse</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">$yellow_x</span><span style="color: #007700">, </span><span style="color: #0000BB">$yellow_y</span><span style="color: #007700">, </span><span style="color: #0000BB">$radius</span><span style="color: #007700">, </span><span style="color: #0000BB">$radius</span><span style="color: #007700">, </span><span style="color: #0000BB">$yellow</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagefilledellipse</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">$red_x</span><span style="color: #007700">, </span><span style="color: #0000BB">$red_y</span><span style="color: #007700">, </span><span style="color: #0000BB">$radius</span><span style="color: #007700">, </span><span style="color: #0000BB">$radius</span><span style="color: #007700">, </span><span style="color: #0000BB">$red</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagefilledellipse</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">$blue_x</span><span style="color: #007700">, </span><span style="color: #0000BB">$blue_y</span><span style="color: #007700">, </span><span style="color: #0000BB">$radius</span><span style="color: #007700">, </span><span style="color: #0000BB">$radius</span><span style="color: #007700">, </span><span style="color: #0000BB">$blue</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 不要忘记输出正确的 header！<br /></span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">'Content-Type: image/png'</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 最后，输出结果<br /></span><span style="color: #0000BB">imagepng</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagedestroy</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例的输出类似于：</p></div>
+   <div class="mediaobject">
+    
+    <div class="imageobject">
+     <img src="images/21009b70229598c6a80eef8b45bf282b-imagecolorallocatealpha.png" alt="示例输出：使用 imagecolorallocatealpha() 的示例" width="300" height="300" />
+    </div>
+   </div>
+  </div>
+  <div class="example" id="">
+   <p><strong>示例 #2 Convert typical alpha values for use with <span class="function"><strong>imagecolorallocatealpha()</strong></span></strong></p>
+   <div class="example-contents"><p>
+    Usually alpha values of <code class="literal">0</code> designate fully transparent pixels,
+    and the alpha channel has 8 bits. To convert such alpha values to be compatible
+    with <span class="function"><strong>imagecolorallocatealpha()</strong></span>, some simple arithmetic is
+    sufficient:
+   </p></div>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$alpha8 </span><span style="color: #007700">= </span><span style="color: #0000BB">0</span><span style="color: #007700">; </span><span style="color: #FF8000">// fully transparent<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">127 </span><span style="color: #007700">- (</span><span style="color: #0000BB">$alpha8 </span><span style="color: #007700">&gt;&gt; </span><span style="color: #0000BB">1</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">$alpha8 </span><span style="color: #007700">= </span><span style="color: #0000BB">255</span><span style="color: #007700">; </span><span style="color: #FF8000">// fully opaque<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">127 </span><span style="color: #007700">- (</span><span style="color: #0000BB">$alpha8 </span><span style="color: #007700">&gt;&gt; </span><span style="color: #0000BB">1</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例会输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+int(127)
+int(0)
+</pre></div>
+   </div>
+  </div>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.imagecolorallocatealpha-seealso">
+  <h3 class="title">参见</h3>
+  <ul class="simplelist">
+   <li class="member"><span class="function"><a href="function.imagecolorallocate.html" class="function" rel="rdfs-seeAlso">imagecolorallocate()</a> - 为图像分配颜色</span></li>
+   <li class="member"><span class="function"><a href="function.imagecolordeallocate.html" class="function" rel="rdfs-seeAlso">imagecolordeallocate()</a> - 取消图像颜色的分配</span></li>
+  </ul>
+ </div>
+
+</div></div></div></body></html>

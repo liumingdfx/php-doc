@@ -1,0 +1,1479 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>预定义常量</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="mysqli.persistconns.html">« mysqli 扩展和持久化连接</a></li>
+      <li style="float: right;"><a href="mysqli.notes.html">Notes »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="book.mysqli.html">MySQLi</a></li>
+    <li>预定义常量</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="mysqli.constants" class="appendix">
+ <h1>预定义常量</h1>
+
+ <p class="simpara">下列常量由此扩展定义，且仅在此扩展编译入 PHP 或在运行时动态载入时可用。</p>
+  <dl>
+   
+    <dt id="constantmysqli-read-default-group">
+     <strong><code>MYSQLI_READ_DEFAULT_GROUP</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Read options from the named group from <var class="filename">my.cnf</var>
+      or the file specified with <strong><code>MYSQLI_READ_DEFAULT_FILE</code></strong>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-read-default-file">
+     <strong><code>MYSQLI_READ_DEFAULT_FILE</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Read options from the named option file instead of from <var class="filename">my.cnf</var>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-opt-connect-timeout">
+     <strong><code>MYSQLI_OPT_CONNECT_TIMEOUT</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Connect timeout in seconds
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-opt-read-timeout">
+     <strong><code>MYSQLI_OPT_READ_TIMEOUT</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Command execution result timeout in seconds. Available as of PHP 7.2.0.
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-opt-local-infile">
+     <strong><code>MYSQLI_OPT_LOCAL_INFILE</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Enables command <code class="literal">LOAD LOCAL INFILE</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-opt-int-and-float-native">
+     <strong><code>MYSQLI_OPT_INT_AND_FLOAT_NATIVE</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Convert integer and float columns back to PHP numbers. Only valid for mysqlnd.
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-opt-net-cmd-buffer-size">
+     <strong><code>MYSQLI_OPT_NET_CMD_BUFFER_SIZE</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      The size of the internal command/network buffer. Only valid for mysqlnd.
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-opt-net-read-buffer-size">
+     <strong><code>MYSQLI_OPT_NET_READ_BUFFER_SIZE</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Maximum read chunk size in bytes when reading the body of a MySQL command packet.
+      Only valid for mysqlnd.
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-opt-ssl-verify-server-cert">
+     <strong><code>MYSQLI_OPT_SSL_VERIFY_SERVER_CERT</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      需要 MySQL 5.1.10 及更高版本
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-init-command">
+     <strong><code>MYSQLI_INIT_COMMAND</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Command to execute when connecting to MySQL server. Will automatically be re-executed when reconnecting.
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-client-ssl">
+     <strong><code>MYSQLI_CLIENT_SSL</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Use SSL (encrypted protocol). This option should not be set by application programs; 
+      it is set internally in the MySQL client library
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-client-compress">
+     <strong><code>MYSQLI_CLIENT_COMPRESS</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Use compression protocol
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-client-interactive">
+     <strong><code>MYSQLI_CLIENT_INTERACTIVE</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Allow <code class="literal">interactive_timeout</code> seconds
+      (instead of <code class="literal">wait_timeout</code> seconds) of inactivity before
+      closing the connection.  The client&#039;s session
+      <code class="literal">wait_timeout</code> variable will be set to
+      the value of the session <code class="literal">interactive_timeout</code> variable. 
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-client-ignore-space">
+     <strong><code>MYSQLI_CLIENT_IGNORE_SPACE</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Allow spaces after function names. Makes all functions names reserved words. 
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-client-no-schema">
+     <strong><code>MYSQLI_CLIENT_NO_SCHEMA</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Don&#039;t allow the <code class="literal">db_name.tbl_name.col_name</code> syntax.
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-client-multi-queries">
+     <strong><code>MYSQLI_CLIENT_MULTI_QUERIES</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Allows multiple semicolon-delimited queries in a single <span class="function"><a href="mysqli.query.html" class="function">mysqli_query()</a></span> call.
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-store-result">
+     <strong><code>MYSQLI_STORE_RESULT</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      使用缓冲的结果集合。值为 <code class="literal">0</code>。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-use-result">
+     <strong><code>MYSQLI_USE_RESULT</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      使用无缓冲的结果集合。值为 <code class="literal">1</code>。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-assoc">
+     <strong><code>MYSQLI_ASSOC</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Columns are returned into the array having the fieldname as the array index.
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-num">
+     <strong><code>MYSQLI_NUM</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Columns are returned into the array having an enumerated index.
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-both">
+     <strong><code>MYSQLI_BOTH</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Columns are returned into the array having both a numerical index and the fieldname as the associative index. 
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-not-null-flag">
+     <strong><code>MYSQLI_NOT_NULL_FLAG</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Indicates that a field is defined as <code class="literal">NOT NULL</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-pri-key-flag">
+     <strong><code>MYSQLI_PRI_KEY_FLAG</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is part of a primary index
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-unique-key-flag">
+     <strong><code>MYSQLI_UNIQUE_KEY_FLAG</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is part of a unique index.
+     </p>
+    </dd>
+
+   
+
+   
+    <dt id="constantmysqli-multiple-key-flag">
+     <strong><code>MYSQLI_MULTIPLE_KEY_FLAG</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is part of an index.
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-blob-flag">
+     <strong><code>MYSQLI_BLOB_FLAG</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">BLOB</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-unsigned-flag">
+     <strong><code>MYSQLI_UNSIGNED_FLAG</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">UNSIGNED</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-zerofill-flag">
+     <strong><code>MYSQLI_ZEROFILL_FLAG</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">ZEROFILL</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-auto-increment-flag">
+     <strong><code>MYSQLI_AUTO_INCREMENT_FLAG</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">AUTO_INCREMENT</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-timestamp-flag">
+     <strong><code>MYSQLI_TIMESTAMP_FLAG</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">TIMESTAMP</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-set-flag">
+     <strong><code>MYSQLI_SET_FLAG</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">SET</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-num-flag">
+     <strong><code>MYSQLI_NUM_FLAG</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">NUMERIC</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-part-key-flag">
+     <strong><code>MYSQLI_PART_KEY_FLAG</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is part of an multi-index
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-group-flag">
+     <strong><code>MYSQLI_GROUP_FLAG</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is part of <code class="literal">GROUP BY</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-decimal">
+     <strong><code>MYSQLI_TYPE_DECIMAL</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">DECIMAL</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-newdecimal">
+     <strong><code>MYSQLI_TYPE_NEWDECIMAL</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Precision math <code class="literal">DECIMAL</code> or <code class="literal">NUMERIC</code> field (MySQL 5.0.3 and up)
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-bit">
+     <strong><code>MYSQLI_TYPE_BIT</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">BIT</code> (MySQL 5.0.3 and up)
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-tiny">
+     <strong><code>MYSQLI_TYPE_TINY</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">TINYINT</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-short">
+     <strong><code>MYSQLI_TYPE_SHORT</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">SMALLINT</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-long">
+     <strong><code>MYSQLI_TYPE_LONG</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">INT</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-fload">
+     <strong><code>MYSQLI_TYPE_FLOAT</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">FLOAT</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-double">
+     <strong><code>MYSQLI_TYPE_DOUBLE</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">DOUBLE</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-null">
+     <strong><code>MYSQLI_TYPE_NULL</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">DEFAULT NULL</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-timestamp">
+     <strong><code>MYSQLI_TYPE_TIMESTAMP</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">TIMESTAMP</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-longlong">
+     <strong><code>MYSQLI_TYPE_LONGLONG</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">BIGINT</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-int24">
+     <strong><code>MYSQLI_TYPE_INT24</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">MEDIUMINT</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-date">
+     <strong><code>MYSQLI_TYPE_DATE</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">DATE</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-time">
+     <strong><code>MYSQLI_TYPE_TIME</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">TIME</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-datetime">
+     <strong><code>MYSQLI_TYPE_DATETIME</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">DATETIME</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-year">
+     <strong><code>MYSQLI_TYPE_YEAR</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">YEAR</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-newdate">
+     <strong><code>MYSQLI_TYPE_NEWDATE</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">DATE</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-interval">
+     <strong><code>MYSQLI_TYPE_INTERVAL</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">INTERVAL</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-enum">
+     <strong><code>MYSQLI_TYPE_ENUM</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">ENUM</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-set">
+     <strong><code>MYSQLI_TYPE_SET</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">SET</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-tiny-blob">
+     <strong><code>MYSQLI_TYPE_TINY_BLOB</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">TINYBLOB</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-medium-blob">
+     <strong><code>MYSQLI_TYPE_MEDIUM_BLOB</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">MEDIUMBLOB</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-long-blob">
+     <strong><code>MYSQLI_TYPE_LONG_BLOB</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">LONGBLOB</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-blob">
+     <strong><code>MYSQLI_TYPE_BLOB</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">BLOB</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-var-string">
+     <strong><code>MYSQLI_TYPE_VAR_STRING</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">VARCHAR</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-string">
+     <strong><code>MYSQLI_TYPE_STRING</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      字段定义为 <code class="literal">CHAR</code> 或 <code class="literal">BINARY</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-char">
+     <strong><code>MYSQLI_TYPE_CHAR</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      字段定义为 <code class="literal">TINYINT</code>。对于 <code class="literal">CHAR</code>，参阅 <code class="literal">MYSQLI_TYPE_STRING</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-geometry">
+     <strong><code>MYSQLI_TYPE_GEOMETRY</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      Field is defined as <code class="literal">GEOMETRY</code>
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-type-json">
+     <strong><code>MYSQLI_TYPE_JSON</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      字段定义为 <code class="literal">JSON</code>。仅对 mysqlnd 和
+      MySQL 5.7.8 及更高版本有效。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-need-data">
+     <strong><code>MYSQLI_NEED_DATA</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      More data available for bind variable
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-no-data">
+     <strong><code>MYSQLI_NO_DATA</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      No more data available for bind variable
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-data-truncated">
+     <strong><code>MYSQLI_DATA_TRUNCATED</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      发生数据截断。自 MySQL 5.0.5 起可用。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-enum-flag">
+     <strong><code>MYSQLI_ENUM_FLAG</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      字段定义为 <code class="literal">ENUM</code>。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-binary-flag">
+     <strong><code>MYSQLI_BINARY_FLAG</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      字段定义为 <code class="literal">BINARY</code>。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-cursor-type-for-update">
+     <strong><code>MYSQLI_CURSOR_TYPE_FOR_UPDATE</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-cursor-type-no-cursor">
+     <strong><code>MYSQLI_CURSOR_TYPE_NO_CURSOR</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-cursor-type-read-only">
+     <strong><code>MYSQLI_CURSOR_TYPE_READ_ONLY</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-cursor-type-scrollable">
+     <strong><code>MYSQLI_CURSOR_TYPE_SCROLLABLE</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-stmt-attr-cursor-type">
+     <strong><code>MYSQLI_STMT_ATTR_CURSOR_TYPE</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-stmt-attr-prefetch-rows">
+     <strong><code>MYSQLI_STMT_ATTR_PREFETCH_ROWS</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-stmt-attr-update-max-length">
+     <strong><code>MYSQLI_STMT_ATTR_UPDATE_MAX_LENGTH</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-set-charset-name">
+     <strong><code>MYSQLI_SET_CHARSET_NAME</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-report-index">
+     <strong><code>MYSQLI_REPORT_INDEX</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      如果在查询中没有使用索引或使用了坏索引，则会报告。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-report-error">
+     <strong><code>MYSQLI_REPORT_ERROR</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      报告来自 mysqli 函数调用的错误。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-report-strict">
+     <strong><code>MYSQLI_REPORT_STRICT</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      抛出 <code class="literal">mysqli_sql_exception</code> 错误而不是警告。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-report-all">
+     <strong><code>MYSQLI_REPORT_ALL</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      启用所有选项（报告所有）。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-report-off">
+     <strong><code>MYSQLI_REPORT_OFF</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      关闭报告功能。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-debug-trace-enabled">
+     <strong><code>MYSQLI_DEBUG_TRACE_ENABLED</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      如果 <span class="function"><a href="mysqli.debug.html" class="function">mysqli_debug()</a></span> 功能启用，设置为 1。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-server-query-no-good-index-used">
+     <strong><code>MYSQLI_SERVER_QUERY_NO_GOOD_INDEX_USED</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-server-query-no-index-used">
+     <strong><code>MYSQLI_SERVER_QUERY_NO_INDEX_USED</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-server-public-key">
+     <strong><code>MYSQLI_SERVER_PUBLIC_KEY</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-refresh-grant">
+     <strong><code>MYSQLI_REFRESH_GRANT</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      刷新授权表。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-refresh-log">
+     <strong><code>MYSQLI_REFRESH_LOG</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      刷新日志，就像执行 <code class="literal">FLUSH LOGS</code> <abbr>SQL</abbr> 语句。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-refresh-tables">
+     <strong><code>MYSQLI_REFRESH_TABLES</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      刷新表缓存，就像执行 <code class="literal">FLUSH TABLES</code> <abbr>SQL</abbr> 语句。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-refresh-hosts">
+     <strong><code>MYSQLI_REFRESH_HOSTS</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      刷新主机缓存，就像执行刷新 <code class="literal">FLUSH HOSTS</code> <abbr>SQL</abbr> 语句一样。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-refresh-replica">
+     <strong><code>MYSQLI_REFRESH_REPLICA</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      <strong><code>MYSQLI_REFRESH_SLAVE</code></strong> 常量的别名。自 PHP 8.1.0 起可用。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-refresh-status">
+     <strong><code>MYSQLI_REFRESH_STATUS</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      重置状态变量，如执行 <code class="literal">FLUSH STATUS</code> <abbr>SQL</abbr> 语句。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-refresh-threads">
+     <strong><code>MYSQLI_REFRESH_THREADS</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      刷新线程缓存。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-refresh-slave">
+     <strong><code>MYSQLI_REFRESH_SLAVE</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      在从复制服务器上：重置主服务器信息，并重新启动从服务器。就像执行
+      <code class="literal">RESET SLAVE</code> <abbr>SQL</abbr> 语句一样。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-refresh-master">
+     <strong><code>MYSQLI_REFRESH_MASTER</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      在主复制服务器上：删除二进制日志索引中列出的二进制日志文件，并截断索引文件。就像执行
+      <code class="literal">RESET MASTER</code> <abbr>SQL</abbr> 语句一样。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-trans-cor-and-chain">
+     <strong><code>MYSQLI_TRANS_COR_AND_CHAIN</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      追加“AND CHAIN”到 <span class="function"><a href="mysqli.commit.html" class="function">mysqli_commit()</a></span> 或 <span class="function"><a href="mysqli.rollback.html" class="function">mysqli_rollback()</a></span>。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-trans-cor-and-no-chain">
+     <strong><code>MYSQLI_TRANS_COR_AND_NO_CHAIN</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      追加“AND NO CHAIN”到 <span class="function"><a href="mysqli.commit.html" class="function">mysqli_commit()</a></span> 或 <span class="function"><a href="mysqli.rollback.html" class="function">mysqli_rollback()</a></span>。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-trans-cor-release">
+     <strong><code>MYSQLI_TRANS_COR_RELEASE</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      追加“RELEASE”到 <span class="function"><a href="mysqli.commit.html" class="function">mysqli_commit()</a></span> 或 <span class="function"><a href="mysqli.rollback.html" class="function">mysqli_rollback()</a></span>。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-trans-cor-no-release">
+     <strong><code>MYSQLI_TRANS_COR_NO_RELEASE</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      追加“NO RELEASE”到 <span class="function"><a href="mysqli.commit.html" class="function">mysqli_commit()</a></span> 或 <span class="function"><a href="mysqli.rollback.html" class="function">mysqli_rollback()</a></span>。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-trans-start-read-only">
+     <strong><code>MYSQLI_TRANS_START_READ_ONLY</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      使用 <span class="function"><a href="mysqli.begin-transaction.html" class="function">mysqli_begin_transaction()</a></span> 作为“START TRANSACTION READ
+      ONLY”启动事务。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-trans-start-read-write">
+     <strong><code>MYSQLI_TRANS_START_READ_WRITE</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      使用 <span class="function"><a href="mysqli.begin-transaction.html" class="function">mysqli_begin_transaction()</a></span> 作为“START TRANSACTION READ
+      WRITE”启动事务。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-trans-start-consistent-snapshot">
+     <strong><code>MYSQLI_TRANS_START_CONSISTENT_SNAPSHOT</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      使用 <span class="function"><a href="mysqli.begin-transaction.html" class="function">mysqli_begin_transaction()</a></span> 作为“START TRANSACTION WITH
+      CONSISTENT SNAPSHOT” 启动事务。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-client-ssl-dont-verify-server-cert">
+     <strong><code>MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT</code></strong>
+     (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      需要 MySQL 5.6.5 及其以上版本。
+     </p>
+    </dd>
+
+   
+   
+    <dt id="constantmysqli-is-mariadb">
+     <strong><code>MYSQLI_IS_MARIADB</code></strong>
+     (<span class="type">bool</span>)
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      mysqli 扩展是否针对 MariaDB 客户端库编译。自 PHP 8.1.2 起有效。
+     </p>
+    </dd>
+
+   
+  </dl>
+
+</div>
+</div></div></body></html>

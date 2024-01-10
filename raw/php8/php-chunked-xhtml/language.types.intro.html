@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>简介</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="language.types.html">« 类型</a></li>
+      <li style="float: right;"><a href="language.types.type-system.html">类型系统 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="language.types.html">类型</a></li>
+    <li>简介</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="language.types.intro" class="sect1">
+  <h2 class="title">简介</h2>
+
+  <p class="para">
+   PHP 中的每个表达式都属于以下某个内置类型，具体取决于值：
+   <ul class="itemizedlist">
+    <li class="listitem"><span class="simpara"><span class="type">null</span></span></li>
+    <li class="listitem"><span class="simpara"><span class="type">bool</span></span></li>
+    <li class="listitem"><span class="simpara"><span class="type">int</span></span></li>
+    <li class="listitem"><span class="simpara"><span class="type">float</span> （浮点数）</span></li>
+    <li class="listitem"><span class="simpara"><span class="type">string</span></span></li>
+    <li class="listitem"><span class="simpara"><span class="type">array</span></span></li>
+    <li class="listitem"><span class="simpara"><span class="type">object</span></span></li>
+    <li class="listitem"><span class="simpara"><span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span></span></li>
+    <li class="listitem"><span class="simpara"><span class="type">resource</span></span></li>
+   </ul>
+  </p>
+
+  <p class="para">
+   PHP 是动态类型语言，这意味着默认不需要指定变量的类型，因为会在运行时确定。然而，可以通过使用<a href="language.types.declarations.html" class="link">类型声明</a>对语言的一些方面进行类型静态化。
+  </p>
+
+  <p class="para">
+   类型限制了可以对其执行的操作。然而，如果使用的表达式/变量不支持该操作，PHP 将尝试将该值<a href="language.types.type-juggling.html" class="link">类型转换</a>为操作支持的类型。此过程取决于使用该值的上下文。更多信息参阅<a href="language.types.type-juggling.html" class="link">类型转换</a>。
+  </p>
+
+  <div class="tip"><strong class="tip">小技巧</strong>
+   <p class="simpara">
+    <a href="types.comparisons.html" class="link">类型比较表</a>也很有用，因为存在不同类型之间的值的各种比较示例。
+   </p>
+  </div>
+
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <span class="simpara">
+    使用<a href="language.types.type-juggling.html#language.types.typecasting" class="link">类型转换</a>，强制将表达式的值转换为某种类型。还可以使用
+    <span class="function"><a href="function.settype.html" class="function">settype()</a></span> 函数就地对变量进行类型转换。
+   </span>
+  </p></blockquote>
+
+  <p class="para">
+   使用 <span class="function"><a href="function.var-dump.html" class="function">var_dump()</a></span> 函数检查<a href="language.expressions.html" class="link">表达式</a>的值和类型。使用
+   <span class="function"><a href="function.get-debug-type.html" class="function">get_debug_type()</a></span> 检索<a href="language.expressions.html" class="link">表达式</a>的值和类型。使用
+   <code class="literal">is_<span class="replaceable">type</span></code> 检查表达式是否属于某种类型。
+
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">$a_bool = true;   // a bool<br />$a_str  = "foo";  // a string<br />$a_str2 = 'foo';  // a string<br />$an_int = 12;     // an int<br />echo get_debug_type($a_bool), "\n";<br />echo get_debug_type($a_str), "\n";<br /><br />// 如果是整型，就加上 4<br />if (is_int($an_int)) {<br />    $an_int += 4;<br />}<br />var_dump($an_int);<br /><br />// 如果 $a_bool 是字符串，就打印出来<br />if (is_string($a_bool)) {<br />    echo "String: $a_bool";<br />}<br />?&gt;</span></code></div>
+    </div>
+
+    <p class="para">以上示例在 PHP 8 中的输出：</p>
+    <div class="example-contents screen">
+     <div class="cdata"><pre>
+bool
+string
+int(16)
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <span class="simpara">
+    PHP 8.0.0 之前，<span class="function"><a href="function.get-debug-type.html" class="function">get_debug_type()</a></span> 无效，可以使用 <span class="function"><a href="function.gettype.html" class="function">gettype()</a></span>
+    函数代替。但是没有使用规范的类型名称。
+   </span>
+  </p></blockquote>
+ </div></div></div></body></html>

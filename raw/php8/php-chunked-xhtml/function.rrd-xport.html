@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>导出 RRD 数据库的相关信息</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.rrd-version.html">« rrd_version</a></li>
+      <li style="float: right;"><a href="function.rrdc-disconnect.html">rrdc_disconnect »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.rrd.html">RRD 函数</a></li>
+    <li>导出 RRD 数据库的相关信息</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.rrd-xport" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">rrd_xport</h1>
+  <p class="verinfo">(PECL rrd &gt;= 0.9.0)</p><p class="refpurpose"><span class="refname">rrd_xport</span> &mdash; <span class="dc-title">导出 RRD 数据库的相关信息</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.rrd-xport-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description"><span class="methodname"><strong>rrd_xport</strong></span>(<span class="methodparam"><span class="type">array</span> <code class="parameter">$options</code></span>): <span class="type">array</span></div>
+
+  <p class="para rdfs-comment">
+   导出 RRD 数据库文件的相关信息。这些数据可以通过用户空间的 PHP 脚本转换为 XML 文件，然后再恢复为 RRD 数据库文件。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.rrd-xport-parameters">
+  <h3 class="title">参数</h3>
+  <dl>
+   
+    <dt>
+<code class="parameter">options</code></dt>
+
+    <dd>
+
+     <p class="para">
+      导出的数组选项，可以通过 rrd xport 手册查看。
+     </p>
+    </dd>
+
+   
+  </dl>
+
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.rrd-xport-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   有关 RRD 数据库文件信息的数组， 或者在失败时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

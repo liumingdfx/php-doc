@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>接受套接字上的连接</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="ref.sockets.html">« Socket 函数</a></li>
+      <li style="float: right;"><a href="function.socket-addrinfo-bind.html">socket_addrinfo_bind »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.sockets.html">Socket 函数</a></li>
+    <li>接受套接字上的连接</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.socket-accept" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">socket_accept</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.1.0, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">socket_accept</span> &mdash; <span class="dc-title">接受套接字上的连接</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.socket-accept-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>socket_accept</strong></span>(<span class="methodparam"><span class="type"><a href="class.socket.html" class="type Socket">Socket</a></span> <code class="parameter">$socket</code></span>): <span class="type"><span class="type"><a href="class.socket.html" class="type Socket">Socket</a></span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   <code class="parameter">socket</code> 是从 <span class="function"><a href="function.socket-create.html" class="function">socket_create()</a></span> 创建，使用 
+   <span class="function"><a href="function.socket-bind.html" class="function">socket_bind()</a></span> 绑定，<span class="function"><a href="function.socket-listen.html" class="function">socket_listen()</a></span> 监听的一个套接字实例。此函数接受在 
+   <code class="parameter">socket</code> 上创建的连接。当连接被成功创建后，返回一个可用于通信的 
+   <span class="classname"><a href="class.socket.html" class="classname">Socket</a></span> 实例。若有多个连接排队，返回队头第一个连接。若没有待处理的连接，那么 
+   <span class="function"><strong>socket_accept()</strong></span> 默认阻塞，直到有一个连接出现。如果 
+   <code class="parameter">socket</code> 使用 <span class="function"><a href="function.socket-set-blocking.html" class="function">socket_set_blocking()</a></span> 或 
+   <span class="function"><a href="function.socket-set-nonblock.html" class="function">socket_set_nonblock()</a></span> 设置为非阻塞，那么 
+   <span class="function"><strong>socket_accept()</strong></span> 将直接返回 <strong><code>false</code></strong>。
+  </p>
+  <p class="para">
+   <span class="function"><strong>socket_accept()</strong></span> 返回的 <span class="classname"><a href="class.socket.html" class="classname">Socket</a></span> 实例不能用于接受新的连接。但 
+   <code class="parameter">socket</code> 依然保持打开状态，并且可以继续接受新的连接。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.socket-accept-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">socket</code></dt>
+
+     <dd>
+
+      <p class="para">
+       使用 <span class="function"><a href="function.socket-create.html" class="function">socket_create()</a></span> 创建的 <span class="classname"><a href="class.socket.html" class="classname">Socket</a></span> 实例。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.socket-accept-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   成功时返回一个新的 <span class="classname"><a href="class.socket.html" class="classname">Socket</a></span> 实例，错误时返回 <strong><code>false</code></strong>。可以通过调用 
+   <span class="function"><a href="function.socket-last-error.html" class="function">socket_last_error()</a></span> 来检索实际的错误代码。将错误代码作为参数传递给 
+   <span class="function"><a href="function.socket-strerror.html" class="function">socket_strerror()</a></span> 以获得错误的文本解释。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.socket-accept-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       成功时，该函数现在返回一个 <span class="classname"><a href="class.socket.html" class="classname">Socket</a></span> 实例；在此之前，返回值是一个 <span class="type">resource</span>。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.socket-accept-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.socket-connect.html" class="function" rel="rdfs-seeAlso">socket_connect()</a> - 开启一个套接字连接</span></li>
+    <li class="member"><span class="function"><a href="function.socket-listen.html" class="function" rel="rdfs-seeAlso">socket_listen()</a> - 监听套接字的连接</span></li>
+    <li class="member"><span class="function"><a href="function.socket-create.html" class="function" rel="rdfs-seeAlso">socket_create()</a> - 创建一个套接字（通讯节点）</span></li>
+    <li class="member"><span class="function"><a href="function.socket-bind.html" class="function" rel="rdfs-seeAlso">socket_bind()</a> - 给套接字绑定名字</span></li>
+    <li class="member"><span class="function"><a href="function.socket-strerror.html" class="function" rel="rdfs-seeAlso">socket_strerror()</a> - 返回描述套接字错误的字符串</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

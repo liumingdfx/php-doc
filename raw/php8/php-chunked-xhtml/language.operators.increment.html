@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>递增／递减运算符</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="language.operators.arithmetic.html">« 算术运算符</a></li>
+      <li style="float: right;"><a href="language.operators.assignment.html">赋值运算符 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="language.operators.html">运算符</a></li>
+    <li>递增／递减运算符</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="language.operators.increment" class="sect1">
+ <h2 class="title">递增／递减运算符</h2>
+ <p class="para">
+  PHP 支持前／后递增与递减运算符。这些一元运算符允许将值递增或递减 1。
+ </p>
+ <table class="doctable table">
+  <caption><strong>递增／递减运算符</strong></caption>
+  
+   <thead>
+    <tr>
+     <th>示例</th>
+     <th>名称</th>
+     <th>效果</th>
+    </tr>
+
+   </thead>
+
+   <tbody class="tbody">
+    <tr>
+     <td>++$a</td>
+     <td>前加</td>
+     <td><var class="varname">$a</var> 的值加一，然后返回 <var class="varname">$a</var>。</td>
+    </tr>
+
+    <tr>
+     <td>$a++</td>
+     <td>后加</td>
+     <td>返回 <var class="varname">$a</var>，然后将 <var class="varname">$a</var> 的值加一。</td>
+    </tr>
+
+    <tr>
+     <td>--$a</td>
+     <td>前减</td>
+     <td><var class="varname">$a</var> 的值减一， 然后返回 <var class="varname">$a</var>。</td>
+    </tr>
+
+    <tr>
+     <td>$a--</td>
+     <td>后减</td>
+     <td>返回 <var class="varname">$a</var>，然后将 <var class="varname">$a</var> 的值减一。</td>
+    </tr>
+
+   </tbody>
+  
+ </table>
+
+
+ <p class="para">
+  一个简单的示例脚本：
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">echo </span><span style="color: #DD0000">'Post-increment:'</span><span style="color: #007700">, </span><span style="color: #0000BB">PHP_EOL</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$a </span><span style="color: #007700">= </span><span style="color: #0000BB">5</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">++);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">);<br /><br />echo </span><span style="color: #DD0000">'Pre-increment:'</span><span style="color: #007700">, </span><span style="color: #0000BB">PHP_EOL</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$a </span><span style="color: #007700">= </span><span style="color: #0000BB">5</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(++</span><span style="color: #0000BB">$a</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">);<br /><br />echo </span><span style="color: #DD0000">'Post-decrement:'</span><span style="color: #007700">, </span><span style="color: #0000BB">PHP_EOL</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$a </span><span style="color: #007700">= </span><span style="color: #0000BB">5</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">--);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">);<br /><br />echo </span><span style="color: #DD0000">'Pre-decrement:'</span><span style="color: #007700">, </span><span style="color: #0000BB">PHP_EOL</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$a </span><span style="color: #007700">= </span><span style="color: #0000BB">5</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(--</span><span style="color: #0000BB">$a</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+   <p class="para">以上示例会输出：</p>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+Post-increment:
+int(5)
+int(6)
+Pre-increment:
+int(6)
+int(6)
+Post-decrement:
+int(5)
+int(4)
+Pre-decrement:
+int(4)
+int(4)
+</pre></div>
+   </div>
+  </div>
+
+  <div class="warning"><strong class="warning">警告</strong>
+   <p class="para">
+    递增和递减运算符对 <span class="type">bool</span> 类型值没有影响。自 PHP 8.3.0 起，会发出
+    <strong><code>E_WARNING</code></strong>，因为将来会默认将该值转换为 <span class="type">int</span>。
+   </p>
+   <p class="para">
+    递减运算符对 <span class="type">null</span> 类型的值没有影响。自 PHP 8.3.0 起，会发出
+    <strong><code>E_WARNING</code></strong>，因为将来会默认将该值转换为 <span class="type">int</span>。
+   </p>
+   <p class="para">
+    递减运算符对非<a href="language.types.numeric-strings.html" class="link">数字字符串</a>没有影响。自
+    PHP 8.3.0 起，会发出 <strong><code>E_WARNING</code></strong>，因为在将来会抛出 <span class="classname"><a href="class.typeerror.html" class="classname">TypeError</a></span>。
+   </p>
+  </div>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    支持重载加/减法的内部对象也可以进行递增或递减。其中一个这样的内部对象是 <span class="classname"><a href="class.gmp.html" class="classname">GMP</a></span>。
+   </p>
+  </p></blockquote>
+ </p>
+
+ <div class="sect2" id="language.operators.increment.string">
+  <h3 class="title">PERL 字符串递增功能</h3>
+  <div class="warning"><strong class="warning">警告</strong>
+   <p class="simpara">
+    自 PHP 8.3.0 起，此功能已软弃用。应该使用 <span class="function"><a href="function.str-increment.html" class="function">str_increment()</a></span> 函数。
+   </p>
+  </div>
+
+  <p class="para">
+   在 PHP 中，可以递增非<a href="language.types.numeric-strings.html" class="link">数字字符串</a>。该字符串必须是字母数字
+   ASCII 字符串。当到达字母 <code class="literal">Z</code> 且递增到下个字母时，将进位到左侧值。例如，<code class="code">$a = &#039;Z&#039;;
+   $a++;</code>将 <var class="varname">$a</var> 变为 <code class="literal">&#039;AA&#039;</code>。
+  </p>
+
+  <div class="example" id="example-323">
+   <p><strong>示例 #1 PERL 字符串递减功能</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">echo </span><span style="color: #DD0000">'== Alphabetic strings ==' </span><span style="color: #007700">. </span><span style="color: #0000BB">PHP_EOL</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$s </span><span style="color: #007700">= </span><span style="color: #DD0000">'W'</span><span style="color: #007700">;<br />for (</span><span style="color: #0000BB">$n</span><span style="color: #007700">=</span><span style="color: #0000BB">0</span><span style="color: #007700">; </span><span style="color: #0000BB">$n</span><span style="color: #007700">&lt;</span><span style="color: #0000BB">6</span><span style="color: #007700">; </span><span style="color: #0000BB">$n</span><span style="color: #007700">++) {<br />    echo ++</span><span style="color: #0000BB">$s </span><span style="color: #007700">. </span><span style="color: #0000BB">PHP_EOL</span><span style="color: #007700">;<br />}<br /></span><span style="color: #FF8000">// 字母数字字符串的不同行为<br /></span><span style="color: #007700">echo </span><span style="color: #DD0000">'== Alphanumeric strings ==' </span><span style="color: #007700">. </span><span style="color: #0000BB">PHP_EOL</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$d </span><span style="color: #007700">= </span><span style="color: #DD0000">'A8'</span><span style="color: #007700">;<br />for (</span><span style="color: #0000BB">$n</span><span style="color: #007700">=</span><span style="color: #0000BB">0</span><span style="color: #007700">; </span><span style="color: #0000BB">$n</span><span style="color: #007700">&lt;</span><span style="color: #0000BB">6</span><span style="color: #007700">; </span><span style="color: #0000BB">$n</span><span style="color: #007700">++) {<br />  echo ++</span><span style="color: #0000BB">$d </span><span style="color: #007700">. </span><span style="color: #0000BB">PHP_EOL</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">$d </span><span style="color: #007700">= </span><span style="color: #DD0000">'A08'</span><span style="color: #007700">;<br />for (</span><span style="color: #0000BB">$n</span><span style="color: #007700">=</span><span style="color: #0000BB">0</span><span style="color: #007700">; </span><span style="color: #0000BB">$n</span><span style="color: #007700">&lt;</span><span style="color: #0000BB">6</span><span style="color: #007700">; </span><span style="color: #0000BB">$n</span><span style="color: #007700">++) {<br />    echo ++</span><span style="color: #0000BB">$d </span><span style="color: #007700">. </span><span style="color: #0000BB">PHP_EOL</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例会输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+== Alphabetic strings ==
+X
+Y
+Z
+AA
+AB
+AC
+== Alphanumeric strings ==
+A9
+B0
+B1
+B2
+B3
+B4
+A09
+A10
+A11
+A12
+A13
+A14
+</pre></div>
+   </div>
+  </div>
+
+  <div class="warning"><strong class="warning">警告</strong>
+   <p class="para">
+    如果数字字母字符串可以解释为<a href="language.types.numeric-strings.html" class="link">数字字符串</a>，则将转换为
+    <span class="type">int</span> 或 <span class="type">float</span>。这对于看起来像以指数形式写出的浮点数字符串来说尤其是一个问题。<span class="function"><a href="function.str-increment.html" class="function">str_increment()</a></span>
+    函数不会受到这些默认类型转换的影响。
+   </p>
+   <div class="example" id="example-326">
+    <p><strong>示例 #2 数字字母字符串转换为浮点数</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$s </span><span style="color: #007700">= </span><span style="color: #DD0000">"5d9"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(++</span><span style="color: #0000BB">$s</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(++</span><span style="color: #0000BB">$s</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+string(3) &quot;5e0&quot;
+float(6)
+</pre></div>
+    </div>
+    <div class="example-contents"><p>
+     这是因为值 <code class="literal">&quot;5e0&quot;</code> 解释为 <span class="type">float</span>，并在递增之前转换为 <code class="literal">5.0</code>。
+    </p></div>
+   </div>
+  </div>
+ </div>
+</div></div></div></body></html>

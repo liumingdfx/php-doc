@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Installing the MongoDB PHP Driver on Windows</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="mongodb.installation.homebrew.html">« Installing the MongoDB PHP Driver on macOS with Homebrew</a></li>
+      <li style="float: right;"><a href="mongodb.installation.manual.html">Building the MongoDB PHP Driver from source »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="mongodb.installation.html">安装</a></li>
+    <li>Installing the MongoDB PHP Driver on Windows</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="mongodb.installation.windows" class="section">
+  <h2 class="title">Installing the MongoDB PHP Driver on Windows</h2>
+
+  <p class="para">
+   Precompiled binaries are attached to the project&#039;s
+   <a href="https://github.com/mongodb/mongo-php-driver/releases/" class="link external">&raquo;&nbsp;Github releases</a>.
+   Archives are published for various combinations of PHP version, thread safety
+   (TS or NTS), and architecture (x86 or x64). Determining the correct archive
+   for the PHP environment and extract the <var class="filename">php_mongodb.dll</var>
+   file to the extension directory (&quot;ext&quot; by default).
+  </p>
+
+  <p class="para">
+   Add the following line to the <var class="filename">php.ini</var> file for each environment that will
+   need to use the driver:
+   <div class="example-contents">
+<div class="inicode"><pre class="inicode">extension=php_mongodb.dll</pre>
+</div>
+   </div>
+
+  </p>
+
+  <p class="para">
+   Failure to select the correct binary will result in an error when attempting
+   to load the extension DLL at runtime:
+   <div class="example-contents">
+<div class="txtcode"><pre class="txtcode">PHP Warning:  PHP Startup: Unable to load dynamic library &#039;mongodb&#039;</pre>
+</div>
+   </div>
+
+  </p>
+
+  <p class="para">
+   Ensure that the downloaded DLL corresponds to the following PHP runtime
+   properties:
+   <ul class="simplelist">
+    <li class="member">PHP version (<strong><code>PHP_VERSION</code></strong>)</li>
+    <li class="member">Thread safety (<strong><code>PHP_ZTS</code></strong>)</li>
+    <li class="member">Architecture (<strong><code>PHP_INT_SIZE</code></strong>)</li>
+   </ul>
+  </p>
+
+  <p class="para">
+   In addition to the aforementioned constants, these properties can also be
+   inferred from <span class="function"><a href="function.phpinfo.html" class="function">phpinfo()</a></span>. If a system has multiple PHP
+   runtimes installed, double-check that the <span class="function"><a href="function.phpinfo.html" class="function">phpinfo()</a></span> output
+   is for the correct environment.
+  </p>
+
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <strong>Additional DLL dependencies for Windows Users</strong><br />
+   <p class="para">
+    为了使此扩展生效，
+<abbr title="Dynamic Link Library">DLL</abbr> 文件必须能在 Windows 系统的
+<var class="envar">PATH</var> 指示的路径下找到。如何操作的信息，请参见题为“<a href="faq.installation.html#faq.installation.addtopath" class="link">如何在 Windows 中将 PHP
+目录加到 PATH 中</a>”的<abbr title="Frequently Asked Questions">FAQ</abbr>。虽然将
+DLL 文件从 PHP 文件夹复制到 Windows 系统目录也行，但不建议这样做。
+<em>此扩展需要下列文件在 <var class="envar">PATH</var> 路径中：</em>
+    <var class="filename">libsasl.dll</var>
+   </p>
+  </p></blockquote>
+ </div></div></div></body></html>

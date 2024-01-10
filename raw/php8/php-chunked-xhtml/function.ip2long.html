@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>将 IPV4 的字符串互联网协议转换成长整型数字</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.inet-pton.html">« inet_pton</a></li>
+      <li style="float: right;"><a href="function.long2ip.html">long2ip »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.network.html">网络 函数</a></li>
+    <li>将 IPV4 的字符串互联网协议转换成长整型数字</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.ip2long" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">ip2long</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">ip2long</span> &mdash; <span class="dc-title">将 IPV4 的字符串互联网协议转换成长整型数字</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.ip2long-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>ip2long</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$ip</code></span>): <span class="type"><span class="type">int</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   函数 <span class="function"><strong>ip2long()</strong></span> 返回 IPV4 网络地址的长整型格式，从标准网络地址格式(点字符串)转化得到。
+  </p>
+  <p class="para">
+   <span class="function"><strong>ip2long()</strong></span> 还可以与非完整IP进行工作。阅读
+   <a href="http://ps-2.kev009.com/wisclibrary/aix52/usr/share/man/info/en_US/a_doc_lib/libs/commtrf2/inet_addr.htm" class="link external">&raquo;&nbsp;http://ps-2.kev009.com/wisclibrary/aix52/usr/share/man/info/en_US/a_doc_lib/libs/commtrf2/inet_addr.htm</a>
+   获得更多信息。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.ip2long-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">ip</code></dt>
+
+     <dd>
+
+      <p class="para">
+      一个标准格式的地址。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.ip2long-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回IP地址转换后的数字，如果 <code class="parameter">ip</code> 无效，则为 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.ip2long-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 <span class="function"><strong>ip2long()</strong></span> 例子</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$ip </span><span style="color: #007700">= </span><span style="color: #0000BB">gethostbyname</span><span style="color: #007700">(</span><span style="color: #DD0000">'www.example.com'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$out </span><span style="color: #007700">= </span><span style="color: #DD0000">"The following URLs are equivalent:&lt;br /&gt;\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$out </span><span style="color: #007700">.= </span><span style="color: #DD0000">'http://www.example.com/, http://' </span><span style="color: #007700">. </span><span style="color: #0000BB">$ip </span><span style="color: #007700">. </span><span style="color: #DD0000">'/, and http://' </span><span style="color: #007700">. </span><span style="color: #0000BB">sprintf</span><span style="color: #007700">(</span><span style="color: #DD0000">"%u"</span><span style="color: #007700">, </span><span style="color: #0000BB">ip2long</span><span style="color: #007700">(</span><span style="color: #0000BB">$ip</span><span style="color: #007700">)) . </span><span style="color: #DD0000">"/&lt;br /&gt;\n"</span><span style="color: #007700">;<br />echo </span><span style="color: #0000BB">$out</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #2 显示 IP 地址</strong></p>
+    <div class="example-contents"><p>
+     第二个例子说明使用 <span class="function"><a href="function.printf.html" class="function">printf()</a></span> 打印转换后的地址：
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$ip   </span><span style="color: #007700">= </span><span style="color: #0000BB">gethostbyname</span><span style="color: #007700">(</span><span style="color: #DD0000">'www.example.com'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$long </span><span style="color: #007700">= </span><span style="color: #0000BB">ip2long</span><span style="color: #007700">(</span><span style="color: #0000BB">$ip</span><span style="color: #007700">);<br /><br />if (</span><span style="color: #0000BB">$long </span><span style="color: #007700">== -</span><span style="color: #0000BB">1 </span><span style="color: #007700">|| </span><span style="color: #0000BB">$long </span><span style="color: #007700">=== </span><span style="color: #0000BB">FALSE</span><span style="color: #007700">) {<br />    echo </span><span style="color: #DD0000">'Invalid IP, please try again'</span><span style="color: #007700">;<br />} else {<br />    echo </span><span style="color: #0000BB">$ip   </span><span style="color: #007700">. </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;            </span><span style="color: #FF8000">// 192.0.34.166<br />    </span><span style="color: #007700">echo </span><span style="color: #0000BB">$long </span><span style="color: #007700">. </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;            </span><span style="color: #FF8000">// 3221234342 （-1073732954 32 位系统，整型溢出）<br />    </span><span style="color: #0000BB">printf</span><span style="color: #007700">(</span><span style="color: #DD0000">"%u\n"</span><span style="color: #007700">, </span><span style="color: #0000BB">ip2long</span><span style="color: #007700">(</span><span style="color: #0000BB">$ip</span><span style="color: #007700">)); </span><span style="color: #FF8000">// 3221234342<br /></span><span style="color: #007700">}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.ip2long-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    因为 PHP 的 <span class="type">int</span> 类型是有符号，并且有许多的 IP 地址将导致在 32
+    位系统的情况下为负数，你需要使用“%u”进行转换通过 <span class="function"><a href="function.sprintf.html" class="function">sprintf()</a></span> 或
+    <span class="function"><a href="function.printf.html" class="function">printf()</a></span> 得到的字符串来表示无符号的 IP 地址。
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    由于整数值溢出，<span class="function"><strong>ip2long()</strong></span> 将为 32 位系统上的 IP
+    <code class="literal">255.255.255.255</code> 返回 <code class="literal">-1</code>。
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.ip2long-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.long2ip.html" class="function" rel="rdfs-seeAlso">long2ip()</a> - 将长整型转化为字符串形式带点的互联网标准格式地址（IPV4）</span></li>
+    <li class="member"><span class="function"><a href="function.sprintf.html" class="function" rel="rdfs-seeAlso">sprintf()</a> - 返回格式化字符串</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

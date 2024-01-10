@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>在 fd 上执行 C 标准库的 fcntl</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.dio-close.html">« dio_close</a></li>
+      <li style="float: right;"><a href="function.dio-open.html">dio_open »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.dio.html">Direct IO 函数</a></li>
+    <li>在 fd 上执行 C 标准库的 fcntl</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.dio-fcntl" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">dio_fcntl</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.2.0, PHP 5 &lt; 5.1.0)</p><p class="refpurpose"><span class="refname">dio_fcntl</span> &mdash; <span class="dc-title">在 fd 上执行 C 标准库的 fcntl</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.dio-fcntl-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>dio_fcntl</strong></span>(<span class="methodparam"><span class="type">resource</span> <code class="parameter">$fd</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$cmd</code></span>, <span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$args</code><span class="initializer"> = ?</span></span>): <span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>dio_fcntl()</strong></span> 函数在 <code class="parameter">fd</code> 
+   文件描述符上执行 <code class="parameter">cmd</code> 
+   指定的操作。一些命令需要提供额外的 <code class="parameter">args</code> 
+   参数。
+  </p>
+ </div>
+
+ <div class="refsect1 parameters" id="refsect1-function.dio-fcntl-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">fd</code></dt>
+
+     <dd>
+
+      <p class="para">
+       <span class="function"><a href="function.dio-open.html" class="function">dio_open()</a></span> 返回的文件描述符。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">cmd</code></dt>
+
+     <dd>
+
+      <p class="para">
+       可以是以下操作：
+       <ul class="itemizedlist">
+        <li class="listitem">
+         <p class="para">
+          <strong><code>F_SETLK</code></strong> - 设置或清除锁。如果其他人持有锁 <span class="function"><strong>dio_fcntl()</strong></span> 
+          返回 -1。
+         </p>
+        </li>
+        <li class="listitem">
+         <p class="para">
+          <strong><code>F_SETLKW</code></strong> - 和 <strong><code>F_SETLK</code></strong> 
+          相似，但如果其他人持有锁，<span class="function"><strong>dio_fcntl()</strong></span> 等待锁释放。
+         </p>
+        </li>
+        <li class="listitem">
+         <p class="para">
+          <strong><code>F_GETLK</code></strong> - 如果其他人阻止锁定，<span class="function"><strong>dio_fcntl()</strong></span> 
+          返回关联数组（如下所述）。如果没有阻塞，键“type”将设置为 <strong><code>F_UNLCK</code></strong>。
+         </p>
+        </li>
+        <li class="listitem">
+         <p class="para">
+          <strong><code>F_DUPFD</code></strong> - 查找大于或等于 <code class="parameter">args</code> 的最小可用文件描述符，并将其返回。
+         </p>
+        </li>
+        <li class="listitem">
+         <p class="para">
+          <strong><code>F_SETFL</code></strong> - 设置 <code class="parameter">args</code> 
+          指定的文件描述符标志。可以是 <strong><code>O_APPEND</code></strong>、<strong><code>O_NONBLOCK</code></strong> 
+          或 <strong><code>O_ASYNC</code></strong>。要使用 <strong><code>O_ASYNC</code></strong> 
+          需要依赖 <a href="ref.pcntl.html" class="link">PCNTL</a> 扩展。
+         </p>
+        </li>
+       </ul>
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">args</code></dt>
+
+     <dd>
+
+      <p class="para">
+       当 <code class="parameter">cmd</code> 是 <strong><code>F_SETLK</code></strong> 
+       或 <strong><code>F_SETLLW</code></strong> 时，<code class="parameter">args</code> 
+       是包含以下键的关联数组：
+       <ul class="itemizedlist">
+        <li class="listitem">
+         <p class="para">
+          <code class="literal">start</code> - 开始锁定的偏移
+         </p>
+        </li>
+        <li class="listitem">
+         <p class="para">
+          <code class="literal">length</code> - 锁定区域大小。0 代表文件结尾
+         </p>
+        </li>
+        <li class="listitem">
+         <p class="para">
+          <code class="literal">whence</code> - l_start 的相对位置可以是：<strong><code>SEEK_SET</code></strong>、<strong><code>SEEK_END</code></strong>
+          和 <strong><code>SEEK_CUR</code></strong>
+         </p>
+        </li>
+        <li class="listitem">
+         <p class="para">
+          <code class="literal">type</code> - 锁类型：可以是 <strong><code>F_RDLCK</code></strong> 
+          （读锁），<strong><code>F_WRLCK</code></strong>（写锁）或 <strong><code>F_UNLCK</code></strong> 
+          （解锁）。
+         </p>
+        </li>
+       </ul>
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+ <div class="refsect1 returnvalues" id="refsect1-function.dio-fcntl-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回 C 调用的结果。
+  </p>
+ </div>
+
+ <div class="refsect1 examples" id="refsect1-function.dio-fcntl-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 设置并清除锁</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />$fd </span><span style="color: #007700">= </span><span style="color: #0000BB">dio_open</span><span style="color: #007700">(</span><span style="color: #DD0000">'/dev/ttyS0'</span><span style="color: #007700">, </span><span style="color: #0000BB">O_RDWR</span><span style="color: #007700">);<br /><br />if (</span><span style="color: #0000BB">dio_fcntl</span><span style="color: #007700">(</span><span style="color: #0000BB">$fd</span><span style="color: #007700">, </span><span style="color: #0000BB">F_SETLK</span><span style="color: #007700">, Array(</span><span style="color: #DD0000">"type"</span><span style="color: #007700">=&gt;</span><span style="color: #0000BB">F_WRLCK</span><span style="color: #007700">)) == -</span><span style="color: #0000BB">1</span><span style="color: #007700">) {<br />   </span><span style="color: #FF8000">// the file descriptor appears locked<br />   </span><span style="color: #007700">echo </span><span style="color: #DD0000">"The lock can not be cleared. It is held by someone else."</span><span style="color: #007700">;<br />} else {<br />   echo </span><span style="color: #DD0000">"Lock successfully set/cleared"</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">dio_close</span><span style="color: #007700">(</span><span style="color: #0000BB">$fd</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.dio-fcntl-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">注意</strong>: <span class="simpara">此函数未在 Windows 平台下实现。</span></p></blockquote>
+ </div>
+
+</div></div></div></body></html>

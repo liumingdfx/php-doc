@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>属性</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="language.oop5.basic.html">« 基本概念</a></li>
+      <li style="float: right;"><a href="language.oop5.constants.html">类常量 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="language.oop5.html">类与对象</a></li>
+    <li>属性</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="language.oop5.properties" class="sect1">
+  <h2 class="title">属性</h2>
+
+  <p class="para">
+   类的变量成员叫做<em>属性</em>，或者叫<em>字段</em>，在本文档统一称为<em>属性</em>。
+   属性开头至少使用一个修饰符（比如 <a href="language.oop5.visibility.html" class="xref">访问控制（可见性）</a>、<a href="language.oop5.static.html" class="xref">静态（static）关键字</a>或者自 PHP 8.1.0 起支持的 <a href="language.oop5.properties.html#language.oop5.properties.readonly-properties" class="link">readonly</a>），
+   除了 <code class="code">readonly</code> 属性之外都是可选的，然后自 PHP 7.4 
+   起可以跟一个类型声明，然后跟一个普通的变量声明来组成。属性中的变量可以初始化，但是初始化的值必须是 <a href="language.constants.html" class="link">常量</a>值。
+  </p>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    另一种过时的声明类属性的方法是使用 <code class="literal">var</code> 关键字，而不是使用修饰符。
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <span class="simpara">
+    没有声明 <a href="language.oop5.visibility.html" class="xref">访问控制（可见性）</a> 修饰符的属性将默认声明为 <code class="literal">public</code>。
+   </span>
+  </p></blockquote>
+  <p class="para">
+   在类的成员方法里面，可以用 <code class="literal">-&gt;</code>（对象运算符）：<var class="varname">$this->property</var>（其中
+   <code class="literal">property</code> 是该属性名）这种方式来访问非静态属性。静态属性则是用
+   <code class="literal">::</code>（双冒号）：<var class="varname">self::$property</var>
+   来访问。更多静态属性与非静态属性的区别参见 <a href="language.oop5.static.html" class="xref">静态（static）关键字</a>。
+  </p>
+  <p class="para">
+   当一个方法在类定义内部被调用时，有一个可用的伪变量
+   <var class="varname">$this</var>。<var class="varname">$this</var>
+   是一个到主叫对象的引用（通常是该方法所从属的对象，但如果是从第二个对象<a href="language.oop5.static.html" class="link">静态</a>调用时也可能是另一个对象）。
+  </p>
+
+  <p class="para">
+   <div class="example" id="example-638">
+    <p><strong>示例 #1 属性声明</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">SimpleClass<br /></span><span style="color: #007700">{<br />   public </span><span style="color: #0000BB">$var1 </span><span style="color: #007700">= </span><span style="color: #DD0000">'hello ' </span><span style="color: #007700">. </span><span style="color: #DD0000">'world'</span><span style="color: #007700">;<br />   public </span><span style="color: #0000BB">$var2 </span><span style="color: #007700">= &lt;&lt;&lt;EOD<br /></span><span style="color: #DD0000">hello world<br /></span><span style="color: #007700">EOD;<br />   public </span><span style="color: #0000BB">$var3 </span><span style="color: #007700">= </span><span style="color: #0000BB">1</span><span style="color: #007700">+</span><span style="color: #0000BB">2</span><span style="color: #007700">;<br />   </span><span style="color: #FF8000">// 错误的属性声明<br />   </span><span style="color: #007700">public </span><span style="color: #0000BB">$var4 </span><span style="color: #007700">= </span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">myStaticMethod</span><span style="color: #007700">();<br />   public </span><span style="color: #0000BB">$var5 </span><span style="color: #007700">= </span><span style="color: #0000BB">$myVar</span><span style="color: #007700">;<br /><br />   </span><span style="color: #FF8000">// 正确的属性声明<br />   </span><span style="color: #007700">public </span><span style="color: #0000BB">$var6 </span><span style="color: #007700">= </span><span style="color: #0000BB">myConstant</span><span style="color: #007700">;<br />   public </span><span style="color: #0000BB">$var7 </span><span style="color: #007700">= array(</span><span style="color: #0000BB">true</span><span style="color: #007700">, </span><span style="color: #0000BB">false</span><span style="color: #007700">);<br /><br />   public </span><span style="color: #0000BB">$var8 </span><span style="color: #007700">= &lt;&lt;&lt;'EOD'<br /></span><span style="color: #DD0000">hello world<br /></span><span style="color: #007700">EOD;<br /><br />   </span><span style="color: #FF8000">// 没有访问控制修饰符：<br />   </span><span style="color: #007700">static </span><span style="color: #0000BB">$var9</span><span style="color: #007700">;<br />   readonly </span><span style="color: #0000BB">int $var10</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+   
+   </div>
+  </p>
+
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    更多关于类／对象的处理函数，请查看<a href="ref.classobj.html" class="link">类／对象函数</a>。
+   </p>
+  </p></blockquote>
+
+ <div class="sect2" id="language.oop5.properties.typed-properties">
+  <h3 class="title">类型声明</h3>
+  <p class="para">
+   从 PHP 7.4.0 开始，属性定义可以包含<a href="language.types.declarations.html" class="xref">类型声明</a>，但
+   <span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span> 除外。
+   <div class="example" id="uopz-set-static.example.basic">
+    <p><strong>示例 #2 类型声明的示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">class </span><span style="color: #0000BB">User<br /></span><span style="color: #007700">{<br />    public </span><span style="color: #0000BB">int $id</span><span style="color: #007700">;<br />    public ?</span><span style="color: #0000BB">string $name</span><span style="color: #007700">;<br /><br />    public function </span><span style="color: #0000BB">__construct</span><span style="color: #007700">(</span><span style="color: #0000BB">int $id</span><span style="color: #007700">, ?</span><span style="color: #0000BB">string $name</span><span style="color: #007700">)<br />    {<br />        </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">id </span><span style="color: #007700">= </span><span style="color: #0000BB">$id</span><span style="color: #007700">;<br />        </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">name </span><span style="color: #007700">= </span><span style="color: #0000BB">$name</span><span style="color: #007700">;<br />    }<br />}<br /><br /></span><span style="color: #0000BB">$user </span><span style="color: #007700">= new </span><span style="color: #0000BB">User</span><span style="color: #007700">(</span><span style="color: #0000BB">1234</span><span style="color: #007700">, </span><span style="color: #0000BB">null</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$user</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">id</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$user</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">name</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+     <div class="cdata"><pre>
+int(1234)
+NULL
+</pre></div>
+    </div>
+   </div>
+  </p>
+
+  <p class="para">
+   类型属性必须在访问前初始化，否则会抛出 <span class="classname"><a href="class.error.html" class="classname">Error</a></span> 。
+   <div class="example" id="example-644">
+    <p><strong>示例 #3 访问属性</strong></p>
+    <div class="example-contents">
+     <div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">class </span><span style="color: #0000BB">Shape<br /></span><span style="color: #007700">{<br />    public </span><span style="color: #0000BB">int $numberOfSides</span><span style="color: #007700">;<br />    public </span><span style="color: #0000BB">string $name</span><span style="color: #007700">;<br /><br />    public function </span><span style="color: #0000BB">setNumberOfSides</span><span style="color: #007700">(</span><span style="color: #0000BB">int $numberOfSides</span><span style="color: #007700">): </span><span style="color: #0000BB">void<br />    </span><span style="color: #007700">{<br />        </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">numberOfSides </span><span style="color: #007700">= </span><span style="color: #0000BB">$numberOfSides</span><span style="color: #007700">;<br />    }<br /><br />    public function </span><span style="color: #0000BB">setName</span><span style="color: #007700">(</span><span style="color: #0000BB">string $name</span><span style="color: #007700">): </span><span style="color: #0000BB">void<br />    </span><span style="color: #007700">{<br />        </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">name </span><span style="color: #007700">= </span><span style="color: #0000BB">$name</span><span style="color: #007700">;<br />    }<br /><br />    public function </span><span style="color: #0000BB">getNumberOfSides</span><span style="color: #007700">(): </span><span style="color: #0000BB">int<br />    </span><span style="color: #007700">{<br />        return </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">numberOfSides</span><span style="color: #007700">;<br />    }<br /><br />    public function </span><span style="color: #0000BB">getName</span><span style="color: #007700">(): </span><span style="color: #0000BB">string<br />    </span><span style="color: #007700">{<br />        return </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">name</span><span style="color: #007700">;<br />    }<br />}<br /><br /></span><span style="color: #0000BB">$triangle </span><span style="color: #007700">= new </span><span style="color: #0000BB">Shape</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$triangle</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setName</span><span style="color: #007700">(</span><span style="color: #DD0000">"triangle"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$triangle</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setNumberofSides</span><span style="color: #007700">(</span><span style="color: #0000BB">3</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$triangle</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getName</span><span style="color: #007700">());<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$triangle</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getNumberOfSides</span><span style="color: #007700">());<br /><br /></span><span style="color: #0000BB">$circle </span><span style="color: #007700">= new </span><span style="color: #0000BB">Shape</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$circle</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setName</span><span style="color: #007700">(</span><span style="color: #DD0000">"circle"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$circle</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getName</span><span style="color: #007700">());<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$circle</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getNumberOfSides</span><span style="color: #007700">());<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+     <div class="cdata"><pre>
+string(8) &quot;triangle&quot;
+int(3)
+string(6) &quot;circle&quot;
+
+Fatal error: Uncaught Error: Typed property Shape::$numberOfSides must not be accessed before initialization
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+ <div class="sect2" id="language.oop5.properties.readonly-properties">
+  <h3 class="title">只读属性</h3>
+  <p class="para">
+   自 PHP 8.1.0 起，可以使用 <code class="code">readonly</code> 修饰符声明属性，防止初始化后修改属性。
+   <div class="example" id="example-647">
+    <p><strong>示例 #4 只读属性示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">Test </span><span style="color: #007700">{<br />   public readonly </span><span style="color: #0000BB">string $prop</span><span style="color: #007700">;<br />   public function </span><span style="color: #0000BB">__construct</span><span style="color: #007700">(</span><span style="color: #0000BB">string $prop</span><span style="color: #007700">) {<br />       </span><span style="color: #FF8000">// 初始化正常。<br />       </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">prop </span><span style="color: #007700">= </span><span style="color: #0000BB">$prop</span><span style="color: #007700">;<br />   }<br />}<br /></span><span style="color: #0000BB">$test </span><span style="color: #007700">= new </span><span style="color: #0000BB">Test</span><span style="color: #007700">(</span><span style="color: #DD0000">"foobar"</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">// 读取正常。<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$test</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">prop</span><span style="color: #007700">); </span><span style="color: #FF8000">// string(6) "foobar"<br />// 再赋值异常。分配的值是否相同并不重要。<br /></span><span style="color: #0000BB">$test</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">prop </span><span style="color: #007700">= </span><span style="color: #DD0000">"foobar"</span><span style="color: #007700">;<br /></span><span style="color: #FF8000">// Error: Cannot modify readonly property Test::$prop<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+   <blockquote class="note"><p><strong class="note">注意</strong>: 
+    <p class="para">
+     readonly 修饰符只能应用于<a href="language.oop5.properties.html#language.oop5.properties.typed-properties" class="link">类型化属性</a>。可以使用
+     <a href="language.types.mixed.html" class="xref">Mixed</a> 类型创建没有类型约束的只读属性。
+    </p>
+   </p></blockquote>
+   <blockquote class="note"><p><strong class="note">注意</strong>: 
+    <p class="para">
+     不支持对静态属性只读。
+    </p>
+   </p></blockquote>
+  </p>
+  <p class="para">
+   只读属性只能初始化一次，并且只能从声明它的作用域内初始化。对属性的任何赋值和修改都会导致 <span class="classname"><a href="class.error.html" class="classname">Error</a></span> 异常。
+   <div class="example" id="example-650">
+    <p><strong>示例 #5 初始化只读属性异常</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">Test1 </span><span style="color: #007700">{<br />    public readonly </span><span style="color: #0000BB">string $prop</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">$test1 </span><span style="color: #007700">= new </span><span style="color: #0000BB">Test1</span><span style="color: #007700">;<br /></span><span style="color: #FF8000">// 私有作用域之外异常初始化。<br /></span><span style="color: #0000BB">$test1</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">prop </span><span style="color: #007700">= </span><span style="color: #DD0000">"foobar"</span><span style="color: #007700">;<br /></span><span style="color: #FF8000">// Error: Cannot initialize readonly property Test1::$prop from global scope<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    禁止在只读属性上指定默认值，因为具有默认值的只读属性等同于常量，因此不是特别有用。
+    <div class="example" id="example-653">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">Test </span><span style="color: #007700">{<br />    </span><span style="color: #FF8000">// Fatal error: Readonly property Test::$prop cannot have default value<br />    </span><span style="color: #007700">public readonly </span><span style="color: #0000BB">int $prop </span><span style="color: #007700">= </span><span style="color: #0000BB">42</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </div>
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    只读属性一旦初始化就不能 <span class="function"><a href="function.unset.html" class="function">unset()</a></span>。但可以在初始化之前从声明属性的作用域中取消只读属性。
+   </p>
+  </p></blockquote>
+  <p class="para">
+   修改不一定是简单的赋值，以下所有行为也会导致 <span class="classname"><a href="class.error.html" class="classname">Error</a></span> 异常：
+   <div class="example" id="example-656">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">Test </span><span style="color: #007700">{<br />    public function </span><span style="color: #0000BB">__construct</span><span style="color: #007700">(<br />        public readonly </span><span style="color: #0000BB">int $i </span><span style="color: #007700">= </span><span style="color: #0000BB">0</span><span style="color: #007700">,<br />        public readonly array </span><span style="color: #0000BB">$ary </span><span style="color: #007700">= [],<br />    ) {}<br />}<br /></span><span style="color: #0000BB">$test </span><span style="color: #007700">= new </span><span style="color: #0000BB">Test</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$test</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">i </span><span style="color: #007700">+= </span><span style="color: #0000BB">1</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$test</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">i</span><span style="color: #007700">++;<br />++</span><span style="color: #0000BB">$test</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">i</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$test</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">ary</span><span style="color: #007700">[] = </span><span style="color: #0000BB">1</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$test</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">ary</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">][] = </span><span style="color: #0000BB">1</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$ref </span><span style="color: #007700">=&amp; </span><span style="color: #0000BB">$test</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">i</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$test</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">i </span><span style="color: #007700">=&amp; </span><span style="color: #0000BB">$ref</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">byRef</span><span style="color: #007700">(</span><span style="color: #0000BB">$test</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">i</span><span style="color: #007700">);<br />foreach (</span><span style="color: #0000BB">$test </span><span style="color: #007700">as &amp;</span><span style="color: #0000BB">$prop</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   然而，只读属性并不会妨碍内部可变性。存储在只读属性中的对象（或资源）仍然可以在内部修改：
+   <div class="example" id="example-659">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">Test </span><span style="color: #007700">{<br />    public function </span><span style="color: #0000BB">__construct</span><span style="color: #007700">(public readonly </span><span style="color: #0000BB">object $obj</span><span style="color: #007700">) {}<br />}<br /></span><span style="color: #0000BB">$test </span><span style="color: #007700">= new </span><span style="color: #0000BB">Test</span><span style="color: #007700">(new </span><span style="color: #0000BB">stdClass</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">// 内部可变正常。<br /></span><span style="color: #0000BB">$test</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">obj</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">foo </span><span style="color: #007700">= </span><span style="color: #0000BB">1</span><span style="color: #007700">;<br /></span><span style="color: #FF8000">// 赋值异常。<br /></span><span style="color: #0000BB">$test</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">obj </span><span style="color: #007700">= new </span><span style="color: #0000BB">stdClass</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+ <div class="sect2" id="language.oop5.properties.dynamic-properties">
+  <h3 class="title">动态属性</h3>
+  <p class="para">
+   如果尝试在 <span class="type">object</span> 上赋值不存在的属性，PHP
+   将会自动创建相应的属性。动态创建的属性将<em>仅能</em>在此类实例上使用。
+  </p>
+
+  <div class="warning"><strong class="warning">警告</strong>
+   <p class="simpara">
+    自 PHP 8.2.0 起弃用动态属性。建议更改为属性声明。要处理任意属性名称，类应该实现魔术方法
+    <a href="language.oop5.overloading.html#object.get" class="link">__get()</a> 和 <a href="language.oop5.overloading.html#object.set" class="link">__set()</a>。最后可以使用 <code class="code">#[\AllowDynamicProperties]</code>
+    注解标记此类。
+   </p>
+  </div>
+ </div>
+
+</div></div></div></body></html>

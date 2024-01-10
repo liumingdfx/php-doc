@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>绘制部分弧形并填充</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.imagefill.html">« imagefill</a></li>
+      <li style="float: right;"><a href="function.imagefilledellipse.html">imagefilledellipse »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.image.html">GD 和图像处理 函数</a></li>
+    <li>绘制部分弧形并填充</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.imagefilledarc" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">imagefilledarc</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.0.6, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">imagefilledarc</span> &mdash; <span class="dc-title">绘制部分弧形并填充</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.imagefilledarc-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>imagefilledarc</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><a href="class.gdimage.html" class="type GdImage">GdImage</a></span> <code class="parameter">$image</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$center_x</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$center_y</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$width</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$height</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$start_angle</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$end_angle</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$color</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$style</code></span><br>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   在指定 <code class="parameter">image</code> 中以指定坐标为中心绘制部分弧形。
+  </p>
+ </div>
+
+ <div class="refsect1 parameters" id="refsect1-function.imagefilledarc-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    <dt>
+
+<code class="parameter">image</code></dt>
+<dd>
+<p class="para">由图象创建函数(例如<span class="function"><a href="function.imagecreatetruecolor.html" class="function">imagecreatetruecolor()</a></span>)返回的 
+<span class="classname"><a href="class.gdimage.html" class="classname">GdImage</a></span> 对象。</p></dd>
+
+    
+     <dt>
+<code class="parameter">center_x</code></dt>
+
+     <dd>
+
+      <p class="para">
+       中间的 x 坐标。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">center_y</code></dt>
+
+     <dd>
+
+      <p class="para">
+       中间的 y 坐标。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">width</code></dt>
+
+     <dd>
+
+      <p class="para">
+       弧形宽度。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">height</code></dt>
+
+     <dd>
+
+      <p class="para">
+       弧形高度。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">start_angle</code></dt>
+
+     <dd>
+
+      <p class="para">
+       弧形起始角，以度为单位。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">end_angle</code></dt>
+
+     <dd>
+
+      <p class="para">
+       弧形结束角度，以度为单位。0° 位于三点钟位置，顺时针绘制弧形。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">color</code></dt>
+
+     <dd>
+
+      <p class="para">
+       颜色标识符使用 <span class="function"><a href="function.imagecolorallocate.html" class="function">imagecolorallocate()</a></span> 创建。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">style</code></dt>
+
+     <dd>
+
+      <p class="para">
+       值可以是下列值的按位或（OR）：
+       <ol type="1">
+        <li class="listitem"><span class="simpara"><strong><code>IMG_ARC_PIE</code></strong></span></li>
+        <li class="listitem"><span class="simpara"><strong><code>IMG_ARC_CHORD</code></strong></span></li>
+        <li class="listitem"><span class="simpara"><strong><code>IMG_ARC_NOFILL</code></strong></span></li>
+        <li class="listitem"><span class="simpara"><strong><code>IMG_ARC_EDGED</code></strong></span></li>
+       </ol>
+       <strong><code>IMG_ARC_PIE</code></strong> 和 <strong><code>IMG_ARC_CHORD</code></strong>
+       是互斥的；<strong><code>IMG_ARC_CHORD</code></strong>
+       只是用直线连接了起始和结束点，<strong><code>IMG_ARC_PIE</code></strong>
+       则产生圆形边界。<strong><code>IMG_ARC_NOFILL</code></strong>
+       指明弧或弦只有轮廓，不填充。<strong><code>IMG_ARC_EDGED</code></strong>
+       指明用直线将起始和结束点与中心点相连，和 <strong><code>IMG_ARC_NOFILL</code></strong>
+       一起使用是画饼状图轮廓的好方法（而不用填充）。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+ <div class="refsect1 returnvalues" id="refsect1-function.imagefilledarc-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   成功时返回 <strong><code>true</code></strong>， 或者在失败时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.imagefilledarc-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+ <td>8.0.0</td>
+ <td>
+  <code class="parameter">image</code> 现在需要 <span class="classname"><a href="class.gdimage.html" class="classname">GdImage</a></span> 实例；之前需要有效的 <code class="literal">gd</code> <span class="type">resource</span>。
+ </td>
+</tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.imagefilledarc-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 创建 3D 外观的饼图</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #FF8000">// 创建图像<br /></span><span style="color: #0000BB">$image </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecreatetruecolor</span><span style="color: #007700">(</span><span style="color: #0000BB">100</span><span style="color: #007700">, </span><span style="color: #0000BB">100</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 分配一些颜色<br /></span><span style="color: #0000BB">$white    </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">0xFF</span><span style="color: #007700">, </span><span style="color: #0000BB">0xFF</span><span style="color: #007700">, </span><span style="color: #0000BB">0xFF</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$gray     </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">0xC0</span><span style="color: #007700">, </span><span style="color: #0000BB">0xC0</span><span style="color: #007700">, </span><span style="color: #0000BB">0xC0</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$darkgray </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">0x90</span><span style="color: #007700">, </span><span style="color: #0000BB">0x90</span><span style="color: #007700">, </span><span style="color: #0000BB">0x90</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$navy     </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">0x00</span><span style="color: #007700">, </span><span style="color: #0000BB">0x00</span><span style="color: #007700">, </span><span style="color: #0000BB">0x80</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$darknavy </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">0x00</span><span style="color: #007700">, </span><span style="color: #0000BB">0x00</span><span style="color: #007700">, </span><span style="color: #0000BB">0x50</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$red      </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">0xFF</span><span style="color: #007700">, </span><span style="color: #0000BB">0x00</span><span style="color: #007700">, </span><span style="color: #0000BB">0x00</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$darkred  </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">0x90</span><span style="color: #007700">, </span><span style="color: #0000BB">0x00</span><span style="color: #007700">, </span><span style="color: #0000BB">0x00</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 创建 3D 效果<br /></span><span style="color: #007700">for (</span><span style="color: #0000BB">$i </span><span style="color: #007700">= </span><span style="color: #0000BB">60</span><span style="color: #007700">; </span><span style="color: #0000BB">$i </span><span style="color: #007700">&gt; </span><span style="color: #0000BB">50</span><span style="color: #007700">; </span><span style="color: #0000BB">$i</span><span style="color: #007700">--) {<br />   </span><span style="color: #0000BB">imagefilledarc</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">50</span><span style="color: #007700">, </span><span style="color: #0000BB">$i</span><span style="color: #007700">, </span><span style="color: #0000BB">100</span><span style="color: #007700">, </span><span style="color: #0000BB">50</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">45</span><span style="color: #007700">, </span><span style="color: #0000BB">$darknavy</span><span style="color: #007700">, </span><span style="color: #0000BB">IMG_ARC_PIE</span><span style="color: #007700">);<br />   </span><span style="color: #0000BB">imagefilledarc</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">50</span><span style="color: #007700">, </span><span style="color: #0000BB">$i</span><span style="color: #007700">, </span><span style="color: #0000BB">100</span><span style="color: #007700">, </span><span style="color: #0000BB">50</span><span style="color: #007700">, </span><span style="color: #0000BB">45</span><span style="color: #007700">, </span><span style="color: #0000BB">75 </span><span style="color: #007700">, </span><span style="color: #0000BB">$darkgray</span><span style="color: #007700">, </span><span style="color: #0000BB">IMG_ARC_PIE</span><span style="color: #007700">);<br />   </span><span style="color: #0000BB">imagefilledarc</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">50</span><span style="color: #007700">, </span><span style="color: #0000BB">$i</span><span style="color: #007700">, </span><span style="color: #0000BB">100</span><span style="color: #007700">, </span><span style="color: #0000BB">50</span><span style="color: #007700">, </span><span style="color: #0000BB">75</span><span style="color: #007700">, </span><span style="color: #0000BB">360 </span><span style="color: #007700">, </span><span style="color: #0000BB">$darkred</span><span style="color: #007700">, </span><span style="color: #0000BB">IMG_ARC_PIE</span><span style="color: #007700">);<br />}<br /><br /></span><span style="color: #0000BB">imagefilledarc</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">50</span><span style="color: #007700">, </span><span style="color: #0000BB">50</span><span style="color: #007700">, </span><span style="color: #0000BB">100</span><span style="color: #007700">, </span><span style="color: #0000BB">50</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">45</span><span style="color: #007700">, </span><span style="color: #0000BB">$navy</span><span style="color: #007700">, </span><span style="color: #0000BB">IMG_ARC_PIE</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagefilledarc</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">50</span><span style="color: #007700">, </span><span style="color: #0000BB">50</span><span style="color: #007700">, </span><span style="color: #0000BB">100</span><span style="color: #007700">, </span><span style="color: #0000BB">50</span><span style="color: #007700">, </span><span style="color: #0000BB">45</span><span style="color: #007700">, </span><span style="color: #0000BB">75 </span><span style="color: #007700">, </span><span style="color: #0000BB">$gray</span><span style="color: #007700">, </span><span style="color: #0000BB">IMG_ARC_PIE</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagefilledarc</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">50</span><span style="color: #007700">, </span><span style="color: #0000BB">50</span><span style="color: #007700">, </span><span style="color: #0000BB">100</span><span style="color: #007700">, </span><span style="color: #0000BB">50</span><span style="color: #007700">, </span><span style="color: #0000BB">75</span><span style="color: #007700">, </span><span style="color: #0000BB">360 </span><span style="color: #007700">, </span><span style="color: #0000BB">$red</span><span style="color: #007700">, </span><span style="color: #0000BB">IMG_ARC_PIE</span><span style="color: #007700">);<br /><br /><br /></span><span style="color: #FF8000">// 输出图像<br /></span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">'Content-type: image/png'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagepng</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagedestroy</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例的输出类似于：</p></div>
+    <div class="mediaobject">
+     
+     <div class="imageobject">
+      <img src="images/21009b70229598c6a80eef8b45bf282b-imagefilledarc.png" alt="示例输出：创建 3D 外观的饼图" width="100" height="100" />
+     </div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

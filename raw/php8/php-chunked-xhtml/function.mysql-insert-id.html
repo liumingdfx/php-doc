@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>取得上一条查询生成的 ID</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.mysql-info.html">« mysql_info</a></li>
+      <li style="float: right;"><a href="function.mysql-list-dbs.html">mysql_list_dbs »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.mysql.html">MySQL 函数</a></li>
+    <li>取得上一条查询生成的 ID</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.mysql-insert-id" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">mysql_insert_id</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">mysql_insert_id</span> &mdash; <span class="dc-title">取得上一条查询生成的 ID</span></p>
+
+ </div>
+
+ <div id="function.mysql-insert-id-refsynopsisdiv">
+  <div class="warning"><strong class="warning">警告</strong>
+   <p class="para">本扩展自 PHP 5.5.0
+起已废弃，并在自 PHP 7.0.0 开始被移除。应使用 <a href="book.mysqli.html" class="link">MySQLi</a>
+或 <a href="ref.pdo-mysql.html" class="link">PDO_MySQL</a> 扩展来替换之。参见 <a href="mysqlinfo.api.choosing.html" class="link">MySQL：选择 API</a> 
+指南来获取更多信息。用以替代本函数的有：</p>
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="mysqli.insert-id.html" class="function">mysqli_insert_id()</a></span></li>
+    <li class="member"><span class="methodname"><a href="pdo.lastinsertid.html" class="methodname">PDO::lastInsertId()</a></span></li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.mysql-insert-id-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>mysql_insert_id</strong></span>(<span class="methodparam"><span class="type">resource</span> <code class="parameter">$link_identifier</code><span class="initializer"> = NULL</span></span>): <span class="type">int</span></div>
+
+  <p class="para rdfs-comment">
+   检索通过之前查询（通常是 INSERT）中 AUTO_INCREMENT 列生成的 ID。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.mysql-insert-id-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    <dt>
+
+<code class="parameter">link_identifier</code></dt>
+<dd>
+<p class="para">MySQL
+连接。如不指定连接标识，则使用由 <span class="function"><a href="function.mysql-connect.html" class="function">mysql_connect()</a></span>
+最近打开的连接。如果没有找到该连接，会尝试不带参数调用
+<span class="function"><a href="function.mysql-connect.html" class="function">mysql_connect()</a></span>
+来创建。如没有找到连接或无法建立连接，则会生成
+<strong><code>E_WARNING</code></strong> 级别的错误。</p></dd>
+
+
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.mysql-insert-id-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   成功时返回通过之前查询中 AUTO_INCREMENT 列生成的 ID，如果之前查询没有生成 AUTO_INCREMENT
+   值，则为 <code class="literal">0</code>。如果没有建立 MySQL 连接，则为 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.mysql-insert-id-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="example-5342">
+    <p><strong>示例 #1 <span class="function"><strong>mysql_insert_id()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$link </span><span style="color: #007700">= </span><span style="color: #0000BB">mysql_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">'localhost'</span><span style="color: #007700">, </span><span style="color: #DD0000">'mysql_user'</span><span style="color: #007700">, </span><span style="color: #DD0000">'mysql_password'</span><span style="color: #007700">);<br />if (!</span><span style="color: #0000BB">$link</span><span style="color: #007700">) {<br />    die(</span><span style="color: #DD0000">'Could not connect: ' </span><span style="color: #007700">. </span><span style="color: #0000BB">mysql_error</span><span style="color: #007700">());<br />}<br /></span><span style="color: #0000BB">mysql_select_db</span><span style="color: #007700">(</span><span style="color: #DD0000">'mydb'</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">mysql_query</span><span style="color: #007700">(</span><span style="color: #DD0000">"INSERT INTO mytable (product) values ('kossu')"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">printf</span><span style="color: #007700">(</span><span style="color: #DD0000">"Last inserted record has id %d\n"</span><span style="color: #007700">, </span><span style="color: #0000BB">mysql_insert_id</span><span style="color: #007700">());<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.mysql-insert-id-notes">
+  <h3 class="title">注释</h3>
+  <div class="caution"><strong class="caution">警告</strong>
+   <p class="para">
+    <span class="function"><strong>mysql_insert_id()</strong></span> will convert the return type of the
+    native MySQL C API function <code class="literal">mysql_insert_id()</code> to a type
+    of <code class="literal">long</code> (named <span class="type">int</span> in PHP). If your
+    AUTO_INCREMENT column has a column type of BIGINT (64 bits) the
+    conversion may result in an incorrect value. Instead, use the internal
+    MySQL SQL function LAST_INSERT_ID() in an SQL query. For more information
+    about PHP&#039;s maximum integer values, please see the
+    <a href="language.types.integer.html" class="link">integer</a> documentation.
+   </p>
+  </div>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    Because <span class="function"><strong>mysql_insert_id()</strong></span> acts on the last performed
+    query, be sure to call <span class="function"><strong>mysql_insert_id()</strong></span> immediately 
+    after the query that generates the value.
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    The value of the MySQL SQL function
+    <code class="literal">LAST_INSERT_ID()</code> always contains the most
+    recently generated AUTO_INCREMENT value, and is not reset
+    between queries.
+  </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.mysql-insert-id-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.mysql-query.html" class="function" rel="rdfs-seeAlso">mysql_query()</a> - 发送一条 MySQL 查询</span></li>
+    <li class="member"><span class="function"><a href="function.mysql-info.html" class="function" rel="rdfs-seeAlso">mysql_info()</a> - 获取最近查询的有关信息</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div></div></div></body></html>

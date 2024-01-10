@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>类的自动加载</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="language.oop5.constants.html">« 类常量</a></li>
+      <li style="float: right;"><a href="language.oop5.decon.html">构造函数和析构函数 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="language.oop5.html">类与对象</a></li>
+    <li>类的自动加载</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="language.oop5.autoload" class="sect1">
+ <h2 class="title">类的自动加载</h2>
+ <p class="para">
+  在编写面向对象（OOP） 程序时，很多开发者为每个类新建一个 PHP 文件。
+  这会带来一个烦恼：每个脚本的开头，都需要包含（include）一个长长的列表（每个类都有个文件）。
+ </p>
+ <p class="para">
+  <span class="function"><a href="function.spl-autoload-register.html" class="function">spl_autoload_register()</a></span> 函数可以注册任意数量的自动加载器，当使用尚未被定义的类（class）和接口（interface）时自动去加载。通过注册自动加载器，脚本引擎在
+  PHP 出错失败前有了最后一个机会加载所需的类。
+ </p>
+  <p class="para">
+   像 class 一样的结构都可以以相同方式自动加载。包括类、接口、trait 和枚举。
+  </p>
+ <div class="caution"><strong class="caution">警告</strong>
+   <p class="para">
+    PHP 8.0.0 之前，可以使用 <span class="function"><a href="function.autoload.html" class="function">__autoload()</a></span> 自动加载类和接口。然而，它是
+    <span class="function"><a href="function.spl-autoload-register.html" class="function">spl_autoload_register()</a></span> 的一种不太灵活的替代方法，并且
+    <span class="function"><a href="function.autoload.html" class="function">__autoload()</a></span> 在 PHP 7.2.0 起弃用，在 PHP 8.0.0 起移除。
+   </p>
+  </div>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    <span class="function"><a href="function.spl-autoload-register.html" class="function">spl_autoload_register()</a></span>
+    可以多次调用以便注册多个自动加载器。但从自动加载函数中抛出异常会中断该过程并且禁止继续执行。因此强烈建议不要从自动加载函数中抛出异常。
+   </p>
+  </p></blockquote>
+  <p class="para">
+   <div class="example" id="example-674">
+   <p><strong>示例 #1 自动加载示例</strong></p>
+   <div class="example-contents"><p>
+    本例尝试分别从 <var class="filename">MyClass1.php</var>
+    和 <var class="filename">MyClass2.php</var> 文件中加载
+    <code class="literal">MyClass1</code> 和
+    <code class="literal">MyClass2</code> 类。
+   </p></div>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />spl_autoload_register</span><span style="color: #007700">(function (</span><span style="color: #0000BB">$class_name</span><span style="color: #007700">) {<br />    require_once </span><span style="color: #0000BB">$class_name </span><span style="color: #007700">. </span><span style="color: #DD0000">'.php'</span><span style="color: #007700">;<br />});<br /><br /></span><span style="color: #0000BB">$obj  </span><span style="color: #007700">= new </span><span style="color: #0000BB">MyClass1</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$obj2 </span><span style="color: #007700">= new </span><span style="color: #0000BB">MyClass2</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+  </div>
+  <div class="example" id="example-677">
+   <p><strong>示例 #2 另一个例子</strong></p>
+   <div class="example-contents"><p>
+    本例尝试加载接口 <code class="literal">ITest</code>。
+   </p></div>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />spl_autoload_register</span><span style="color: #007700">(function (</span><span style="color: #0000BB">$name</span><span style="color: #007700">) {<br />    </span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$name</span><span style="color: #007700">);<br />});<br /><br />class </span><span style="color: #0000BB">Foo </span><span style="color: #007700">implements </span><span style="color: #0000BB">ITest </span><span style="color: #007700">{<br />}<br /><br /></span><span style="color: #FF8000">/*<br />string(5) "ITest"<br /><br />Fatal error: Interface 'ITest' not found in ...<br />*/<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+
+ <div class="simplesect">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.unserialize.html" class="function">unserialize()</a></span></li>
+    <li class="member"><a href="var.configuration.html#ini.unserialize-callback-func" class="link">unserialize_callback_func</a></li>
+    <li class="member"><a href="var.configuration.html#ini.unserialize-max-depth" class="link">unserialize_max_depth</a></li>
+    <li class="member"><span class="function"><a href="function.spl-autoload-register.html" class="function">spl_autoload_register()</a></span></li>
+    <li class="member"><span class="function"><a href="function.spl-autoload.html" class="function">spl_autoload()</a></span></li>
+     <li class="member"><span class="function"><a href="function.autoload.html" class="function">__autoload()</a></span></li>
+   </ul>
+  </p>
+ </div>
+
+</div></div></div></body></html>

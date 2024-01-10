@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>CMS Flag/常量</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="openssl.pkcs7.flags.html">« PKCS7 flag/常量</a></li>
+      <li style="float: right;"><a href="openssl.signature-algos.html">签名算法 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="openssl.constants.html">预定义常量</a></li>
+    <li>CMS Flag/常量</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="openssl.cms.flags" class="section">
+   <h2 class="title"><abbr>CMS</abbr> Flag/常量</h2>
+   <p class="para">
+    CMS 函数使用 flag，这些 flag 使用位字段指定，位字段可以包含以下一个或多个值：
+    <table class="doctable table">
+     <caption><strong><abbr>CMS</abbr> CONSTANTS</strong></caption>
+      
+       <thead>
+        <tr>
+         <th>常量名</th>
+         <th>说明</th>
+        </tr>
+
+       </thead>
+
+       <tbody class="tbody">
+        <tr id="constant.openssl-cms-text">
+         <td>
+          <strong><code>OPENSSL_CMS_TEXT</code></strong>
+          (<span class="type">int</span>)
+         </td>
+         <td>
+          将 text/plain 内容类型标头添加到加密/签名消息中。如果解密或验证，将从输出中去除这些标头；如果解密或验证的消息不是 MIME 类型 text/plain，则会发生错误。
+         </td>
+        </tr>
+
+        <tr id="constant.openssl-cms-binary">
+         <td>
+          <strong><code>OPENSSL_CMS_BINARY</code></strong>
+          (<span class="type">int</span>)
+         </td>
+         <td>
+          通常，输入消息被转换为有效使用 <code class="literal">CR</code> 和 <code class="literal">LF</code> 作为行尾的“canonical”格式：按照
+          CMS 规范的要求。存在此选项时，不会发生翻译。这在处理可能不是 CMS 格式的二进制数据时很有用。
+         </td>
+        </tr>
+
+        <tr id="constant.openssl-cms-nointern">
+         <td>
+          <strong><code>OPENSSL_CMS_NOINTERN</code></strong>
+          (<span class="type">int</span>)
+         </td>
+         <td>
+          验证消息时，通常会搜索消息中包含的证书（如果有）以查找签名证书。使用此选项仅使用在 <span class="function"><a href="function.openssl-cms-verify.html" class="function">openssl_cms_verify()</a></span>
+          的 <code class="parameter">untrusted_certificates_filename</code> 参数中指定的证书。但是，提供的证书仍可用作不受信任的 CA。
+         </td>
+        </tr>
+
+        <tr id="constant.openssl-cms-noverify">
+         <td>
+          <strong><code>OPENSSL_CMS_NOVERIFY</code></strong>
+          (<span class="type">int</span>)
+         </td>
+         <td>
+          不验证签名消息的签名者证书。
+         </td>
+        </tr>
+
+        <tr id="constant.openssl-cms-nocerts">
+         <td>
+          <strong><code>OPENSSL_CMS_NOCERTS</code></strong>
+          (<span class="type">int</span>)
+         </td>
+         <td>
+          When signing a message the signer&#039;s certificate is normally
+          included - with this option it is excluded.  This will reduce the
+          size of the signed message but the verifier must have a copy of the
+          signers certificate available locally (passed using the
+          <code class="parameter">untrusted_certificates_filename</code> to
+          <span class="function"><a href="function.openssl-cms-verify.html" class="function">openssl_cms_verify()</a></span> for example).
+         </td>
+        </tr>
+
+        <tr id="constant.openssl-cms-noattr">
+         <td>
+          <strong><code>OPENSSL_CMS_NOATTR</code></strong>
+          (<span class="type">int</span>)
+         </td>
+         <td>
+          Normally when a message is signed, a set of attributes are
+          included which include the signing time and the supported symmetric
+          algorithms.  With this option they are not included.
+         </td>
+        </tr>
+
+        <tr id="constant.openssl-cms-detached">
+         <td>
+          <strong><code>OPENSSL_CMS_DETACHED</code></strong>
+          (<span class="type">int</span>)
+         </td>
+         <td>
+          When signing a message, use cleartext signing with the MIME
+          type <code class="literal">&quot;multipart/signed&quot;</code>. This is the default
+          if you do not specify any <code class="parameter">flags</code> to
+          <span class="function"><a href="function.openssl-cms-sign.html" class="function">openssl_cms_sign()</a></span>.
+          If you turn this option off, the message will be signed using
+          opaque signing, which is more resistant to translation by mail relays
+          but cannot be read by mail agents that do not support S/MIME.
+         </td>
+        </tr>
+
+        <tr id="constant.openssl-cms-nosigs">
+         <td>
+          <strong><code>OPENSSL_CMS_NOSIGS</code></strong>
+          (<span class="type">int</span>)
+         </td>
+         <td>不要尝试验证消息的签名</td>
+        </tr>
+
+        <tr id="constant.openssl-cms-oldmimetype">
+         <td>
+          <strong><code>OPENSSL_CMS_OLDMIMETYPE</code></strong>
+          (<span class="type">int</span>)
+         </td>
+         <td>
+          自 PHP 8.3.0 起可用。
+          将 content-type 设置为 <code class="literal">application/x-pkcs7-mime</code>，而不是 <code class="literal">application/pkcs7-mime</code> 来加密消息。
+         </td>
+        </tr>
+
+       </tbody>
+      
+     </table>
+
+   </p>
+  </div></div></div></body></html>

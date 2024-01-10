@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>需求</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="image.setup.html">« 安装/配置</a></li>
+      <li style="float: right;"><a href="image.installation.html">安装 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="image.setup.html">安装/配置</a></li>
+    <li>需求</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="image.requirements" class="section">
+  <h2 class="title">需求</h2>
+  <p class="para">
+   如果拥有 <abbr title="Graphics Draw">GD</abbr> 库（位于 <a href="http://www.libgd.org/" class="link external">&raquo;&nbsp;http://www.libgd.org/</a>），还可以创建和处理图像。
+  </p>
+  <p class="para">
+   可以处理的图像格式取决于安装的 <abbr title="Graphics Draw">GD</abbr> 版本，以及
+   <abbr title="Graphics Draw">GD</abbr> 可能需要访问这些图像格式的任何其他库。
+   <blockquote class="note"><p><strong class="note">注意</strong>: 
+    <span class="simpara">
+     需要 libgd-2.1.0 或更高版本。或者使用 PHP 中绑定的 <abbr title="Graphics Draw">GD</abbr> 库。
+    </span>
+   </p></blockquote>
+   <blockquote class="note"><p><strong class="note">注意</strong>: 
+    <span class="simpara">
+     <abbr title="Graphics Draw">GD</abbr> 库需要 zlib &gt;= 1.2.0.4。
+    </span>
+   </p></blockquote>
+  </p>
+  <p class="para">
+   可能希望增强 <abbr title="Graphics Draw">GD</abbr> 库以处理更多的图像格式。
+   <table class="doctable table">
+   <caption><strong>支持的图像格式</strong></caption>
+    
+     <thead>
+      <tr>
+       <th>图像格式</th>
+       <th>需要下载的库</th>
+       <th>备注</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td><code class="literal">gif</code></td>
+       <td class="empty">&nbsp;</td>
+       <td class="empty">&nbsp;</td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">jpeg</code></td>
+       <td><a href="http://www.ijg.org/" class="link external">&raquo;&nbsp;http://www.ijg.org/</a></td>
+       <td>
+        在编译 jpeg 时（编译 PHP 之前），必须在配置步骤使用 <strong class="option configure">--enable-shared</strong>
+        选项。否则，当进入编译 PHP 的配置步骤时，会收到一条错误信息，说 <code class="literal">libjpeg.(a|so) not found</code>。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">png</code></td>
+       <td><a href="http://www.libpng.org/pub/png/libpng.html" class="link external">&raquo;&nbsp;http://www.libpng.org/pub/png/libpng.html</a></td>
+       <td>
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">xpm</code></td>
+       <td><a href="http://www.ibiblio.org/pub/Linux/libs/X/!INDEX.html" class="link external">&raquo;&nbsp;http://www.ibiblio.org/pub/Linux/libs/X/!INDEX.html</a></td>
+       <td>
+        如果你的系统中已经安装了 X-Environment，就可能已经有了这个库。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+
+  <p class="para">
+   希望增强 <abbr title="Graphics Draw">GD</abbr> 以处理不同的字体。<a href="http://www.freetype.org/" class="link external">&raquo;&nbsp;FreeType 2</a>
+   库支持。
+  </p>
+ </div></div></div></body></html>

@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>实用的脚本</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="tutorial.firstpage.html">« 第一个 PHP 页面</a></li>
+      <li style="float: right;"><a href="tutorial.forms.html">处理表单 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="tutorial.html">简明教程</a></li>
+    <li>实用的脚本</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="tutorial.useful" class="section">
+  <div class="info"><h1 class="title">实用的脚本</h1></div>
+  <p class="para">
+   现在来编写一些更实用的脚本，比如检查浏览页面的访问者在用什么浏览器。要达到这个目的，需要检查用户的
+   agent 字符串，它是浏览器发送的 HTTP 请求的一部分。该信息被存储在一个<a href="language.variables.html" class="link">变量</a>中。在 PHP
+   中，变量总是以一个美元符开头。我们现在感兴趣的变量是
+   <var class="varname"><a href="reserved.variables.server.html" class="classname">$_SERVER['HTTP_USER_AGENT']</a></var>。
+  </p>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    <a href="reserved.variables.server.html" class="link">$_SERVER</a>
+    是一个特殊的 PHP 保留变量，它包含了 web
+    服务器提供的所有信息，被称为超全局变量。请查阅本手册“<a href="language.variables.superglobals.html" class="link">超全局变量</a>”中的有关内容以获取更多信息。
+   </p>
+  </p></blockquote>
+  <p class="para">
+   要显示该变量，只需简单地进行如下操作：
+  </p>
+  <p class="para">
+   <div class="example" id="example-11">
+   <div class="info"><p><strong>示例 #1 打印一个变量（数组元素）</strong></p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php <br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">$_SERVER</span><span style="color: #007700">[</span><span style="color: #DD0000">'HTTP_USER_AGENT'</span><span style="color: #007700">]; <br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+   <div class="example-contents"><p>
+    该脚本的输出可能是：
+   </p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Mozilla/5.0 (Linux) Firefox/112.0
+</pre></div>
+    </div>
+  </div>
+  </p>
+  <p class="para">
+   PHP 有多种不同<a href="language.types.html" class="link">类型</a>的变量。以上例子是从 <a href="language.types.array.html" class="link">Array</a> 变量中打印了一个元素。数组非常有用。
+  </p>
+  <p class="para">
+   <var class="varname"><a href="reserved.variables.server.html" class="classname">$_SERVER</a></var> 只是 PHP 自动全局化的变量之一。可以查阅“<a href="reserved.variables.html" class="link">预定义变量</a>”一节来查看这些变量的列表，或者也可以通过上节例子中
+   <span class="function"><a href="function.phpinfo.html" class="function">phpinfo()</a></span> 函数的输出来查看。
+  </p>
+  <p class="para">
+   可以在一个 PHP 标识中加入多个 PHP 语句，也可以建立一个代码块来做比简单的
+   echo 更多的事情。例如，如果需要检测 Firefox，可以进行如下操作：
+  </p>
+  <p class="para">
+   <div class="example" id="install.unix.debian.apt.example2">
+    <div class="info"><p><strong>示例 #2 <a href="language.control-structures.html" class="link">流程控制</a>与<a href="language.functions.html" class="link">函数</a>的使用</strong></p></div>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">if (</span><span style="color: #0000BB">str_contains</span><span style="color: #007700">(</span><span style="color: #0000BB">$_SERVER</span><span style="color: #007700">[</span><span style="color: #DD0000">'HTTP_USER_AGENT'</span><span style="color: #007700">], </span><span style="color: #DD0000">'Firefox'</span><span style="color: #007700">)) {<br />    echo </span><span style="color: #DD0000">'You are using Firefox.'</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    <div class="example-contents"><p>
+     该脚本的输出可能是：
+    </p></div>
+     <div class="example-contents screen">
+<div class="cdata"><pre>
+You are using Firefox.
+</pre></div>
+     </div>
+   </div>
+  </p>
+  <p class="para">
+   这里要介绍一些新的原理。上面用了一个
+   <a href="control-structures.if.html" class="link">if</a> 语句。如果用户对
+   C 语言的基本语法比较熟悉，则应该对此很熟悉，否则，可能需要拿起任何一本
+   PHP 介绍性的书籍并阅读前面的两三个章节，或者也可以阅读本手册的“<a href="langref.html" class="link">语言参考</a>”一章。
+  </p>
+  <p class="para">
+   需要介绍的第二个原理，是对 <span class="function"><a href="function.str-contains.html" class="function">str_contains()</a></span>
+   函数的调用。<span class="function"><a href="function.str-contains.html" class="function">str_contains()</a></span> 是 PHP
+   的一个内置函数，其功能是确定指定字符串是否包含其它字符串。例如我们现在需要在
+   <var class="varname"><a href="reserved.variables.server.html" class="classname">$_SERVER['HTTP_USER_AGENT']</a></var>（即所谓的 haystack）变量中寻找
+   <code class="literal">&#039;Firefox&#039;</code>。如果在这个 haystack
+   中该字符串（即所谓的 needle）被找到（“草里寻针”），则函数返回 <strong><code>true</code></strong>；如果没有，则返回
+   <strong><code>false</code></strong>。如果返回 <strong><code>true</code></strong>，则 <a href="control-structures.if.html" class="link">if</a> 会将条件判断为
+   <strong><code>true</code></strong> 并运行其花括号 {} 内的代码；否则，则不运行这些代码。可以自己尝试利用
+   <a href="control-structures.if.html" class="link">if</a>，<a href="control-structures.else.html" class="link">else</a> 以及其它的函数如
+   <span class="function"><a href="function.strtoupper.html" class="function">strtoupper()</a></span> 和 <span class="function"><a href="function.strlen.html" class="function">strlen()</a></span>
+   来建立类似的脚本。在本手册中相关的页面也包含有范例。如果对如何使用函数不是很确定，可以阅读手册中有关“<a href="about.prototypes.html" class="link">如何阅读函数的定义</a>”和“<a href="language.functions.html" class="link">函数</a>”的有关章节。
+  </p>
+  <p class="para">
+   以下我们进一步显示如何进出 PHP 模式，甚至是在一个 PHP 代码块的中间：
+  </p>
+  <p class="para">
+   <div class="example" id="example-17">
+    <div class="info"><p><strong>示例 #3 混和 HTML 和 PHP 模式</strong></p></div>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">if (</span><span style="color: #0000BB">str_contains</span><span style="color: #007700">(</span><span style="color: #0000BB">$_SERVER</span><span style="color: #007700">[</span><span style="color: #DD0000">'HTTP_USER_AGENT'</span><span style="color: #007700">], </span><span style="color: #DD0000">'Firefox'</span><span style="color: #007700">)) {<br /></span><span style="color: #0000BB">?&gt;<br /></span>&lt;h3&gt;str_contains() returned true&lt;/h3&gt;<br />&lt;p&gt;You are using Firefox&lt;/p&gt;<br /><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">} else {<br /></span><span style="color: #0000BB">?&gt;<br /></span>&lt;h3&gt;str_contains() returned false&lt;/h3&gt;<br />&lt;p&gt;You are not using Firefox&lt;/p&gt;<br /><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    <div class="example-contents"><p>
+     该脚本的输出可能是：
+    </p></div>
+     <div class="example-contents screen">
+<div class="cdata"><pre>
+&lt;h3&gt;str_contains() returned true&lt;/h3&gt;
+&lt;p&gt;You are using Firefox&lt;/p&gt;
+</pre></div>
+     </div>
+   </div>
+  </p>
+  <p class="para">
+   和使用 PHP echo 语句输出不同的是，以上示例跳出了 PHP 模式直接发送
+   HTML。这里需要特别注意的一点是脚本的逻辑流保持不变。根据
+   <span class="function"><a href="function.str-contains.html" class="function">str_contains()</a></span> 的结果，只会有一个 HTML
+   块将发送给浏览者。换句话说，取决于是否找到字符串 <code class="literal">Firefox</code>。
+  </p>
+ </div></div></div></body></html>

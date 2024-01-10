@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>新功能</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="migration83.html">« 从 PHP 8.2.x 移植到 PHP 8.3.x</a></li>
+      <li style="float: right;"><a href="migration83.new-classes.html">新的类和接口 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="migration83.html">从 PHP 8.2.x 移植到 PHP 8.3.x</a></li>
+    <li>新功能</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="migration83.new-features" class="sect1">
+ <h2 class="title">新功能</h2>
+
+ <div class="sect2" id="migration83.new-features.core">
+  <h3 class="title">PHP 核心</h3>
+
+  <div class="sect3" id="migration83.new-features.core.readonly-modifier-improvements">
+   <h4 class="title">只读修正</h4>
+
+   <p class="para">
+    匿名类现在可以标记为 readonly。
+   </p>
+
+   <p class="para">
+    只读属性现在可以在克隆时重新初始化。
+    
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.new-features.core.typed-class-constants">
+   <h4 class="title">类型化类常量</h4>
+
+   <p class="para">
+    类、接口、trait 和 enum 常量现在支持类型声明。
+    
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.new-features.core.closures-created-from-magic-methods">
+   <h4 class="title">从魔术方法中创建的闭包</h4>
+
+   <p class="para">
+    从魔术方法中创建的闭包现在接受命名参数。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.new-features.core.final-modifier-method-from-trait">
+   <h4 class="title">trait 中的方法使用 final 修饰符</h4>
+
+   <p class="para">
+    final 修饰符现在可以用于 trait 中的方法。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.new-features.core.override-attribute">
+   <h4 class="title">Override 注解</h4>
+
+   <p class="para">
+    新增 #[\Override] 注解用于检测方法是否在父类中存在或实现了接口。
+    
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.new-features.core.fetch-class-constant-dynamically-syntax">
+   <h4 class="title">动态语法获取类常量</h4>
+
+   <p class="para">
+    类常量现在可以使用 <code class="code">C::{$name}</code> 语法动态访问。
+    
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.new-features.core.static-variable-initializers">
+   <h4 class="title">静态变量初始化</h4>
+
+   <p class="para">
+    静态变量初始化现在可以包含任意表达式。
+    
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.new-features.core.fallback-value-syntax-for-php-ini">
+   <h4 class="title">ini 变量的后备值语法</h4>
+
+   <p class="para">
+    php.ini 现在支持后备/默认值语法。
+    
+    <div class="informalexample">
+     <div class="example-contents">
+      <div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">/*<br />On /path/to/user.ini contains the following settings:<br /><br />listen = localhost:${DRUPAL_FPM_PORT:-9000}<br />*/<br /><br /></span><span style="color: #0000BB">$user_ini </span><span style="color: #007700">= </span><span style="color: #0000BB">parse_ini_file</span><span style="color: #007700">(</span><span style="color: #DD0000">'/path/to/user.ini'</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">$user_ini</span><span style="color: #007700">[</span><span style="color: #DD0000">'listen'</span><span style="color: #007700">]; </span><span style="color: #FF8000">// localhost:9000</span></span></code></div>
+     </div>
+
+    </div>
+
+   </p>
+  </div>
+
+ </div>
+
+ <div class="sect2" id="migration83.new-features.cli">
+  <h3 class="title">CLI</h3>
+
+  <p class="para">
+   现在可以对多个文件进行 lint。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration83.new-features.dom">
+  <h3 class="title">DOM</h3>
+
+  <p class="para">
+   添加属性 <span class="property">DOMElement::$className</span> 和
+   <span class="property">DOMElement::$id</span>。由于 libxml2
+   底层限制，这些属性目前并非二进制安全。这意味着属性值将在 NUL 字节处截断。
+  </p>
+
+  <p class="para">
+   添加属性 <span class="property">DOMNode::$isConnected</span>
+   和 <span class="property">DOMNameSpaceNode::$isConnected</span>。
+  </p>
+
+  <p class="para">
+   添加属性 <span class="property">DOMNode::$parentElement</span>
+   和 <span class="property">DOMNameSpaceNode::$parentElement</span>。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration83.new-features.ffi">
+  <h3 class="title">FFI</h3>
+
+  <p class="para">
+   现在可以将 <span class="classname"><a href="class.ffi-cdata.html" class="classname">FFI\CData</a></span> 分配给其它 FFI\CData。这意味着现在可以将
+   CData 分配给结构和字段。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration83.new-features.opcache">
+  <h3 class="title">Opcache</h3>
+
+  <p class="para">
+   <code class="code">opcache_get_status()[&#039;scripts&#039;][n][&#039;revalidate&#039;]</code> 现在包含 Unix 时间戳，表示下一次重新验证脚本时间戳的时间，由
+   <a href="opcache.configuration.html#ini.opcache.revalidate-freq" class="link">opcache.revalidate_freq</a> INI 指令指定。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration83.new-features.posix">
+  <h3 class="title">POSIX</h3>
+
+  <p class="para">
+   <span class="function"><a href="function.posix-getrlimit.html" class="function">posix_getrlimit()</a></span> 现在接受可选的
+   <code class="parameter">$res</code> 参数用于获取单个资源限制。
+  </p>
+
+  <p class="para">
+   <span class="function"><a href="function.posix-isatty.html" class="function">posix_isatty()</a></span> 按照通用的 ZPP 语义现在对整数将引发类型警告。
+  </p>
+
+  <p class="para">
+   <span class="function"><strong>posix_isposix_ttynameatty()</strong></span> 按照通用的 ZPP 语义现在对整数将引发类型警告，并针对无效整数文件描述符引发值警告。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration83.new-features.streams">
+  <h3 class="title">Streams</h3>
+
+  <p class="para">
+   Streams 现在可以发出 <strong><code>STREAM_NOTIFY_COMPLETED</code></strong> 通知。之前没有实现过。
+  </p>
+ </div>
+
+</div></div></div></body></html>

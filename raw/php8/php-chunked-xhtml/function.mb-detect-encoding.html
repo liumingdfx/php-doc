@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>检测字符的编码</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.mb-decode-numericentity.html">« mb_decode_numericentity</a></li>
+      <li style="float: right;"><a href="function.mb-detect-order.html">mb_detect_order »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.mbstring.html">多字节字符串 函数</a></li>
+    <li>检测字符的编码</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.mb-detect-encoding" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">mb_detect_encoding</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.0.6, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">mb_detect_encoding</span> &mdash; <span class="dc-title">检测字符的编码</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.mb-detect-encoding-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>mb_detect_encoding</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$string</code></span>, <span class="methodparam"><span class="type"><span class="type">array</span>|<span class="type">string</span>|<span class="type">null</span></span> <code class="parameter">$encodings</code><span class="initializer"> = <strong><code>null</code></strong></span></span>, <span class="methodparam"><span class="type">bool</span> <code class="parameter">$strict</code><span class="initializer"> = <strong><code>false</code></strong></span></span>): <span class="type"><span class="type">string</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   从有序的候选列表中检测 <span class="type">string</span> <code class="parameter">string</code> 最可能的字符编码。
+  </p>
+  <p class="para">
+   对预期（intended）字符编码的自动检测不可能永远完全可靠；没有额外的信息，就类似于在没有密钥的情况下解码已编码的字符串。最好使用与数据一起存储或传输的字符编码表示，例如“Content-Type” HTTP 头。
+  </p>
+  <p class="para">
+   此函数适用于多字节编码，但并非所有字节顺序都构成有效字符串。如果输入字符串包含这样的顺序，则将会拒绝该编码，并检查下一个编码。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.mb-detect-encoding-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">string</code></dt>
+
+     <dd>
+
+      <p class="para">
+       要检测的 <span class="type">string</span>。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">encodings</code></dt>
+
+     <dd>
+
+      <p class="para">
+       按顺序尝试的字符编码列表。该列表可以指定为字符串数组，或以逗号分隔的单个字符串。
+      </p>
+      <p class="para">
+       如果省略 <code class="parameter">encodings</code> 被或为 <strong><code>null</code></strong>，则将使用当前的 detect_order（使用
+       <a href="mbstring.configuration.html#ini.mbstring.detect-order" class="link">mbstring.detect_order</a> 配置选项或
+       <span class="function"><a href="function.mb-detect-order.html" class="function">mb_detect_order()</a></span> 函数设置）。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">strict</code></dt>
+
+     <dd>
+
+      <p class="para">
+       控制 <code class="parameter">string</code> 在列出的所有 <code class="parameter">encodings</code> 中无效时的行为。如果
+       <code class="parameter">strict</code> 设置为 <strong><code>false</code></strong>，将返回最接近的匹配编码；如果 <code class="parameter">strict</code>
+       设置为 <strong><code>true</code></strong>，将返回 <strong><code>false</code></strong>。
+      </p>
+      <p class="para">
+       可以使用 <a href="mbstring.configuration.html#ini.mbstring.strict-detection" class="link">mbstring.strict_detection</a> 配置选项设置 <code class="parameter">strict</code> 的默认值。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.mb-detect-encoding-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   检测到的字符编码，如果字符串在任何列出的编码中均无效，则返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.mb-detect-encoding-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 <span class="function"><strong>mb_detect_encoding()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// 使用当前的 detect_order 来检测字符编码<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">mb_detect_encoding</span><span style="color: #007700">(</span><span style="color: #0000BB">$str</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// "auto" 将根据 mbstring.language 来扩展<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">mb_detect_encoding</span><span style="color: #007700">(</span><span style="color: #0000BB">$str</span><span style="color: #007700">, </span><span style="color: #DD0000">"auto"</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 通过以逗号分隔的列表指定“encodings”参数<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">mb_detect_encoding</span><span style="color: #007700">(</span><span style="color: #0000BB">$str</span><span style="color: #007700">, </span><span style="color: #DD0000">"JIS, eucjp-win, sjis-win"</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 使用数组指定“encodings”参数<br /></span><span style="color: #0000BB">$encodings </span><span style="color: #007700">= [<br />  </span><span style="color: #DD0000">"ASCII"</span><span style="color: #007700">,<br />  </span><span style="color: #DD0000">"JIS"</span><span style="color: #007700">,<br />  </span><span style="color: #DD0000">"EUC-JP"<br /></span><span style="color: #007700">];<br />echo </span><span style="color: #0000BB">mb_detect_encoding</span><span style="color: #007700">(</span><span style="color: #0000BB">$str</span><span style="color: #007700">, </span><span style="color: #0000BB">$encodings</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #2 <code class="parameter">strict</code> 参数的影响</strong></p>
+    <div class="example-contents">
+     <div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// 'áéóú' 在 ISO-8859-1 中的编码<br /></span><span style="color: #0000BB">$str </span><span style="color: #007700">= </span><span style="color: #DD0000">"\xE1\xE9\xF3\xFA"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// 该字符串不是有效的 ASCII 或 UTF-8，但 UTF-8 被认为是更接近的匹配<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">mb_detect_encoding</span><span style="color: #007700">(</span><span style="color: #0000BB">$str</span><span style="color: #007700">, [</span><span style="color: #DD0000">'ASCII'</span><span style="color: #007700">, </span><span style="color: #DD0000">'UTF-8'</span><span style="color: #007700">], </span><span style="color: #0000BB">false</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">mb_detect_encoding</span><span style="color: #007700">(</span><span style="color: #0000BB">$str</span><span style="color: #007700">, [</span><span style="color: #DD0000">'ASCII'</span><span style="color: #007700">, </span><span style="color: #DD0000">'UTF-8'</span><span style="color: #007700">], </span><span style="color: #0000BB">true</span><span style="color: #007700">));<br /><br /></span><span style="color: #FF8000">// 如果找到有效编码，则严格参数不会更改结果<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">mb_detect_encoding</span><span style="color: #007700">(</span><span style="color: #0000BB">$str</span><span style="color: #007700">, [</span><span style="color: #DD0000">'ASCII'</span><span style="color: #007700">, </span><span style="color: #DD0000">'UTF-8'</span><span style="color: #007700">, </span><span style="color: #DD0000">'ISO-8859-1'</span><span style="color: #007700">], </span><span style="color: #0000BB">false</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">mb_detect_encoding</span><span style="color: #007700">(</span><span style="color: #0000BB">$str</span><span style="color: #007700">, [</span><span style="color: #DD0000">'ASCII'</span><span style="color: #007700">, </span><span style="color: #DD0000">'UTF-8'</span><span style="color: #007700">, </span><span style="color: #DD0000">'ISO-8859-1'</span><span style="color: #007700">], </span><span style="color: #0000BB">true</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+string(5) &quot;UTF-8&quot;
+bool(false)
+string(10) &quot;ISO-8859-1&quot;
+string(10) &quot;ISO-8859-1&quot;
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   在某些情况下，相同的字节顺序可能会在多种字符编码中形成有效的字符串，并且无法知道其意图是哪种解释。例如，在众多字符编码中，字节序列“\xC4\xA2”可能是：
+  </p>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member">
+     &quot;Ä¢&quot; (U+00C4 LATIN CAPITAL LETTER A WITH DIAERESIS followed by U+00A2 CENT SIGN)
+     encoded in any of ISO-8859-1, ISO-8859-15, or Windows-1252
+    </li>
+    <li class="member">
+     &quot;ФЂ&quot; (U+0424 CYRILLIC CAPITAL LETTER EF followed by U+0402 CYRILLIC CAPITAL LETTER
+     DJE) encoded in ISO-8859-5
+    </li>
+    <li class="member">
+     &quot;Ģ&quot; (U+0122 LATIN CAPITAL LETTER G WITH CEDILLA) encoded in UTF-8
+    </li>
+   </ul>
+  </p>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #3 匹配多个编码时顺序的影响</strong></p>
+    <div class="example-contents">
+     <div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$str </span><span style="color: #007700">= </span><span style="color: #DD0000">"\xC4\xA2"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// 该字符串在所有三种编码中均有效，因此将返回列出的第一个<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">mb_detect_encoding</span><span style="color: #007700">(</span><span style="color: #0000BB">$str</span><span style="color: #007700">, [</span><span style="color: #DD0000">'UTF-8'</span><span style="color: #007700">, </span><span style="color: #DD0000">'ISO-8859-1'</span><span style="color: #007700">, </span><span style="color: #DD0000">'ISO-8859-5'</span><span style="color: #007700">]));<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">mb_detect_encoding</span><span style="color: #007700">(</span><span style="color: #0000BB">$str</span><span style="color: #007700">, [</span><span style="color: #DD0000">'ISO-8859-1'</span><span style="color: #007700">, </span><span style="color: #DD0000">'ISO-8859-5'</span><span style="color: #007700">, </span><span style="color: #DD0000">'UTF-8'</span><span style="color: #007700">]));<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">mb_detect_encoding</span><span style="color: #007700">(</span><span style="color: #0000BB">$str</span><span style="color: #007700">, [</span><span style="color: #DD0000">'ISO-8859-5'</span><span style="color: #007700">, </span><span style="color: #DD0000">'UTF-8'</span><span style="color: #007700">, </span><span style="color: #DD0000">'ISO-8859-1'</span><span style="color: #007700">]));<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+string(5) &quot;UTF-8&quot;
+string(10) &quot;ISO-8859-1&quot;
+string(10) &quot;ISO-8859-5&quot;
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.mb-detect-encoding-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.mb-detect-order.html" class="function" rel="rdfs-seeAlso">mb_detect_order()</a> - 设置/获取 字符编码的检测顺序</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

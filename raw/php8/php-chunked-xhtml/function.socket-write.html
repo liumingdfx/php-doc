@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>向套接字写数据</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.socket-strerror.html">« socket_strerror</a></li>
+      <li style="float: right;"><a href="function.socket-wsaprotocol-info-export.html">socket_wsaprotocol_info_export »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.sockets.html">Socket 函数</a></li>
+    <li>向套接字写数据</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.socket-write" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">socket_write</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.1.0, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">socket_write</span> &mdash; <span class="dc-title">向套接字写数据</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.socket-write-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>socket_write</strong></span>(<span class="methodparam"><span class="type"><a href="class.socket.html" class="type Socket">Socket</a></span> <code class="parameter">$socket</code></span>, <span class="methodparam"><span class="type">string</span> <code class="parameter">$data</code></span>, <span class="methodparam"><span class="type">?</span><span class="type"><span class="type">int</span><span class="type"></span></span> <code class="parameter">$length</code><span class="initializer"> = <strong><code>null</code></strong></span></span>): <span class="type"><span class="type">int</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   函数 <span class="function"><strong>socket_write()</strong></span> 向 <code class="parameter">socket</code> 
+   写入 <code class="parameter">data</code>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.socket-write-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">socket</code></dt>
+
+     <dd>
+
+      <p class="para">
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">data</code></dt>
+
+     <dd>
+
+      <p class="para">
+       要写入到缓冲区的数据。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">length</code></dt>
+
+     <dd>
+
+      <p class="para">
+       可选参数 <code class="parameter">length</code> 可以指定写入 socket 
+       的字节长度。如果写入的字节长度大于缓冲区长度，默认将被截取为缓冲区长度。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.socket-write-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回成功写入 socket 的字节数 或者在失败时返回 <strong><code>false</code></strong>。可以通过调用 <span class="function"><a href="function.socket-last-error.html" class="function">socket_last_error()</a></span> 
+   来检索实际的错误码。将错误码作为参数传递给 <span class="function"><a href="function.socket-strerror.html" class="function">socket_strerror()</a></span> 以获得错误的文本解释。
+  </p>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    对于 <span class="function"><strong>socket_wirte()</strong></span> 来说返回 0 是完全有效的，这代表没有字节被写入。如果发生错误，务必使用 <code class="literal">===</code> 
+    运算符来判断是否为 <strong><code>false</code></strong>。
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.socket-write-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+  <td>8.0.0</td>
+  <td>
+   现在 <code class="parameter">socket</code> 是 <span class="classname"><a href="class.socket.html" class="classname">Socket</a></span> 实例，
+   之前是 <span class="type">resource</span>。
+  </td>
+ </tr>
+
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       <code class="parameter">length</code> 现在允许为 null。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.socket-write-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    <span class="function"><strong>socket_write()</strong></span> 
+    不一定会写入缓冲区全部的内容。根据网络缓冲区的条件，即使缓冲区待写入的数据很多，也可能只写入一部分，甚至是一个字节。因此，必须注意是否所有数据都写入成功。
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.socket-write-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.socket-accept.html" class="function" rel="rdfs-seeAlso">socket_accept()</a> - 接受套接字上的连接</span></li>
+    <li class="member"><span class="function"><a href="function.socket-bind.html" class="function" rel="rdfs-seeAlso">socket_bind()</a> - 给套接字绑定名字</span></li>
+    <li class="member"><span class="function"><a href="function.socket-connect.html" class="function" rel="rdfs-seeAlso">socket_connect()</a> - 开启一个套接字连接</span></li>
+    <li class="member"><span class="function"><a href="function.socket-listen.html" class="function" rel="rdfs-seeAlso">socket_listen()</a> - 监听套接字的连接</span></li>
+    <li class="member"><span class="function"><a href="function.socket-read.html" class="function" rel="rdfs-seeAlso">socket_read()</a> - 从套接字中读取最大长度的数据</span></li>
+    <li class="member"><span class="function"><a href="function.socket-strerror.html" class="function" rel="rdfs-seeAlso">socket_strerror()</a> - 返回描述套接字错误的字符串</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

@@ -1,0 +1,214 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>得到指定年份的复活节午夜时的 Unix 时间戳</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.cal-to-jd.html">« cal_to_jd</a></li>
+      <li style="float: right;"><a href="function.easter-days.html">easter_days »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.calendar.html">Calendar 函数</a></li>
+    <li>得到指定年份的复活节午夜时的 Unix 时间戳</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.easter-date" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">easter_date</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">easter_date</span> &mdash; <span class="dc-title">得到指定年份的复活节午夜时的 Unix 时间戳</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.easter-date-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>easter_date</strong></span>(<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">int</span><span class="type"></span></span> <code class="parameter">$year</code><span class="initializer"> = <strong><code>null</code></strong></span></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$mode</code><span class="initializer"> = <strong><code>CAL_EASTER_DEFAULT</code></strong></span></span>): <span class="type">int</span></div>
+
+  <p class="para rdfs-comment">
+   返回指定年份的复活节午夜时的 Unix 时间戳。
+  </p>
+  <p class="para">
+   复活节的日期是由尼西亚议会在公元 325 年确定的为每年春分月圆后的第一个星期日。春分一般是在 3 月 21 
+   日，这就简化为只要计算满月的日期和紧挨的星期日的日期。这里所用的算法是在 532 年由 Dionysius Exiguus
+   引入。在 1753 年以前用儒略历计算，一个简单的 19 年周期用于追踪月相。在 1753 年之后公历（由 
+   Clavius 和 Lilius 设计，1582 年 10 月由教皇 Gregory 十三世引入，并于 1752
+   年 9 月进入英国及其当时的殖民地）添加了两个校正因子以使周期更准确。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.easter-date-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">year</code></dt>
+
+     <dd>
+
+      <p class="para">
+       对于 32 位系统，年份必须是 1970 至 2037 之间的数字，对于 64 位系统，年份必须是 1970 到 2,000,000,000
+       之间的数字。如果省略或者为 <strong><code>null</code></strong>，则根据本地时间默认为当前年份。
+      </p>
+     </dd>
+
+      
+    
+     <dt>
+<code class="parameter">mode</code></dt>
+
+     <dd>
+
+      <p class="para">
+       当设置为 <strong><code>CAL_EASTER_ALWAYS_JULIAN</code></strong> 时，允许基于儒略历计算复活节时间。参见 
+       <a href="calendar.constants.html" class="link">calendar 常量</a>。
+       </p>
+     </dd>
+
+      
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.easter-date-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   复活节日期的 Unix 时间戳。
+  </p>
+ </div>
+
+
+ <div class="refsect1 errors" id="refsect1-function.easter-date-errors">
+  <h3 class="title">错误／异常</h3>
+  <p class="para">
+   如果年份早于 1970，或者晚于 32 位系统的 2037 以及 64 位系统上的 2,000,000,000
+   时会抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.easter-date-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>8.3.0</td>
+      <td>
+       在 64 位系统上，<code class="parameter">year</code> 参数现在接受范围在 1970 到 2,000,000,000 的值。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       <code class="parameter">year</code> 现在可为空（nullable）。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       当 <code class="parameter">year</code> 超出允许的范围现在抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。之前函数会返回
+       <strong><code>false</code></strong> 会触发 <strong><code>E_WARNING</code></strong>。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.easter-date-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 <span class="function"><strong>easter_date()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">"M-d-Y"</span><span style="color: #007700">, </span><span style="color: #0000BB">easter_date</span><span style="color: #007700">(</span><span style="color: #0000BB">1999</span><span style="color: #007700">));        </span><span style="color: #FF8000">// Apr-04-1999<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">"M-d-Y"</span><span style="color: #007700">, </span><span style="color: #0000BB">easter_date</span><span style="color: #007700">(</span><span style="color: #0000BB">2000</span><span style="color: #007700">));        </span><span style="color: #FF8000">// Apr-23-2000<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">"M-d-Y"</span><span style="color: #007700">, </span><span style="color: #0000BB">easter_date</span><span style="color: #007700">(</span><span style="color: #0000BB">2001</span><span style="color: #007700">));        </span><span style="color: #FF8000">// Apr-15-2001<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+
+   <div class="example" id="">
+    <p><strong>示例 #2 使用带 <span class="classname"><a href="class.datetime.html" class="classname">DateTime</a></span> 的 <span class="function"><strong>easter_date()</strong></span></strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />$timestamp </span><span style="color: #007700">= </span><span style="color: #0000BB">easter_date</span><span style="color: #007700">(</span><span style="color: #0000BB">2023</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$datetime </span><span style="color: #007700">= new </span><span style="color: #0000BB">\DateTime</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$datetime</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setTimestamp</span><span style="color: #007700">(</span><span style="color: #0000BB">$timestamp</span><span style="color: #007700">);<br /><br />echo </span><span style="color: #0000BB">$datetime</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">format</span><span style="color: #007700">(</span><span style="color: #DD0000">'M-d-Y'</span><span style="color: #007700">); </span><span style="color: #FF8000">// Apr-09-2023<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.easter-date-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    <span class="function"><strong>easter_date()</strong></span> 依赖于系统的 C 库 time 函数，而不是使用
+    PHP 内置的 date 和 time 函数。因此 <span class="function"><strong>easter_date()</strong></span> 使用
+    <code class="literal">TZ</code> 环境变量来确定应该运行的时区，而不是使用 PHP
+    <a href="datetime.configuration.html#ini.date.timezone" class="link">默认时区</a>
+    ，此函数与 PHP 其他 date 函数一起使用时会出现意外行为。
+   </p>
+   <p class="para">
+    有一种解决方案，可以使用带 <span class="classname"><a href="class.datetime.html" class="classname">DateTime</a></span> 和
+    <span class="classname"><a href="class.dateinterval.html" class="classname">DateInterval</a></span> 的 <span class="function"><a href="function.easter-days.html" class="function">easter_days()</a></span>
+    来计算 PHP 时区中的复活节开始时间，如下所示：
+   </p>
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">get_easter_datetime</span><span style="color: #007700">(</span><span style="color: #0000BB">$year</span><span style="color: #007700">) {<br />    </span><span style="color: #0000BB">$base </span><span style="color: #007700">= new </span><span style="color: #0000BB">DateTime</span><span style="color: #007700">(</span><span style="color: #DD0000">"</span><span style="color: #0000BB">$year</span><span style="color: #DD0000">-03-21"</span><span style="color: #007700">);<br />    </span><span style="color: #0000BB">$days </span><span style="color: #007700">= </span><span style="color: #0000BB">easter_days</span><span style="color: #007700">(</span><span style="color: #0000BB">$year</span><span style="color: #007700">);<br /><br />    return </span><span style="color: #0000BB">$base</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">add</span><span style="color: #007700">(new </span><span style="color: #0000BB">DateInterval</span><span style="color: #007700">(</span><span style="color: #DD0000">"P</span><span style="color: #007700">{</span><span style="color: #0000BB">$days</span><span style="color: #007700">}</span><span style="color: #DD0000">D"</span><span style="color: #007700">));<br />}<br /><br />foreach (</span><span style="color: #0000BB">range</span><span style="color: #007700">(</span><span style="color: #0000BB">2012</span><span style="color: #007700">, </span><span style="color: #0000BB">2015</span><span style="color: #007700">) as </span><span style="color: #0000BB">$year</span><span style="color: #007700">) {<br />    </span><span style="color: #0000BB">printf</span><span style="color: #007700">(</span><span style="color: #DD0000">"Easter in %d is on %s\n"</span><span style="color: #007700">,<br />           </span><span style="color: #0000BB">$year</span><span style="color: #007700">,<br />           </span><span style="color: #0000BB">get_easter_datetime</span><span style="color: #007700">(</span><span style="color: #0000BB">$year</span><span style="color: #007700">)-&gt;</span><span style="color: #0000BB">format</span><span style="color: #007700">(</span><span style="color: #DD0000">'F j'</span><span style="color: #007700">));<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <p class="para">以上示例会输出：</p>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Easter in 2012 is on April 8
+Easter in 2013 is on March 31
+Easter in 2014 is on April 20
+Easter in 2015 is on April 5
+</pre></div>
+    </div>
+   </div>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.easter-date-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member">
+     <span class="function"><a href="function.easter-days.html" class="function" rel="rdfs-seeAlso">easter_days()</a> - 得到指定年份的 3 月 21 日到复活节之间的天数</span> 用于计算 1970 年之前或 2037 年之后的复活节。
+    </li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

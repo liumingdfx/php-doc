@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>返回所取得行中字段的值</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.oci-register-taf-callback.html">« oci_register_taf_callback</a></li>
+      <li style="float: right;"><a href="function.oci-rollback.html">oci_rollback »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.oci8.html">OCI8 函数</a></li>
+    <li>返回所取得行中字段的值</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.oci-result" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">oci_result</h1>
+  <p class="verinfo">(PHP 5, PHP 7, PHP 8, PECL OCI8 &gt;= 1.1.0)</p><p class="refpurpose"><span class="refname">oci_result</span> &mdash; <span class="dc-title">返回所取得行中字段的值</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.oci-result-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>oci_result</strong></span>(<span class="methodparam"><span class="type">resource</span> <code class="parameter">$statement</code></span>, <span class="methodparam"><span class="type"><span class="type">string</span>|<span class="type">int</span></span> <code class="parameter">$column</code></span>): <span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span></div>
+
+  <p class="para rdfs-comment">
+   返回由 <span class="function"><a href="function.oci-fetch.html" class="function">oci_fetch()</a></span> 所读取的当前行中 <code class="parameter">column</code> 的数据。
+  </p>
+  <p class="para">要获取 OCI8
+扩展进行数据类型映射的细节，请参见<a href="oci8.datatypes.html" class="link">驱动所支持的数据类型</a>。</p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.oci-result-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">statement</code></dt>
+
+     <dd>
+
+      <p class="para">
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">column</code></dt>
+
+     <dd>
+
+      <p class="para">
+       可以使用列号（从 1 开始）或列名。列名的大小写必须是 Oracle 元数据描述该列的大小写，对于创建的不区分大小写的列来说是大写。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.oci-result-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   以字符串形式返回除抽象类型（ROWID、LOB 和 FILE）之外的所有内容。在出错时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.oci-result-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="example-5663">
+    <p><strong>示例 #1 <span class="function"><a href="function.oci-fetch.html" class="function">oci_fetch()</a></span> 和 <span class="function"><strong>oci_result()</strong></span></strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />$conn </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">'hr'</span><span style="color: #007700">, </span><span style="color: #DD0000">'welcome'</span><span style="color: #007700">, </span><span style="color: #DD0000">'localhost/XE'</span><span style="color: #007700">);<br />if (!</span><span style="color: #0000BB">$conn</span><span style="color: #007700">) {<br />    </span><span style="color: #0000BB">$e </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_error</span><span style="color: #007700">();<br />    </span><span style="color: #0000BB">trigger_error</span><span style="color: #007700">(</span><span style="color: #0000BB">htmlentities</span><span style="color: #007700">(</span><span style="color: #0000BB">$e</span><span style="color: #007700">[</span><span style="color: #DD0000">'message'</span><span style="color: #007700">], </span><span style="color: #0000BB">ENT_QUOTES</span><span style="color: #007700">), </span><span style="color: #0000BB">E_USER_ERROR</span><span style="color: #007700">);<br />}<br /><br /></span><span style="color: #0000BB">$sql </span><span style="color: #007700">= </span><span style="color: #DD0000">'SELECT location_id, city FROM locations WHERE location_id &lt; 1200'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$stid </span><span style="color: #007700">= </span><span style="color: #0000BB">oci_parse</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">, </span><span style="color: #0000BB">$sql</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">oci_execute</span><span style="color: #007700">(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">);<br /><br />while (</span><span style="color: #0000BB">oci_fetch</span><span style="color: #007700">(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">)) {<br />    echo </span><span style="color: #0000BB">oci_result</span><span style="color: #007700">(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">, </span><span style="color: #DD0000">'LOCATION_ID'</span><span style="color: #007700">) . </span><span style="color: #DD0000">" is "</span><span style="color: #007700">;<br />    echo </span><span style="color: #0000BB">oci_result</span><span style="color: #007700">(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">, </span><span style="color: #DD0000">'CITY'</span><span style="color: #007700">) . </span><span style="color: #DD0000">"&lt;br&gt;\n"</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #FF8000">// Displays:<br />//   1000 is Roma<br />//   1100 is Venice<br /><br /></span><span style="color: #0000BB">oci_free_statement</span><span style="color: #007700">(</span><span style="color: #0000BB">$stid</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">oci_close</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.oci-result-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.oci-fetch-array.html" class="function" rel="rdfs-seeAlso">oci_fetch_array()</a> - Returns the next row from a query as an associative or numeric array</span></li>
+    <li class="member"><span class="function"><a href="function.oci-fetch-assoc.html" class="function" rel="rdfs-seeAlso">oci_fetch_assoc()</a> - Returns the next row from a query as an associative array</span></li>
+    <li class="member"><span class="function"><a href="function.oci-fetch-object.html" class="function" rel="rdfs-seeAlso">oci_fetch_object()</a> - Returns the next row from a query as an object</span></li>
+    <li class="member"><span class="function"><a href="function.oci-fetch-row.html" class="function" rel="rdfs-seeAlso">oci_fetch_row()</a> - Returns the next row from a query as a numeric array</span></li>
+    <li class="member"><span class="function"><a href="function.oci-fetch-all.html" class="function" rel="rdfs-seeAlso">oci_fetch_all()</a> - 从查询中读取多行到二维数组中</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

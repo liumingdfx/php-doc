@@ -1,0 +1,362 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>预定义常量</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="inotify.resources.html">« 资源类型</a></li>
+      <li style="float: right;"><a href="ref.inotify.html">Inotify 函数 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="book.inotify.html">Inotify</a></li>
+    <li>预定义常量</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="inotify.constants" class="appendix">
+  <h1>预定义常量</h1>
+
+  <p class="simpara">下列常量由此扩展定义，且仅在此扩展编译入 PHP 或在运行时动态载入时可用。</p>
+  <dl id="inotify.constants.events">
+   <strong class="title">Inotify 常量可用于 <span class="function"><a href="function.inotify-add-watch.html" class="function">inotify_add_watch()</a></span> 或由 <span class="function"><a href="function.inotify-read.html" class="function">inotify_read()</a></span> 返回</strong>
+   
+    <dt id="constant.in-access">
+     <strong><code>IN_ACCESS</code></strong>
+      (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <span class="simpara">
+      文件被访问（读）（*）
+     </span>
+    </dd>
+
+   
+   
+    <dt id="constant.in-modify">
+     <strong><code>IN_MODIFY</code></strong>
+      (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <span class="simpara">
+      文件被修改（*）
+     </span>
+    </dd>
+
+   
+   
+    <dt id="constant.in-attrib">
+     <strong><code>IN_ATTRIB</code></strong>
+      (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <span class="simpara">
+      元数据变更（例如：权限、修改时间等）（*）
+     </span>
+    </dd>
+
+   
+   
+    <dt id="constant.in-close-write">
+     <strong><code>IN_CLOSE_WRITE</code></strong>
+      (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <span class="simpara">
+      打开写入后关闭的文件（*）
+     </span>
+    </dd>
+
+   
+   
+    <dt id="constant.in-close-nowrite">
+     <strong><code>IN_CLOSE_NOWRITE</code></strong>
+      (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <span class="simpara">
+      未打开写入的文件被关闭（*）
+     </span>
+    </dd>
+
+   
+   
+    <dt id="constant.in-open">
+     <strong><code>IN_OPEN</code></strong>
+      (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <span class="simpara">
+      文件被打开（*）
+     </span>
+    </dd>
+
+   
+   
+    <dt id="constant.in-moved-to">
+     <strong><code>IN_MOVED_TO</code></strong>
+      (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <span class="simpara">
+      文件被移动到监听目录（*）
+     </span>
+    </dd>
+
+   
+   
+    <dt id="constant.in-moved-from">
+     <strong><code>IN_MOVED_FROM</code></strong>
+      (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <span class="simpara">
+      文件移出监听目录（*）
+     </span>
+    </dd>
+
+   
+   
+    <dt id="constant.in-create">
+     <strong><code>IN_CREATE</code></strong>
+      (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <span class="simpara">
+      在监听目录中创建文件或文件夹（*）
+     </span>
+    </dd>
+
+   
+   
+    <dt id="constant.in-delete">
+     <strong><code>IN_DELETE</code></strong>
+      (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <span class="simpara">
+      监听目录中删除文件或文件夹（*）
+     </span>
+    </dd>
+
+   
+   
+    <dt id="constant.in-delete-self">
+     <strong><code>IN_DELETE_SELF</code></strong>
+      (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <span class="simpara">
+      监听的文件或目录被删除
+     </span>
+    </dd>
+
+   
+   
+    <dt id="constant.in-move-self">
+     <strong><code>IN_MOVE_SELF</code></strong>
+      (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <span class="simpara">
+      监听的文件或目录被移动
+     </span>
+    </dd>
+
+   
+   
+    <dt id="constant.in-close">
+     <strong><code>IN_CLOSE</code></strong>
+      (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <span class="simpara">
+      与 IN_CLOSE_WRITE | IN_CLOSE_NOWRITE 相等
+     </span>
+    </dd>
+
+   
+   
+    <dt id="constant.in-move">
+     <strong><code>IN_MOVE</code></strong>
+      (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <span class="simpara">
+      与 IN_MOVED_FROM | IN_MOVED_TO 相等
+     </span>
+    </dd>
+
+   
+   
+    <dt id="constant.in-all-events">
+     <strong><code>IN_ALL_EVENTS</code></strong>
+      (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <span class="simpara">
+      以上所有常量的位掩码 
+     </span>
+    </dd>
+
+   
+   
+    <dt id="constant.in-unmount">
+     <strong><code>IN_UNMOUNT</code></strong>
+      (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <span class="simpara">
+      卸载包含监听对象的文件系统
+     </span>
+    </dd>
+
+   
+   
+    <dt id="constant.in-q-overflow">
+     <strong><code>IN_Q_OVERFLOW</code></strong>
+      (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <span class="simpara">
+      事件队列溢出（此事件中监听描述符是 -1）
+     </span>
+    </dd>
+
+   
+   
+    <dt id="constant.in-ignored">
+     <strong><code>IN_IGNORED</code></strong>
+      (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <span class="simpara">
+      监听被移除（通过 <span class="function"><a href="function.inotify-rm-watch.html" class="function">inotify_rm_watch()</a></span> 显示移除，或者是文件被移动，或者文件系统被卸载）
+     </span>
+    </dd>
+
+   
+   
+    <dt id="constant.in-isdir">
+     <strong><code>IN_ISDIR</code></strong>
+      (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <span class="simpara">
+      事件发生的主体是目录
+     </span>
+    </dd>
+
+   
+   
+    <dt id="constant.in-onlydir">
+     <strong><code>IN_ONLYDIR</code></strong>
+      (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <span class="simpara">
+      如果是目录，仅监听路径名（从 Linux 2.6.15 开始）
+     </span>
+    </dd>
+
+   
+   
+    <dt id="constant.in-dont-follow">
+     <strong><code>IN_DONT_FOLLOW</code></strong>
+      (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <span class="simpara">
+      如果是符号链接，不引用路径名（从 Linux 2.6.15 开始）
+     </span>
+    </dd>
+
+   
+   
+    <dt id="constant.in-mask-add">
+     <strong><code>IN_MASK_ADD</code></strong>
+      (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <span class="simpara">
+      如果路径名存在，追加监听此路径的事件掩码（代替更换掩码）
+     </span>
+    </dd>
+
+   
+   
+    <dt id="constant.in-oneshot">
+     <strong><code>IN_ONESHOT</code></strong>
+      (<span class="type">int</span>)
+    </dt>
+
+    <dd>
+
+     <span class="simpara">
+      路径触发一个监听事件后，从监听列表中移除。
+     </span>
+    </dd>
+
+   
+  </dl>
+
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <span class="simpara">
+    以上标有星号 (*) 的事件可能发生在已监听目录的文件中。 
+   </span>
+  </p></blockquote>
+</div>
+</div></div></body></html>

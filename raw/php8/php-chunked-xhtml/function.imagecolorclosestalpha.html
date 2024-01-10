@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>获取最接近指定颜色 + alpha 的颜色索引</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.imagecolorclosest.html">« imagecolorclosest</a></li>
+      <li style="float: right;"><a href="function.imagecolorclosesthwb.html">imagecolorclosesthwb »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.image.html">GD 和图像处理 函数</a></li>
+    <li>获取最接近指定颜色 + alpha 的颜色索引</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.imagecolorclosestalpha" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">imagecolorclosestalpha</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.0.6, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">imagecolorclosestalpha</span> &mdash; <span class="dc-title">获取最接近指定颜色 + alpha 的颜色索引</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.imagecolorclosestalpha-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>imagecolorclosestalpha</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><a href="class.gdimage.html" class="type GdImage">GdImage</a></span> <code class="parameter">$image</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$red</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$green</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$blue</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$alpha</code></span><br>): <span class="type">int</span></div>
+
+  <p class="para rdfs-comment">
+   返回图像调色板中“最接近”指定 <abbr title="Red-Green-Blue">RGB</abbr> 值以及
+   <code class="parameter">alpha</code> 级别的颜色索引。
+  </p>
+ </div>
+
+ <div class="refsect1 parameters" id="refsect1-function.imagecolorclosestalpha-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    <dt>
+
+<code class="parameter">image</code></dt>
+<dd>
+<p class="para">由图象创建函数(例如<span class="function"><a href="function.imagecreatetruecolor.html" class="function">imagecreatetruecolor()</a></span>)返回的 
+<span class="classname"><a href="class.gdimage.html" class="classname">GdImage</a></span> 对象。</p></dd>
+
+    
+     <dt>
+<code class="parameter">red</code></dt>
+
+     <dd>
+
+      <p class="para">红色成分的值。</p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">green</code></dt>
+
+     <dd>
+
+      <p class="para">绿色成分的值。</p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">blue</code></dt>
+
+     <dd>
+
+      <p class="para">蓝色成分的值。</p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">alpha</code></dt>
+
+     <dd>
+
+      <p class="para">
+       介于 <code class="literal">0</code> 和 <code class="literal">127</code> 之间的值。<code class="literal">0</code>
+       表示完全不透明，而 <code class="literal">127</code> 表示完全透明。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+   colors 参数是 0 到 255 之间的整数或 0x00 到 0xFF 之间的十六进制数。
+  </p>
+ </div>
+
+ <div class="refsect1 returnvalues" id="refsect1-function.imagecolorclosestalpha-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回调色板中最接近的颜色的索引。
+  </p>
+ </div>
+
+ <div class="refsect1 examples" id="refsect1-function.imagecolorclosestalpha-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 在图像中搜索一组颜色</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// Start with an image and convert it to a palette-based image<br /></span><span style="color: #0000BB">$im </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecreatefrompng</span><span style="color: #007700">(</span><span style="color: #DD0000">'figures/imagecolorclosest.png'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagetruecolortopalette</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">, </span><span style="color: #0000BB">false</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// Search colors (RGB)<br /></span><span style="color: #0000BB">$colors </span><span style="color: #007700">= array(<br />    array(</span><span style="color: #0000BB">254</span><span style="color: #007700">, </span><span style="color: #0000BB">145</span><span style="color: #007700">, </span><span style="color: #0000BB">154</span><span style="color: #007700">, </span><span style="color: #0000BB">50</span><span style="color: #007700">),<br />    array(</span><span style="color: #0000BB">153</span><span style="color: #007700">, </span><span style="color: #0000BB">145</span><span style="color: #007700">, </span><span style="color: #0000BB">188</span><span style="color: #007700">, </span><span style="color: #0000BB">127</span><span style="color: #007700">),<br />    array(</span><span style="color: #0000BB">153</span><span style="color: #007700">, </span><span style="color: #0000BB">90</span><span style="color: #007700">, </span><span style="color: #0000BB">145</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">),<br />    array(</span><span style="color: #0000BB">255</span><span style="color: #007700">, </span><span style="color: #0000BB">137</span><span style="color: #007700">, </span><span style="color: #0000BB">92</span><span style="color: #007700">, </span><span style="color: #0000BB">84</span><span style="color: #007700">)<br />);<br /><br /></span><span style="color: #FF8000">// Loop through each search and find the closest color in the palette.<br />// Return the search number, the search RGB and the converted RGB match<br /></span><span style="color: #007700">foreach(</span><span style="color: #0000BB">$colors </span><span style="color: #007700">as </span><span style="color: #0000BB">$id </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">$rgb</span><span style="color: #007700">)<br />{<br />    </span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecolorclosestalpha</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">, </span><span style="color: #0000BB">$rgb</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">], </span><span style="color: #0000BB">$rgb</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">], </span><span style="color: #0000BB">$rgb</span><span style="color: #007700">[</span><span style="color: #0000BB">2</span><span style="color: #007700">], </span><span style="color: #0000BB">$rgb</span><span style="color: #007700">[</span><span style="color: #0000BB">3</span><span style="color: #007700">]);<br />    </span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecolorsforindex</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">, </span><span style="color: #0000BB">$result</span><span style="color: #007700">);<br />    </span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #DD0000">"(</span><span style="color: #007700">{</span><span style="color: #0000BB">$result</span><span style="color: #007700">[</span><span style="color: #DD0000">'red'</span><span style="color: #007700">]}</span><span style="color: #DD0000">, </span><span style="color: #007700">{</span><span style="color: #0000BB">$result</span><span style="color: #007700">[</span><span style="color: #DD0000">'green'</span><span style="color: #007700">]}</span><span style="color: #DD0000">, </span><span style="color: #007700">{</span><span style="color: #0000BB">$result</span><span style="color: #007700">[</span><span style="color: #DD0000">'blue'</span><span style="color: #007700">]}</span><span style="color: #DD0000">, </span><span style="color: #007700">{</span><span style="color: #0000BB">$result</span><span style="color: #007700">[</span><span style="color: #DD0000">'alpha'</span><span style="color: #007700">]}</span><span style="color: #DD0000">)"</span><span style="color: #007700">;<br /><br />    echo </span><span style="color: #DD0000">"#</span><span style="color: #0000BB">$id</span><span style="color: #DD0000">: Search (</span><span style="color: #0000BB">$rgb</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">]</span><span style="color: #DD0000">, </span><span style="color: #0000BB">$rgb</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">]</span><span style="color: #DD0000">, </span><span style="color: #0000BB">$rgb</span><span style="color: #007700">[</span><span style="color: #0000BB">2</span><span style="color: #007700">]</span><span style="color: #DD0000">, </span><span style="color: #0000BB">$rgb</span><span style="color: #007700">[</span><span style="color: #0000BB">3</span><span style="color: #007700">]</span><span style="color: #DD0000">); Closest match: </span><span style="color: #0000BB">$result</span><span style="color: #DD0000">.\n"</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">imagedestroy</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例的输出类似于：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+#0: Search (254, 145, 154, 50); Closest match: (252, 150, 148, 0).
+#1: Search (153, 145, 188, 127); Closest match: (148, 150, 196, 0).
+#2: Search (153, 90, 145, 0); Closest match: (148, 90, 156, 0).
+#3: Search (255, 137, 92, 84); Closest match: (252, 150, 92, 0).
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.imagecolorclosestalpha-seealso">
+  <h3 class="title">参见</h3>
+  <ul class="simplelist">
+   <li class="member"><span class="function"><a href="function.imagecolorexactalpha.html" class="function" rel="rdfs-seeAlso">imagecolorexactalpha()</a> - 取得指定的颜色加透明度的索引值</span></li>
+   <li class="member"><span class="function"><a href="function.imagecolorclosest.html" class="function" rel="rdfs-seeAlso">imagecolorclosest()</a> - 取得与指定的颜色最接近的颜色索引值</span></li>
+   <li class="member"><span class="function"><a href="function.imagecolorclosesthwb.html" class="function" rel="rdfs-seeAlso">imagecolorclosesthwb()</a> - 取得与给定颜色最接近的色度的黑白色的索引</span></li>
+  </ul>
+ </div>
+
+</div></div></div></body></html>

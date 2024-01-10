@@ -1,0 +1,198 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>取得服务器响应 HTTP 请求所发送的所有标头</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.base64-encode.html">« base64_encode</a></li>
+      <li style="float: right;"><a href="function.get-meta-tags.html">get_meta_tags »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.url.html">URL 函数</a></li>
+    <li>取得服务器响应 HTTP 请求所发送的所有标头</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.get-headers" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">get_headers</h1>
+  <p class="verinfo">(PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">get_headers</span> &mdash; <span class="dc-title">取得服务器响应 HTTP 请求所发送的所有标头</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.get-headers-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>get_headers</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$url</code></span>, <span class="methodparam"><span class="type">bool</span> <code class="parameter">$associative</code><span class="initializer"> = <strong><code>false</code></strong></span></span>, <span class="methodparam"><span class="type">?</span><span class="type"><span class="type">resource</span><span class="type"></span></span> <code class="parameter">$context</code><span class="initializer"> = <strong><code>null</code></strong></span></span>): <span class="type"><span class="type">array</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>get_headers()</strong></span> 返回一个数组，包含有服务器响应一个
+   HTTP 请求所发送的标头。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.get-headers-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">url</code></dt>
+
+     <dd>
+
+      <p class="para">
+       目标 URL。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">associative</code></dt>
+
+     <dd>
+
+      <p class="para">
+        如果将可选的 <code class="parameter">associative</code> 参数设为 true，则
+        <span class="function"><strong>get_headers()</strong></span> 会解析相应的信息并设定数组的键名。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">context</code></dt>
+
+     <dd>
+
+      <p class="para">
+       使用 <span class="function"><a href="function.stream-context-create.html" class="function">stream_context_create()</a></span> 创建的有效上下文资源，<strong><code>null</code></strong>
+       使用默认上下文。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.get-headers-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回包含有服务器响应一个
+   HTTP 请求所发送标头的索引或关联数组，如果失败则返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.get-headers-changelog">
+  <h3 class="title">更新日志</h3>
+  <p class="para">
+   <table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>8.0.0</td>
+       <td>
+        <code class="parameter">associative</code> 从 <span class="type">int</span> 更改为 <span class="type">bool</span>。
+       </td>
+      </tr>
+
+      <tr>
+       <td>7.1.0</td>
+       <td>
+        新增 <code class="parameter">context</code> 参数。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.get-headers-examples">
+ <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 <span class="function"><strong>get_headers()</strong></span> 例子</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$url </span><span style="color: #007700">= </span><span style="color: #DD0000">'http://www.example.com'</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">get_headers</span><span style="color: #007700">(</span><span style="color: #0000BB">$url</span><span style="color: #007700">));<br /><br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">get_headers</span><span style="color: #007700">(</span><span style="color: #0000BB">$url</span><span style="color: #007700">, </span><span style="color: #0000BB">true</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例的输出类似于：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+    [0] =&gt; HTTP/1.1 200 OK
+    [1] =&gt; Date: Sat, 29 May 2004 12:28:13 GMT
+    [2] =&gt; Server: Apache/1.3.27 (Unix)  (Red-Hat/Linux)
+    [3] =&gt; Last-Modified: Wed, 08 Jan 2003 23:11:55 GMT
+    [4] =&gt; ETag: &quot;3f80f-1b6-3e1cb03b&quot;
+    [5] =&gt; Accept-Ranges: bytes
+    [6] =&gt; Content-Length: 438
+    [7] =&gt; Connection: close
+    [8] =&gt; Content-Type: text/html
+)
+
+Array
+(
+    [0] =&gt; HTTP/1.1 200 OK
+    [Date] =&gt; Sat, 29 May 2004 12:28:14 GMT
+    [Server] =&gt; Apache/1.3.27 (Unix)  (Red-Hat/Linux)
+    [Last-Modified] =&gt; Wed, 08 Jan 2003 23:11:55 GMT
+    [ETag] =&gt; &quot;3f80f-1b6-3e1cb03b&quot;
+    [Accept-Ranges] =&gt; bytes
+    [Content-Length] =&gt; 438
+    [Connection] =&gt; close
+    [Content-Type] =&gt; text/html
+)
+</pre></div>
+    </div>
+   </div>
+   <div class="example" id="">
+    <p><strong>示例 #2 <span class="function"><strong>get_headers()</strong></span> 使用 HEAD 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// 默认 get_headers 使用 GET 请求获取 header。如果想要发送<br />// HEAD 请求，可以通过 stream context 进行 HEAD 请求：<br /></span><span style="color: #0000BB">$context </span><span style="color: #007700">= </span><span style="color: #0000BB">stream_context_create</span><span style="color: #007700">(<br />    [<br />        </span><span style="color: #DD0000">'http' </span><span style="color: #007700">=&gt; array(<br />            </span><span style="color: #DD0000">'method' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'HEAD'<br />        </span><span style="color: #007700">)<br />    ]<br />);<br /></span><span style="color: #0000BB">$headers </span><span style="color: #007700">= </span><span style="color: #0000BB">get_headers</span><span style="color: #007700">(</span><span style="color: #DD0000">'http://example.com'</span><span style="color: #007700">, </span><span style="color: #0000BB">false</span><span style="color: #007700">, </span><span style="color: #0000BB">$context</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.get-headers-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.apache-request-headers.html" class="function" rel="rdfs-seeAlso">apache_request_headers()</a> - 获取全部 HTTP 请求头信息</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

@@ -1,0 +1,214 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>取得 GMT 日期的 UNIX 时间戳</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.gmdate.html">« gmdate</a></li>
+      <li style="float: right;"><a href="function.gmstrftime.html">gmstrftime »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.datetime.html">Date/Time 函数</a></li>
+    <li>取得 GMT 日期的 UNIX 时间戳</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.gmmktime" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">gmmktime</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">gmmktime</span> &mdash; <span class="dc-title">取得 GMT 日期的 UNIX 时间戳</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.gmmktime-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>gmmktime</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$hour</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">int</span><span class="type"></span></span> <code class="parameter">$minute</code><span class="initializer"> = <strong><code>null</code></strong></span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">int</span><span class="type"></span></span> <code class="parameter">$second</code><span class="initializer"> = <strong><code>null</code></strong></span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">int</span><span class="type"></span></span> <code class="parameter">$month</code><span class="initializer"> = <strong><code>null</code></strong></span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">int</span><span class="type"></span></span> <code class="parameter">$day</code><span class="initializer"> = <strong><code>null</code></strong></span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">int</span><span class="type"></span></span> <code class="parameter">$year</code><span class="initializer"> = <strong><code>null</code></strong></span></span><br>): <span class="type"><span class="type">int</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   和 <span class="function"><a href="function.mktime.html" class="function">mktime()</a></span> 相同，但传递的参数是 GMT 日期。
+   <span class="function"><strong>gmmktime()</strong></span> internally uses <span class="function"><a href="function.mktime.html" class="function">mktime()</a></span>
+   so only times valid in derived local time can be used.
+  </p>
+  <p class="para">
+   和 <span class="function"><a href="function.mktime.html" class="function">mktime()</a></span>
+   一样，可选参数可以从右到左的顺序省略，省略的参数会被设为当前对应的 GMT 值。
+  </p>
+  <p class="simpara">
+   不再支持不带参数调用 <span class="function"><strong>gmmktime()</strong></span>，并会导致 <span class="classname"><a href="class.argumentcounterror.html" class="classname">ArgumentCountError</a></span>。
+   <span class="function"><a href="function.time.html" class="function">time()</a></span> 可用于获取当前时间戳。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.gmmktime-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">hour</code></dt>
+
+     <dd>
+
+      <p class="para">
+       相对于一天开始的小时数，由 <code class="parameter">month</code>、<code class="parameter">day</code> 和
+       <code class="parameter">year</code> 确定。负值是指当天零点前的小时。值大于 23 是指接下来几天的适当小时。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">minute</code></dt>
+
+     <dd>
+
+      <p class="para">
+       相对于 <code class="parameter">hour</code> 开始的分钟数。负值指的是上个小时的分钟。大于 59
+       的值将指向接下来几个小时的适当分钟。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">second</code></dt>
+
+     <dd>
+
+      <p class="para">
+       相对于 <code class="parameter">minute</code> 开始的秒数。负值是指前一分钟的秒数。大于 59
+       的值是指接下来几分钟的适当秒。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">month</code></dt>
+
+     <dd>
+
+      <p class="para">
+       相对于去年年底的月份数。值 1 到 12 是指相关年份的正常日历月份。小于 1
+       的值（包括负值）按相反的顺序指向去年的月份，因此 0 是 12 月，-1 是 11
+       月，以此类推。值大于 12 是指接下来几年的适当月份。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">day</code></dt>
+
+     <dd>
+
+      <p class="para">
+       相对于上个月月底的天数。值 1 到 28、29、30 或 31（取决于月份）是指相关月份的正常天数。小于
+       1 的值（包括负值）是指上个月的天数，因此 0 是上个月的最后一天，-1 
+       是倒数第二天，以此类推。大于相关月份天数的值是指接下来几个月的适当某一天。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">year</code></dt>
+
+     <dd>
+
+      <p class="para">
+       年份
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.gmmktime-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   成功时返回 <span class="type">int</span> Unix 时间戳，如果时间戳不适合 PHP 整数则返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.gmmktime-changelog">
+  <h3 class="title">更新日志</h3>
+  <p class="para">
+   <table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>8.0.0</td>
+       <td>
+        <code class="parameter">hour</code> 不再可选。如果需要获取 Unix 时间戳，可以使用 <span class="function"><a href="function.time.html" class="function">time()</a></span>。
+       </td>
+      </tr>
+
+      <tr>
+       <td>8.0.0</td>
+       <td>
+        现在 <code class="parameter">minute</code>、<code class="parameter">second</code>、<code class="parameter">month</code>、<code class="parameter">day</code>
+        和 <code class="parameter">year</code> 可以为 null。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.gmmktime-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 <span class="function"><strong>gmmktime()</strong></span> 基础示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// 打印： July 1, 2000 is on a Saturday<br /></span><span style="color: #007700">echo </span><span style="color: #DD0000">"July 1, 2000 is on a " </span><span style="color: #007700">. </span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">"l"</span><span style="color: #007700">, </span><span style="color: #0000BB">gmmktime</span><span style="color: #007700">(</span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">7</span><span style="color: #007700">, </span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2000</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.gmmktime-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="classname"><a href="class.datetimeimmutable.html" class="classname">DateTimeImmutable</a></span> 类</li>
+    <li class="member"><span class="function"><a href="function.mktime.html" class="function" rel="rdfs-seeAlso">mktime()</a> - 取得一个日期的 Unix 时间戳</span></li>
+    <li class="member"><span class="function"><a href="function.date.html" class="function" rel="rdfs-seeAlso">date()</a> - 格式化 Unix 时间戳</span></li>
+    <li class="member"><span class="function"><a href="function.time.html" class="function" rel="rdfs-seeAlso">time()</a> - 返回当前的 Unix 时间戳</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div></div></div></body></html>

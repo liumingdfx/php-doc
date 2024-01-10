@@ -1,0 +1,224 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>计算指定字符串在目标字符串中最后一次出现的位置</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.strripos.html">« strripos</a></li>
+      <li style="float: right;"><a href="function.strspn.html">strspn »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.strings.html">字符串 函数</a></li>
+    <li>计算指定字符串在目标字符串中最后一次出现的位置</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.strrpos" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">strrpos</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">strrpos</span> &mdash; <span class="dc-title">计算指定字符串在目标字符串中最后一次出现的位置</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.strrpos-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>strrpos</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$haystack</code></span>, <span class="methodparam"><span class="type">string</span> <code class="parameter">$needle</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$offset</code><span class="initializer"> = 0</span></span>): <span class="type"><span class="type">int</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   返回 <code class="parameter">haystack</code> 字符串中 <code class="parameter">needle</code> 最后一次出现的数字位置。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.strrpos-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">haystack</code></dt>
+
+     <dd>
+
+      <p class="para">
+       在此字符串中进行查找。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">needle</code></dt>
+
+     <dd>
+
+      <p class="para">
+       要搜索的字符串。
+      </p>
+      
+ <p class="para">
+  Prior to PHP 8.0.0, if <code class="parameter">needle</code> is not a string, it is converted
+  to an integer and applied as the ordinal value of a character.
+  This behavior is deprecated as of PHP 7.3.0, and relying on it is highly
+  discouraged. Depending on the intended behavior, the
+  <code class="parameter">needle</code> should either be explicitly cast to string,
+  or an explicit call to <span class="function"><a href="function.chr.html" class="function">chr()</a></span> should be performed.
+ </p>
+
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">offset</code></dt>
+
+     <dd>
+
+      <p class="para"> 
+       如果为 0 或正数，则从左到右搜索，跳过 <code class="parameter">haystack</code> 的开头
+       <code class="parameter">offset</code> 个字节。
+      </p>
+      <p class="para">
+       如果为负数，搜索从右侧 <code class="parameter">offset</code> 个字节开始，而不是从开头 <code class="parameter">haystack</code>
+       个字节开始。搜索从右往左进行，从所选字节中搜索第一个出现的 <code class="parameter">needle</code>。
+       <blockquote class="note"><p><strong class="note">注意</strong>: 
+        <p class="para">
+         这实际是在最后 <code class="parameter">offset</code> 个字节之前寻找最后出现的
+         <code class="parameter">needle</code> 的位置。
+        </p>
+       </p></blockquote>
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.strrpos-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回 needle 在 <code class="parameter">haystack</code> 字符串中存在的位置（与搜索顺序或者 offset 无关）。
+   <blockquote class="note"><p><strong class="note">注意</strong>: 
+    <span class="simpara">
+     字符串位置从 0 开始，而不是 1。
+    </span>
+   </p></blockquote>
+  </p>
+  <p class="para">
+   如果未找到 needle，则返回 <strong><code>false</code></strong>。
+  </p>
+  <div class="warning"><strong class="warning">警告</strong><p class="simpara">此函数可能返回布尔值
+<strong><code>false</code></strong>，但也可能返回等同于 <strong><code>false</code></strong> 的非布尔值。请阅读 <a href="language.types.boolean.html" class="link">布尔类型</a>章节以获取更多信息。应使用
+<a href="language.operators.comparison.html" class="link">===
+运算符</a>来测试此函数的返回值。</p></div>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.strrpos-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+ <td>8.0.0</td>
+ <td>
+  <code class="parameter">needle</code> 现在接受空字符串。
+ </td>
+</tr>
+
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       不再支持将 <span class="type">int</span> 传递给 <code class="parameter">needle</code>。
+      </td>
+     </tr>
+
+     <tr>
+      <td>7.3.0</td>
+      <td>
+       弃用将 <span class="type">int</span> 传递给 <code class="parameter">needle</code>。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.strrpos-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 检查字串是否存在</strong></p>
+    <div class="example-contents"><p>
+     很容易将“在位置 0 处找到”和“未发现字符串”这两种情况搞错。这是检测区别的办法：
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />$pos </span><span style="color: #007700">= </span><span style="color: #0000BB">strrpos</span><span style="color: #007700">(</span><span style="color: #0000BB">$mystring</span><span style="color: #007700">, </span><span style="color: #DD0000">"b"</span><span style="color: #007700">);<br />if (</span><span style="color: #0000BB">$pos </span><span style="color: #007700">=== </span><span style="color: #0000BB">false</span><span style="color: #007700">) { </span><span style="color: #FF8000">// 注意: 三个等号<br />    // 未发现...<br /></span><span style="color: #007700">}<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #2 使用偏移位置进行查找</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$foo </span><span style="color: #007700">= </span><span style="color: #DD0000">"0123456789a123456789b123456789c"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// 从第 0 个字节（从头）寻找“0”<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">strrpos</span><span style="color: #007700">(</span><span style="color: #0000BB">$foo</span><span style="color: #007700">, </span><span style="color: #DD0000">'0'</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">));<br /><br /></span><span style="color: #FF8000">// 从第 1 个字节（字节“0”之后）寻找“0”<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">strrpos</span><span style="color: #007700">(</span><span style="color: #0000BB">$foo</span><span style="color: #007700">, </span><span style="color: #DD0000">'0'</span><span style="color: #007700">, </span><span style="color: #0000BB">1</span><span style="color: #007700">));<br /><br /></span><span style="color: #FF8000">// 从第 21 个字节（20 个字节之后）寻找“7”<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">strrpos</span><span style="color: #007700">(</span><span style="color: #0000BB">$foo</span><span style="color: #007700">, </span><span style="color: #DD0000">'7'</span><span style="color: #007700">, </span><span style="color: #0000BB">20</span><span style="color: #007700">));<br /><br /></span><span style="color: #FF8000">// 从第 29 个字节（28 个字节之后）寻找“7”<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">strrpos</span><span style="color: #007700">(</span><span style="color: #0000BB">$foo</span><span style="color: #007700">, </span><span style="color: #DD0000">'7'</span><span style="color: #007700">, </span><span style="color: #0000BB">28</span><span style="color: #007700">));<br /><br /></span><span style="color: #FF8000">// 从倒数第 5 个字节起从右向左寻找“7”<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">strrpos</span><span style="color: #007700">(</span><span style="color: #0000BB">$foo</span><span style="color: #007700">, </span><span style="color: #DD0000">'7'</span><span style="color: #007700">, -</span><span style="color: #0000BB">5</span><span style="color: #007700">));<br /><br /></span><span style="color: #FF8000">// 从倒数第 2 个字节起从右向左寻找“c”<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">strrpos</span><span style="color: #007700">(</span><span style="color: #0000BB">$foo</span><span style="color: #007700">, </span><span style="color: #DD0000">'c'</span><span style="color: #007700">, -</span><span style="color: #0000BB">2</span><span style="color: #007700">));<br /><br /></span><span style="color: #FF8000">// 从倒数第 2 个字节起从右向左寻找“9c”<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">strrpos</span><span style="color: #007700">(</span><span style="color: #0000BB">$foo</span><span style="color: #007700">, </span><span style="color: #DD0000">'9c'</span><span style="color: #007700">, -</span><span style="color: #0000BB">2</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   <div class="example-contents"><p>以上示例会输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+int(0)
+bool(false)
+int(27)
+bool(false)
+int(17)
+bool(false)
+int(29)
+</pre></div>
+   </div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.strrpos-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.strpos.html" class="function" rel="rdfs-seeAlso">strpos()</a> - 查找字符串首次出现的位置</span></li>
+    <li class="member"><span class="function"><a href="function.stripos.html" class="function" rel="rdfs-seeAlso">stripos()</a> - 查找字符串首次出现的位置（不区分大小写）</span></li>
+    <li class="member"><span class="function"><a href="function.strripos.html" class="function" rel="rdfs-seeAlso">strripos()</a> - 计算指定字符串在目标字符串中最后一次出现的位置（不区分大小写）</span></li>
+    <li class="member"><span class="function"><a href="function.strrchr.html" class="function" rel="rdfs-seeAlso">strrchr()</a> - 查找指定字符在字符串中的最后一次出现</span></li>
+    <li class="member"><span class="function"><a href="function.substr.html" class="function" rel="rdfs-seeAlso">substr()</a> - 返回字符串的子串</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

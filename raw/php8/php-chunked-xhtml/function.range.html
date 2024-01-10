@@ -1,0 +1,287 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>根据范围创建数组，包含指定的元素</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.prev.html">« prev</a></li>
+      <li style="float: right;"><a href="function.reset.html">reset »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.array.html">数组 函数</a></li>
+    <li>根据范围创建数组，包含指定的元素</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.range" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">range</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">range</span> &mdash; <span class="dc-title">根据范围创建数组，包含指定的元素</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.range-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>range</strong></span>(<span class="methodparam"><span class="type"><span class="type">string</span>|<span class="type">int</span>|<span class="type">float</span></span> <code class="parameter">$start</code></span>, <span class="methodparam"><span class="type"><span class="type">string</span>|<span class="type">int</span>|<span class="type">float</span></span> <code class="parameter">$end</code></span>, <span class="methodparam"><span class="type"><span class="type">int</span>|<span class="type">float</span></span> <code class="parameter">$step</code><span class="initializer"> = 1</span></span>): <span class="type">array</span></div>
+
+  <p class="para rdfs-comment">
+   建立一个包含指定范围单元的数组。
+  </p>
+  <p class="para">
+   如果 <code class="parameter">start</code> 和 <code class="parameter">end</code> 都是 <span class="type">string</span>，<code class="parameter">step</code>
+   是 <span class="type">int</span>，则生成的数组是字节序列，否则，生成的数组将是数字序列。
+  </p>
+  <p class="para">
+   如果 <code class="parameter">start</code> 小于或等于 <code class="parameter">end</code>，则为递增序列，否则为递减序列。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.range-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">start</code></dt>
+
+     <dd>
+
+      <p class="para">
+       序列的第一个值。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">end</code></dt>
+
+     <dd>
+
+      <p class="para">
+       序列的最后一个可能值。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">step</code></dt>
+
+     <dd>
+
+      <p class="para">
+       <code class="parameter">step</code> 表示在序列之间产生序列时前进的数量。
+      </p>
+      <p class="para">
+       对于递减序列，<code class="parameter">step</code> 可能是负数。
+      </p>
+      <p class="para">
+       如果 <code class="parameter">step</code> 是没有小数部分的 <span class="type">float</span>，则将解释为 <span class="type">int</span>。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.range-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回  <span class="type">array</span>，由元素组成的序列，其中第一个元素为 <code class="parameter">start</code>，最后一个元素为
+   <code class="parameter">end</code>，序列中每个元素之间的差值为 <code class="parameter">step</code>。
+  </p>
+  <p class="para">
+   返回的数组的最后一个元素是 <code class="parameter">end</code> 或序列中的前一个元素，具体取决于 <code class="parameter">step</code>。
+  </p>
+  <p class="para">
+   如果 <code class="parameter">start</code> 和 <code class="parameter">end</code> 都是 <span class="type">string</span>，并且
+   <code class="parameter">step</code> 是 <span class="type">int</span>，则生成的数组将是字节序列，通常是拉丁 <abbr class="abbrev">ASCII</abbr> 字符。
+  </p>
+  <p class="para">
+   如果 <code class="parameter">start</code>、<code class="parameter">end</code> 或 <code class="parameter">step</code> 是
+   <span class="type">float</span>，则生成的数组将是 <span class="type">float</span> 序列。
+  </p>
+  <p class="para">
+   否则，生成的数组将是 <span class="type">int</span> 序列。
+  </p>
+ </div>
+
+
+ <div class="refsect1 errors" id="refsect1-function.range-errors">
+  <h3 class="title">错误／异常</h3>
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <span class="simpara">
+     如果 <code class="parameter">step</code> 是 <code class="literal">0</code>，则抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     如果 <code class="parameter">start</code>、<code class="parameter">end</code> 或 <code class="parameter">step</code> 不是
+      <span class="function"><a href="function.is-finite.html" class="function">is_finite()</a></span>，则抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     如果 <code class="parameter">step</code> 是负数，但生成的范围是递增的（例如 <code class="code">$start &lt;=
+     $end</code>），则抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     如果 <code class="parameter">start</code> 或 <code class="parameter">end</code> 是空字符串 <code class="literal">&#039;&#039;</code>，则发出
+     <strong><code>E_WARNING</code></strong> 并将空字符串解释为 <code class="literal">0</code>。
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     如果 <code class="parameter">start</code> 或 <code class="parameter">end</code> 不是<a href="language.types.numeric-strings.html" class="link">数字字符串</a>，并且多于一个字节，将发出 <strong><code>E_WARNING</code></strong>。
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     如果 <code class="parameter">start</code> 或 <code class="parameter">end</code> 是字符串，并且由于另一个边界值是数字而默默转换为
+     <span class="type">int</span>，将发出 <strong><code>E_WARNING</code></strong>。
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     如果 <code class="parameter">step</code> 是 <span class="type">float</span>，并且 <code class="parameter">start</code> 和 <code class="parameter">end</code>
+     不是<a href="language.types.numeric-strings.html" class="link">数字字符串</a>，将发出 <strong><code>E_WARNING</code></strong>。
+    </span>
+   </li>
+  </ul>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.range-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>8.3.0</td>
+      <td>
+       如果 <code class="parameter">start</code> 和 <code class="parameter">end</code> 都是字符串，然后 <span class="function"><strong>range()</strong></span>
+       现在将始终生成字节 <span class="type">array</span>。之前如果其中一个边界值是数字字符串，然后另外一个边界值也会默默转换为 <span class="type">int</span>。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.3.0</td>
+      <td>
+       如果 <code class="parameter">start</code> 或 <code class="parameter">end</code> 是字符串，并且由于另一个边界值是数字而默默转换为
+       <span class="type">int</span>，现在将发出 <strong><code>E_WARNING</code></strong>。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.3.0</td>
+      <td>
+       如果 <code class="parameter">start</code> 或 <code class="parameter">end</code> 是多于一个字节的非数字字符串，现在将发出 <strong><code>E_WARNING</code></strong>。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.3.0</td>
+      <td>
+       如果 <code class="parameter">start</code> 或 <code class="parameter">end</code> 是空字符串，现在将发出 <strong><code>E_WARNING</code></strong>。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.3.0</td>
+      <td>
+       如果 <code class="parameter">step</code> 是不带小数部分的 <span class="type">float</span>，将解释为 <span class="type">int</span>。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.3.0</td>
+      <td>
+       如果 <code class="parameter">step</code> 是负数，当生成的范围是递增时，现在将抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.3.0</td>
+      <td>
+       如果 <code class="parameter">step</code> 不是有限数值（finite），现在将抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.3.0</td>
+      <td>
+       如果 <code class="parameter">start</code> 或 <code class="parameter">end</code> 是 <span class="type">array</span>、<span class="type">object</span> 或
+       <span class="type">resource</span>，现在将会抛出  <span class="classname"><a href="class.typeerror.html" class="classname">TypeError</a></span>。之前会默默地转换为 <span class="type">int</span>。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.range-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 <span class="function"><strong>range()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">implode</span><span style="color: #007700">(</span><span style="color: #DD0000">', '</span><span style="color: #007700">, </span><span style="color: #0000BB">range</span><span style="color: #007700">(</span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">12</span><span style="color: #007700">)), </span><span style="color: #0000BB">PHP_EOL</span><span style="color: #007700">;<br /><br />echo </span><span style="color: #0000BB">implode</span><span style="color: #007700">(</span><span style="color: #DD0000">', '</span><span style="color: #007700">, </span><span style="color: #0000BB">range</span><span style="color: #007700">(</span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">100</span><span style="color: #007700">, </span><span style="color: #0000BB">10</span><span style="color: #007700">)), </span><span style="color: #0000BB">PHP_EOL</span><span style="color: #007700">;<br /><br />echo </span><span style="color: #0000BB">implode</span><span style="color: #007700">(</span><span style="color: #DD0000">', '</span><span style="color: #007700">, </span><span style="color: #0000BB">range</span><span style="color: #007700">(</span><span style="color: #DD0000">'a'</span><span style="color: #007700">, </span><span style="color: #DD0000">'i'</span><span style="color: #007700">)), </span><span style="color: #0000BB">PHP_EOL</span><span style="color: #007700">;<br /><br />echo </span><span style="color: #0000BB">implode</span><span style="color: #007700">(</span><span style="color: #DD0000">', '</span><span style="color: #007700">, </span><span style="color: #0000BB">range</span><span style="color: #007700">(</span><span style="color: #DD0000">'c'</span><span style="color: #007700">, </span><span style="color: #DD0000">'a'</span><span style="color: #007700">)), </span><span style="color: #0000BB">PHP_EOL</span><span style="color: #007700">;<br /><br />echo </span><span style="color: #0000BB">implode</span><span style="color: #007700">(</span><span style="color: #DD0000">', '</span><span style="color: #007700">, </span><span style="color: #0000BB">range</span><span style="color: #007700">(</span><span style="color: #DD0000">'A'</span><span style="color: #007700">, </span><span style="color: #DD0000">'z'</span><span style="color: #007700">)), </span><span style="color: #0000BB">PHP_EOL</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100
+a, b, c, d, e, f, g, h, i
+c, b, a
+A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, [, \, ], ^, _, `, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.range-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.shuffle.html" class="function" rel="rdfs-seeAlso">shuffle()</a> - 打乱数组</span></li>
+    <li class="member"><span class="function"><a href="function.array-fill.html" class="function" rel="rdfs-seeAlso">array_fill()</a> - 用给定的值填充数组</span></li>
+    <li class="member"><a href="control-structures.foreach.html" class="link">foreach</a></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

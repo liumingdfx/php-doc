@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>提交当前事务</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="mysqli.close.html">« mysqli::close</a></li>
+      <li style="float: right;"><a href="mysqli.connect-errno.html">mysqli::$connect_errno »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="class.mysqli.html">mysqli</a></li>
+    <li>提交当前事务</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="mysqli.commit" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">mysqli::commit</h1>
+  <h1 class="refname">mysqli_commit</h1>
+  <p class="verinfo">(PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">mysqli::commit</span> -- <span class="refname">mysqli_commit</span> &mdash; <span class="dc-title">提交当前事务</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-mysqli.commit-description">
+  <h3 class="title">说明</h3>
+  <p class="para">面向对象风格</p>
+  <div class="methodsynopsis dc-description">
+   <span class="modifier">public</span> <span class="methodname"><strong>mysqli::commit</strong></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$flags</code><span class="initializer"> = 0</span></span>, <span class="methodparam"><span class="type">?</span><span class="type"><span class="type">string</span><span class="type"></span></span> <code class="parameter">$name</code><span class="initializer"> = <strong><code>null</code></strong></span></span>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">过程化风格</p>
+  <div class="methodsynopsis dc-description"><span class="methodname"><strong>mysqli_commit</strong></span>(<span class="methodparam"><span class="type"><a href="class.mysqli.html" class="type mysqli">mysqli</a></span> <code class="parameter">$mysql</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$flags</code><span class="initializer"> = 0</span></span>, <span class="methodparam"><span class="type">?</span><span class="type"><span class="type">string</span><span class="type"></span></span> <code class="parameter">$name</code><span class="initializer"> = <strong><code>null</code></strong></span></span>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   提交当前数据库连接的事务。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-mysqli.commit-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    <dt>
+
+<code class="parameter">mysql</code></dt>
+<dd>
+<p class="para">仅以过程化样式：由 <span class="function"><a href="function.mysqli-connect.html" class="function">mysqli_connect()</a></span> 或
+<span class="function"><a href="mysqli.init.html" class="function">mysqli_init()</a></span> 返回的 <span class="classname"><a href="class.mysqli.html" class="classname">mysqli</a></span> 对象。</p></dd>
+
+    
+     <dt>
+<code class="parameter">flags</code></dt>
+
+     <dd>
+
+      <p class="para">
+       <strong><code>MYSQLI_TRANS_COR_*</code></strong> 常量的位掩码。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">name</code></dt>
+
+     <dd>
+
+      <p class="para">
+       如果提供，则执行 <code class="literal">COMMIT/*name*/</code>。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-mysqli.commit-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   成功时返回 <strong><code>true</code></strong>， 或者在失败时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 errors" id="refsect1-mysqli.commit-errors">
+  <h3 class="title">错误／异常</h3>
+  <p class="para">
+If mysqli error reporting is enabled (<strong><code>MYSQLI_REPORT_ERROR</code></strong>) and the requested operation fails,
+a warning is generated. If, in addition, the mode is set to <strong><code>MYSQLI_REPORT_STRICT</code></strong>,
+a <span class="classname"><a href="class.mysqli-sql-exception.html" class="classname">mysqli_sql_exception</a></span> is thrown instead.</p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-mysqli.commit-changelog">
+  <h3 class="title">更新日志</h3>
+  <p class="para">
+   <table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>8.0.0</td>
+       <td>
+        <code class="parameter">name</code> 现在允许为 null。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-mysqli.commit-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   参阅 <a href="mysqli.begin-transaction.html#mysqli.begin-transaction.example.basic" class="link"><span class="methodname"><a href="mysqli.begin-transaction.html" class="methodname">mysqli::begin_transaction()</a></span> 示例</a>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-mysqli.commit-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    此方法在不支持事务的表类型中不生效，如 MyISAM 或 ISAM。
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-mysqli.commit-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="mysqli.autocommit.html" class="function" rel="rdfs-seeAlso">mysqli_autocommit()</a> - 打开或关闭本次数据库连接的自动命令提交事务模式</span></li>
+    <li class="member"><span class="function"><a href="mysqli.begin-transaction.html" class="function" rel="rdfs-seeAlso">mysqli_begin_transaction()</a> - Starts a transaction</span></li>
+    <li class="member"><span class="function"><a href="mysqli.rollback.html" class="function" rel="rdfs-seeAlso">mysqli_rollback()</a> - 回滚当前事务</span></li>
+    <li class="member"><span class="function"><a href="mysqli.savepoint.html" class="function" rel="rdfs-seeAlso">mysqli_savepoint()</a> - 在当前事务中设置命名保存点</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

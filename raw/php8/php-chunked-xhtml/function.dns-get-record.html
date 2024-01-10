@@ -1,0 +1,552 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>获取指定主机名的 DNS 纪录</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.dns-get-mx.html">« dns_get_mx</a></li>
+      <li style="float: right;"><a href="function.fsockopen.html">fsockopen »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.network.html">网络 函数</a></li>
+    <li>获取指定主机名的 DNS 纪录</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.dns-get-record" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">dns_get_record</h1>
+  <p class="verinfo">(PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">dns_get_record</span> &mdash; <span class="dc-title">获取指定主机名的 DNS 纪录</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.dns-get-record-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>dns_get_record</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$hostname</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$type</code><span class="initializer"> = <strong><code>DNS_ANY</code></strong></span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">array</span> <code class="parameter reference">&$authoritative_name_servers</code><span class="initializer"> = <strong><code>null</code></strong></span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">array</span> <code class="parameter reference">&$additional_records</code><span class="initializer"> = <strong><code>null</code></strong></span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">bool</span> <code class="parameter">$raw</code><span class="initializer"> = <strong><code>false</code></strong></span></span><br>): <span class="type"><span class="type">array</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   获取指定 <code class="parameter">hostname</code> 的 DNS 纪录。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.dns-get-record-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">hostname</code></dt>
+
+     <dd>
+
+      <p class="para">
+       <code class="parameter">hostname</code> 应该是有效的 DNS 主机名，比如“<code class="literal">www.example.com</code>”。可以使用
+       <code class="literal">in-addr.arpa</code> 表示法生成反向查找，但大多数情况下更适合用 <span class="function"><a href="function.gethostbyaddr.html" class="function">gethostbyaddr()</a></span>。
+      </p>
+      <blockquote class="note"><p><strong class="note">注意</strong>: 
+       <p class="para">
+        根据 DNS 标准，邮件地址以 <code class="literal">user.host</code> 格式给出（例如：<code class="literal">hostmaster.example.com</code>
+        而不是 <code class="literal">hostmaster@example.com</code>），请务必检查此值并在必要时进行修改，然后将其与
+        <span class="function"><a href="function.mail.html" class="function">mail()</a></span> 等函数一起使用。
+       </p>
+      </p></blockquote>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">type</code></dt>
+
+     <dd>
+
+      <p class="para">
+       默认情况下，<span class="function"><strong>dns_get_record()</strong></span> 将会搜索跟 <code class="parameter">hostname</code>
+       关联的任何资源记录。要限制查询，可以指定可选的 <code class="parameter">type</code>
+       选项。可以是以下之一：<strong><code>DNS_A</code></strong>、<strong><code>DNS_CNAME</code></strong>、<strong><code>DNS_HINFO</code></strong>, <strong><code>DNS_CAA</code></strong>、<strong><code>DNS_MX</code></strong>、<strong><code>DNS_NS</code></strong>、<strong><code>DNS_PTR</code></strong>、<strong><code>DNS_SOA</code></strong>、<strong><code>DNS_TXT</code></strong>、<strong><code>DNS_AAAA</code></strong>、<strong><code>DNS_SRV</code></strong>、<strong><code>DNS_NAPTR</code></strong>、<strong><code>DNS_A6</code></strong>、<strong><code>DNS_ALL</code></strong>
+       或 <strong><code>DNS_ANY</code></strong>。
+      </p>
+      <blockquote class="note"><p><strong class="note">注意</strong>: 
+       <p class="para">
+        因为不同平台间的 libresolv 存在性能差异，<strong><code>DNS_ANY</code></strong>
+        不会始终返回每条记录，较慢的 <strong><code>DNS_ALL</code></strong>
+        会更可靠的收集所有记录。
+       </p>
+      </p></blockquote>
+      <blockquote class="note"><p><strong class="note">注意</strong>: 
+       <p class="para">
+        Windows：不支持 <strong><code>DNS_CAA</code></strong>。没有实现对
+        <strong><code>DNS_A6</code></strong> 的支持。
+       </p>
+      </p></blockquote>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">authoritative_name_servers</code></dt>
+
+     <dd>
+
+      <p class="para">
+       引用传递，如果给出，将会填充<em>权威名称服务器</em>的资源记录。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">additional_records</code></dt>
+
+     <dd>
+
+      <p class="para">
+       引用传递，如果给出，将会填充任何<em>附加记录</em>。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">raw</code></dt>
+
+     <dd>
+
+      <p class="para">
+       <code class="parameter">type</code> 将解释为原始 DNS 类型 ID（不能使用 <code class="literal">DNS_*</code>
+       常量）。返回值包含 <code class="literal">data</code> 键，需要手动解析。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.dns-get-record-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   此函数返回由关联数组组成的数组， 或者在失败时返回 <strong><code>false</code></strong>。每个关联数组<em>至少</em>包含以下键：
+   <table class="doctable table">
+    <caption><strong>基础 DNS 属性</strong></caption>
+    
+     <thead>
+      <tr>
+       <th>属性</th>
+       <th>含义</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>host</td>
+       <td>
+        The record in the DNS namespace to which the rest of the associated data refers.
+       </td>
+      </tr>
+
+      <tr>
+       <td>class</td>
+       <td>
+        <span class="function"><strong>dns_get_record()</strong></span> 仅返回内部类记录，因此参数将始终返回 <code class="literal">IN</code>。
+       </td>
+      </tr>
+
+      <tr>
+       <td>type</td>
+       <td>
+        包含记录类型的字符串。其他属性也包含在结果数组中，具体取决于 type 的值。查看下表。
+       </td>
+      </tr>
+
+      <tr>
+       <td>ttl</td>
+       <td>
+        <code class="literal">&quot;Time To Live&quot;</code> remaining for this record. This will <em>not</em> equal
+        the record&#039;s original ttl, but will rather equal the original ttl minus whatever
+        length of time has passed since the authoritative name server was queried.
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+  <p class="para">
+   <table class="doctable table">
+    <caption><strong>根据“type”的不同，出现的关联数组的其它键</strong></caption>
+    
+     <thead>
+      <tr>
+       <th>类型</th>
+       <th>额外列</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td><code class="literal">A</code></td>
+       <td>
+        <code class="literal">ip</code>：点分十进制格式的 IPv4。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">MX</code></td>
+       <td>
+        <code class="literal">pri</code>：邮件交换器的有优先级。较低的数字有较高的优先级。<code class="literal">target</code>：邮件服务器的
+        FQDN（全称域名）。参阅 <span class="function"><a href="function.dns-get-mx.html" class="function">dns_get_mx()</a></span>。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">CNAME</code></td>
+       <td>
+        <code class="literal">target</code>: FQDN of location in DNS namespace to which
+        the record is aliased.
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">NS</code></td>
+       <td>
+        <code class="literal">target</code>: FQDN of the name server which is authoritative
+        for this hostname.
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">PTR</code></td>
+       <td>
+        <code class="literal">target</code>: Location within the DNS namespace to which
+        this record points.
+       </td>
+      </tr>
+
+       <tr>
+       <td><code class="literal">TXT</code></td>
+       <td>
+        <code class="literal">txt</code>：跟此记录关联的任意字符串数据。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">HINFO</code></td>
+       <td>
+        <code class="literal">cpu</code>: IANA number designating the CPU of the machine
+        referenced by this record.
+        <code class="literal">os</code>: IANA number designating the Operating System on
+        the machine referenced by this record.
+        See IANA&#039;s <a href="http://www.iana.org/assignments/operating-system-names" class="link external">&raquo;&nbsp;<code class="literal">Operating System
+        Names</code></a> for the meaning of these values.
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">CAA</code></td>
+       <td>
+        <code class="literal">flags</code>：单字节位字段；目前仅定义了第 0
+        位，意味着“critical”；其他位保留且应该忽略。<code class="literal">tag</code>：CAA
+        标记名（字母数字的 ASCII 字符串）。<code class="literal">value</code>：CAA
+        标记值（二进制字符串，可以使用子格式）。更多信息参阅：<a href="http://www.faqs.org/rfcs/rfc6844" class="link external">&raquo;&nbsp;RFC 6844</a>。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">SOA</code></td>
+       <td>
+        <code class="literal">mname</code>: FQDN of the machine from which the resource
+        records originated.
+        <code class="literal">rname</code>: Email address of the administrative contact
+        for this domain.
+        <code class="literal">serial</code>: Serial # of this revision of the requested
+        domain.
+        <code class="literal">refresh</code>: Refresh interval (seconds) secondary name
+        servers should use when updating remote copies of this domain.
+        <code class="literal">retry</code>: Length of time (seconds) to wait after a
+        failed refresh before making a second attempt.
+        <code class="literal">expire</code>: Maximum length of time (seconds) a secondary
+        DNS server should retain remote copies of the zone data without a
+        successful refresh before discarding.
+        <code class="literal">minimum-ttl</code>: Minimum length of time (seconds) a
+        client can continue to use a DNS resolution before it should request
+        a new resolution from the server.  Can be overridden by individual
+        resource records.
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">AAAA</code></td>
+       <td>
+        <code class="literal">ipv6</code>：IPv6 地址
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">A6</code></td>
+       <td>
+        <code class="literal">masklen</code>: Length (in bits) to inherit from the target
+        specified by <code class="parameter">chain</code>.
+        <code class="literal">ipv6</code>: Address for this specific record to merge with
+        <code class="parameter">chain</code>.
+        <code class="literal">chain</code>: Parent record to merge with
+        <code class="parameter">ipv6</code> data.
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">SRV</code></td>
+       <td>
+        <code class="literal">pri</code>: (Priority) lowest priorities should be used first.
+        <code class="literal">weight</code>: Ranking to weight which of commonly prioritized
+        <code class="parameter">targets</code> should be chosen at random.
+        <code class="literal">target</code> and <code class="literal">port</code>: hostname and port
+        where the requested service can be found.
+        For additional information see: <a href="http://www.faqs.org/rfcs/rfc2782" class="link external">&raquo;&nbsp;RFC 2782</a>
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">NAPTR</code></td>
+       <td>
+        <code class="literal">order</code> and <code class="literal">pref</code>: Equivalent to
+        <code class="parameter">pri</code> and <code class="parameter">weight</code> above.
+        <code class="literal">flags</code>, <code class="literal">services</code>, <code class="literal">regex</code>,
+        and <code class="literal">replacement</code>: Parameters as defined by
+        <a href="http://www.faqs.org/rfcs/rfc2915" class="link external">&raquo;&nbsp;RFC 2915</a>.
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.dns-get-record-changelog">
+  <h3 class="title">更新日志</h3>
+  <p class="para">
+   <table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>7.0.16, 7.1.2</td>
+       <td>
+        新增对 CAA 记录的支持。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.dns-get-record-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 使用 <span class="function"><strong>dns_get_record()</strong></span></strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$result </span><span style="color: #007700">= </span><span style="color: #0000BB">dns_get_record</span><span style="color: #007700">(</span><span style="color: #DD0000">"php.net"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例的输出类似于：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+    [0] =&gt; Array
+        (
+            [host] =&gt; php.net
+            [type] =&gt; MX
+            [pri] =&gt; 5
+            [target] =&gt; pair2.php.net
+            [class] =&gt; IN
+            [ttl] =&gt; 6765
+        )
+
+    [1] =&gt; Array
+        (
+            [host] =&gt; php.net
+            [type] =&gt; A
+            [ip] =&gt; 64.246.30.37
+            [class] =&gt; IN
+            [ttl] =&gt; 8125
+        )
+
+)
+</pre></div>
+    </div>
+   </div>
+   <div class="example" id="">
+    <p><strong>示例 #2 使用 <span class="function"><strong>dns_get_record()</strong></span> 和 DNS_ANY</strong></p>
+    <div class="example-contents"><p>
+     一旦解析了 MX 记录，通常需要邮件服务器的 IP 地址，因此 <span class="function"><strong>dns_get_record()</strong></span>
+     还会在 <code class="parameter">additional_records</code>
+     中返回包含关联记录的数组。<code class="parameter">authoritative_name_servers</code>
+     也会返回，包含权威名称服务器列表。
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">/* 为 php.net 请求“ANY”记录，并创建 $authns 和 $addtl 数组，<br />   包含名称服务器列表和任何附加记录列表 */<br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">dns_get_record</span><span style="color: #007700">(</span><span style="color: #DD0000">"php.net"</span><span style="color: #007700">, </span><span style="color: #0000BB">DNS_ANY</span><span style="color: #007700">, </span><span style="color: #0000BB">$authns</span><span style="color: #007700">, </span><span style="color: #0000BB">$addtl</span><span style="color: #007700">);<br />echo </span><span style="color: #DD0000">"Result = "</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">);<br />echo </span><span style="color: #DD0000">"Auth NS = "</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$authns</span><span style="color: #007700">);<br />echo </span><span style="color: #DD0000">"Additional = "</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$addtl</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例的输出类似于：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Result = Array
+(
+    [0] =&gt; Array
+        (
+            [host] =&gt; php.net
+            [type] =&gt; MX
+            [pri] =&gt; 5
+            [target] =&gt; pair2.php.net
+            [class] =&gt; IN
+            [ttl] =&gt; 6765
+        )
+
+    [1] =&gt; Array
+        (
+            [host] =&gt; php.net
+            [type] =&gt; A
+            [ip] =&gt; 64.246.30.37
+            [class] =&gt; IN
+            [ttl] =&gt; 8125
+        )
+
+)
+Auth NS = Array
+(
+    [0] =&gt; Array
+        (
+            [host] =&gt; php.net
+            [type] =&gt; NS
+            [target] =&gt; remote1.easydns.com
+            [class] =&gt; IN
+            [ttl] =&gt; 10722
+        )
+
+    [1] =&gt; Array
+        (
+            [host] =&gt; php.net
+            [type] =&gt; NS
+            [target] =&gt; remote2.easydns.com
+            [class] =&gt; IN
+            [ttl] =&gt; 10722
+        )
+
+    [2] =&gt; Array
+        (
+            [host] =&gt; php.net
+            [type] =&gt; NS
+            [target] =&gt; ns1.easydns.com
+            [class] =&gt; IN
+            [ttl] =&gt; 10722
+        )
+
+    [3] =&gt; Array
+        (
+            [host] =&gt; php.net
+            [type] =&gt; NS
+            [target] =&gt; ns2.easydns.com
+            [class] =&gt; IN
+            [ttl] =&gt; 10722
+        )
+
+)
+Additional = Array
+(
+    [0] =&gt; Array
+        (
+            [host] =&gt; pair2.php.net
+            [type] =&gt; A
+            [ip] =&gt; 216.92.131.5
+            [class] =&gt; IN
+            [ttl] =&gt; 6766
+        )
+
+    [1] =&gt; Array
+        (
+            [host] =&gt; remote1.easydns.com
+            [type] =&gt; A
+            [ip] =&gt; 64.39.29.212
+            [class] =&gt; IN
+            [ttl] =&gt; 100384
+        )
+
+    [2] =&gt; Array
+        (
+            [host] =&gt; remote2.easydns.com
+            [type] =&gt; A
+            [ip] =&gt; 212.100.224.80
+            [class] =&gt; IN
+            [ttl] =&gt; 81241
+        )
+
+    [3] =&gt; Array
+        (
+            [host] =&gt; ns1.easydns.com
+            [type] =&gt; A
+            [ip] =&gt; 216.220.40.243
+            [class] =&gt; IN
+            [ttl] =&gt; 81241
+        )
+
+    [4] =&gt; Array
+        (
+            [host] =&gt; ns2.easydns.com
+            [type] =&gt; A
+            [ip] =&gt; 216.220.40.244
+            [class] =&gt; IN
+            [ttl] =&gt; 81241
+        )
+
+)
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.dns-get-record-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.dns-get-mx.html" class="function" rel="rdfs-seeAlso">dns_get_mx()</a> - 别名 getmxrr</span></li>
+    <li class="member"><span class="function"><a href="function.dns-check-record.html" class="function" rel="rdfs-seeAlso">dns_check_record()</a> - 别名 checkdnsrr</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

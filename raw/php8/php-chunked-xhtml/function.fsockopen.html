@@ -1,0 +1,242 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>打开 Internet 或者 Unix 套接字连接</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.dns-get-record.html">« dns_get_record</a></li>
+      <li style="float: right;"><a href="function.gethostbyaddr.html">gethostbyaddr »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.network.html">网络 函数</a></li>
+    <li>打开 Internet 或者 Unix 套接字连接</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.fsockopen" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">fsockopen</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">fsockopen</span> &mdash; <span class="dc-title">打开 Internet 或者 Unix 套接字连接</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.fsockopen-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>fsockopen</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$hostname</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$port</code><span class="initializer"> = -1</span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter reference">&$error_code</code><span class="initializer"> = <strong><code>null</code></strong></span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter reference">&$error_message</code><span class="initializer"> = <strong><code>null</code></strong></span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">float</span><span class="type"></span></span> <code class="parameter">$timeout</code><span class="initializer"> = <strong><code>null</code></strong></span></span><br>): <span class="type"><span class="type">resource</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   初始化套接字连接到指定 <code class="parameter">hostname</code> 资源。
+  </p>
+  <p class="para">
+   如<a href="transports.html" class="xref">所支持的套接字传输器列表</a>所述，PHP 支持 Internet 和 Unix 域中的目标。也可以通过
+   <span class="function"><a href="function.stream-get-transports.html" class="function">stream_get_transports()</a></span> 获取支持的传输器列表。
+  </p>
+  <p class="para">
+   默认情况下将以阻塞模式开启套接字连接。可以通过 <span class="function"><a href="function.stream-set-blocking.html" class="function">stream_set_blocking()</a></span> 将它转换到非阻塞模式。
+  </p>
+  <p class="para">
+   <span class="function"><a href="function.stream-socket-client.html" class="function">stream_socket_client()</a></span> 与之非常相似，而且提供了更加丰富的参数设置，包括非阻塞连接和提供流上下文的能力。
+  </p>
+ </div>
+
+ <div class="refsect1 parameters" id="refsect1-function.fsockopen-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">hostname</code></dt>
+
+     <dd>
+
+      <p class="para">
+       如果安装了 <a href="openssl.installation.html" class="link">OpenSSL</a>，那么可以在主机名地址前面添加 <code class="literal">ssl://</code>
+       或者是 <code class="literal">tls://</code>，从而可以使用基于 TCP/IP 协议的 SSL 或者 TLS 的客户端连接到远程主机。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">port</code></dt>
+
+     <dd>
+
+      <p class="para">
+       端口号。可以省略该参数或传 -1，则表示传输器不使用端口，例如 <code class="literal">unix://</code>。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">error_code</code></dt>
+
+     <dd>
+
+      <p class="para">
+       如果提供该参数，则会保存调用系统级别 <code class="literal">connect()</code> 发生的系统级错误号。
+      </p>
+      <p class="para">
+       如果 <code class="parameter">error_code</code> 的返回值为 <code class="literal">0</code>，且函数的返回值为
+       <strong><code>false</code></strong>，则表明错误发生在 <code class="literal">connect()</code>
+       调用之前。这很可能是由于初始化套接字的问题。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">error_message</code></dt>
+
+     <dd>
+
+      <p class="para">
+       错误信息将以字符串的信息返回。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">timeout</code></dt>
+
+     <dd>
+
+      <p class="para">
+       设置连接的时限，单位为秒。当为 <strong><code>null</code></strong> 时，使用 <a href="filesystem.configuration.html#ini.default-socket-timeout" class="link">default_socket_timeout</a> <var class="filename">php.ini</var> 设置。
+      </p>
+      <blockquote class="note"><p><strong class="note">注意</strong>: 
+       <p class="para">
+        如果需要对为套接字读/写数据数据操作设置超时，请使用
+        <span class="function"><a href="function.stream-set-timeout.html" class="function">stream_set_timeout()</a></span>，<span class="function"><strong>fsockopen()</strong></span> 的
+        <code class="parameter">timeout</code> 参数仅仅在连接套接字时适用。
+       </p>
+      </p></blockquote>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+ <div class="refsect1 returnvalues" id="refsect1-function.fsockopen-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   <span class="function"><strong>fsockopen()</strong></span> 返回文件指针，可以跟其他文件函数（比如
+   <span class="function"><a href="function.fgets.html" class="function">fgets()</a></span>、<span class="function"><a href="function.fgetss.html" class="function">fgetss()</a></span>、<span class="function"><a href="function.fwrite.html" class="function">fwrite()</a></span>、<span class="function"><a href="function.fclose.html" class="function">fclose()</a></span>
+   和 <span class="function"><a href="function.feof.html" class="function">feof()</a></span>）一起使用。如果调用失败，将返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+ <div class="refsect1 errors" id="refsect1-function.fsockopen-errors">
+  <h3 class="title">错误／异常</h3>
+  <p class="para">
+   如果 <code class="parameter">hostname</code> 不是有效域，则抛出 <strong><code>E_WARNING</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.fsockopen-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       <code class="parameter">timeout</code> 现在可以为 null。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.fsockopen-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 <span class="function"><strong>fsockopen()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$fp </span><span style="color: #007700">= </span><span style="color: #0000BB">fsockopen</span><span style="color: #007700">(</span><span style="color: #DD0000">"www.example.com"</span><span style="color: #007700">, </span><span style="color: #0000BB">80</span><span style="color: #007700">, </span><span style="color: #0000BB">$errno</span><span style="color: #007700">, </span><span style="color: #0000BB">$errstr</span><span style="color: #007700">, </span><span style="color: #0000BB">30</span><span style="color: #007700">);<br />if (!</span><span style="color: #0000BB">$fp</span><span style="color: #007700">) {<br />    echo </span><span style="color: #DD0000">"</span><span style="color: #0000BB">$errstr</span><span style="color: #DD0000"> (</span><span style="color: #0000BB">$errno</span><span style="color: #DD0000">)&lt;br /&gt;\n"</span><span style="color: #007700">;<br />} else {<br />    </span><span style="color: #0000BB">$out </span><span style="color: #007700">= </span><span style="color: #DD0000">"GET / HTTP/1.1\r\n"</span><span style="color: #007700">;<br />    </span><span style="color: #0000BB">$out </span><span style="color: #007700">.= </span><span style="color: #DD0000">"Host: www.example.com\r\n"</span><span style="color: #007700">;<br />    </span><span style="color: #0000BB">$out </span><span style="color: #007700">.= </span><span style="color: #DD0000">"Connection: Close\r\n\r\n"</span><span style="color: #007700">;<br />    </span><span style="color: #0000BB">fwrite</span><span style="color: #007700">(</span><span style="color: #0000BB">$fp</span><span style="color: #007700">, </span><span style="color: #0000BB">$out</span><span style="color: #007700">);<br />    while (!</span><span style="color: #0000BB">feof</span><span style="color: #007700">(</span><span style="color: #0000BB">$fp</span><span style="color: #007700">)) {<br />        echo </span><span style="color: #0000BB">fgets</span><span style="color: #007700">(</span><span style="color: #0000BB">$fp</span><span style="color: #007700">, </span><span style="color: #0000BB">128</span><span style="color: #007700">);<br />    }<br />    </span><span style="color: #0000BB">fclose</span><span style="color: #007700">(</span><span style="color: #0000BB">$fp</span><span style="color: #007700">);<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #2 使用 UDP 连接</strong></p>
+    <div class="example-contents"><p>
+     下面这个例子展示了怎么样在自己的机器上通过 UDP 服务“daytime”（端口号 13）中来检索日期和时间。
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$fp </span><span style="color: #007700">= </span><span style="color: #0000BB">fsockopen</span><span style="color: #007700">(</span><span style="color: #DD0000">"udp://127.0.0.1"</span><span style="color: #007700">, </span><span style="color: #0000BB">13</span><span style="color: #007700">, </span><span style="color: #0000BB">$errno</span><span style="color: #007700">, </span><span style="color: #0000BB">$errstr</span><span style="color: #007700">);<br />if (!</span><span style="color: #0000BB">$fp</span><span style="color: #007700">) {<br />    echo </span><span style="color: #DD0000">"ERROR: </span><span style="color: #0000BB">$errno</span><span style="color: #DD0000"> - </span><span style="color: #0000BB">$errstr</span><span style="color: #DD0000">&lt;br /&gt;\n"</span><span style="color: #007700">;<br />} else {<br />    </span><span style="color: #0000BB">fwrite</span><span style="color: #007700">(</span><span style="color: #0000BB">$fp</span><span style="color: #007700">, </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">);<br />    echo </span><span style="color: #0000BB">fread</span><span style="color: #007700">(</span><span style="color: #0000BB">$fp</span><span style="color: #007700">, </span><span style="color: #0000BB">26</span><span style="color: #007700">);<br />    </span><span style="color: #0000BB">fclose</span><span style="color: #007700">(</span><span style="color: #0000BB">$fp</span><span style="color: #007700">);<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+ <div class="refsect1 notes" id="refsect1-function.fsockopen-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    根据环境的不同，Unix 域或可选的连接超时可能无效。
+   </p>
+  </p></blockquote>
+  <div class="warning"><strong class="warning">警告</strong>
+   <p class="para">
+    即使远程主机无法访问，UDP
+    套接字有时候也能打开且无错误。只有当从套接字读/写数据的时候才会出现错误。这样的原因是
+    UDP 是“无连接”协议，这意味着在真正发送/接收数据之前，操作系统不会尝试为套接字创建连接。
+   </p>
+  </div>
+  <blockquote class="note"><p><strong class="note">注意</strong>: <span class="simpara">当指定数值型的 IPv6
+地址（例如 <code class="literal">fe80::1</code>）时必须用方括号将 IP 围起来——例如，
+<code class="literal">tcp://[fe80::1]:80</code>。</span></p></blockquote>
+ </div>
+
+ <div class="refsect1 seealso" id="refsect1-function.fsockopen-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.pfsockopen.html" class="function" rel="rdfs-seeAlso">pfsockopen()</a> - 打开持久的 Internet 或 Unix 套接字连接</span></li>
+    <li class="member"><span class="function"><a href="function.stream-socket-client.html" class="function" rel="rdfs-seeAlso">stream_socket_client()</a> - Open Internet or Unix domain socket connection</span></li>
+    <li class="member"><span class="function"><a href="function.stream-set-blocking.html" class="function" rel="rdfs-seeAlso">stream_set_blocking()</a> - 为资源流设置阻塞或者阻塞模式</span></li>
+    <li class="member"><span class="function"><a href="function.stream-set-timeout.html" class="function" rel="rdfs-seeAlso">stream_set_timeout()</a> - Set timeout period on a stream</span></li>
+    <li class="member"><span class="function"><a href="function.fgets.html" class="function" rel="rdfs-seeAlso">fgets()</a> - 从文件指针中读取一行</span></li>
+    <li class="member"><span class="function"><a href="function.fgetss.html" class="function" rel="rdfs-seeAlso">fgetss()</a> - 从文件指针中读取一行并过滤掉 HTML 标记</span></li>
+    <li class="member"><span class="function"><a href="function.fwrite.html" class="function" rel="rdfs-seeAlso">fwrite()</a> - 写入文件（可安全用于二进制文件）</span></li>
+    <li class="member"><span class="function"><a href="function.fclose.html" class="function" rel="rdfs-seeAlso">fclose()</a> - 关闭一个已打开的文件指针</span></li>
+    <li class="member"><span class="function"><a href="function.feof.html" class="function" rel="rdfs-seeAlso">feof()</a> - 测试文件指针是否到了文件结束的位置</span></li>
+    <li class="member"><span class="function"><a href="function.socket-connect.html" class="function" rel="rdfs-seeAlso">socket_connect()</a> - 开启一个套接字连接</span></li>
+    <li class="member"><a href="ref.curl.html" class="link">Curl 扩展</a></li>
+   </ul>
+  </p>
+ </div>
+
+</div></div></div></body></html>

@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>关闭先前打开的数据库连接</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="mysqli.character-set-name.html">« mysqli::character_set_name</a></li>
+      <li style="float: right;"><a href="mysqli.commit.html">mysqli::commit »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="class.mysqli.html">mysqli</a></li>
+    <li>关闭先前打开的数据库连接</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="mysqli.close" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">mysqli::close</h1>
+  <h1 class="refname">mysqli_close</h1>
+  <p class="verinfo">(PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">mysqli::close</span> -- <span class="refname">mysqli_close</span> &mdash; <span class="dc-title">关闭先前打开的数据库连接</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-mysqli.close-description">
+  <h3 class="title">说明</h3>
+  <p class="para">面向对象风格</p>
+  <div class="methodsynopsis dc-description">
+   <span class="modifier">public</span> <span class="methodname"><strong>mysqli::close</strong></span>(): <span class="type"><span class="type true">true</span></span></div>
+
+  <p class="para rdfs-comment">过程化风格</p>
+  <div class="methodsynopsis dc-description"><span class="methodname"><strong>mysqli_close</strong></span>(<span class="methodparam"><span class="type"><a href="class.mysqli.html" class="type mysqli">mysqli</a></span> <code class="parameter">$mysql</code></span>): <span class="type"><span class="type true">true</span></span></div>
+
+  <p class="para rdfs-comment">
+   关闭先前打开的数据库连接。
+  </p>
+  <p class="para">
+   当打开的非持久 MySQL
+   连接和结果集的对象销毁时会自动关闭。显式关闭打开的连接和释放结果集不是必需的。但是，如果脚本在获得结果后仍有大量工作要做，那么最好在脚本执行完所有数据库操作后立即关闭连接。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-mysqli.close-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    <dt>
+
+<code class="parameter">mysql</code></dt>
+<dd>
+<p class="para">仅以过程化样式：由 <span class="function"><a href="function.mysqli-connect.html" class="function">mysqli_connect()</a></span> 或
+<span class="function"><a href="mysqli.init.html" class="function">mysqli_init()</a></span> 返回的 <span class="classname"><a href="class.mysqli.html" class="classname">mysqli</a></span> 对象。</p></dd>
+
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-mysqli.close-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   总是返回 <strong><code>true</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-mysqli.close-changelog">
+  <h3 class="title">更新日志</h3>
+  <p class="para">
+   <table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>8.0.0</td>
+       <td>
+        此函数始终返回 <strong><code>true</code></strong>。之前失败时返回 <strong><code>false</code></strong>。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-mysqli.close-examples">
+  <h3 class="title">示例</h3>
+  <div class="example" id="example-4358">
+   <p><strong>示例 #1 <span class="methodname"><strong>mysqli::close()</strong></span> 示例</strong></p>
+   <div class="example-contents"><p>面向对象风格</p></div>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />mysqli_report</span><span style="color: #007700">(</span><span style="color: #0000BB">MYSQLI_REPORT_ERROR </span><span style="color: #007700">| </span><span style="color: #0000BB">MYSQLI_REPORT_STRICT</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$mysqli </span><span style="color: #007700">= new </span><span style="color: #0000BB">mysqli</span><span style="color: #007700">(</span><span style="color: #DD0000">"localhost"</span><span style="color: #007700">, </span><span style="color: #DD0000">"my_user"</span><span style="color: #007700">, </span><span style="color: #DD0000">"my_password"</span><span style="color: #007700">, </span><span style="color: #DD0000">"world"</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">query</span><span style="color: #007700">(</span><span style="color: #DD0000">"SELECT Name, CountryCode FROM City ORDER BY ID LIMIT 3"</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">/* Close the connection as soon as it's no longer needed */<br /></span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">close</span><span style="color: #007700">();<br /><br />foreach (</span><span style="color: #0000BB">$result </span><span style="color: #007700">as </span><span style="color: #0000BB">$row</span><span style="color: #007700">) {<br />    </span><span style="color: #FF8000">/* Processing of the data retrieved from the database */<br /></span><span style="color: #007700">}</span></span></code></div>
+   </div>
+
+   <div class="example-contents"><p>过程化风格</p></div>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />mysqli_report</span><span style="color: #007700">(</span><span style="color: #0000BB">MYSQLI_REPORT_ERROR </span><span style="color: #007700">| </span><span style="color: #0000BB">MYSQLI_REPORT_STRICT</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$mysqli </span><span style="color: #007700">= </span><span style="color: #0000BB">mysqli_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">"localhost"</span><span style="color: #007700">, </span><span style="color: #DD0000">"my_user"</span><span style="color: #007700">, </span><span style="color: #DD0000">"my_password"</span><span style="color: #007700">, </span><span style="color: #DD0000">"world"</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">mysqli_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">, </span><span style="color: #DD0000">"SELECT Name, CountryCode FROM City ORDER BY ID LIMIT 3"</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">/* Close the connection as soon as it's no longer needed */<br /></span><span style="color: #0000BB">mysqli_close</span><span style="color: #007700">(</span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">);<br /><br />foreach (</span><span style="color: #0000BB">$result </span><span style="color: #007700">as </span><span style="color: #0000BB">$row</span><span style="color: #007700">) {<br />    </span><span style="color: #FF8000">/* Processing of the data retrieved from the database */<br /></span><span style="color: #007700">}</span></span></code></div>
+   </div>
+
+  </div>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-mysqli.close-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    <span class="function"><strong>mysqli_close()</strong></span> 不会关闭持久连接。更多详情，查看<a href="features.persistent-connections.html" class="link">持久连接</a>的相关手册页。
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-mysqli.close-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="methodname"><a href="mysqli.construct.html" class="methodname" rel="rdfs-seeAlso">mysqli::__construct()</a> - Open a new connection to the MySQL server</span></li>
+    <li class="member"><span class="function"><a href="mysqli.init.html" class="function" rel="rdfs-seeAlso">mysqli_init()</a> - 初始化 MySQLi 并返回用于 mysqli_real_connect() 的对象</span></li>
+    <li class="member"><span class="function"><a href="mysqli.real-connect.html" class="function" rel="rdfs-seeAlso">mysqli_real_connect()</a> - 建立一个 MySQL 服务器连接</span></li>
+    <li class="member"><span class="function"><a href="mysqli-result.free.html" class="function" rel="rdfs-seeAlso">mysqli_free_result()</a> - Frees the memory associated with a result</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

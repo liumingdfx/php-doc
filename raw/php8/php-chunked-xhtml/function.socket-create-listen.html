@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>在端口上打开一个套接字以接受连接</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.socket-connect.html">« socket_connect</a></li>
+      <li style="float: right;"><a href="function.socket-create-pair.html">socket_create_pair »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.sockets.html">Socket 函数</a></li>
+    <li>在端口上打开一个套接字以接受连接</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.socket-create-listen" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">socket_create_listen</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.1.0, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">socket_create_listen</span> &mdash; <span class="dc-title">在端口上打开一个套接字以接受连接</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.socket-create-listen-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>socket_create_listen</strong></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$port</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$backlog</code><span class="initializer"> = 128</span></span>): <span class="type"><span class="type"><a href="class.socket.html" class="type Socket">Socket</a></span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>socket_create_listen()</strong></span> 创建一个 <strong><code>AF_INET</code></strong> 类型的 <span class="classname"><a href="class.socket.html" class="classname">Socket</a></span> 
+   实例，在<em>所有</em>本地接口上监听指定端口，等待新连接。
+  </p>
+  <p class="para">
+   此方法旨在简化创建新的套接字任务，仅监听且用于接受新连接。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.socket-create-listen-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">port</code></dt>
+
+     <dd>
+
+      <p class="para">
+       监听所有接口的端口号
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">backlog</code></dt>
+
+     <dd>
+
+      <p class="para">
+       <code class="parameter">backlog</code> 参数定义了待处理的连接队列的最大长度。<strong><code>SOMAXCONN</code></strong> 
+       可以作为 <code class="parameter">backlog</code> 参数，详情见 <span class="function"><a href="function.socket-listen.html" class="function">socket_listen()</a></span>。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.socket-create-listen-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   <span class="function"><strong>socket_create_listen()</strong></span> 成功时返回一个新的 <span class="classname"><a href="class.socket.html" class="classname">Socket</a></span> 
+   实例，错误时返回 <strong><code>false</code></strong>。可以通过调用 <span class="function"><a href="function.socket-last-error.html" class="function">socket_last_error()</a></span> 
+   来检索实际的错误码。将错误码作为参数传递给 <span class="function"><a href="function.socket-strerror.html" class="function">socket_strerror()</a></span> 以获得错误的文本解释。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.socket-create-listen-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>8.0.0</td>
+      <td>
+        成功时，该函数现在返回一个 <span class="classname"><a href="class.socket.html" class="classname">Socket</a></span> 实例；在此之前，返回值是一个 <span class="type">resource</span>。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.socket-create-listen-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    如果想创建只监听某个接口的套接字，需要使用 <span class="function"><a href="function.socket-create.html" class="function">socket_create()</a></span>，<span class="function"><a href="function.socket-bind.html" class="function">socket_bind()</a></span> 
+    和 <span class="function"><a href="function.socket-listen.html" class="function">socket_listen()</a></span>。
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.socket-create-listen-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.socket-create.html" class="function" rel="rdfs-seeAlso">socket_create()</a> - 创建一个套接字（通讯节点）</span></li>
+    <li class="member"><span class="function"><a href="function.socket-create-pair.html" class="function" rel="rdfs-seeAlso">socket_create_pair()</a> - 创建一对彼此连接的套接字，并用数组存储</span></li>
+    <li class="member"><span class="function"><a href="function.socket-bind.html" class="function" rel="rdfs-seeAlso">socket_bind()</a> - 给套接字绑定名字</span></li>
+    <li class="member"><span class="function"><a href="function.socket-listen.html" class="function" rel="rdfs-seeAlso">socket_listen()</a> - 监听套接字的连接</span></li>
+    <li class="member"><span class="function"><a href="function.socket-last-error.html" class="function" rel="rdfs-seeAlso">socket_last_error()</a> - 返回套接字上的最后一个错误</span></li>
+    <li class="member"><span class="function"><a href="function.socket-strerror.html" class="function" rel="rdfs-seeAlso">socket_strerror()</a> - 返回描述套接字错误的字符串</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div></div></div></body></html>

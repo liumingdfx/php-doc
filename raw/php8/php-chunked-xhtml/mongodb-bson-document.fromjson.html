@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Construct a new document instance from a JSON string</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="mongodb-bson-document.frombson.html">« MongoDB\BSON\Document::fromBSON</a></li>
+      <li style="float: right;"><a href="mongodb-bson-document.fromphp.html">MongoDB\BSON\Document::fromPHP »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="class.mongodb-bson-document.html">MongoDB\BSON\Document</a></li>
+    <li>Construct a new document instance from a JSON string</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="mongodb-bson-document.fromjson" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">MongoDB\BSON\Document::fromJSON</h1>
+  <p class="verinfo">(mongodb &gt;=1.16.0)</p><p class="refpurpose"><span class="refname">MongoDB\BSON\Document::fromJSON</span> &mdash; <span class="dc-title">Construct a new document instance from a JSON string</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-mongodb-bson-document.fromjson-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="modifier">final</span> <span class="modifier">static</span> <span class="modifier">public</span> <span class="methodname"><strong>MongoDB\BSON\Document::fromJSON</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$json</code></span>): <span class="type"><a href="class.mongodb-bson-document.html" class="type MongoDB\BSON\Document">MongoDB\BSON\Document</a></span></div>
+
+  <p class="para rdfs-comment">
+   Converts an
+   <a href="https://www.mongodb.com/docs/manual/reference/mongodb-extended-json/" class="link external">&raquo;&nbsp;extended JSON</a>
+   string to its BSON representation.
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-mongodb-bson-document.fromjson-parameters">
+  <h3 class="title">参数</h3>
+  <dl>
+   
+    <dt>
+<code class="parameter">json</code> (<span class="type">string</span>)</dt>
+
+    <dd>
+
+     <p class="para">
+      JSON value to be converted.
+     </p>
+    </dd>
+
+   
+  </dl>
+
+ </div>
+
+
+ <div class="refsect1 errors" id="refsect1-mongodb-bson-document.fromjson-errors">
+  <h3 class="title">错误／异常</h3>
+  <ul class="simplelist">
+   <li class="member">Throws <span class="classname"><a href="class.mongodb-driver-exception-invalidargumentexception.html" class="classname">MongoDB\Driver\Exception\InvalidArgumentException</a></span> on argument parsing errors.</li>
+   <li class="member">Throws <span class="classname"><a href="class.mongodb-driver-exception-unexpectedvalueexception.html" class="classname">MongoDB\Driver\Exception\UnexpectedValueException</a></span> if <code class="parameter">json</code> is not a valid document.</li>
+  </ul>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-mongodb-bson-document.fromjson-seealso">
+  <h3 class="title">参见</h3>
+  <ul class="simplelist">
+   <li class="member"><span class="methodname"><a href="mongodb-bson-document.fromphp.html" class="methodname" rel="rdfs-seeAlso">MongoDB\BSON\Document::fromPHP()</a> - Construct a new document instance from PHP data</span></li>
+   <li class="member"><span class="methodname"><a href="mongodb-bson-document.frombson.html" class="methodname" rel="rdfs-seeAlso">MongoDB\BSON\Document::fromBSON()</a> - Construct a new document instance from a BSON string</span></li>
+   <li class="member"><span class="function"><a href="function.mongodb.bson-fromjson.html" class="function" rel="rdfs-seeAlso">MongoDB\BSON\fromJSON()</a> - Returns the BSON representation of a JSON value</span></li>
+   <li class="member"><a href="https://www.mongodb.com/docs/manual/reference/mongodb-extended-json/" class="link external">&raquo;&nbsp;MongoDB Extended JSON</a></li>
+   <li class="member"><a href="https://www.mongodb.com/docs/manual/reference/bson-types/" class="link external">&raquo;&nbsp;BSON Types</a></li>
+  </ul>
+ </div>
+
+
+</div></div></div></body></html>

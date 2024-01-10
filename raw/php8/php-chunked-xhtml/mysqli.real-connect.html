@@ -1,0 +1,334 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>建立一个 MySQL 服务器连接</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="mysqli.query.html">« mysqli::query</a></li>
+      <li style="float: right;"><a href="mysqli.real-escape-string.html">mysqli::real_escape_string »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="class.mysqli.html">mysqli</a></li>
+    <li>建立一个 MySQL 服务器连接</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="mysqli.real-connect" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">mysqli::real_connect</h1>
+  <h1 class="refname">mysqli_real_connect</h1>
+  <p class="verinfo">(PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">mysqli::real_connect</span> -- <span class="refname">mysqli_real_connect</span> &mdash; <span class="dc-title">建立一个 MySQL 服务器连接</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-mysqli.real-connect-description">
+  <h3 class="title">说明</h3>
+  <p class="para">面向对象风格</p>
+  <div class="methodsynopsis dc-description">
+   <span class="modifier">public</span> <span class="methodname"><strong>mysqli::real_connect</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">string</span><span class="type"></span></span> <code class="parameter">$hostname</code><span class="initializer"> = <strong><code>null</code></strong></span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">string</span><span class="type"></span></span> <code class="parameter">$username</code><span class="initializer"> = <strong><code>null</code></strong></span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">string</span><span class="type"></span></span> <code class="parameter">$password</code><span class="initializer"> = <strong><code>null</code></strong></span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">string</span><span class="type"></span></span> <code class="parameter">$database</code><span class="initializer"> = <strong><code>null</code></strong></span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">int</span><span class="type"></span></span> <code class="parameter">$port</code><span class="initializer"> = <strong><code>null</code></strong></span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">string</span><span class="type"></span></span> <code class="parameter">$socket</code><span class="initializer"> = <strong><code>null</code></strong></span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$flags</code><span class="initializer"> = 0</span></span><br>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">过程化风格</p>
+  <div class="methodsynopsis dc-description"><span class="methodname"><strong>mysqli_real_connect</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><a href="class.mysqli.html" class="type mysqli">mysqli</a></span> <code class="parameter">$mysql</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">string</span><span class="type"></span></span> <code class="parameter">$hostname</code><span class="initializer"> = <strong><code>null</code></strong></span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">string</span><span class="type"></span></span> <code class="parameter">$username</code><span class="initializer"> = <strong><code>null</code></strong></span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">string</span><span class="type"></span></span> <code class="parameter">$password</code><span class="initializer"> = <strong><code>null</code></strong></span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">string</span><span class="type"></span></span> <code class="parameter">$database</code><span class="initializer"> = <strong><code>null</code></strong></span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">int</span><span class="type"></span></span> <code class="parameter">$port</code><span class="initializer"> = <strong><code>null</code></strong></span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">string</span><span class="type"></span></span> <code class="parameter">$socket</code><span class="initializer"> = <strong><code>null</code></strong></span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$flags</code><span class="initializer"> = 0</span></span><br>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   建立一个到 MySQL 服务器的链接。
+  </p>
+  <p class="para">
+   与 <span class="function"><a href="function.mysqli-connect.html" class="function">mysqli_connect()</a></span> 的不同点：
+  </p>
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><strong>mysqli_real_connect()</strong></span> 需要一个由 <span class="function"><a href="mysqli.init.html" class="function">mysqli_init()</a></span> 创建的有效对象。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     可以使用 <span class="function"><a href="mysqli.options.html" class="function">mysqli_options()</a></span> 设置各种连接设置。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     提供 <code class="parameter">flags</code> 参数。
+    </p>
+   </li>
+  </ul>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-mysqli.real-connect-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    <dt>
+
+<code class="parameter">mysql</code></dt>
+<dd>
+<p class="para">仅以过程化样式：由 <span class="function"><a href="function.mysqli-connect.html" class="function">mysqli_connect()</a></span> 或
+<span class="function"><a href="mysqli.init.html" class="function">mysqli_init()</a></span> 返回的 <span class="classname"><a href="class.mysqli.html" class="classname">mysqli</a></span> 对象。</p></dd>
+
+    
+     <dt>
+<code class="parameter">hostname</code></dt>
+
+     <dd>
+
+      <p class="para">
+       可以使用域名、IP 地址。如果传递 <strong><code>null</code></strong>，值将从 <a href="mysqli.configuration.html#ini.mysqli.default-host" class="link">mysqli.default_host</a>
+       中检索。如果可能，将使用管道代替 TCP/IP 协议。如果同时提供主机名和端口号，则使用 TCP/IP 协议，例如 <code class="literal">localhost:3308</code>。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">username</code></dt>
+
+     <dd>
+
+      <p class="para">
+       MySQL 登录用户名，为 <strong><code>null</code></strong> 时则假设是基于 <a href="mysqli.configuration.html#ini.mysqli.default-user" class="link">mysqli.default_user</a> ini 选项的用户名。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">password</code></dt>
+
+     <dd>
+
+      <p class="para">
+       MySQL 密码，为 <strong><code>null</code></strong> 时则假设是基于 <a href="mysqli.configuration.html#ini.mysqli.default-pw" class="link">mysqli.default_pw</a> ini 选项的密码。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">database</code></dt>
+
+     <dd>
+
+      <p class="para">
+       执行查询语句的默认数据库或为 <strong><code>null</code></strong>。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">port</code></dt>
+
+     <dd>
+
+      <p class="para">
+       MySQL 服务器的端口，为 <strong><code>null</code></strong> 时则假设是基于 <a href="mysqli.configuration.html#ini.mysqli.default-port" class="link">mysqli.default_port</a> ini 选项的端口。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">socket</code></dt>
+
+     <dd>
+
+      <p class="para">
+       指定使用的 socket 或者命名通道，为 <strong><code>null</code></strong> 时则假设是基于 <a href="mysqli.configuration.html#ini.mysqli.default-socket" class="link">mysqli.default_socket</a> ini 选项的套接字。
+      </p>
+      <blockquote class="note"><p><strong class="note">注意</strong>: 
+       <p class="para">
+        指定 <code class="parameter">socket</code> 参数并不能说明要采用何种方式连接数据库。
+        连接数据的方式由 <code class="parameter">hostname</code> 设定。
+       </p>
+      </p></blockquote>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">flags</code></dt>
+
+     <dd>
+
+      <p class="para">
+       这里可以设置连接参数：
+      </p>
+      <table id="mysqli.real-connect.flags" class="doctable table">
+       <caption><strong>Supported flags</strong></caption>
+       
+       <thead>
+        <tr>
+         <th>Name</th>
+         <th>Description</th>
+        </tr>
+
+       </thead>
+
+       <tbody class="tbody">
+        <tr>
+         <td><strong><code>MYSQLI_CLIENT_COMPRESS</code></strong></td>
+         <td>使用压缩协议</td>
+        </tr>
+
+        <tr>
+         <td><strong><code>MYSQLI_CLIENT_FOUND_ROWS</code></strong></td>
+         <td>返回语句匹配的行数，而不是影响的行数</td>
+        </tr>
+
+        <tr>
+         <td><strong><code>MYSQLI_CLIENT_IGNORE_SPACE</code></strong></td>
+         <td>允许函数名称后有空格，这将使所有的函数名称成为保留字。</td>
+        </tr>
+
+        <tr>
+         <td><strong><code>MYSQLI_CLIENT_INTERACTIVE</code></strong></td>
+         <td>
+          在关闭连接之前允许等待 <code class="literal">interactive_timeout</code> 秒，
+          他替代 <code class="literal">wait_timeout</code> 设定。
+         </td>
+        </tr>
+
+        <tr>
+         <td><strong><code>MYSQLI_CLIENT_SSL</code></strong></td>
+         <td>使用 SSL 加密</td>
+        </tr>
+
+        <tr>
+         <td><strong><code>MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT</code></strong></td>
+         <td>
+          跟 <strong><code>MYSQLI_CLIENT_SSL</code></strong> 类似，但禁用对提供的 SSL 证书的验证。这仅适用于使用
+          MySQL Native Driver 和 MySQL 5.6 及其后续版本的安装。
+         </td>
+        </tr>
+
+        </tbody>
+       
+      </table>
+
+      <blockquote class="note"><p><strong class="note">注意</strong>: 
+       <p class="para">
+        从安全角度考虑，在 PHP 中不可以使用 <strong><code>MULTI_STATEMENT</code></strong>，
+        若要执行多查询语句，请使用 <span class="function"><a href="mysqli.multi-query.html" class="function">mysqli_multi_query()</a></span>。
+       </p>
+      </p></blockquote>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-mysqli.real-connect-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   成功时返回 <strong><code>true</code></strong>， 或者在失败时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 errors" id="refsect1-mysqli.real-connect-errors">
+  <h3 class="title">错误／异常</h3>
+  <p class="para">
+If mysqli error reporting is enabled (<strong><code>MYSQLI_REPORT_ERROR</code></strong>) and the requested operation fails,
+a warning is generated. If, in addition, the mode is set to <strong><code>MYSQLI_REPORT_STRICT</code></strong>,
+a <span class="classname"><a href="class.mysqli-sql-exception.html" class="classname">mysqli_sql_exception</a></span> is thrown instead.</p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-mysqli.real-connect-changelog">
+  <h3 class="title">更新日志</h3>
+  <p class="para">
+   <table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>7.4.0</td>
+       <td>
+        所有的参数都可为 null。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-mysqli.real-connect-examples">
+  <h3 class="title">示例</h3>
+  <div class="example" id="example-4442">
+   <p><strong>示例 #1 <span class="methodname"><strong>mysqli::real_connect()</strong></span> 示例</strong></p>
+   <div class="example-contents"><p>面向对象风格</p></div>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />$mysqli </span><span style="color: #007700">= </span><span style="color: #0000BB">mysqli_init</span><span style="color: #007700">();<br />if (!</span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">) {<br />    die(</span><span style="color: #DD0000">'mysqli_init failed'</span><span style="color: #007700">);<br />}<br /><br />if (!</span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">options</span><span style="color: #007700">(</span><span style="color: #0000BB">MYSQLI_INIT_COMMAND</span><span style="color: #007700">, </span><span style="color: #DD0000">'SET AUTOCOMMIT = 0'</span><span style="color: #007700">)) {<br />    die(</span><span style="color: #DD0000">'Setting MYSQLI_INIT_COMMAND failed'</span><span style="color: #007700">);<br />}<br /><br />if (!</span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">options</span><span style="color: #007700">(</span><span style="color: #0000BB">MYSQLI_OPT_CONNECT_TIMEOUT</span><span style="color: #007700">, </span><span style="color: #0000BB">5</span><span style="color: #007700">)) {<br />    die(</span><span style="color: #DD0000">'Setting MYSQLI_OPT_CONNECT_TIMEOUT failed'</span><span style="color: #007700">);<br />}<br /><br />if (!</span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">real_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">'localhost'</span><span style="color: #007700">, </span><span style="color: #DD0000">'my_user'</span><span style="color: #007700">, </span><span style="color: #DD0000">'my_password'</span><span style="color: #007700">, </span><span style="color: #DD0000">'my_db'</span><span style="color: #007700">)) {<br />    die(</span><span style="color: #DD0000">'Connect Error (' </span><span style="color: #007700">. </span><span style="color: #0000BB">mysqli_connect_errno</span><span style="color: #007700">() . </span><span style="color: #DD0000">') '<br />            </span><span style="color: #007700">. </span><span style="color: #0000BB">mysqli_connect_error</span><span style="color: #007700">());<br />}<br /><br />echo </span><span style="color: #DD0000">'Success... ' </span><span style="color: #007700">. </span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">host_info </span><span style="color: #007700">. </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">close</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+   <div class="example-contents"><p>面向对象风格 when extending mysqli class</p></div>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">class </span><span style="color: #0000BB">foo_mysqli </span><span style="color: #007700">extends </span><span style="color: #0000BB">mysqli </span><span style="color: #007700">{<br />    public function </span><span style="color: #0000BB">__construct</span><span style="color: #007700">(</span><span style="color: #0000BB">$host</span><span style="color: #007700">, </span><span style="color: #0000BB">$user</span><span style="color: #007700">, </span><span style="color: #0000BB">$pass</span><span style="color: #007700">, </span><span style="color: #0000BB">$db</span><span style="color: #007700">) {<br />        </span><span style="color: #0000BB">parent</span><span style="color: #007700">::</span><span style="color: #0000BB">__construct</span><span style="color: #007700">();<br /><br />        if (!</span><span style="color: #0000BB">parent</span><span style="color: #007700">::</span><span style="color: #0000BB">options</span><span style="color: #007700">(</span><span style="color: #0000BB">MYSQLI_INIT_COMMAND</span><span style="color: #007700">, </span><span style="color: #DD0000">'SET AUTOCOMMIT = 0'</span><span style="color: #007700">)) {<br />            die(</span><span style="color: #DD0000">'Setting MYSQLI_INIT_COMMAND failed'</span><span style="color: #007700">);<br />        }<br /><br />        if (!</span><span style="color: #0000BB">parent</span><span style="color: #007700">::</span><span style="color: #0000BB">options</span><span style="color: #007700">(</span><span style="color: #0000BB">MYSQLI_OPT_CONNECT_TIMEOUT</span><span style="color: #007700">, </span><span style="color: #0000BB">5</span><span style="color: #007700">)) {<br />            die(</span><span style="color: #DD0000">'Setting MYSQLI_OPT_CONNECT_TIMEOUT failed'</span><span style="color: #007700">);<br />        }<br /><br />        if (!</span><span style="color: #0000BB">parent</span><span style="color: #007700">::</span><span style="color: #0000BB">real_connect</span><span style="color: #007700">(</span><span style="color: #0000BB">$host</span><span style="color: #007700">, </span><span style="color: #0000BB">$user</span><span style="color: #007700">, </span><span style="color: #0000BB">$pass</span><span style="color: #007700">, </span><span style="color: #0000BB">$db</span><span style="color: #007700">)) {<br />            die(</span><span style="color: #DD0000">'Connect Error (' </span><span style="color: #007700">. </span><span style="color: #0000BB">mysqli_connect_errno</span><span style="color: #007700">() . </span><span style="color: #DD0000">') '<br />                    </span><span style="color: #007700">. </span><span style="color: #0000BB">mysqli_connect_error</span><span style="color: #007700">());<br />        }<br />    }<br />}<br /><br /></span><span style="color: #0000BB">$db </span><span style="color: #007700">= new </span><span style="color: #0000BB">foo_mysqli</span><span style="color: #007700">(</span><span style="color: #DD0000">'localhost'</span><span style="color: #007700">, </span><span style="color: #DD0000">'my_user'</span><span style="color: #007700">, </span><span style="color: #DD0000">'my_password'</span><span style="color: #007700">, </span><span style="color: #DD0000">'my_db'</span><span style="color: #007700">);<br /><br />echo </span><span style="color: #DD0000">'Success... ' </span><span style="color: #007700">. </span><span style="color: #0000BB">$db</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">host_info </span><span style="color: #007700">. </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$db</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">close</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+   <div class="example-contents"><p>过程化风格</p></div>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />$link </span><span style="color: #007700">= </span><span style="color: #0000BB">mysqli_init</span><span style="color: #007700">();<br />if (!</span><span style="color: #0000BB">$link</span><span style="color: #007700">) {<br />    die(</span><span style="color: #DD0000">'mysqli_init failed'</span><span style="color: #007700">);<br />}<br /><br />if (!</span><span style="color: #0000BB">mysqli_options</span><span style="color: #007700">(</span><span style="color: #0000BB">$link</span><span style="color: #007700">, </span><span style="color: #0000BB">MYSQLI_INIT_COMMAND</span><span style="color: #007700">, </span><span style="color: #DD0000">'SET AUTOCOMMIT = 0'</span><span style="color: #007700">)) {<br />    die(</span><span style="color: #DD0000">'Setting MYSQLI_INIT_COMMAND failed'</span><span style="color: #007700">);<br />}<br /><br />if (!</span><span style="color: #0000BB">mysqli_options</span><span style="color: #007700">(</span><span style="color: #0000BB">$link</span><span style="color: #007700">, </span><span style="color: #0000BB">MYSQLI_OPT_CONNECT_TIMEOUT</span><span style="color: #007700">, </span><span style="color: #0000BB">5</span><span style="color: #007700">)) {<br />    die(</span><span style="color: #DD0000">'Setting MYSQLI_OPT_CONNECT_TIMEOUT failed'</span><span style="color: #007700">);<br />}<br /><br />if (!</span><span style="color: #0000BB">mysqli_real_connect</span><span style="color: #007700">(</span><span style="color: #0000BB">$link</span><span style="color: #007700">, </span><span style="color: #DD0000">'localhost'</span><span style="color: #007700">, </span><span style="color: #DD0000">'my_user'</span><span style="color: #007700">, </span><span style="color: #DD0000">'my_password'</span><span style="color: #007700">, </span><span style="color: #DD0000">'my_db'</span><span style="color: #007700">)) {<br />    die(</span><span style="color: #DD0000">'Connect Error (' </span><span style="color: #007700">. </span><span style="color: #0000BB">mysqli_connect_errno</span><span style="color: #007700">() . </span><span style="color: #DD0000">') '<br />            </span><span style="color: #007700">. </span><span style="color: #0000BB">mysqli_connect_error</span><span style="color: #007700">());<br />}<br /><br />echo </span><span style="color: #DD0000">'Success... ' </span><span style="color: #007700">. </span><span style="color: #0000BB">mysqli_get_host_info</span><span style="color: #007700">(</span><span style="color: #0000BB">$link</span><span style="color: #007700">) . </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">mysqli_close</span><span style="color: #007700">(</span><span style="color: #0000BB">$link</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例会输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+Success... MySQL host info: localhost via TCP/IP
+</pre></div>
+   </div>
+  </div>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-mysqli.real-connect-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+<p class="para">MySQLnd 总是使用服务器的默认字符集。此字符集在连接握手／认证时发送，并被 mysqlnd
+使用。</p><p class="para">Libmysqlclient 使用 <var class="filename">my.cnf</var> 中的默认字符集或者由在调用
+<span class="function"><a href="mysqli.init.html" class="function">mysqli_init()</a></span> 之后，<span class="function"><strong>mysqli_real_connect()</strong></span>
+之前先调用 <span class="function"><a href="mysqli.options.html" class="function">mysqli_options()</a></span> 来指定。</p></p></blockquote>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-mysqli.real-connect-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.mysqli-connect.html" class="function" rel="rdfs-seeAlso">mysqli_connect()</a> - 别名 mysqli::__construct</span></li>
+    <li class="member"><span class="function"><a href="mysqli.init.html" class="function" rel="rdfs-seeAlso">mysqli_init()</a> - 初始化 MySQLi 并返回用于 mysqli_real_connect() 的对象</span></li>
+    <li class="member"><span class="function"><a href="mysqli.options.html" class="function" rel="rdfs-seeAlso">mysqli_options()</a> - 设置选项</span></li>
+    <li class="member"><span class="function"><a href="mysqli.ssl-set.html" class="function" rel="rdfs-seeAlso">mysqli_ssl_set()</a> - 用于使用 SSL 建立安全连接</span></li>
+    <li class="member"><span class="function"><a href="mysqli.close.html" class="function" rel="rdfs-seeAlso">mysqli_close()</a> - 关闭先前打开的数据库连接</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

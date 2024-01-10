@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>在当前进程当前位置产生分叉（fork）</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.pcntl-exec.html">« pcntl_exec</a></li>
+      <li style="float: right;"><a href="function.pcntl-get-last-error.html">pcntl_get_last_error »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.pcntl.html">PCNTL 函数</a></li>
+    <li>在当前进程当前位置产生分叉（fork）</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.pcntl-fork" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">pcntl_fork</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.1.0, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">pcntl_fork</span> &mdash; <span class="dc-title">在当前进程当前位置产生分叉（fork）</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.pcntl-fork-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>pcntl_fork</strong></span>(): <span class="type">int</span></div>
+
+  <p class="para rdfs-comment">
+  <span class="function"><strong>pcntl_fork()</strong></span> 函数创建子进程，这个子进程仅 PID（进程号）
+  和 PPID（父进程号）与其父进程不同。有关分叉在系统上工作的具体细节，请参阅系统的 fork(2) 手册页。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.pcntl-fork-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">此函数没有参数。</p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.pcntl-fork-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+  成功时，在父进程执行线程内返回产生的子进程的 PID，在子进程执行线程内返回 0。失败时，在
+  父进程上下文返回 -1，不会创建子进程，并且会引发 PHP 错误。
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.pcntl-fork-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 <span class="function"><strong>pcntl_fork()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />$pid </span><span style="color: #007700">= </span><span style="color: #0000BB">pcntl_fork</span><span style="color: #007700">();<br />if (</span><span style="color: #0000BB">$pid </span><span style="color: #007700">== -</span><span style="color: #0000BB">1</span><span style="color: #007700">) {<br />     die(</span><span style="color: #DD0000">'could not fork'</span><span style="color: #007700">);<br />} else if (</span><span style="color: #0000BB">$pid</span><span style="color: #007700">) {<br />     </span><span style="color: #FF8000">// 父进程<br />     </span><span style="color: #0000BB">pcntl_wait</span><span style="color: #007700">(</span><span style="color: #0000BB">$status</span><span style="color: #007700">); </span><span style="color: #FF8000">// 防止僵尸子进程<br /></span><span style="color: #007700">} else {<br />     </span><span style="color: #FF8000">// 子进程<br /></span><span style="color: #007700">}<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.pcntl-fork-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.pcntl-rfork.html" class="function" rel="rdfs-seeAlso">pcntl_rfork()</a> - Manipulates process resources</span></li>
+    <li class="member"><span class="function"><a href="function.pcntl-waitpid.html" class="function" rel="rdfs-seeAlso">pcntl_waitpid()</a> - 等待或返回 fork 的子进程状态</span></li>
+    <li class="member"><span class="function"><a href="function.pcntl-signal.html" class="function" rel="rdfs-seeAlso">pcntl_signal()</a> - 安装信号处理程序</span></li>
+    <li class="member"><span class="function"><a href="function.cli-set-process-title.html" class="function" rel="rdfs-seeAlso">cli_set_process_title()</a> - Sets the process title</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

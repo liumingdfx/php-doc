@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>以千位分隔符方式格式化一个数字</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.nl2br.html">« nl2br</a></li>
+      <li style="float: right;"><a href="function.ord.html">ord »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.strings.html">字符串 函数</a></li>
+    <li>以千位分隔符方式格式化一个数字</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.number-format" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">number_format</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">number_format</span> &mdash; <span class="dc-title">以千位分隔符方式格式化一个数字</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.number-format-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>number_format</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">float</span> <code class="parameter">$num</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$decimals</code><span class="initializer"> = 0</span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">string</span><span class="type"></span></span> <code class="parameter">$decimal_separator</code><span class="initializer"> = &quot;.&quot;</span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">string</span><span class="type"></span></span> <code class="parameter">$thousands_separator</code><span class="initializer"> = &quot;,&quot;</span></span><br>): <span class="type">string</span></div>
+
+  <p class="para rdfs-comment">
+   使用四舍五入的规则，将数字格式化为千位分组和小数位（可选）。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.number-format-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">num</code></dt>
+
+     <dd>
+
+      <p class="para">
+       要格式化的数字。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">decimals</code></dt>
+
+     <dd>
+
+      <p class="para">
+       设置小数位数。如果为 <code class="literal">0</code>，则从返回值中忽略 <code class="parameter">decimal_separator</code>。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">decimal_separator</code></dt>
+
+     <dd>
+
+      <p class="para">
+       指定小数点的分隔符。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">thousands_separator</code></dt>
+
+     <dd>
+
+      <p class="para">
+       设置千位分隔符。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.number-format-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   <code class="parameter">num</code> 的格式化版本。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.number-format-changelog">
+  <h3 class="title">更新日志</h3>
+  <p class="para">
+   <table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>8.0.0</td>
+       <td>
+        在此版本之前，<span class="function"><strong>number_format()</strong></span> 接受一个、两个或四个参数（不会是三个）。
+       </td>
+      </tr>
+
+      <tr>
+       <td>7.2.0</td>
+       <td>
+        <span class="function"><strong>number_format()</strong></span> 现在再也不会返回 <code class="literal">-0</code>，之前
+        <code class="parameter">num</code> 为 <code class="literal">-0.01</code> 的情况下可以返回 <code class="literal">-0</code>。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.number-format-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 <span class="function"><strong>number_format()</strong></span> 示例</strong></p>
+    <div class="example-contents"><p>
+     例如，法语计数通常使用两位小数，逗号（“,”）作为小数分隔符，空格（“ ”）作为千位分隔符。以下示例展示了格式化数字的各种方法：
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />$number </span><span style="color: #007700">= </span><span style="color: #0000BB">1234.56</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// 英文计数（默认）<br /></span><span style="color: #0000BB">$english_format_number </span><span style="color: #007700">= </span><span style="color: #0000BB">number_format</span><span style="color: #007700">(</span><span style="color: #0000BB">$number</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">// 1,235<br /><br />// 法语计数<br /></span><span style="color: #0000BB">$nombre_format_francais </span><span style="color: #007700">= </span><span style="color: #0000BB">number_format</span><span style="color: #007700">(</span><span style="color: #0000BB">$number</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #DD0000">','</span><span style="color: #007700">, </span><span style="color: #DD0000">' '</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">// 1 234,56<br /><br /></span><span style="color: #0000BB">$number </span><span style="color: #007700">= </span><span style="color: #0000BB">1234.5678</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// 没有千位分隔符的英文计数<br /></span><span style="color: #0000BB">$english_format_number </span><span style="color: #007700">= </span><span style="color: #0000BB">number_format</span><span style="color: #007700">(</span><span style="color: #0000BB">$number</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #DD0000">'.'</span><span style="color: #007700">, </span><span style="color: #DD0000">''</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">// 1234.57<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 seealso" id="refsect1-function.number-format-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.money-format.html" class="function" rel="rdfs-seeAlso">money_format()</a> - 将数字格式化成货币字符串</span></li>
+    <li class="member"><span class="function"><a href="function.sprintf.html" class="function" rel="rdfs-seeAlso">sprintf()</a> - 返回格式化字符串</span></li>
+    <li class="member"><span class="function"><a href="function.printf.html" class="function" rel="rdfs-seeAlso">printf()</a> - 输出格式化字符串</span></li>
+    <li class="member"><span class="function"><a href="function.sscanf.html" class="function" rel="rdfs-seeAlso">sscanf()</a> - 根据指定格式解析输入的字符</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

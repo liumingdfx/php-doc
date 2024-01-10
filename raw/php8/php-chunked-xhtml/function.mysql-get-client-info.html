@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>取得 MySQL 客户端信息</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.mysql-free-result.html">« mysql_free_result</a></li>
+      <li style="float: right;"><a href="function.mysql-get-host-info.html">mysql_get_host_info »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.mysql.html">MySQL 函数</a></li>
+    <li>取得 MySQL 客户端信息</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.mysql-get-client-info" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">mysql_get_client_info</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.0.5, PHP 5)</p><p class="refpurpose"><span class="refname">mysql_get_client_info</span> &mdash; <span class="dc-title">取得 MySQL 客户端信息</span></p>
+
+ </div>
+
+ <div id="function.mysql-get-client-info-refsynopsisdiv">
+  <div class="warning"><strong class="warning">警告</strong>
+   <p class="para">本扩展自 PHP 5.5.0
+起已废弃，并在自 PHP 7.0.0 开始被移除。应使用 <a href="book.mysqli.html" class="link">MySQLi</a>
+或 <a href="ref.pdo-mysql.html" class="link">PDO_MySQL</a> 扩展来替换之。参见 <a href="mysqlinfo.api.choosing.html" class="link">MySQL：选择 API</a> 
+指南来获取更多信息。用以替代本函数的有：</p>
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="mysqli.get-client-info.html" class="function">mysqli_get_client_info()</a></span></li>
+    <li class="member">
+     <span class="methodname"><a href="pdo.getattribute.html" class="methodname">PDO::getAttribute()</a></span>
+     with <code class="parameter">attribute</code> as <strong><code>PDO::ATTR_CLIENT_VERSION</code></strong>
+    </li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.mysql-get-client-info-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>mysql_get_client_info</strong></span>(): <span class="type">string</span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>mysql_get_client_info()</strong></span> 返回表示客户端库版本的字符串。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.mysql-get-client-info-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">此函数没有参数。</p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.mysql-get-client-info-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   MySQL 客户端版本。
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.mysql-get-client-info-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="example-5327">
+    <p><strong>示例 #1 <span class="function"><strong>mysql_get_client_info()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />printf</span><span style="color: #007700">(</span><span style="color: #DD0000">"MySQL client info: %s\n"</span><span style="color: #007700">, </span><span style="color: #0000BB">mysql_get_client_info</span><span style="color: #007700">());<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例的输出类似于：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+MySQL client info: 3.23.39
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.mysql-get-client-info-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.mysql-get-host-info.html" class="function" rel="rdfs-seeAlso">mysql_get_host_info()</a> - 取得 MySQL 主机信息</span></li>
+    <li class="member"><span class="function"><a href="function.mysql-get-proto-info.html" class="function" rel="rdfs-seeAlso">mysql_get_proto_info()</a> - 取得 MySQL 协议信息</span></li>
+    <li class="member"><span class="function"><a href="function.mysql-get-server-info.html" class="function" rel="rdfs-seeAlso">mysql_get_server_info()</a> - 取得 MySQL 服务器信息</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div></div></div></body></html>

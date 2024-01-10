@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>绘制直线</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.imagelayereffect.html">« imagelayereffect</a></li>
+      <li style="float: right;"><a href="function.imageloadfont.html">imageloadfont »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.image.html">GD 和图像处理 函数</a></li>
+    <li>绘制直线</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.imageline" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">imageline</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">imageline</span> &mdash; <span class="dc-title">绘制直线</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.imageline-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>imageline</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><a href="class.gdimage.html" class="type GdImage">GdImage</a></span> <code class="parameter">$image</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$x1</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$y1</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$x2</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$y2</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$color</code></span><br>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   在指定的两个点之间画一条直线。
+  </p>
+ </div>
+
+ <div class="refsect1 parameters" id="refsect1-function.imageline-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    <dt>
+
+<code class="parameter">image</code></dt>
+<dd>
+<p class="para">由图象创建函数(例如<span class="function"><a href="function.imagecreatetruecolor.html" class="function">imagecreatetruecolor()</a></span>)返回的 
+<span class="classname"><a href="class.gdimage.html" class="classname">GdImage</a></span> 对象。</p></dd>
+
+    
+     <dt>
+<code class="parameter">x1</code></dt>
+
+     <dd>
+
+      <p class="para">
+       第一个点的 x 坐标。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">y1</code></dt>
+
+     <dd>
+
+      <p class="para">
+       第一个点的 y 坐标。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">x2</code></dt>
+
+     <dd>
+
+      <p class="para">
+       第二个点的 x 坐标。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">y2</code></dt>
+
+     <dd>
+
+      <p class="para">
+       第二个点的 y 坐标。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">color</code></dt>
+
+     <dd>
+
+      <p class="para">
+       直线颜色。颜色标识符使用 <span class="function"><a href="function.imagecolorallocate.html" class="function">imagecolorallocate()</a></span> 创建。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+ <div class="refsect1 returnvalues" id="refsect1-function.imageline-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   成功时返回 <strong><code>true</code></strong>， 或者在失败时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.imageline-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+ <td>8.0.0</td>
+ <td>
+  <code class="parameter">image</code> 现在需要 <span class="classname"><a href="class.gdimage.html" class="classname">GdImage</a></span> 实例；之前需要有效的 <code class="literal">gd</code> <span class="type">resource</span>。
+ </td>
+</tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.imageline-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 绘制粗线</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">function </span><span style="color: #0000BB">imagelinethick</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">$x1</span><span style="color: #007700">, </span><span style="color: #0000BB">$y1</span><span style="color: #007700">, </span><span style="color: #0000BB">$x2</span><span style="color: #007700">, </span><span style="color: #0000BB">$y2</span><span style="color: #007700">, </span><span style="color: #0000BB">$color</span><span style="color: #007700">, </span><span style="color: #0000BB">$thick </span><span style="color: #007700">= </span><span style="color: #0000BB">1</span><span style="color: #007700">)<br />{<br />    </span><span style="color: #FF8000">/* 这样只适用于正交线<br />    imagesetthickness($image, $thick);<br />    return imageline($image, $x1, $y1, $x2, $y2, $color);<br />    */<br />    </span><span style="color: #007700">if (</span><span style="color: #0000BB">$thick </span><span style="color: #007700">== </span><span style="color: #0000BB">1</span><span style="color: #007700">) {<br />        return </span><span style="color: #0000BB">imageline</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">$x1</span><span style="color: #007700">, </span><span style="color: #0000BB">$y1</span><span style="color: #007700">, </span><span style="color: #0000BB">$x2</span><span style="color: #007700">, </span><span style="color: #0000BB">$y2</span><span style="color: #007700">, </span><span style="color: #0000BB">$color</span><span style="color: #007700">);<br />    }<br />    </span><span style="color: #0000BB">$t </span><span style="color: #007700">= </span><span style="color: #0000BB">$thick </span><span style="color: #007700">/ </span><span style="color: #0000BB">2 </span><span style="color: #007700">- </span><span style="color: #0000BB">0.5</span><span style="color: #007700">;<br />    if (</span><span style="color: #0000BB">$x1 </span><span style="color: #007700">== </span><span style="color: #0000BB">$x2 </span><span style="color: #007700">|| </span><span style="color: #0000BB">$y1 </span><span style="color: #007700">== </span><span style="color: #0000BB">$y2</span><span style="color: #007700">) {<br />        return </span><span style="color: #0000BB">imagefilledrectangle</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">round</span><span style="color: #007700">(</span><span style="color: #0000BB">min</span><span style="color: #007700">(</span><span style="color: #0000BB">$x1</span><span style="color: #007700">, </span><span style="color: #0000BB">$x2</span><span style="color: #007700">) - </span><span style="color: #0000BB">$t</span><span style="color: #007700">), </span><span style="color: #0000BB">round</span><span style="color: #007700">(</span><span style="color: #0000BB">min</span><span style="color: #007700">(</span><span style="color: #0000BB">$y1</span><span style="color: #007700">, </span><span style="color: #0000BB">$y2</span><span style="color: #007700">) - </span><span style="color: #0000BB">$t</span><span style="color: #007700">), </span><span style="color: #0000BB">round</span><span style="color: #007700">(</span><span style="color: #0000BB">max</span><span style="color: #007700">(</span><span style="color: #0000BB">$x1</span><span style="color: #007700">, </span><span style="color: #0000BB">$x2</span><span style="color: #007700">) + </span><span style="color: #0000BB">$t</span><span style="color: #007700">), </span><span style="color: #0000BB">round</span><span style="color: #007700">(</span><span style="color: #0000BB">max</span><span style="color: #007700">(</span><span style="color: #0000BB">$y1</span><span style="color: #007700">, </span><span style="color: #0000BB">$y2</span><span style="color: #007700">) + </span><span style="color: #0000BB">$t</span><span style="color: #007700">), </span><span style="color: #0000BB">$color</span><span style="color: #007700">);<br />    }<br />    </span><span style="color: #0000BB">$k </span><span style="color: #007700">= (</span><span style="color: #0000BB">$y2 </span><span style="color: #007700">- </span><span style="color: #0000BB">$y1</span><span style="color: #007700">) / (</span><span style="color: #0000BB">$x2 </span><span style="color: #007700">- </span><span style="color: #0000BB">$x1</span><span style="color: #007700">); </span><span style="color: #FF8000">//y = kx + q<br />    </span><span style="color: #0000BB">$a </span><span style="color: #007700">= </span><span style="color: #0000BB">$t </span><span style="color: #007700">/ </span><span style="color: #0000BB">sqrt</span><span style="color: #007700">(</span><span style="color: #0000BB">1 </span><span style="color: #007700">+ </span><span style="color: #0000BB">pow</span><span style="color: #007700">(</span><span style="color: #0000BB">$k</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">));<br />    </span><span style="color: #0000BB">$points </span><span style="color: #007700">= array(<br />        </span><span style="color: #0000BB">round</span><span style="color: #007700">(</span><span style="color: #0000BB">$x1 </span><span style="color: #007700">- (</span><span style="color: #0000BB">1</span><span style="color: #007700">+</span><span style="color: #0000BB">$k</span><span style="color: #007700">)*</span><span style="color: #0000BB">$a</span><span style="color: #007700">), </span><span style="color: #0000BB">round</span><span style="color: #007700">(</span><span style="color: #0000BB">$y1 </span><span style="color: #007700">+ (</span><span style="color: #0000BB">1</span><span style="color: #007700">-</span><span style="color: #0000BB">$k</span><span style="color: #007700">)*</span><span style="color: #0000BB">$a</span><span style="color: #007700">),<br />        </span><span style="color: #0000BB">round</span><span style="color: #007700">(</span><span style="color: #0000BB">$x1 </span><span style="color: #007700">- (</span><span style="color: #0000BB">1</span><span style="color: #007700">-</span><span style="color: #0000BB">$k</span><span style="color: #007700">)*</span><span style="color: #0000BB">$a</span><span style="color: #007700">), </span><span style="color: #0000BB">round</span><span style="color: #007700">(</span><span style="color: #0000BB">$y1 </span><span style="color: #007700">- (</span><span style="color: #0000BB">1</span><span style="color: #007700">+</span><span style="color: #0000BB">$k</span><span style="color: #007700">)*</span><span style="color: #0000BB">$a</span><span style="color: #007700">),<br />        </span><span style="color: #0000BB">round</span><span style="color: #007700">(</span><span style="color: #0000BB">$x2 </span><span style="color: #007700">+ (</span><span style="color: #0000BB">1</span><span style="color: #007700">+</span><span style="color: #0000BB">$k</span><span style="color: #007700">)*</span><span style="color: #0000BB">$a</span><span style="color: #007700">), </span><span style="color: #0000BB">round</span><span style="color: #007700">(</span><span style="color: #0000BB">$y2 </span><span style="color: #007700">- (</span><span style="color: #0000BB">1</span><span style="color: #007700">-</span><span style="color: #0000BB">$k</span><span style="color: #007700">)*</span><span style="color: #0000BB">$a</span><span style="color: #007700">),<br />        </span><span style="color: #0000BB">round</span><span style="color: #007700">(</span><span style="color: #0000BB">$x2 </span><span style="color: #007700">+ (</span><span style="color: #0000BB">1</span><span style="color: #007700">-</span><span style="color: #0000BB">$k</span><span style="color: #007700">)*</span><span style="color: #0000BB">$a</span><span style="color: #007700">), </span><span style="color: #0000BB">round</span><span style="color: #007700">(</span><span style="color: #0000BB">$y2 </span><span style="color: #007700">+ (</span><span style="color: #0000BB">1</span><span style="color: #007700">+</span><span style="color: #0000BB">$k</span><span style="color: #007700">)*</span><span style="color: #0000BB">$a</span><span style="color: #007700">),<br />    );<br />    </span><span style="color: #0000BB">imagefilledpolygon</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">$points</span><span style="color: #007700">, </span><span style="color: #0000BB">4</span><span style="color: #007700">, </span><span style="color: #0000BB">$color</span><span style="color: #007700">);<br />    return </span><span style="color: #0000BB">imagepolygon</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">, </span><span style="color: #0000BB">$points</span><span style="color: #007700">, </span><span style="color: #0000BB">4</span><span style="color: #007700">, </span><span style="color: #0000BB">$color</span><span style="color: #007700">);<br />}<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+ <div class="refsect1 seealso" id="refsect1-function.imageline-seealso">
+  <h3 class="title">参见</h3>
+  <ul class="simplelist">
+   <li class="member"><span class="function"><a href="function.imagecreatetruecolor.html" class="function" rel="rdfs-seeAlso">imagecreatetruecolor()</a> - 新建真彩色图像</span></li>
+   <li class="member"><span class="function"><a href="function.imagecolorallocate.html" class="function" rel="rdfs-seeAlso">imagecolorallocate()</a> - 为图像分配颜色</span></li>
+  </ul>
+ </div>
+
+</div></div></div></body></html>

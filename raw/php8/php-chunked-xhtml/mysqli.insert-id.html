@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>返回上次查询为 AUTO_INCREMENT 列生成的值</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="mysqli.init.html">« mysqli::init</a></li>
+      <li style="float: right;"><a href="mysqli.kill.html">mysqli::kill »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="class.mysqli.html">mysqli</a></li>
+    <li>返回上次查询为 AUTO_INCREMENT 列生成的值</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="mysqli.insert-id" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">mysqli::$insert_id</h1>
+  <h1 class="refname">mysqli_insert_id</h1>
+  <p class="verinfo">(PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">mysqli::$insert_id</span> -- <span class="refname">mysqli_insert_id</span> &mdash; <span class="dc-title">返回上次查询为 AUTO_INCREMENT 列生成的值</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-mysqli.insert-id-description">
+  <h3 class="title">说明</h3>
+  <p class="para">面向对象风格</p>
+  <div class="fieldsynopsis"><span class="type"><span class="type">int</span>|<span class="type">string</span></span> <var class="varname"><a href="mysqli.insert-id.html">$mysqli-&gt;insert_id</a></var>;</div>
+
+  <p class="para">过程化风格</p>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>mysqli_insert_id</strong></span>(<span class="methodparam"><span class="type"><a href="class.mysqli.html" class="type mysqli">mysqli</a></span> <code class="parameter">$mysql</code></span>): <span class="type"><span class="type">int</span>|<span class="type">string</span></span></div>
+
+  <p class="para rdfs-comment">
+   返回有 <code class="literal">AUTO_INCREMENT</code> 属性的表执行 <code class="literal">INSERT</code> 或 <code class="literal">UPDATE</code>
+   查询生成的 ID。对于多行 <code class="literal">INSERT</code> 语句，返回成功插入的第一个自动生成的值。
+  </p>
+  <p class="para">
+   使用 <code class="literal">LAST_INSERT_ID()</code> MySQL 函数执行 <code class="literal">INSERT</code> 或 <code class="literal">UPDATE</code>
+   语句也会修改 <span class="function"><strong>mysqli_insert_id()</strong></span> 返回的值。如果使用 <code class="literal">LAST_INSERT_ID(expr)</code>
+   生成 <code class="literal">AUTO_INCREMENT</code> 的值，将返回最后 <code class="literal">expr</code> 的值而不是生成的
+   <code class="literal">AUTO_INCREMENT</code> 值。
+  </p>
+  <p class="para">
+   如果之前的语句没有修改 <code class="literal">AUTO_INCREMENT</code> 的值，则返回 <code class="literal">0</code>。<span class="function"><strong>mysqli_insert_id()</strong></span>
+   必须在生成值的语句之后立即调用。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-mysqli.insert-id-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    <dt>
+
+<code class="parameter">mysql</code></dt>
+<dd>
+<p class="para">仅以过程化样式：由 <span class="function"><a href="function.mysqli-connect.html" class="function">mysqli_connect()</a></span> 或
+<span class="function"><a href="mysqli.init.html" class="function">mysqli_init()</a></span> 返回的 <span class="classname"><a href="class.mysqli.html" class="classname">mysqli</a></span> 对象。</p></dd>
+
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-mysqli.insert-id-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   上一个查询更新的 <code class="literal">AUTO_INCREMENT</code> 字段的值。如果连接上没有之前的查询或者查询没有更新
+   <code class="literal">AUTO_INCREMENT</code> 值。则返回 0。
+  </p>
+  <p class="para">
+   只有使用当前连接发出的语句才会影响返回值。该值不受使用其它连接或客户端发出的语句的影响。
+  </p>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    如果数字大于最大 int 值，将以字符串返回该值。
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-mysqli.insert-id-examples">
+  <h3 class="title">示例</h3>
+  <div class="example" id="example-4421">
+   <p><strong>示例 #1 <var class="varname">$mysqli->insert_id</var> 示例</strong></p>
+   <div class="example-contents"><p>面向对象风格</p></div>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />mysqli_report</span><span style="color: #007700">(</span><span style="color: #0000BB">MYSQLI_REPORT_ERROR </span><span style="color: #007700">| </span><span style="color: #0000BB">MYSQLI_REPORT_STRICT</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$mysqli </span><span style="color: #007700">= new </span><span style="color: #0000BB">mysqli</span><span style="color: #007700">(</span><span style="color: #DD0000">"localhost"</span><span style="color: #007700">, </span><span style="color: #DD0000">"my_user"</span><span style="color: #007700">, </span><span style="color: #DD0000">"my_password"</span><span style="color: #007700">, </span><span style="color: #DD0000">"world"</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">query</span><span style="color: #007700">(</span><span style="color: #DD0000">"CREATE TABLE myCity LIKE City"</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$query </span><span style="color: #007700">= </span><span style="color: #DD0000">"INSERT INTO myCity VALUES (NULL, 'Stuttgart', 'DEU', 'Stuttgart', 617000)"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">query</span><span style="color: #007700">(</span><span style="color: #0000BB">$query</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">printf</span><span style="color: #007700">(</span><span style="color: #DD0000">"New record has ID %d.\n"</span><span style="color: #007700">, </span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">insert_id</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">/* 删除表 */<br /></span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">query</span><span style="color: #007700">(</span><span style="color: #DD0000">"DROP TABLE myCity"</span><span style="color: #007700">);</span></span></code></div>
+   </div>
+
+   <div class="example-contents"><p>过程化风格</p></div>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />mysqli_report</span><span style="color: #007700">(</span><span style="color: #0000BB">MYSQLI_REPORT_ERROR </span><span style="color: #007700">| </span><span style="color: #0000BB">MYSQLI_REPORT_STRICT</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$link </span><span style="color: #007700">= </span><span style="color: #0000BB">mysqli_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">"localhost"</span><span style="color: #007700">, </span><span style="color: #DD0000">"my_user"</span><span style="color: #007700">, </span><span style="color: #DD0000">"my_password"</span><span style="color: #007700">, </span><span style="color: #DD0000">"world"</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">mysqli_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$link</span><span style="color: #007700">, </span><span style="color: #DD0000">"CREATE TABLE myCity LIKE City"</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$query </span><span style="color: #007700">= </span><span style="color: #DD0000">"INSERT INTO myCity VALUES (NULL, 'Stuttgart', 'DEU', 'Stuttgart', 617000)"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">mysqli_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$link</span><span style="color: #007700">, </span><span style="color: #0000BB">$query</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">printf</span><span style="color: #007700">(</span><span style="color: #DD0000">"New record has ID %d.\n"</span><span style="color: #007700">, </span><span style="color: #0000BB">mysqli_insert_id</span><span style="color: #007700">(</span><span style="color: #0000BB">$link</span><span style="color: #007700">));<br /><br /></span><span style="color: #FF8000">/* 删除表 */<br /></span><span style="color: #0000BB">mysqli_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$link</span><span style="color: #007700">, </span><span style="color: #DD0000">"DROP TABLE myCity"</span><span style="color: #007700">);</span></span></code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例会输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+New record has ID 1.
+</pre></div>
+   </div>
+  </div>
+ </div>
+
+
+</div></div></div></body></html>

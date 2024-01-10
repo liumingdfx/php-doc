@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>安装</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="mysqli.requirements.html">« 需求</a></li>
+      <li style="float: right;"><a href="mysqli.configuration.html">运行时配置 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="mysqli.setup.html">安装/配置</a></li>
+    <li>安装</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="mysqli.installation" class="section">
+
+<h2 class="title">安装</h2>
+
+ <p class="para">
+  在 PHP 5.0.0 中引入 <code class="literal">mysqli</code> 扩展。PHP 5.3.0 版本中引入 Mysql Native Driver。
+ </p>
+
+ <div class="section" id="mysqli.installation.linux">
+
+  <h2 class="title">在 Linux 上安装</h2>
+
+  <p class="para">
+   常见的 Unix 发行版中包含可以安装的 PHP 的二进制版本。虽然这些二进制版本通常是在支持 MySQL
+   扩展的情况下编译的，但扩展库自身可能需要使用额外的包进行安装。因此需要检查选择的发行版附带包管理的可用性。
+  </p>
+  
+  <p class="para">
+   例如，在 Ubuntu 上，<code class="literal">php5-mysql</code> 包安装了 ext/mysql、ext/mysqli 和 pdo_mysql 三个 PHP
+   扩展。在 CentOS 上，<code class="literal">php-mysql</code> 包也安装了这三个 PHP 扩展。
+  </p>
+
+  <p class="para">
+   或者，可以编译扩展本身。从源代码编译 PHP 允许指定要使用的 MySQL 扩展，以及为每个扩展选择客户端库。
+  </p>
+
+  <p class="para">
+   Mysql Native Driver 是推荐的客户端库选项，可以提升性能并带来一些 MySQL Client Library
+   不支持访问的特性。参阅<a href="mysqli.overview.html#mysqli.overview.mysqlnd" class="link">什么是 PHP 的 MySQL
+   Native Driver？</a>中对简要概述 Mysql Native Driver 的优势。
+  </p>
+
+  <p class="para">
+   <code class="literal">/path/to/mysql_config</code> 表示 MySQL Server 自带的 mysql_config 程序的位置。
+  </p>
+
+  <table id="mysqli.installation.time.matrix" class="doctable table">
+   <caption><strong>mysqli 编译时支持模型</strong></caption>
+   
+    <thead>
+     <tr>
+      <th>PHP 版本</th>
+      <th>默认</th>
+      <th>配置选项: <a href="mysqlnd.overview.html" class="link">mysqlnd</a></th>
+      <th>配置选项: <code class="literal">libmysqlclient</code></th>
+      <th>更新日志</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>5.4.x 及以上</td>
+      <td>mysqlnd</td>
+      <td><strong class="option configure">--with-mysqli</strong></td>
+      <td><strong class="option configure">--with-mysqli=/path/to/mysql_config</strong></td>
+      <td>默认是 mysqlnd</td>
+     </tr>
+
+     <tr>
+      <td>5.3.x</td>
+      <td>libmysqlclient</td>
+      <td><strong class="option configure">--with-mysqli=mysqlnd</strong></td>
+      <td><strong class="option configure">--with-mysqli=/path/to/mysql_config</strong></td>
+      <td>支持 mysqlnd</td>
+     </tr>
+
+     <tr>
+      <td>5.0.x, 5.1.x, 5.2.x</td>
+      <td>libmysqlclient</td>
+      <td>不适用</td>
+      <td><strong class="option configure">--with-mysqli=/path/to/mysql_config</strong></td>
+      <td>不支持 mysqlnd</td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+
+  <p class="para">
+   请注意 MySQL 扩展和客户端库可以自由混合。比如，可以启用 MySQL 扩展使用 MySQL Client
+   Library（libmysqlclient），同时配置 <code class="literal">mysqli</code> 扩展去使用 Mysql Native
+   Driver。然而，扩展和客户端库的所有顺序都有可能。
+  </p>
+
+ </div>
+
+ <div class="section" id="mysqli.installation.windows">
+
+  <h2 class="title">在 Windows 系统上安装</h2>
+
+  <p class="para">
+   在 Windows 上，必须在 <var class="filename">php.ini</var> 中启用 <var class="filename">php_mysqli.dll</var> DLL。
+  </p>
+
+  <p class="para">
+   与启用任一 PHP 扩展（比如 <var class="filename">php_mysqli.dll</var>）一样，PHP 指令
+   <a href="ini.core.html#ini.extension-dir" class="link">extension_dir</a> 应设置为 PHP 扩展所在目录。查看
+   <a href="install.windows.manual.html" class="link">Windows 手动安装说明</a>。<code class="literal">extension_dir</code>
+   的示例值是 <var class="filename">c:\php\ext</var>。
+  </p>
+
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    如果启动 Web 服务器的时候发生了类似下面这样的错误：<code class="literal">&quot;Unable to load dynamic library
+    &#039;./php_mysqli.dll&#039;&quot;</code>，这是因为系统找不到 <var class="filename">php_mysqli.dll</var>。
+   </p>
+  </p></blockquote>
+
+ </div>
+
+</div></div></div></body></html>

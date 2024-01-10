@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>获得跟 result 相关的错误信息</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.pg-result-error-field.html">« pg_result_error_field</a></li>
+      <li style="float: right;"><a href="function.pg-result-seek.html">pg_result_seek »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.pgsql.html">PostgreSQL 函数</a></li>
+    <li>获得跟 result 相关的错误信息</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.pg-result-error" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">pg_result_error</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.2.0, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">pg_result_error</span> &mdash; <span class="dc-title">
+   获得跟 result 相关的错误信息
+  </span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.pg-result-error-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>pg_result_error</strong></span>(<span class="methodparam"><span class="type"><a href="class.pgsql-result.html" class="type PgSql\Result">PgSql\Result</a></span> <code class="parameter">$result</code></span>): <span class="type"><span class="type">string</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>pg_result_error()</strong></span> 返回和 <code class="parameter">result</code>
+   实例关联的错误信息。因此用户更有机会可以得到比 <span class="function"><a href="function.pg-last-error.html" class="function">pg_last_error()</a></span> 更好的错误信息。
+  </p>
+  <p class="para">
+   函数 <span class="function"><a href="function.pg-result-error-field.html" class="function">pg_result_error_field()</a></span> 可以比 <span class="function"><strong>pg_result_error()</strong></span> 给出更多关于 result 错误的细节。
+  </p>
+  <p class="para">
+   因为如果查询失败 <span class="function"><a href="function.pg-query.html" class="function">pg_query()</a></span> 返回 <strong><code>false</code></strong>，必须使用
+   <span class="function"><a href="function.pg-send-query.html" class="function">pg_send_query()</a></span> 和 <span class="function"><a href="function.pg-get-result.html" class="function">pg_get_result()</a></span> 来获取 result 句柄。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.pg-result-error-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">result</code></dt>
+
+     <dd>
+
+      <p class="para"><span class="classname"><a href="class.pgsql-result.html" class="classname">PgSql\Result</a></span> 实例，由
+<span class="function"><a href="function.pg-query.html" class="function">pg_query()</a></span>、<span class="function"><a href="function.pg-query-params.html" class="function">pg_query_params()</a></span> 或者 <span class="function"><a href="function.pg-execute.html" class="function">pg_execute()</a></span>（等）返回。</p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.pg-result-error-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回 <span class="type">string</span>。如果没有错误返回空字符串。如果有跟
+   <code class="parameter">result</code> 参数相关的错误，则返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.pg-result-error-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+ <td>8.1.0</td>
+ <td>
+  现在 <code class="parameter">result</code> 参数接受 <span class="classname"><a href="class.pgsql-result.html" class="classname">PgSql\Result</a></span>
+  实例，之前接受 <a href="language.types.resource.html" class="link">resource</a>。
+ </td>
+</tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.pg-result-error-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 <span class="function"><strong>pg_result_error()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />  $dbconn </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">"dbname=publisher"</span><span style="color: #007700">) or die(</span><span style="color: #DD0000">"Could not connect"</span><span style="color: #007700">);<br /><br />  if (!</span><span style="color: #0000BB">pg_connection_busy</span><span style="color: #007700">(</span><span style="color: #0000BB">$dbconn</span><span style="color: #007700">)) {<br />      </span><span style="color: #0000BB">pg_send_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$dbconn</span><span style="color: #007700">, </span><span style="color: #DD0000">"select * from doesnotexist;"</span><span style="color: #007700">);<br />  }<br /><br />  </span><span style="color: #0000BB">$res1 </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_get_result</span><span style="color: #007700">(</span><span style="color: #0000BB">$dbconn</span><span style="color: #007700">);<br />  echo </span><span style="color: #0000BB">pg_result_error</span><span style="color: #007700">(</span><span style="color: #0000BB">$res1</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.pg-result-error-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.pg-result-error-field.html" class="function" rel="rdfs-seeAlso">pg_result_error_field()</a> - Returns an individual field of an error report</span></li>
+    <li class="member"><span class="function"><a href="function.pg-query.html" class="function" rel="rdfs-seeAlso">pg_query()</a> - 执行查询</span></li>
+    <li class="member"><span class="function"><a href="function.pg-send-query.html" class="function" rel="rdfs-seeAlso">pg_send_query()</a> - 发送异步查询</span></li>
+    <li class="member"><span class="function"><a href="function.pg-get-result.html" class="function" rel="rdfs-seeAlso">pg_get_result()</a> - 取得异步查询结果</span></li>
+    <li class="member"><span class="function"><a href="function.pg-last-error.html" class="function" rel="rdfs-seeAlso">pg_last_error()</a> - 得到某连接的最后一条错误信息</span></li>
+    <li class="member"><span class="function"><a href="function.pg-last-notice.html" class="function" rel="rdfs-seeAlso">pg_last_notice()</a> - 返回 PostgreSQL 服务器最新一条公告信息</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div></div></div></body></html>

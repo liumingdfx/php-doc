@@ -1,0 +1,221 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>预定义常量</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="pcre.resources.html">« 资源类型</a></li>
+      <li style="float: right;"><a href="pcre.examples.html">示例 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="book.pcre.html">PCRE</a></li>
+    <li>预定义常量</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="pcre.constants" class="appendix">
+ <h1>预定义常量</h1>
+
+ <p class="simpara">下列常量由此扩展定义，且仅在此扩展编译入 PHP 或在运行时动态载入时可用。</p>
+ <table class="doctable table">
+  <caption><strong>PREG 常量</strong></caption>
+  
+   <thead>
+    <tr>
+     <th>常量</th>
+     <th>说明</th>
+     <th>开始可用的版本</th>
+    </tr>
+
+   </thead>
+
+   <tbody class="tbody">
+    <tr id="constant.preg-pattern-order">
+     <td>
+      <strong><code>PREG_PATTERN_ORDER</code></strong>
+      (<span class="type">int</span>)
+     </td>
+     <td>
+      对结果进行排序，以便 <var class="varname">$matches[0]</var> 是完整模式匹配的数组，<var class="varname">$matches[1]</var>
+      是第一个括号子模式匹配的字符串数组，以此类推。此 flag 仅与 <span class="function"><a href="function.preg-match-all.html" class="function">preg_match_all()</a></span> 一起使用。
+     </td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    <tr id="constant.preg-set-order">
+     <td>
+      <strong><code>PREG_SET_ORDER</code></strong>
+      (<span class="type">int</span>)
+     </td>
+     <td>
+      对结果进行排序，以便 <var class="varname">$matches[0]</var> 是第一组匹配的数组，<var class="varname">$matches[1]</var>
+      是第二组匹配的数组，以此类推。此 flag 仅与 <span class="function"><a href="function.preg-match-all.html" class="function">preg_match_all()</a></span> 一起使用。
+     </td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    <tr id="constant.preg-offset-capture">
+     <td>
+      <strong><code>PREG_OFFSET_CAPTURE</code></strong>
+      (<span class="type">int</span>)
+     </td>
+     <td>
+      查看 <strong><code>PREG_SPLIT_OFFSET_CAPTURE</code></strong> 的描述。
+     </td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    <tr id="constant.preg-split-no-empty">
+     <td>
+      <strong><code>PREG_SPLIT_NO_EMPTY</code></strong>
+      (<span class="type">int</span>)
+     </td>
+     <td>
+     这个 flag 告诉 <span class="function"><a href="function.preg-split.html" class="function">preg_split()</a></span> 仅返回非空部分。
+     </td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    <tr id="constant.preg-split-delim-capture">
+     <td>
+      <strong><code>PREG_SPLIT_DELIM_CAPTURE</code></strong>
+      (<span class="type">int</span>)
+     </td>
+     <td>
+      这个 flag 告诉 <span class="function"><a href="function.preg-split.html" class="function">preg_split()</a></span> 也捕获分隔符模式中带括号的表达式。
+     </td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    <tr id="constant.preg-split-offset-capture">
+     <td>
+      <strong><code>PREG_SPLIT_OFFSET_CAPTURE</code></strong>
+      (<span class="type">int</span>)
+     </td>
+     <td>
+      如果设置了此 flag，则对于每次发生的匹配，还将附带返回字符串偏移量。注意，这会改变返回数组中的值，
+      每个元素都是由匹配子串作为第 0 个元素，它相对目标字符串的偏移量作为第 1 个元素的数组。这个
+      flag 只能用于 <span class="function"><a href="function.preg-split.html" class="function">preg_split()</a></span>。
+     </td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    <tr id="constant.preg-unmatched-as-null">
+     <td>
+      <strong><code>PREG_UNMATCHED_AS_NULL</code></strong>
+      (<span class="type">int</span>)
+     </td>
+     <td>
+      此 flag 告诉 <span class="function"><a href="function.preg-match.html" class="function">preg_match()</a></span> 和 <span class="function"><a href="function.preg-match-all.html" class="function">preg_match_all()</a></span>
+      在 <var class="varname">$matches</var> 将包含的未匹配子模式作为 <strong><code>null</code></strong> 值。没有此
+      flag，未匹配的子模式将报告为空字符串，就像是空匹配一样。设置此 flag 可以区分这两种情况。
+     </td>
+     <td>7.2.0</td>
+    </tr>
+
+    <tr id="constant.preg-no-error">
+     <td>
+      <strong><code>PREG_NO_ERROR</code></strong>
+      (<span class="type">int</span>)
+     </td>
+     <td>
+     如果没有错误，则由 <span class="function"><a href="function.preg-last-error.html" class="function">preg_last_error()</a></span> 返回。
+     </td>
+     <td>5.2.0</td>
+    </tr>
+
+    <tr id="constant.preg-internal-error">
+     <td>
+      <strong><code>PREG_INTERNAL_ERROR</code></strong>
+      (<span class="type">int</span>)
+     </td>
+     <td>
+      如果有 PCRE 内部错误，则由 <span class="function"><a href="function.preg-last-error.html" class="function">preg_last_error()</a></span> 返回。
+     </td>
+     <td>5.2.0</td>
+    </tr>
+
+    <tr id="constant.preg-backtrack-limit-error">
+     <td>
+      <strong><code>PREG_BACKTRACK_LIMIT_ERROR</code></strong>
+      (<span class="type">int</span>)
+     </td>
+     <td>
+      如果超出了<a href="pcre.configuration.html#ini.pcre.backtrack-limit" class="link">回溯限制</a>，则由 <span class="function"><a href="function.preg-last-error.html" class="function">preg_last_error()</a></span> 返回。
+     </td>
+     <td>5.2.0</td>
+    </tr>
+
+    <tr id="constant.preg-recursion-limit-error">
+     <td>
+      <strong><code>PREG_RECURSION_LIMIT_ERROR</code></strong>
+      (<span class="type">int</span>)
+     </td>
+     <td>
+      如果超出了<a href="pcre.configuration.html#ini.pcre.recursion-limit" class="link">递归限制</a>，则由 <span class="function"><a href="function.preg-last-error.html" class="function">preg_last_error()</a></span> 返回。
+     </td>
+     <td>5.2.0</td>
+    </tr>
+
+    <tr id="constant.preg-bad-utf8-error">
+     <td>
+      <strong><code>PREG_BAD_UTF8_ERROR</code></strong>
+      (<span class="type">int</span>)
+     </td>
+     <td>
+      如果最后一个错误是由格式错误的 UTF-8 数据引起的（仅在 <a href="reference.pcre.pattern.modifiers.html" class="link">UTF-8
+      模式</a>下运行正则表达式时），则由 <span class="function"><a href="function.preg-last-error.html" class="function">preg_last_error()</a></span> 返回。
+     </td>
+     <td>5.2.0</td>
+    </tr>
+
+    <tr id="constant.preg-bad-utf8-offset-error">
+     <td>
+      <strong><code>PREG_BAD_UTF8_OFFSET_ERROR</code></strong>
+      (<span class="type">int</span>)
+     </td>
+     <td>
+      如果偏移量不对应可用的 UTF-8 开始码位（仅在 <a href="reference.pcre.pattern.modifiers.html" class="link">UTF-8
+      模式</a>下运行正则表达式时），则由 <span class="function"><a href="function.preg-last-error.html" class="function">preg_last_error()</a></span> 返回。
+     </td>
+     <td>5.3.0</td>
+    </tr>
+
+    <tr id="constant.preg-jit-stacklimit-error">
+     <td>
+      <strong><code>PREG_JIT_STACKLIMIT_ERROR</code></strong>
+      (<span class="type">int</span>)
+     </td>
+     <td>
+      当最后一个 PCRE 函数因 JIT 栈空间限制而失败，则由 <span class="function"><a href="function.preg-last-error.html" class="function">preg_last_error()</a></span> 返回。
+     </td>
+     <td>7.0.0</td>
+    </tr>
+
+    <tr id="constant.pcre-version">
+     <td>
+      <strong><code>PCRE_VERSION</code></strong>
+      (<span class="type">string</span>)
+     </td>
+     <td>
+      PCRE 版本号和发布日期（比如：“<code class="literal">7.0 18-Dec-2006</code>”）。
+     </td>
+     <td>5.2.4</td>
+    </tr>
+
+   </tbody>
+  
+ </table>
+
+</div>
+</div></div></body></html>

@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>返回 connection 相关的端口号</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.pg-ping.html">« pg_ping</a></li>
+      <li style="float: right;"><a href="function.pg-prepare.html">pg_prepare »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.pgsql.html">PostgreSQL 函数</a></li>
+    <li>返回 connection 相关的端口号</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.pg-port" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">pg_port</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">pg_port</span> &mdash; <span class="dc-title">
+   返回 connection 相关的端口号
+  </span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.pg-port-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>pg_port</strong></span>(<span class="methodparam"><span class="type">?</span><span class="type"><span class="type"><a href="class.pgsql-connection.html" class="type PgSql\Connection">PgSql\Connection</a></span><span class="type"></span></span> <code class="parameter">$connection</code><span class="initializer"> = <strong><code>null</code></strong></span></span>): <span class="type">string</span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>pg_port()</strong></span> 返回连接指定 PostgreSQL <code class="parameter">connection</code> 实例的端口号。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.pg-port-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">connection</code></dt>
+
+     <dd>
+
+      <p class="para">An <span class="classname"><a href="class.pgsql-connection.html" class="classname">PgSql\Connection</a></span> instance.
+When <code class="parameter">connection</code> is <strong><code>null</code></strong>, the default connection is used.
+The default connection is the last connection made by <span class="function"><a href="function.pg-connect.html" class="function">pg_connect()</a></span>
+or <span class="function"><a href="function.pg-pconnect.html" class="function">pg_pconnect()</a></span>.
+<div class="warning"><strong class="warning">警告</strong><p class="simpara">As of PHP 8.1.0, using the default connection is deprecated.</p></div></p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.pg-port-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   <span class="type">string</span>，包含 <code class="parameter">connection</code> 连接到的数据库服务器的端口号，错误时为空字符串。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.pg-port-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+ <td>8.1.0</td>
+ <td>
+  现在 <code class="parameter">connection</code> 参数接受 <span class="classname"><a href="class.pgsql-connection.html" class="classname">PgSql\Connection</a></span>
+  实例，之前接受 <a href="language.types.resource.html" class="link">resource</a>。
+ </td>
+</tr>
+
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       <code class="parameter">connection</code> 现在可为 null。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.pg-port-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 <span class="function"><strong>pg_port()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$pgsql_conn </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">"dbname=mark host=localhost"</span><span style="color: #007700">);<br /><br />if (</span><span style="color: #0000BB">$pgsql_conn</span><span style="color: #007700">) {<br />   print </span><span style="color: #DD0000">"Successfully connected to port: " </span><span style="color: #007700">. </span><span style="color: #0000BB">pg_port</span><span style="color: #007700">(</span><span style="color: #0000BB">$pgsql_conn</span><span style="color: #007700">) . </span><span style="color: #DD0000">"&lt;br/&gt;\n"</span><span style="color: #007700">;<br />} else {<br />   print </span><span style="color: #0000BB">pg_last_error</span><span style="color: #007700">(</span><span style="color: #0000BB">$pgsql_conn</span><span style="color: #007700">);<br />   exit;<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+</div></div></div></body></html>

@@ -1,0 +1,278 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>设置 cURL 并行选项</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.curl-multi-select.html">« curl_multi_select</a></li>
+      <li style="float: right;"><a href="function.curl-multi-strerror.html">curl_multi_strerror »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.curl.html">cURL 函数</a></li>
+    <li>设置 cURL 并行选项</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.curl-multi-setopt" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">curl_multi_setopt</h1>
+  <p class="verinfo">(PHP 5 &gt;= 5.5.0, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">curl_multi_setopt</span> &mdash; <span class="dc-title">设置 cURL 并行选项</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.curl-multi-setopt-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>curl_multi_setopt</strong></span>(<span class="methodparam"><span class="type"><a href="class.curlmultihandle.html" class="type CurlMultiHandle">CurlMultiHandle</a></span> <code class="parameter">$multi_handle</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$option</code></span>, <span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$value</code></span>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   为给定的 cURL 并行句柄设置选项。
+  </p>
+
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.curl-multi-setopt-parameters">
+  <h3 class="title">参数</h3>
+  <dl>
+   <dt>
+<code class="parameter">multi_handle</code>
+</dt>
+<dd>
+<p class="para">由 
+<span class="function"><a href="function.curl-multi-init.html" class="function">curl_multi_init()</a></span> 返回的 cURL 多个句柄。</p></dd>
+
+   
+    <dt>
+<code class="parameter">option</code></dt>
+
+    <dd>
+
+     <p class="para">
+      常量 <strong><code>CURLMOPT_*</code></strong> 之一。
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">value</code></dt>
+
+    <dd>
+
+      <p class="para">
+       将要设置给 <code class="parameter">option</code> 的值。
+      </p>
+      <p class="para">
+       在 <code class="parameter">option</code> 参数为下列值时 <code class="parameter">value</code> 需要为 <span class="type">int</span> 类型：
+       <table class="doctable informaltable">
+        
+         <thead>
+          <tr>
+           <th>选项</th>
+           <th>设置 <code class="parameter">value</code> 为</th>
+          </tr>
+
+         </thead>
+
+         <tbody class="tbody">
+          <tr>
+           <td style="vertical-align: top;"><strong><code>CURLMOPT_PIPELINING</code></strong></td>
+           <td style="vertical-align: top;">
+            传递 1 启用或传递 0 禁用。在多句柄上启用管道将使其尝试对使用此句柄的传输尽可能执行 HTTP
+            管道操作。这意味着如果添加的第二个请求可以使用已有连接，则第二个请求将在同一连接上使用“管道”。
+            从 cURL 7.43.0 开始，该值是位掩码，如果可能，您还可以传递 2 以尝试在已有的 HTTP/2 连接上复用多路新传输。传递
+            3 指示 cURL 请求彼此独立的管道和多路复用。
+            从 cURL 7.62.0 开始，设置管道位没有效果。除了整数文字，还可以使用 CURLPIPE_* 常量（如果可用）。
+           </td>
+          </tr>
+
+          <tr>
+           <td style="vertical-align: top;"><strong><code>CURLMOPT_MAXCONNECTS</code></strong></td>
+           <td style="vertical-align: top;">
+            传递数字，该数字将用作 libcurl 可以缓存的同时打开的最大连接数。默认情况下，数量将放大为适应 <span class="function"><a href="function.curl-multi-add-handle.html" class="function">curl_multi_add_handle()</a></span>
+            添加的句柄数量的四倍。当缓存已满时，curl 会关闭缓存中最早的一个，以防止打开的连接数增加。
+           </td>
+          </tr>
+
+          <tr>
+           <td style="vertical-align: top;"><strong><code>CURLMOPT_CHUNK_LENGTH_PENALTY_SIZE</code></strong></td>
+           <td style="vertical-align: top;">
+            传递数字，以字节为单位指定管道的块（chunk）长度阈值。
+           </td>
+          </tr>
+
+          <tr>
+           <td style="vertical-align: top;"><strong><code>CURLMOPT_CONTENT_LENGTH_PENALTY_SIZE</code></strong></td>
+           <td style="vertical-align: top;">
+            Pass a number that specifies the size threshold for pipelining
+            penalty in bytes.
+           </td>
+          </tr>
+
+          <tr>
+           <td style="vertical-align: top;"><strong><code>CURLMOPT_MAX_CONCURRENT_STREAMS</code></strong></td>
+           <td style="vertical-align: top;">
+            The set number will be used as the maximum number of concurrent streams for a connections that cURL
+            should support on connections done using HTTP/2. Valid values range from
+            <code class="literal">1</code> to <code class="literal">2147483647</code> (<code class="literal">2^31 - 1</code>).
+            The value passed here would be honored based on other system resources properties.
+            Default is <code class="literal">100</code>.
+           </td>
+          </tr>
+
+          <tr>
+           <td style="vertical-align: top;"><strong><code>CURLMOPT_MAX_HOST_CONNECTIONS</code></strong></td>
+           <td style="vertical-align: top;">
+            传递一个数字，指定连接单个主机的最大数量。
+           </td>
+          </tr>
+
+          <tr>
+           <td style="vertical-align: top;"><strong><code>CURLMOPT_MAX_PIPELINE_LENGTH</code></strong></td>
+           <td style="vertical-align: top;">
+            传递数字，指定管道中的最大请求数。
+           </td>
+          </tr>
+
+          <tr>
+           <td style="vertical-align: top;"><strong><code>CURLMOPT_MAX_TOTAL_CONNECTIONS</code></strong></td>
+           <td style="vertical-align: top;">
+            传递数字，指定同时打开连接的最大数量。
+           </td>
+          </tr>
+
+          <tr>
+           <td style="vertical-align: top;"><strong><code>CURLMOPT_PUSHFUNCTION</code></strong></td>
+           <td style="vertical-align: top;">
+            传递 <span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span> 以注册处理服务器推送且应具有以下签名：
+            <div class="methodsynopsis dc-description">
+             <span class="methodname"><span class="replaceable">pushfunction</span></span>(<span class="methodparam"><span class="type">resource</span> <code class="parameter">$parent_ch</code></span>, <span class="methodparam"><span class="type">resource</span> <code class="parameter">$pushed_ch</code></span>, <span class="methodparam"><span class="type">array</span> <code class="parameter">$headers</code></span>): <span class="type">int</span></div>
+
+            <dl>
+             
+              <dt>
+<code class="parameter">parent_ch</code></dt>
+
+              <dd>
+
+               <p class="para">
+                父级 cURL 句柄（客户端发出的请求）。
+               </p>
+              </dd>
+
+             
+             
+              <dt>
+<code class="parameter">pushed_ch</code></dt>
+
+              <dd>
+
+               <p class="para">
+                推送请求的新 cURL 句柄。
+               </p>
+              </dd>
+
+             
+             
+              <dt>
+<code class="parameter">headers</code></dt>
+
+              <dd>
+
+               <p class="para">
+                The push promise headers.
+               </p>
+              </dd>
+
+             
+            </dl>
+
+            推送函数如果可以处理推送应该返回 <strong><code>CURL_PUSH_OK</code></strong>，或者返回 <strong><code>CURL_PUSH_DENY</code></strong> 拒绝。
+           </td>
+          </tr>
+
+         </tbody>
+        
+       </table>
+
+      </p>
+    </dd>
+
+   
+  </dl>
+
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.curl-multi-setopt-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   成功时返回 <strong><code>true</code></strong>， 或者在失败时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.curl-multi-setopt-changelog">
+  <h3 class="title">更新日志</h3>
+  <p class="para">
+   <table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>8.2.0</td>
+       <td>
+        引入 <strong><code>CURLMOPT_MAX_CONCURRENT_STREAMS</code></strong>。
+       </td>
+      </tr>
+
+      <tr>
+ <td>8.0.0</td>
+ <td>
+  <code class="parameter">multi_handle</code> expects a <span class="classname"><a href="class.curlmultihandle.html" class="classname">CurlMultiHandle</a></span>
+  instance now; previously, a <span class="type">resource</span> was expected.
+ </td>
+</tr>
+
+      <tr>
+       <td>7.1.0</td>
+       <td>
+        引入 <strong><code>CURLMOPT_PUSHFUNCTION</code></strong>。
+       </td>
+      </tr>
+
+      <tr>
+       <td>7.0.7</td>
+       <td>
+        引入 <strong><code>CURLMOPT_CHUNK_LENGTH_PENALTY_SIZE</code></strong>、<strong><code>CURLMOPT_CONTENT_LENGTH_PENALTY_SIZE</code></strong>、<strong><code>CURLMOPT_MAX_HOST_CONNECTIONS</code></strong>、<strong><code>CURLMOPT_MAX_PIPELINE_LENGTH</code></strong>
+        和 <strong><code>CURLMOPT_MAX_TOTAL_CONNECTIONS</code></strong>。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

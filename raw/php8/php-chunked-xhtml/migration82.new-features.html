@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>新功能</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="migration82.html">« 从 PHP 8.1.x 移植到 PHP 8.2.x</a></li>
+      <li style="float: right;"><a href="migration82.new-functions.html">新函数 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="migration82.html">从 PHP 8.1.x 移植到 PHP 8.2.x</a></li>
+    <li>新功能</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="migration82.new-features" class="sect1">
+ <h2 class="title">新功能</h2>
+
+ <div class="sect2" id="migration82.new-features.core">
+  <h3 class="title">PHP 核心</h3>
+
+  <div class="sect3" id="migration82.new-features.core.sensitiveparameter">
+   <h4 class="title">SensitiveParameter 属性</h4>
+
+   <p class="para">
+    新增 <code class="code">#[\SensitiveParameter]</code> 属性用于编辑回溯中的敏感数据。
+    
+   </p>
+  </div>
+
+  <div class="sect3" id="migration82.new-features.core.error-log-mode-ini">
+   <h4 class="title">error_log_mode INI 指令</h4>
+
+   <p class="para">
+    新增<a href="errorfunc.configuration.html#ini.error-log-mode" class="link">error_log_mode</a> INI
+    指令，允许设置错误日志的权限。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration82.new-features.core.enums-property-constant-expression">
+   <h4 class="title">常量表达式中的枚举属性</h4>
+
+   <p class="para">
+    现在可以在常量表达式中获取<a href="language.enumerations.html" class="link">枚举</a>属性。
+    
+   </p>
+  </div>
+
+  <div class="sect3" id="migration82.new-features.core.type-system">
+   <h4 class="title">类型系统提升</h4>
+
+   <p class="para">
+    现在可以使用 <span class="type">null</span> 和 <span class="type"><span class="type false">false</span></span> 作为独立类型。
+    
+   </p>
+
+   <p class="para">
+    新增 <span class="type"><span class="type true">true</span></span> 类型。
+    
+   </p>
+
+   <p class="para">
+    现在可以组合交集和联合类型。类型需要用 <abbr title="Disjunctive Normal Form">DNF</abbr> 编写。
+    
+   </p>
+  </div>
+
+  <div class="sect3" id="migration82.new-features.core.constant-in-traits">
+   <h4 class="title">Trait 中常量</h4>
+
+   <p class="para">
+    现在可以在 trait 中定义常量。
+    
+   </p>
+   
+  </div>
+
+  <div class="sect3" id="migration82.new-features.core.readonly-classes">
+   <h4 class="title">只读类</h4>
+
+   <p class="para">
+    新增对<a href="language.oop5.basic.html#language.oop5.basic.class.readonly" class="link">只读类</a>的支持。
+    
+   </p>
+  </div>
+
+ </div>
+
+ <div class="sect2" id="migration82.new-features.curl">
+  <h3 class="title">cURL</h3>
+
+  <p class="para">
+   新增 <strong><code>CURLINFO_EFFECTIVE_METHOD</code></strong> 选项，在 <span class="function"><a href="function.curl-getinfo.html" class="function">curl_getinfo()</a></span>
+   返回值中返回有效的 <abbr title="Hypertext Transfer Protocol">HTTP</abbr> 方法。
+  </p>
+
+  <p class="para">
+   发布了从 libcurl 7.62 到 7.80 的<a href="migration82.constants.html#migration82.constants.curl" class="link">多个新常量</a>。
+  </p>
+
+  <p class="para">
+   新增 <span class="function"><a href="function.curl_upkeep.html" class="function">curl_upkeep()</a></span> 函数来执行任何连接维护检查。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration82.new-features.dba">
+  <h3 class="title">DBA</h3>
+
+  <p class="para">
+   LMDB 驱动程序现在接受 <strong><code>DBA_LMDB_USE_SUB_DIR</code></strong> 或者
+   <strong><code>DBA_LMDB_NO_SUB_DIR</code></strong> flag 来确定在创建数据库文件时是否应该创建子目录。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration82.new-features.oci8">
+  <h3 class="title">OCI8</h3>
+
+  <p class="para">
+   添加 <a href="oci8.configuration.html#ini.oci8.prefetch-lob-size" class="link">oci8.prefetch_lob_size</a> INI 指令和
+   <span class="function"><a href="function.oci-set-prefetch-lob.html" class="function">oci_set_prefetch_lob()</a></span> 函数，当获取 LOBS 时，通过减少 PHP 与 Oracle
+   数据库之间的往返次数来调整 LOB 查询性能。在 Oracel 数据库 12.2 及其更高版本可以使用。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration82.new-features.openssl">
+  <h3 class="title">OpenSSL</h3>
+
+  <p class="para">
+   新增对 chacha20-poly1305 算法的 AEAD 支持。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration82.new-features.odbc">
+  <h3 class="title">ODBC</h3>
+
+  <p class="para">
+   新增 <span class="function"><a href="function.odbc-connection-string-is-quoted.html" class="function">odbc_connection_string_is_quoted()</a></span>、<span class="function"><a href="function.odbc-connection-string-should-quote.html" class="function">odbc_connection_string_should_quote()</a></span>
+   和 <span class="function"><a href="function.odbc-connection-string-quote.html" class="function">odbc_connection_string_quote()</a></span> 函数。这些主要在 ODBC 和 PDO_ODBC
+   扩展中内部使用，但为了更易于单元测试且用户应用程序和库自己执行引用而在用户空间公开。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration82.new-features.pcre">
+  <h3 class="title">PCRE</h3>
+
+  <p class="para">
+   添加对 <code class="literal">n</code>（NO_AUTO_CAPTURE）修饰符的支持，这使得不会捕获简单的 <code class="code">(xyz)</code> 组。仅会捕获名为
+   <code class="code">(?&lt;name&gt;xyz)</code> 的组。这只影响捕获哪些分组，但仍然可以使用编号的子模式引用，匹配结果数组中仍然包含编号的结果。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration82.new-features.random">
+  <h3 class="title">Random</h3>
+
+  <p class="para">
+   这是新扩展，组织和整合与随机数生成器相关的现有实现。可以使用新且更好的 RNG，消除了作用域（scope）问题。
+   
+   
+  </p>
+ </div>
+
+</div></div></div></body></html>

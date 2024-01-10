@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>返回将对象属性混在一起的数组</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.get-declared-traits.html">« get_declared_traits</a></li>
+      <li style="float: right;"><a href="function.get-object-vars.html">get_object_vars »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.classobj.html">类/对象 函数</a></li>
+    <li>返回将对象属性混在一起的数组</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.get-mangled-object-vars" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">get_mangled_object_vars</h1>
+  <p class="verinfo">(PHP 7 &gt;= 7.4.0, PHP 8)</p><p class="refpurpose"><span class="refname">get_mangled_object_vars</span> &mdash; <span class="dc-title">返回将对象属性混在一起的数组</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.get-mangled-object-vars-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>get_mangled_object_vars</strong></span>(<span class="methodparam"><span class="type">object</span> <code class="parameter">$object</code></span>): <span class="type">array</span></div>
+
+  <p class="para rdfs-comment">
+   返回 <span class="type">array</span>，其元素是 <code class="parameter">object</code> 的属性。key 是成员变量名，但有几个显著的异常：private
+   变量的变量名前加上类名，protected 变量的变量名前面加上 <code class="literal">*</code> 号。这些前置值在两边都带有
+   <code class="literal">NUL</code> 字节。未初始化的<a href="language.oop5.properties.html#language.oop5.properties.typed-properties" class="link">类型属性</a>会默默丢弃。
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 parameters" id="refsect1-function.get-mangled-object-vars-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">object</code></dt>
+
+     <dd>
+
+      <p class="para">
+       对象实例。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 returnvalues" id="refsect1-function.get-mangled-object-vars-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回包含 <code class="parameter">object</code> 的所有属性的 <span class="type">array</span>，无论其可见性如何。
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 examples" id="refsect1-function.get-mangled-object-vars-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 <span class="function"><strong>get_mangled_object_vars()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">class </span><span style="color: #0000BB">A<br /></span><span style="color: #007700">{<br />    public </span><span style="color: #0000BB">$public </span><span style="color: #007700">= </span><span style="color: #0000BB">1</span><span style="color: #007700">;<br /><br />    protected </span><span style="color: #0000BB">$protected </span><span style="color: #007700">= </span><span style="color: #0000BB">2</span><span style="color: #007700">;<br /><br />    private </span><span style="color: #0000BB">$private </span><span style="color: #007700">= </span><span style="color: #0000BB">3</span><span style="color: #007700">;<br />}<br /><br />class </span><span style="color: #0000BB">B </span><span style="color: #007700">extends </span><span style="color: #0000BB">A<br /></span><span style="color: #007700">{<br />    private </span><span style="color: #0000BB">$private </span><span style="color: #007700">= </span><span style="color: #0000BB">4</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">$object </span><span style="color: #007700">= new </span><span style="color: #0000BB">B</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$object</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">dynamic </span><span style="color: #007700">= </span><span style="color: #0000BB">5</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$object</span><span style="color: #007700">-&gt;{</span><span style="color: #DD0000">'6'</span><span style="color: #007700">} = </span><span style="color: #0000BB">6</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">get_mangled_object_vars</span><span style="color: #007700">(</span><span style="color: #0000BB">$object</span><span style="color: #007700">));<br /><br />class </span><span style="color: #0000BB">AO </span><span style="color: #007700">extends </span><span style="color: #0000BB">ArrayObject<br /></span><span style="color: #007700">{<br />    private </span><span style="color: #0000BB">$private </span><span style="color: #007700">= </span><span style="color: #0000BB">1</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">$arrayObject </span><span style="color: #007700">= new </span><span style="color: #0000BB">AO</span><span style="color: #007700">([</span><span style="color: #DD0000">'x' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'y'</span><span style="color: #007700">]);<br /></span><span style="color: #0000BB">$arrayObject</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">dynamic </span><span style="color: #007700">= </span><span style="color: #0000BB">2</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">get_mangled_object_vars</span><span style="color: #007700">(</span><span style="color: #0000BB">$arrayObject</span><span style="color: #007700">));</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+array(6) {
+  [&quot;Bprivate&quot;]=&gt;
+  int(4)
+  [&quot;public&quot;]=&gt;
+  int(1)
+  [&quot;*protected&quot;]=&gt;
+  int(2)
+  [&quot;Aprivate&quot;]=&gt;
+  int(3)
+  [&quot;dynamic&quot;]=&gt;
+  int(5)
+  [6]=&gt;
+  int(6)
+}
+array(2) {
+  [&quot;AOprivate&quot;]=&gt;
+  int(1)
+  [&quot;dynamic&quot;]=&gt;
+  int(2)
+}
+
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 seealso" id="refsect1-function.get-mangled-object-vars-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.get-class-vars.html" class="function" rel="rdfs-seeAlso">get_class_vars()</a> - 获取类的默认属性</span></li>
+    <li class="member"><span class="function"><a href="function.get-object-vars.html" class="function" rel="rdfs-seeAlso">get_object_vars()</a> - 获取指定对象的属性</span></li>
+   </ul>
+  </p>
+ </div>
+
+ 
+</div></div></div></body></html>

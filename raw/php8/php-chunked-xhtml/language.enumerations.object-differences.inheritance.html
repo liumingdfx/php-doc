@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>为什么枚举不可扩展</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="language.enumerations.serialization.html">« 序列化</a></li>
+      <li style="float: right;"><a href="language.enumerations.examples.html">示例 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="language.enumerations.html">枚举</a></li>
+    <li>为什么枚举不可扩展</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="language.enumerations.object-differences.inheritance" class="sect1">
+
+  <h2 class="title">为什么枚举不可扩展</h2>
+
+  <p class="simpara">
+   类在方法有契约：
+  </p>
+
+  <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">class </span><span style="color: #0000BB">A </span><span style="color: #007700">{}<br />class </span><span style="color: #0000BB">B </span><span style="color: #007700">extends </span><span style="color: #0000BB">A </span><span style="color: #007700">{}<br /><br />function </span><span style="color: #0000BB">foo</span><span style="color: #007700">(</span><span style="color: #0000BB">A $a</span><span style="color: #007700">) {}<br /><br />function </span><span style="color: #0000BB">bar</span><span style="color: #007700">(</span><span style="color: #0000BB">B $b</span><span style="color: #007700">) {<br />    </span><span style="color: #0000BB">foo</span><span style="color: #007700">(</span><span style="color: #0000BB">$b</span><span style="color: #007700">);<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+ </div>
+
+
+  <p class="simpara">
+   这段代码类型安全，因为 B 遵循 A 的契约，并通过协变/逆变的逻辑，将会保留任何对方法的期望，除了异常。
+  </p>
+
+  <p class="simpara">
+   枚举在其选项上有契约，而不是方法：
+  </p>
+
+  <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">enum </span><span style="color: #0000BB">ErrorCode </span><span style="color: #007700">{<br />    case </span><span style="color: #0000BB">SOMETHING_BROKE</span><span style="color: #007700">;<br />}<br /><br />function </span><span style="color: #0000BB">quux</span><span style="color: #007700">(</span><span style="color: #0000BB">ErrorCode $errorCode</span><span style="color: #007700">)<br />{<br />    </span><span style="color: #FF8000">// When written, this code appears to cover all cases<br />    </span><span style="color: #007700">match (</span><span style="color: #0000BB">$errorCode</span><span style="color: #007700">) {<br />        </span><span style="color: #0000BB">ErrorCode</span><span style="color: #007700">::</span><span style="color: #0000BB">SOMETHING_BROKE </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">true</span><span style="color: #007700">,<br />    }<br />}<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+  </div>
+
+
+  <p class="simpara">
+   在函数 <code class="code">quux</code> 中，<a href="control-structures.match.html" class="link">match</a> 语句可以进行静态分析，以涵盖 ErrorCode 中的所有情况。
+  </p>
+
+  <p class="simpara">
+   但是想一下，如果允许扩展枚举：
+  </p>
+
+
+  <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// Thought experiment code where enums are not final.<br />// Note, this won't actually work in PHP.<br /></span><span style="color: #007700">enum </span><span style="color: #0000BB">MoreErrorCode </span><span style="color: #007700">extends </span><span style="color: #0000BB">ErrorCode </span><span style="color: #007700">{<br />    case </span><span style="color: #0000BB">PEBKAC</span><span style="color: #007700">;<br />}<br /><br />function </span><span style="color: #0000BB">fot</span><span style="color: #007700">(</span><span style="color: #0000BB">MoreErrorCode $errorCode</span><span style="color: #007700">) {<br />    </span><span style="color: #0000BB">quux</span><span style="color: #007700">(</span><span style="color: #0000BB">$errorCode</span><span style="color: #007700">);<br />}<br /><br /></span><span style="color: #0000BB">fot</span><span style="color: #007700">(</span><span style="color: #0000BB">MoreErrorCode</span><span style="color: #007700">::</span><span style="color: #0000BB">PEBKAC</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+ </div>
+
+
+  <p class="simpara">
+   根据正常的继承规则，继承另一个类的类将通过类型检查。
+  </p>
+
+  <p class="simpara">
+   问题在于 <code class="code">quux()</code> 中的 <a href="control-structures.match.html" class="link">match</a> 语句不再涵盖所有情况。因为它不知道 <code class="code">MoreErrorCode::PEBKAC</code>，所以匹配语句会抛出异常。
+  </p>
+
+  <p class="simpara">
+   因此，枚举是 final，不能扩展。
+  </p>
+ </div></div></div></body></html>

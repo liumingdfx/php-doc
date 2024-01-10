@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>运行时配置</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="filter.installation.html">« 安装</a></li>
+      <li style="float: right;"><a href="filter.resources.html">资源类型 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="filter.setup.html">安装/配置</a></li>
+    <li>运行时配置</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="filter.configuration" class="section">
+ <h2 class="title">运行时配置</h2>
+ <p class="simpara">
+这些函数的行为受 <var class="filename">php.ini</var> 中的设置影响。
+</p>
+ <p class="para">
+  <table class="doctable table">
+   <caption><strong>过滤器配置项</strong></caption>
+   
+    <thead>
+     <tr>
+      <th>名字</th>
+      <th>默认</th>
+      <th>可修改范围</th>
+      <th>更新日志</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td><a href="filter.configuration.html#ini.filter.default" class="link">filter.default</a></td>
+      <td>&quot;unsafe_raw&quot;</td>
+      <td>PHP_INI_PERDIR</td>
+      <td>自 PHP 8.1.0 起弃用。</td>
+     </tr>
+
+     <tr>
+      <td><a href="filter.configuration.html#ini.filter.default-flags" class="link">filter.default_flags</a></td>
+      <td>NULL</td>
+      <td>PHP_INI_PERDIR</td>
+      <td class="empty">&nbsp;</td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+  有关 PHP_INI_* 样式的更多详情与定义，见 <a href="configuration.changes.modes.html" class="xref">配置可被设定范围</a>。
+</p>
+
+<p class="para">这是配置指令的简短说明。</p>
+
+<p class="para">
+ <dl>
+  
+   <dt id="ini.filter.default">
+    <code class="parameter">filter.default</code>
+    <span class="type">string</span>
+   </dt>
+
+   <dd>
+
+    <p class="para">
+     通过此过滤器过滤所有
+     <var class="varname"><a href="reserved.variables.get.html" class="classname">$_GET</a></var>、<var class="varname"><a href="reserved.variables.post.html" class="classname">$_POST</a></var>、<var class="varname"><a href="reserved.variables.cookies.html" class="classname">$_COOKIE</a></var>、<var class="varname"><a href="reserved.variables.request.html" class="classname">$_REQUEST</a></var>
+     和 <var class="varname"><a href="reserved.variables.server.html" class="classname">$_SERVER</a></var>。通过 <span class="function"><a href="function.filter-input.html" class="function">filter_input()</a></span> 访问原始数据。
+    </p>
+    <p class="para">
+     默认接受希望使用的过滤器名称。请查看现有<a href="filter.filters.html" class="link">过滤器列表</a>以获取过滤器名称的列表。
+    </p>
+    <blockquote class="note"><p><strong class="note">注意</strong>: 
+      <p class="para">
+        要小心默认过滤器的默认 flag。应该明确将其设置为想要的值。例如，要将默认过滤器配置为与
+        <span class="function"><a href="function.htmlspecialchars.html" class="function">htmlspecialchars()</a></span> 完全相同的行为，需要将默认 flag 设置为 0，如下所示。
+      </p>
+      <p class="para">
+        <div class="example" id="">
+          <p><strong>示例 #1 配置默认过滤器的表现像 htmlspecialchars</strong></p>
+          <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">filter.default = full_special_chars<br />filter.default_flags = 0</span></code></div>
+          </div>
+
+        </div>
+      </p>
+   </p></blockquote>
+   </dd>
+
+  
+  
+  
+   <dt id="ini.filter.default-flags">
+    <code class="parameter">filter.default_flags</code>
+    <span class="type">int</span>
+   </dt>
+
+   <dd>
+
+    <p class="para">
+     设置默认过滤器时要应用的默认 flag。出于向后兼容性的原因，默认设置为 <strong><code>FILTER_FLAG_NO_ENCODE_QUOTES</code></strong>。查看
+     <a href="filter.filters.flags.html" class="link">flag 列表</a>以获取所有 flag 名称的列表。
+    </p>
+   </dd>
+
+  
+  
+ </dl>
+
+ </p>
+</div></div></div></body></html>

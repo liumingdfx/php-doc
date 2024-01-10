@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Installing the MongoDB PHP Driver with PECL</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="mongodb.installation.html">« 安装</a></li>
+      <li style="float: right;"><a href="mongodb.installation.homebrew.html">Installing the MongoDB PHP Driver on macOS with Homebrew »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="mongodb.installation.html">安装</a></li>
+    <li>Installing the MongoDB PHP Driver with PECL</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="mongodb.installation.pecl" class="section">
+  <h2 class="title">Installing the MongoDB PHP Driver with PECL</h2>
+
+  <p class="para">
+   安装此 PECL 扩展相关的信息可在手册中标题为
+<a href="install.pecl.html" class="link">PECL
+扩展的安装</a>章节中找到。更多信息如新的发行版本、下载、源文件、
+维护人员信息及变更日志等，都在此处：
+   <a href="https://pecl.php.net/package/mongodb" class="link external">&raquo;&nbsp;https://pecl.php.net/package/mongodb</a>
+  </p>
+
+  <p class="para">
+   Linux, Unix, and macOS users may run the following command to install the
+   driver:
+   <div class="example-contents">
+<div class="shellcode"><pre class="shellcode">$ sudo pecl install mongodb</pre>
+</div>
+   </div>
+
+  </p>
+
+  <p class="para">
+   On systems with multiple version of PHP installed (e.g. macOS default,
+   Homebrew, <a href="https://www.apachefriends.org/" class="link external">&raquo;&nbsp;XAMPP</a>), each version of PHP
+   will have its own <a href="install.pecl.html" class="link">pecl</a>
+   command and <var class="filename">php.ini</var> file(s). Additionally, each PHP environments (e.g.
+   CLI, web) may use separate <var class="filename">php.ini</var> files.
+  </p>
+
+  <p class="para">
+   As of driver version 1.17.0, PECL will prompt for various
+   <code class="literal">configure</code> options. To install the driver with default
+   options in a non-interactive script, empty string input may be piped to
+   <code class="literal">pecl install</code> using the <code class="literal">yes</code> command:
+   <div class="example-contents">
+<div class="shellcode"><pre class="shellcode">$ yes &#039;&#039; | sudo pecl install mongodb</pre>
+</div>
+   </div>
+
+  </p>
+
+  <p class="para">
+   A complete list of supported <code class="literal">configure</code> options can be
+   found in the <code class="literal">package.xml</code> file included in the PECL
+   package. To install the driver with specific <code class="literal">configure</code>
+   options in a non-interactive script, the
+   <code class="literal">--configureoptions</code> option for
+   <code class="literal">pecl install</code> may be used:
+   <div class="example-contents">
+<div class="shellcode"><pre class="shellcode">$ sudo pecl install --configureoptions=&#039;with-mongodb-system-libs=&quot;yes&quot; enable-mongodb-developer-flags=&quot;no&quot;&#039; mongodb</pre>
+</div>
+   </div>
+
+  </p>
+
+  <p class="para">
+   By default, installing the driver via PECL will use bundled versions of
+   <a href="https://github.com/mongodb/mongo-c-driver/tree/master/src/libbson" class="link external">&raquo;&nbsp;libbson</a>,
+   <a href="https://github.com/mongodb/mongo-c-driver" class="link external">&raquo;&nbsp;libmongoc</a>, and
+   <a href="https://github.com/mongodb/libmongocrypt" class="link external">&raquo;&nbsp;libmongocrypt</a> and attempt to
+   automatically configure them.
+  </p>
+
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <span class="simpara">
+    If the build process fails to find an SSL library, check that the
+    development packages (e.g. <code class="literal">libssl-dev</code>) and
+    <a href="https://en.wikipedia.org/wiki/Pkg-config" class="link external">&raquo;&nbsp;pkg-config</a> are both
+    installed. If that does not resolve the problem, consider using the
+    <a href="mongodb.installation.manual.html" class="link">manual installation</a>
+    process.
+   </span>
+  </p></blockquote>
+
+  <p class="para">
+   Finally, add the following line to the <var class="filename">php.ini</var> file for each environment
+   that will need to use the driver:
+   <div class="example-contents">
+<div class="inicode"><pre class="inicode">extension=mongodb.so</pre>
+</div>
+   </div>
+
+  </p>
+ </div></div></div></body></html>

@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>画弧线</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.imageantialias.html">« imageantialias</a></li>
+      <li style="float: right;"><a href="function.imageavif.html">imageavif »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.image.html">GD 和图像处理 函数</a></li>
+    <li>画弧线</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.imagearc" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">imagearc</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">imagearc</span> &mdash; <span class="dc-title">画弧线</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.imagearc-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>imagearc</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><a href="class.gdimage.html" class="type GdImage">GdImage</a></span> <code class="parameter">$image</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$center_x</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$center_y</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$width</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$height</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$start_angle</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$end_angle</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$color</code></span><br>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>imagearc()</strong></span> 绘制以指定坐标为中心的弧线。
+  </p>
+ </div>
+
+ <div class="refsect1 parameters" id="refsect1-function.imagearc-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    <dt>
+
+<code class="parameter">image</code></dt>
+<dd>
+<p class="para">由图象创建函数(例如<span class="function"><a href="function.imagecreatetruecolor.html" class="function">imagecreatetruecolor()</a></span>)返回的 
+<span class="classname"><a href="class.gdimage.html" class="classname">GdImage</a></span> 对象。</p></dd>
+
+    
+     <dt>
+<code class="parameter">center_x</code></dt>
+
+     <dd>
+
+      <p class="para">
+       中心的 x 坐标。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">center_y</code></dt>
+
+     <dd>
+
+      <p class="para">
+       中心的 y 坐标。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">width</code></dt>
+
+     <dd>
+
+      <p class="para">
+       弧宽。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">height</code></dt>
+
+     <dd>
+
+      <p class="para">
+       弧高。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">start_angle</code></dt>
+
+     <dd>
+
+      <p class="para">
+       弧线起始角度，以度为单位。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">end_angle</code></dt>
+
+     <dd>
+
+      <p class="para">
+       弧线结束角度，以度为单位。0° 位于三点钟位置，顺时针绘制弧线。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">color</code></dt>
+
+     <dd>
+
+      <p class="para">
+       颜色标识符使用 <span class="function"><a href="function.imagecolorallocate.html" class="function">imagecolorallocate()</a></span> 创建。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+ <div class="refsect1 returnvalues" id="refsect1-function.imagearc-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   成功时返回 <strong><code>true</code></strong>， 或者在失败时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.imagearc-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+ <td>8.0.0</td>
+ <td>
+  <code class="parameter">image</code> 现在需要 <span class="classname"><a href="class.gdimage.html" class="classname">GdImage</a></span> 实例；之前需要有效的 <code class="literal">gd</code> <span class="type">resource</span>。
+ </td>
+</tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.imagearc-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 使用 <span class="function"><strong>imagearc()</strong></span> 画圆</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #FF8000">// 创建 200*200 图像<br /></span><span style="color: #0000BB">$img </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecreatetruecolor</span><span style="color: #007700">(</span><span style="color: #0000BB">200</span><span style="color: #007700">, </span><span style="color: #0000BB">200</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 分配一些颜色<br /></span><span style="color: #0000BB">$white </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$img</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$red   </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$img</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">,   </span><span style="color: #0000BB">0</span><span style="color: #007700">,   </span><span style="color: #0000BB">0</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$green </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$img</span><span style="color: #007700">,   </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">,   </span><span style="color: #0000BB">0</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$blue  </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$img</span><span style="color: #007700">,   </span><span style="color: #0000BB">0</span><span style="color: #007700">,   </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 画头<br /></span><span style="color: #0000BB">imagearc</span><span style="color: #007700">(</span><span style="color: #0000BB">$img</span><span style="color: #007700">, </span><span style="color: #0000BB">100</span><span style="color: #007700">, </span><span style="color: #0000BB">100</span><span style="color: #007700">, </span><span style="color: #0000BB">200</span><span style="color: #007700">, </span><span style="color: #0000BB">200</span><span style="color: #007700">,  </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">360</span><span style="color: #007700">, </span><span style="color: #0000BB">$white</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">// 嘴<br /></span><span style="color: #0000BB">imagearc</span><span style="color: #007700">(</span><span style="color: #0000BB">$img</span><span style="color: #007700">, </span><span style="color: #0000BB">100</span><span style="color: #007700">, </span><span style="color: #0000BB">100</span><span style="color: #007700">, </span><span style="color: #0000BB">150</span><span style="color: #007700">, </span><span style="color: #0000BB">150</span><span style="color: #007700">, </span><span style="color: #0000BB">25</span><span style="color: #007700">, </span><span style="color: #0000BB">155</span><span style="color: #007700">, </span><span style="color: #0000BB">$red</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">// 先左眼，然后右眼<br /></span><span style="color: #0000BB">imagearc</span><span style="color: #007700">(</span><span style="color: #0000BB">$img</span><span style="color: #007700">,  </span><span style="color: #0000BB">60</span><span style="color: #007700">,  </span><span style="color: #0000BB">75</span><span style="color: #007700">,  </span><span style="color: #0000BB">50</span><span style="color: #007700">,  </span><span style="color: #0000BB">50</span><span style="color: #007700">,  </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">360</span><span style="color: #007700">, </span><span style="color: #0000BB">$green</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagearc</span><span style="color: #007700">(</span><span style="color: #0000BB">$img</span><span style="color: #007700">, </span><span style="color: #0000BB">140</span><span style="color: #007700">,  </span><span style="color: #0000BB">75</span><span style="color: #007700">,  </span><span style="color: #0000BB">50</span><span style="color: #007700">,  </span><span style="color: #0000BB">50</span><span style="color: #007700">,  </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">360</span><span style="color: #007700">, </span><span style="color: #0000BB">$blue</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 在浏览器中输出图像<br /></span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">"Content-type: image/png"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagepng</span><span style="color: #007700">(</span><span style="color: #0000BB">$img</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 释放内存<br /></span><span style="color: #0000BB">imagedestroy</span><span style="color: #007700">(</span><span style="color: #0000BB">$img</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例的输出类似于：</p></div>
+    <div class="mediaobject">
+     
+     <div class="imageobject">
+      <img src="images/21009b70229598c6a80eef8b45bf282b-imagearc.png" alt="示例输出：使用 imagearc() 画圆" width="200" height="200" />
+     </div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+ <div class="refsect1 seealso" id="refsect1-function.imagearc-seealso">
+  <h3 class="title">参见</h3>
+  <ul class="simplelist">
+   <li class="member"><span class="function"><a href="function.imagefilledarc.html" class="function" rel="rdfs-seeAlso">imagefilledarc()</a> - 绘制部分弧形并填充</span></li>
+   <li class="member"><span class="function"><a href="function.imageellipse.html" class="function" rel="rdfs-seeAlso">imageellipse()</a> - 画椭圆</span></li>
+   <li class="member"><span class="function"><a href="function.imagefilledellipse.html" class="function" rel="rdfs-seeAlso">imagefilledellipse()</a> - 绘制椭圆并填充</span></li>
+  </ul>
+ </div>
+
+</div></div></div></body></html>

@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>SQL 注入</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="security.database.storage.html">« 加密存储模型</a></li>
+      <li style="float: right;"><a href="security.errors.html">错误报告 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="security.database.html">数据库安全</a></li>
+    <li>SQL 注入</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="security.database.sql-injection" class="sect1">
+    <h2 class="title">SQL 注入</h2>
+    <p class="simpara">
+     SQL 注入是一种攻击技术，攻击者利用应用程序代码中构建动态 SQL
+     查询的缺陷。攻击者可以访问应用程序的特权部分，从数据库检索所有信息，篡改现有数据，甚至在数据库主机上执行危险的系统级命令。当开发人员在他们的
+     SQL 语句中连接或插入任意输入时，这种漏洞就会发生。
+    </p>
+    <p class="para">
+     <div class="example" id="example-1310">
+      <p><strong>示例 #1 
+       将结果集切割成页面……并创建超级用户（PostgreSQL）。
+      </strong></p>
+      <div class="example-contents"><p>
+       在下面的示例中，用户输入直接插入到 SQL 查询中，使得攻击者能够在数据库中获得超级用户账户。
+      </p></div>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />$offset </span><span style="color: #007700">= </span><span style="color: #0000BB">$_GET</span><span style="color: #007700">[</span><span style="color: #DD0000">'offset'</span><span style="color: #007700">]; </span><span style="color: #FF8000">// 注意，没有输入验证！<br /></span><span style="color: #0000BB">$query  </span><span style="color: #007700">= </span><span style="color: #DD0000">"SELECT id, name FROM products ORDER BY name LIMIT 20 OFFSET </span><span style="color: #0000BB">$offset</span><span style="color: #DD0000">;"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">, </span><span style="color: #0000BB">$query</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+      </div>
+
+     </div>
+      普通用户会点击“上一页”、“下一页”，<var class="varname">$offset</var> 已经编码到 URL 的链接。脚本期望传入的 <var class="varname">$offset</var>
+      是数字。然而，如果有人尝试把以下语句追加入 URL 中的话：
+      <div class="informalexample">
+       <div class="example-contents">
+<div class="sqlcode"><pre class="sqlcode">0;
+insert into pg_shadow(usename,usesysid,usesuper,usecatupd,passwd)
+    select &#039;crack&#039;, usesysid, &#039;t&#039;,&#039;t&#039;,&#039;crack&#039;
+    from pg_shadow where usename=&#039;postgres&#039;;
+--</pre>
+</div>
+       </div>
+
+      </div>
+      如果发生，脚本将向攻击者提供超级用户访问权限。注意那个 <code class="literal">0;</code> 是为了向原始查询提供有效的偏移量并终止。
+    </p>
+    <blockquote class="note"><p><strong class="note">注意</strong>: 
+     <p class="para">
+      这是常见的技术，使用 SQL 中的注释符号 <code class="literal">--</code>，强制 SQL 解析器忽略开发者编写的查询的其余部分。
+     </p>
+    </p></blockquote>
+    <p class="para">
+     获取密码的一种可行方式是欺骗搜索结果页面。攻击者只需查看是否有已提交的未经适当处理变量在 SQL
+     语句中使用。这些过滤器通常可以在先前的表单中设置，以定制 <code class="literal">SELECT</code> 语句中的
+     <code class="literal">WHERE、ORDER BY、LIMIT</code> 和 <code class="literal">OFFSET</code> 子句。如果数据库支持
+     <code class="literal">UNION</code> 构造，攻击者可能会尝试将整个查询附加到原始查询中，以从任意表中列出密码。强烈建议仅存储密码的安全散列值，而不是密码本身。
+     <div class="example" id="example-1313">
+      <p><strong>示例 #2 
+       列出文章……以及一些密码（任何数据库服务器）
+      </strong></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />$query  </span><span style="color: #007700">= </span><span style="color: #DD0000">"SELECT id, name, inserted, size FROM products<br />           WHERE size = '</span><span style="color: #0000BB">$size</span><span style="color: #DD0000">'"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">odbc_exec</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">, </span><span style="color: #0000BB">$query</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+      </div>
+
+     </div>
+     查询的静态部分可以与另一个 <code class="literal">SELECT</code> 语句组合来显示所有密码：
+     <div class="informalexample">
+      <div class="example-contents">
+<div class="sqlcode"><pre class="sqlcode">&#039;
+union select &#039;1&#039;, concat(uname||&#039;-&#039;||passwd) as name, &#039;1971-01-01&#039;, &#039;0&#039; from usertable;
+--</pre>
+</div>
+      </div>
+
+     </div>
+    </p>
+    <p class="para">
+     <code class="literal">UPDATE</code> 和 <code class="literal">INSERT</code> 语句也容易受到这种攻击的影响。
+     <div class="example" id="example-1316">
+     <p><strong>示例 #3 
+      从重置密码……到获得更多权限（任何数据库服务器）
+     </strong></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$query </span><span style="color: #007700">= </span><span style="color: #DD0000">"UPDATE usertable SET pwd='</span><span style="color: #0000BB">$pwd</span><span style="color: #DD0000">' WHERE uid='</span><span style="color: #0000BB">$uid</span><span style="color: #DD0000">';"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+      </div>
+
+     </div>
+     如果恶意的用户提交值 <code class="literal">&#039; or uid like&#039;%admin%</code>
+     给 <var class="varname">$uid</var> 来改变 admin 的密码，或者简单设置
+     <var class="varname">$pwd</var> 为 <code class="literal">hehehe&#039;, trusted=100, admin=&#039;yes</code>
+     去获得更多权限，然后查询语句实际上就变成了：
+     <div class="informalexample">
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #FF8000">// $uid: ' or uid like '%admin%<br /></span><span style="color: #0000BB">$query </span><span style="color: #007700">= </span><span style="color: #DD0000">"UPDATE usertable SET pwd='...' WHERE uid='' or uid like '%admin%';"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// $pwd: hehehe', trusted=100, admin='yes<br /></span><span style="color: #0000BB">$query </span><span style="color: #007700">= </span><span style="color: #DD0000">"UPDATE usertable SET pwd='hehehe', trusted=100, admin='yes' WHERE<br />...;"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+      </div>
+
+     </div>
+    </p>
+    <p class="simpara">
+     虽然攻击者必须具备至少一些关于数据库架构的知识才能进行成功的攻击，但获取这些信息通常非常简单。例如代码可以是开源软件的一部分并且公开可用。这些信息也可能通过闭源代码泄露——即使它经过了编码、混淆或编译——甚至通过自己的代码显示错误消息来泄露。其他方法包括使用典型的
+     table 和列名。例如，使用“users” table 和列名“id”、“username”和“password”的登录表单。
+    </p>
+    <p class="para">
+     <div class="example" id="example-1319">
+     <p><strong>示例 #4 攻击数据库主机操作系统（MSSQL Server）</strong></p>
+      <div class="example-contents"><p>
+       一种可怕的示例是一些数据库主机上可以访问操作系统级别的命令。
+      </p></div>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />$query  </span><span style="color: #007700">= </span><span style="color: #DD0000">"SELECT * FROM products WHERE id LIKE '%</span><span style="color: #0000BB">$prod</span><span style="color: #DD0000">%'"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">mssql_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$query</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+      </div>
+
+     </div>
+     如果攻击者提交
+     <code class="literal">a%&#039; exec master..xp_cmdshell &#039;net user test testpass /ADD&#039; --</code>
+     作为变量 <var class="varname">$prod</var> 的值，那么 <var class="varname">$query</var> 将会变成
+     <div class="informalexample">
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />$query  </span><span style="color: #007700">= </span><span style="color: #DD0000">"SELECT * FROM products<br />           WHERE id LIKE '%a%'<br />           exec master..xp_cmdshell 'net user test testpass /ADD' --%'"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">mssql_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$query</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+      </div>
+
+     </div>
+     MSSQL Server 执行批处理中的 SQL 语句，其中包括向本地账户数据库添加新用户的命令。如果该应用程序以 <code class="literal">sa</code>
+     身份运行，并且 MSSQLSERVER 服务以足够的权限运行，则攻击者现在将拥有一个账户，可以用此账户访问这台机器。
+    </p>
+    <blockquote class="note"><p><strong class="note">注意</strong>: 
+     <p class="para">
+      以上的一些示例与特定的数据库服务器相关联，这并不意味着不能对其他产品进行类似的攻击。用户的数据库服务器可能以其他方式同样存在漏洞。
+     </p>
+    </p></blockquote>
+    <p class="para">
+     <div class="mediaobject">
+      
+      <div class="imageobject">
+       <img src="images/fa7c5b5f326e3c4a6cc9db19e7edbaf0-xkcd-bobby-tables.png" alt="关于 SQL 注入问题的有趣示例" width="666" height="205" />
+      </div>
+     </div>
+     图片由 <a href="http://xkcd.com/327" class="link external">&raquo;&nbsp;xkcd</a> 提供
+    </p>
+
+    <div class="sect2" id="security.database.avoiding">
+     <h3 class="title">预防措施</h3>
+     <p class="para">
+      避免 SQL 注入的推荐方法是通过使用预处理语句绑定所有数据。仅仅使用参数化查询并不能完全避免 SQL 注入，但它是提供输入给
+      SQL 语句的最简单和最安全的方式。在 <code class="literal">WHERE</code>、<code class="literal">SET</code> 和 <code class="literal">VALUES</code>
+      子句中，所有动态数据常量都必须替换为占位符。实际数据将在执行过程中进行绑定，并与 SQL 命令分开发送。
+     </p>
+     <p class="para">
+      参数绑定只能用于数据。SQL 查询的其他动态部分必须根据已知的允许值列表进行筛选。
+     </p>
+     <p class="para">
+      <div class="example" id="example-1322">
+      <p><strong>示例 #5 通过使用 PDO 预处理语句来避免 SQL 注入</strong></p>
+       <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #FF8000">// The dynamic SQL part is validated against expected values<br /></span><span style="color: #0000BB">$sortingOrder </span><span style="color: #007700">= </span><span style="color: #0000BB">$_GET</span><span style="color: #007700">[</span><span style="color: #DD0000">'sortingOrder'</span><span style="color: #007700">] === </span><span style="color: #DD0000">'DESC' </span><span style="color: #007700">? </span><span style="color: #DD0000">'DESC' </span><span style="color: #007700">: </span><span style="color: #DD0000">'ASC'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$productId </span><span style="color: #007700">= </span><span style="color: #0000BB">$_GET</span><span style="color: #007700">[</span><span style="color: #DD0000">'productId'</span><span style="color: #007700">];<br /></span><span style="color: #FF8000">// The SQL is prepared with a placeholder<br /></span><span style="color: #0000BB">$stmt </span><span style="color: #007700">= </span><span style="color: #0000BB">$pdo</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">prepare</span><span style="color: #007700">(</span><span style="color: #DD0000">"SELECT * FROM products WHERE id LIKE ? ORDER BY price </span><span style="color: #007700">{</span><span style="color: #0000BB">$sortingOrder</span><span style="color: #007700">}</span><span style="color: #DD0000">"</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">// The value is provided with LIKE wildcards<br /></span><span style="color: #0000BB">$stmt</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execute</span><span style="color: #007700">([</span><span style="color: #DD0000">"%</span><span style="color: #007700">{</span><span style="color: #0000BB">$productId</span><span style="color: #007700">}</span><span style="color: #DD0000">%"</span><span style="color: #007700">]);<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+       </div>
+
+      </div>
+     </p>
+
+     <p class="simpara">
+      预处理语句由 <a href="pdo.prepared-statements.html" class="link">PDO</a>、<a href="mysqli.quickstart.prepared-statements.html" class="link">MySQLi</a> 和其他数据库库提供。
+     </p>
+
+     <p class="simpara">
+      SQL 注入攻击主要是基于利用代码在编写时没有考虑安全性。永远不要相信任何输入，特别是来自客户端的输入，即使它来自于选择框、隐藏的输入字段或 cookie。第一个示例表明，即使是如此简单的查询也可能带来灾难。
+     </p>
+
+     <p class="para">
+      深度防御策略涉及几种良好的编程实践：
+      <ul class="itemizedlist">
+       <li class="listitem">
+        <span class="simpara">
+         永远不要以超级用户或数据库所有者的身份连接到数据库。始终使用具有最低权限的自定义用户。
+        </span>
+       </li>
+       <li class="listitem">
+        <span class="simpara">
+         检查指定输入是否具有预期的数据类型。PHP 拥有很多输入验证函数，从最简单的<a href="ref.var.html" class="link">变量函数</a>和<a href="ref.ctype.html" class="link">字符类型函数</a>（例如 <span class="function"><a href="function.is-numeric.html" class="function">is_numeric()</a></span>、<span class="function"><a href="function.ctype-digit.html" class="function">ctype_digit()</a></span>）到支持
+         <a href="ref.pcre.html" class="link">Perl 兼容正则表达式</a>的函数。
+        </span>
+       </li>
+       <li class="listitem">
+        <span class="simpara">
+         如果应用程序期望数字输入，可以考虑使用 <span class="function"><a href="function.ctype-digit.html" class="function">ctype_digit()</a></span> 验证数据，使用
+         <span class="function"><a href="function.settype.html" class="function">settype()</a></span>更改其类型，或者使用 <span class="function"><a href="function.sprintf.html" class="function">sprintf()</a></span> 打印其数字表示形式。
+        </span>
+       </li>
+       <li class="listitem">
+        <span class="simpara">
+         如果数据库层不支持绑定变量，则应使用特定于数据库的字符串转义函数（例如 <span class="function"><a href="function.mysql-real-escape-string.html" class="function">mysql_real_escape_string()</a></span>、<span class="function"><strong>sqlite_escape_string()</strong></span>
+         等）对传递给数据库的用户提供的非数字值进行转义。通用的函数如 <span class="function"><a href="function.addslashes.html" class="function">addslashes()</a></span> 只在非常特定的环境中有用（例如在禁用了 <var class="varname">NO_BACKSLASH_ESCAPES</var>
+         的单字节字符集 MySQL），因此最好避免使用它们。
+        </span>
+       </li>
+       <li class="listitem">
+        <span class="simpara">
+         请勿以正当或非正当手段打印出任何特定于数据库的信息，特别是关于 schema 的信息。另请参阅<a href="security.errors.html" class="link">错误报告</a>和<a href="ref.errorfunc.html" class="link">错误处理以及日志记录函数</a>。
+        </span>
+       </li>
+      </ul>
+     </p>
+
+     <p class="simpara">
+      除此之外，如果数据库支持日志记录，还可以从脚本里或通过数据库自身记录查询语句。显然，日志记录无法阻止任何有害尝试，但它可以帮助追踪绕过了哪个应用程序。日志本身并没有用处，但通过其中包含的信息可以得到帮助。通常情况下，更详细的信息比较少的信息更好。
+     </p>
+    </div>
+   </div></div></div></body></html>

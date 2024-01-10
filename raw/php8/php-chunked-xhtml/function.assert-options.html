@@ -1,0 +1,288 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>设置/获取各种断言 flag</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="ref.info.html">« PHP 选项/信息 函数</a></li>
+      <li style="float: right;"><a href="function.assert.html">assert »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.info.html">PHP 选项/信息 函数</a></li>
+    <li>设置/获取各种断言 flag</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.assert-options" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">assert_options</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">assert_options</span> &mdash; <span class="dc-title">设置/获取各种断言 flag</span></p>
+
+ </div>
+
+ <div id="function.assert-options-refsynopsisdiv">
+  <div class="warning"><strong class="warning">警告</strong><p class="simpara">此函数自 PHP 8.3.0
+起<em>弃用</em>。强烈建议不要应用此函数。</p></div>
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.assert-options-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>assert_options</strong></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$option</code></span>, <span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$value</code><span class="initializer"> = ?</span></span>): <span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span></div>
+
+  <p class="para rdfs-comment">
+   设置 <span class="function"><a href="function.assert.html" class="function">assert()</a></span> 的各种控制选项，或者是仅仅查询当前的设置。
+  </p>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <span class="simpara">
+    不鼓励使用 <span class="function"><strong>assert_options()</strong></span>，而是分别使用
+    <span class="function"><a href="function.ini-set.html" class="function">ini_set()</a></span> 和 <span class="function"><a href="function.ini-get.html" class="function">ini_get()</a></span> 设置和获取
+    <var class="filename">php.ini</var> 指令 <a href="ini.core.html#ini.zend.assertions" class="link">zend.assertions</a> 和
+    <a href="info.configuration.html#ini.assert.exception" class="link">assert.exception</a>。
+   </span>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.assert-options-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">option</code></dt>
+
+     <dd>
+
+      <p class="para">
+       <table class="doctable table">
+        <caption><strong>断言选项</strong></caption>
+        
+         <thead>
+          <tr>
+           <th>选项</th>
+           <th>INI 设置</th>
+           <th>默认值</th>
+           <th>描述</th>
+          </tr>
+
+         </thead>
+
+         <tbody class="tbody">
+          <tr>
+           <td>ASSERT_ACTIVE</td>
+           <td>assert.active</td>
+           <td>1</td>
+           <td>启用 <span class="function"><a href="function.assert.html" class="function">assert()</a></span> 断言</td>
+          </tr>
+
+          <tr>
+           <td>ASSERT_EXCEPTION</td>
+           <td>assert.exception</td>
+           <td>1</td>
+           <td>每个失败断言，抛出 <span class="classname"><a href="class.assertionerror.html" class="classname">AssertionError</a></span></td>
+          </tr>
+
+          <tr>
+           <td>ASSERT_WARNING</td>
+           <td>assert.warning</td>
+           <td>1</td>
+           <td>为每个失败的断言产生一个 PHP 警告（warning）</td>
+          </tr>
+
+          <tr>
+           <td>ASSERT_BAIL</td>
+           <td>assert.bail</td>
+           <td>0</td>
+           <td>在断言失败时中止执行</td>
+          </tr>
+
+          <tr>
+           <td>ASSERT_QUIET_EVAL</td>
+           <td>assert.quiet_eval</td>
+           <td>0</td>
+           <td>
+            在断言表达式求值时禁用 error_reporting。PHP 8.0.0 起移除。
+           </td>
+          </tr>
+
+          <tr>
+           <td>ASSERT_CALLBACK</td>
+           <td>assert.callback</td>
+           <td>(<strong><code>null</code></strong>)</td>
+           <td>断言失败时调用回调函数</td>
+          </tr>
+
+         </tbody>
+        
+       </table>
+
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">value</code></dt>
+
+     <dd>
+
+      <p class="para">
+       可选的新选项值。
+      </p>
+      <p class="para">
+       通过 <strong><code>ASSERT_CALLBACK</code></strong> 或 <a href="info.configuration.html#ini.assert.callback" class="link">assert.callback</a> 设置的回调函数应该有以下签名：
+       <div class="methodsynopsis dc-description">
+        <span class="methodname"><strong>assert_callback</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$file</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$line</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">string</span><span class="type"></span></span> <code class="parameter">$assertion</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$description</code><span class="initializer"> = ?</span></span><br>): <span class="type"><span class="type void">void</span></span></div>
+
+       <dl>
+        
+         <dt>
+<code class="parameter">file</code></dt>
+
+         <dd>
+
+          <span class="simpara">
+           调用 <span class="function"><a href="function.assert.html" class="function">assert()</a></span> 的文件名。
+          </span>
+         </dd>
+
+        
+        
+         <dt>
+<code class="parameter">line</code></dt>
+
+         <dd>
+
+          <span class="simpara">
+           调用 <span class="function"><a href="function.assert.html" class="function">assert()</a></span> 的行数。
+          </span>
+         </dd>
+
+        
+        
+         <dt>
+<code class="parameter">assertion</code></dt>
+
+         <dd>
+
+          <span class="simpara">
+           在 PHP 8.0.0 之前，传递给 <span class="function"><a href="function.assert.html" class="function">assert()</a></span> 的断言，仅作为字符串给出。
+           （如果断言是 boolean 条件，则此参数将为空字符串。）从 PHP 8.0.0 开始，此参数始终为 <strong><code>null</code></strong>。
+          </span>
+         </dd>
+
+        
+        
+         <dt>
+<code class="parameter">description</code></dt>
+
+         <dd>
+
+          <span class="simpara">
+           传递给 <span class="function"><a href="function.assert.html" class="function">assert()</a></span> 的描述。
+          </span>
+         </dd>
+
+        
+       </dl>
+
+      </p>
+     </dd>
+
+    
+   </dl>
+
+   向 <code class="parameter">value</code> 传递空字符串会重置断言回调。
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.assert-options-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回任意选项的原始设置。
+  </p>
+ </div>
+
+
+ <div class="refsect1 errors" id="refsect1-function.assert-options-errors">
+  <h3 class="title">错误／异常</h3>
+  <p class="para">
+   如果 <code class="parameter">option</code> 是无效选项，抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.assert-options-changelog">
+  <h3 class="title">更新日志</h3>
+  <p class="para">
+   <table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>8.3.0</td>
+       <td>
+        <span class="function"><strong>assert_option()</strong></span> 现在已弃用。
+       </td>
+      </tr>
+
+      <tr>
+       <td>8.0.0</td>
+       <td>
+        如果 <code class="parameter">option</code> 是无效选项，抛出
+        <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。之前返回 <strong><code>false</code></strong>。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.assert-options-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="example-1637">
+   <p><strong>示例 #1 <span class="function"><strong>assert_options()</strong></span> 示例</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// 处理断言失败时的函数<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">assert_failure</span><span style="color: #007700">(</span><span style="color: #0000BB">$file</span><span style="color: #007700">, </span><span style="color: #0000BB">$line</span><span style="color: #007700">, </span><span style="color: #0000BB">$assertion</span><span style="color: #007700">, </span><span style="color: #0000BB">$message</span><span style="color: #007700">)<br />{<br />    echo </span><span style="color: #DD0000">"The assertion </span><span style="color: #0000BB">$assertion</span><span style="color: #DD0000"> in </span><span style="color: #0000BB">$file</span><span style="color: #DD0000"> on line </span><span style="color: #0000BB">$line</span><span style="color: #DD0000"> has failed: </span><span style="color: #0000BB">$message</span><span style="color: #DD0000">"</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #FF8000">// 我们的测试函数<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">test_assert</span><span style="color: #007700">(</span><span style="color: #0000BB">$parameter</span><span style="color: #007700">)<br />{<br />    </span><span style="color: #0000BB">assert</span><span style="color: #007700">(</span><span style="color: #0000BB">is_bool</span><span style="color: #007700">(</span><span style="color: #0000BB">$parameter</span><span style="color: #007700">));<br />}<br /><br /></span><span style="color: #FF8000">// 设置断言选项<br /></span><span style="color: #0000BB">assert_options</span><span style="color: #007700">(</span><span style="color: #0000BB">ASSERT_ACTIVE</span><span style="color: #007700">,   </span><span style="color: #0000BB">true</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">assert_options</span><span style="color: #007700">(</span><span style="color: #0000BB">ASSERT_BAIL</span><span style="color: #007700">,     </span><span style="color: #0000BB">true</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">assert_options</span><span style="color: #007700">(</span><span style="color: #0000BB">ASSERT_WARNING</span><span style="color: #007700">,  </span><span style="color: #0000BB">false</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">assert_options</span><span style="color: #007700">(</span><span style="color: #0000BB">ASSERT_CALLBACK</span><span style="color: #007700">, </span><span style="color: #DD0000">'assert_failure'</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 让一个断言会失败<br /></span><span style="color: #0000BB">test_assert</span><span style="color: #007700">(</span><span style="color: #0000BB">1</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 由于 ASSERT_BAIL 是 true，这里永远也到不了<br /></span><span style="color: #007700">echo </span><span style="color: #DD0000">'Never reached'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.assert-options-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.assert.html" class="function" rel="rdfs-seeAlso">assert()</a> - 断言检测</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

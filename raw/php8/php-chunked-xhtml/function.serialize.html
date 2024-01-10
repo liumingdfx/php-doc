@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>生成值的可存储表示</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.print-r.html">« print_r</a></li>
+      <li style="float: right;"><a href="function.settype.html">settype »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.var.html">变量处理函数</a></li>
+    <li>生成值的可存储表示</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.serialize" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">serialize</h1>
+   <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">serialize</span> &mdash; <span class="dc-title">生成值的可存储表示</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.serialize-description">
+  <h3 class="title">说明</h3>
+   <div class="methodsynopsis dc-description">
+    <span class="methodname"><strong>serialize</strong></span>(<span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$value</code></span>): <span class="type">string</span></div>
+
+  <p class="para rdfs-comment">
+   生成值的可存储表示。
+  </p>
+  <p class="para">
+   这有利于存储或传递 PHP 的值，同时不丢失其类型和结构。
+  </p>
+  <p class="para">
+    想要将已序列化的字符串变回 PHP 的值，可使用
+    <span class="function"><a href="function.unserialize.html" class="function">unserialize()</a></span>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.serialize-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">value</code></dt>
+
+     <dd>
+
+      <p class="para">
+       要序列化的值。<span class="function"><strong>serialize()</strong></span> 处理所有的类型，除了 <span class="type">resource</span> 类型和一些
+       <span class="type">object</span>（见下面的注释）。<span class="function"><strong>serialize()</strong></span>
+       甚至可以序列化包含对自身引用的数组。数组/对象内的循环引用也会被存储。其它任何引用都会丢失。
+      </p>
+      <p class="para">
+       序列化对象时，PHP 将尝试在序列化之前调用成员函数 <a href="language.oop5.magic.html#object.serialize" class="link">__serialize()</a> 或
+       <a href="language.oop5.magic.html#object.sleep" class="link">__sleep()</a>。这是为了允许对象在序列化之前进行最后一分钟的清理等等。同样，当使用
+       <span class="function"><a href="function.unserialize.html" class="function">unserialize()</a></span> 恢复对象时，会调用 <a href="language.oop5.magic.html#object.unserialize" class="link">__unserialize()</a>
+       或 <a href="language.oop5.magic.html#object.wakeup" class="link">__wakeup()</a> 成员函数。
+      </p>
+      <blockquote class="note"><p><strong class="note">注意</strong>: 
+       <p class="para">
+        对象的 private 成员会在名前添加类名；protected 成员会在名前添加“*”；这些前置值在两边都有 null 字节。
+       </p>
+      </p></blockquote>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.serialize-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回字符串，包含 <code class="parameter">value</code> 的字节流表示，可以存储在任何地方。
+  </p>
+  <p class="para">
+   注意这可能是包含 null 字节的二进制字符串，需要按原样存储和处理。例如，<span class="function"><strong>serialize()</strong></span>
+   的输出通常应该存储在数据库中 的 BLOB 字段，而不是 CHAR 或 TEXT 字段。
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.serialize-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 <span class="function"><strong>serialize()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// $sssion_data 是多维数组，包含当前用户的<br />// 会话信息。可以在请求结束时使用 serialize()<br />// 将其存储在数据库中。<br /><br /></span><span style="color: #0000BB">$conn </span><span style="color: #007700">= </span><span style="color: #0000BB">odbc_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">"webdb"</span><span style="color: #007700">, </span><span style="color: #DD0000">"php"</span><span style="color: #007700">, </span><span style="color: #DD0000">"chicken"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$stmt </span><span style="color: #007700">= </span><span style="color: #0000BB">odbc_prepare</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">,<br />      </span><span style="color: #DD0000">"UPDATE sessions SET data = ? WHERE id = ?"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$sqldata </span><span style="color: #007700">= array (</span><span style="color: #0000BB">serialize</span><span style="color: #007700">(</span><span style="color: #0000BB">$session_data</span><span style="color: #007700">), </span><span style="color: #0000BB">$_SERVER</span><span style="color: #007700">[</span><span style="color: #DD0000">'PHP_AUTH_USER'</span><span style="color: #007700">]);<br />if (!</span><span style="color: #0000BB">odbc_execute</span><span style="color: #007700">(</span><span style="color: #0000BB">$stmt</span><span style="color: #007700">, </span><span style="color: #0000BB">$sqldata</span><span style="color: #007700">)) {<br />    </span><span style="color: #0000BB">$stmt </span><span style="color: #007700">= </span><span style="color: #0000BB">odbc_prepare</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">,<br />     </span><span style="color: #DD0000">"INSERT INTO sessions (id, data) VALUES(?, ?)"</span><span style="color: #007700">);<br />    if (!</span><span style="color: #0000BB">odbc_execute</span><span style="color: #007700">(</span><span style="color: #0000BB">$stmt</span><span style="color: #007700">, </span><span style="color: #0000BB">array_reverse</span><span style="color: #007700">(</span><span style="color: #0000BB">$sqldata</span><span style="color: #007700">))) {<br />        </span><span style="color: #FF8000">/* Something went wrong.. */<br />    </span><span style="color: #007700">}<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.serialize-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    注意许多内置 PHP 对象不能序列化。然而，要么实现 <span class="interfacename"><a href="class.serializable.html" class="interfacename">Serializable</a></span> 接口，要么实现 <a href="language.oop5.magic.html#object.serialize" class="link">__serialize()</a>/<a href="language.oop5.magic.html#object.unserialize" class="link">__unserialize()</a>
+    或 <a href="language.oop5.magic.html#object.sleep" class="link">__sleep()</a>/<a href="language.oop5.magic.html#object.wakeup" class="link">__wakeup()</a>
+    魔术方法的则是可以的。如果内部类不满足这些其中任意一个，则就不能可靠的进行序列化。
+   </p>
+   <p class="para">
+    上述规则有一些历史例外，一些内部对象可以在不实现接口或公开方法的情况下，使其序列化。
+   </p>
+  </p></blockquote>
+  <div class="warning"><strong class="warning">警告</strong>
+   <p class="para">
+    当 <span class="function"><strong>serialize()</strong></span> 序列化对象时，命名空间中的类名不要以反斜线开头，以便实现最大兼容性。
+   </p>
+  </div>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.serialize-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.unserialize.html" class="function" rel="rdfs-seeAlso">unserialize()</a> - 从已存储的表示中创建 PHP 的值</span></li>
+    <li class="member"><span class="function"><a href="function.var-export.html" class="function" rel="rdfs-seeAlso">var_export()</a> - 输出或返回变量的可解析字符串表示</span></li>
+    <li class="member"><span class="function"><a href="function.json-encode.html" class="function" rel="rdfs-seeAlso">json_encode()</a> - 对变量进行 JSON 编码</span></li>
+    <li class="member"><a href="language.oop5.serialization.html" class="link">序列化对象</a></li>
+    <li class="member"><a href="language.oop5.magic.html#object.sleep" class="link">__sleep()</a></li>
+    <li class="member"><a href="language.oop5.magic.html#object.wakeup" class="link">__wakeup()</a></li>
+    <li class="member"><a href="language.oop5.magic.html#object.serialize" class="link">__serialize()</a></li>
+    <li class="member"><a href="language.oop5.magic.html#object.unserialize" class="link">__unserialize()</a></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

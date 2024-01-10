@@ -1,0 +1,324 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>新特性</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="migration74.html">« 从 PHP 7.3.x 移植到 PHP 7.4.x</a></li>
+      <li style="float: right;"><a href="migration74.new-classes.html">新的类和接口 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="migration74.html">从 PHP 7.3.x 移植到 PHP 7.4.x</a></li>
+    <li>新特性</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="migration74.new-features" class="sect1">
+ <h2 class="title">新特性</h2>
+
+ <div class="sect2" id="migration74.new-features.core">
+  <h3 class="title">PHP 核心中的新特性</h3>
+
+  <div class="sect3" id="migration74.new-features.core.typed-properties">
+   <h4 class="title">属性添加限定类型</h4>
+
+   <p class="para">
+    类的属性中现在支持添加指定的类型。
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">User </span><span style="color: #007700">{<br />    public </span><span style="color: #0000BB">int $id</span><span style="color: #007700">;<br />    public </span><span style="color: #0000BB">string $name</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </div>
+    上面的例子中，会强制要求 <code class="literal">$user-&gt;id</code> 只能为 <span class="type">int</span>
+    类型，同时 <code class="literal">$user-&gt;name</code> 只能为 <span class="type">string</span> 类型。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration74.new-features.core.arrow-functions">
+   <h4 class="title">箭头函数</h4>
+
+   <p class="para">
+    <a href="functions.arrow.html" class="link">箭头函数</a>提供了一种更简洁的定义函数的方法。
+
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$factor </span><span style="color: #007700">= </span><span style="color: #0000BB">10</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$nums </span><span style="color: #007700">= </span><span style="color: #0000BB">array_map</span><span style="color: #007700">(fn(</span><span style="color: #0000BB">$n</span><span style="color: #007700">) =&gt; </span><span style="color: #0000BB">$n </span><span style="color: #007700">* </span><span style="color: #0000BB">$factor</span><span style="color: #007700">, [</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #0000BB">3</span><span style="color: #007700">, </span><span style="color: #0000BB">4</span><span style="color: #007700">]);<br /></span><span style="color: #FF8000">// $nums = array(10, 20, 30, 40);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </div>
+   </p>
+  </div>
+
+  <div class="sect3" id="migration74.new-features.core.type-variance">
+   <h4 class="title">有限返回类型协变与参数类型逆变</h4>
+
+   <p class="para">
+    以下代码现在可以正常执行：
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">A </span><span style="color: #007700">{}<br />class </span><span style="color: #0000BB">B </span><span style="color: #007700">extends </span><span style="color: #0000BB">A </span><span style="color: #007700">{}<br /><br />class </span><span style="color: #0000BB">Producer </span><span style="color: #007700">{<br />    public function </span><span style="color: #0000BB">method</span><span style="color: #007700">(): </span><span style="color: #0000BB">A </span><span style="color: #007700">{}<br />}<br />class </span><span style="color: #0000BB">ChildProducer </span><span style="color: #007700">extends </span><span style="color: #0000BB">Producer </span><span style="color: #007700">{<br />    public function </span><span style="color: #0000BB">method</span><span style="color: #007700">(): </span><span style="color: #0000BB">B </span><span style="color: #007700">{}<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </div>
+    只有在使用自动加载的情况下，才会有完整的差异支持。在一个文件内，只有非循环类型引用是可能的，因为在引用之前，所有的类都需要可用。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration74.new-features.core.null-coalescing-assignment-operator">
+   <h4 class="title">空合并运算符赋值</h4>
+
+   <p class="para">
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$array</span><span style="color: #007700">[</span><span style="color: #DD0000">'key'</span><span style="color: #007700">] ??= </span><span style="color: #0000BB">computeDefault</span><span style="color: #007700">();<br /></span><span style="color: #FF8000">// 等同于以下旧写法<br /></span><span style="color: #007700">if (!isset(</span><span style="color: #0000BB">$array</span><span style="color: #007700">[</span><span style="color: #DD0000">'key'</span><span style="color: #007700">])) {<br />    </span><span style="color: #0000BB">$array</span><span style="color: #007700">[</span><span style="color: #DD0000">'key'</span><span style="color: #007700">] = </span><span style="color: #0000BB">computeDefault</span><span style="color: #007700">();<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </div>
+   </p>
+  </div>
+
+  <div class="sect3" id="migration74.new-features.core.unpack-inside-array">
+   <h4 class="title">数组展开操作</h4>
+
+   <p class="para">
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$parts </span><span style="color: #007700">= [</span><span style="color: #DD0000">'apple'</span><span style="color: #007700">, </span><span style="color: #DD0000">'pear'</span><span style="color: #007700">];<br /></span><span style="color: #0000BB">$fruits </span><span style="color: #007700">= [</span><span style="color: #DD0000">'banana'</span><span style="color: #007700">, </span><span style="color: #DD0000">'orange'</span><span style="color: #007700">, ...</span><span style="color: #0000BB">$parts</span><span style="color: #007700">, </span><span style="color: #DD0000">'watermelon'</span><span style="color: #007700">];<br /></span><span style="color: #FF8000">// ['banana', 'orange', 'apple', 'pear', 'watermelon'];<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </div>
+   </p>
+  </div>
+
+  <div class="sect3" id="migration74.new-features.core.numeric-literal-separator">
+   <h4 class="title">数值文字分隔符</h4>
+
+   <p class="para">
+    数字文字可以在数字之间包含下划线。
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />6.674_083e-11</span><span style="color: #007700">; </span><span style="color: #FF8000">// float<br /></span><span style="color: #0000BB">299_792_458</span><span style="color: #007700">;   </span><span style="color: #FF8000">// decimal<br /></span><span style="color: #0000BB">0xCAFE_F00D</span><span style="color: #007700">;   </span><span style="color: #FF8000">// hexadecimal<br /></span><span style="color: #0000BB">0b0101_1111</span><span style="color: #007700">;   </span><span style="color: #FF8000">// binary<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </div>
+   </p>
+  </div>
+ 
+  <div class="sect3" id="migration74.new-features.core.weakreference">
+   <h4 class="title">弱引用</h4>
+
+   <p class="para">
+    <a href="class.weakreference.html" class="link">弱引用</a>允许程序员保留对对象的引用，但不会阻止销毁对象。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration74.new-features.core.tostring-exceptions">
+   <h4 class="title">允许从 __toString() 抛出异常</h4>
+
+   <p class="para">
+    现在允许从 <a href="language.oop5.magic.html#object.tostring" class="link">__toString()</a>
+    抛出异常。之前的版本，将会导致致命错误。新版本中，之前发生致命错误的代码，已经被转换为
+    <span class="classname"><a href="class.error.html" class="classname">Error</a></span> 异常。
+   </p>
+  </div>
+
+ </div>
+
+ <div class="sect2" id="migration74.new-features.curl">
+  <h3 class="title">CURL</h3>
+  
+  <p class="para">
+   如果扩展是使用 libcurl &gt;= 7.56.0 构建的，<span class="classname"><a href="class.curlfile.html" class="classname">CURLFile</a></span>
+   现在除了支持普通文件名之外还支持流封装协议。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration74.new-features.filter">
+  <h3 class="title">Filter</h3>
+  
+  <p class="para">
+   <strong><code>FILTER_VALIDATE_FLOAT</code></strong> 过滤器现在支持 <code class="literal">min_range</code>
+   和 <code class="literal">max_range</code> 选项，其含义跟 <strong><code>FILTER_VALIDATE_INT</code></strong> 相同。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration74.new-features.ffi">
+  <h3 class="title">FFI</h3>
+
+  <p class="para">
+   FFI 是新扩展，提供了简单的方式去 C 库中调用原生函数、访问原生变量和创建和访问定义的数据结构。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration74.new-features.gd">
+  <h3 class="title">GD</h3>
+
+  <p class="para">
+   添加 <strong><code>IMG_FILTER_SCATTER</code></strong> 图片过滤器以将分散过滤器（scatter filter）应用于图片。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration74.new-features.hash">
+  <h3 class="title">Hash</h3>
+
+  <p class="para">
+   使用循环卷积多项式新增 <code class="literal">crc32c</code> 散列。此 CRC32 变体用于 iSCSI、SCTP、Btrfs 和 ext4 等存储系统。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration74.new-features.mbstring">
+  <h3 class="title">多字节字符串</h3>
+
+  <p class="para">
+   新增 <span class="function"><a href="function.mb-str-split.html" class="function">mb_str_split()</a></span> 函数，提供了跟 <span class="function"><a href="function.str-split.html" class="function">str_split()</a></span>
+   相同的行为，但是在码点上操作，而不是字节。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration74.new-features.opcache">
+  <h3 class="title">OPcache</h3>
+
+  <p class="para">
+   新增<a href="opcache.preloading.html" class="link">缓存预加载</a>特性。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration74.new-features.pcre">
+  <h3 class="title">正则表达式（兼容 Perl）</h3>
+
+  <p class="para">
+   <span class="function"><a href="function.preg-replace-callback.html" class="function">preg_replace_callback()</a></span> 和 <span class="function"><a href="function.preg-replace-callback-array.html" class="function">preg_replace_callback_array()</a></span>
+   函数现在接受附加的 <code class="parameter">flags</code> 参数，支持 <strong><code>PREG_OFFSET_CAPTURE</code></strong>
+   和 <strong><code>PREG_UNMATCHED_AS_NULL</code></strong> flag。这会影响传递给回调函数的匹配数组的格式。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration74.new-features.pdo">
+  <h3 class="title">PDO</h3>
+
+  <p class="para">
+   现在可以将用户名和密码指定为 mysql、mssql、sybase、dblib、firebird 和 oci 驱动程序的
+   PDO DSN 的一部分。之前仅支持 pgsql 驱动程序。如果在构造方法和 DSN
+   中都指定了，则优先使用构造方法中的用户名/密码。
+  </p>
+  <p class="para">
+   现在可以在 SQL 查询中转义问号，以避免解释为参数占位符。编写 <code class="literal">??</code>
+   将会向数据库发送一个问号，例如使用 PostgreSQL JSON
+   键中存在（<code class="literal">?</code>）运算符。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration74.new-features.pdo_oci">
+  <h3 class="title">PDO_OCI</h3>
+
+  <p class="para">
+   <span class="methodname"><a href="pdostatement.getcolumnmeta.html" class="methodname">PDOStatement::getColumnMeta()</a></span> 现在有效。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration74.new-features.pdo_sqlite">
+  <h3 class="title">PDO_SQLite</h3>
+
+  <p class="para">
+   <code class="literal">PDOStatement::getAttribute(PDO::SQLITE_ATTR_READONLY_STATEMENT)</code>
+   允许检查语句是否只读，例如它是否修改数据库。
+  </p>
+  <p class="para">
+   <code class="literal">PDO::setAttribute(PDO::SQLITE_ATTR_EXTENDED_RESULT_CODES, true)</code>
+   允许在 <span class="function"><a href="pdo.errorinfo.html" class="function">PDO::errorInfo()</a></span> 和 <span class="function"><a href="pdostatement.errorinfo.html" class="function">PDOStatement::errorInfo()</a></span>
+   中使用 SQLite3 扩展结果代码。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration74.new-features.sqlite3">
+  <h3 class="title">SQLite3</h3>
+
+  <p class="para">
+   新增 <span class="methodname"><strong>SQLite3::lastExtendedErrorCode()</strong></span> 用于获取最后的扩展结果代码（extended result code）。
+  </p>
+  <p class="para">
+   新增 <code class="literal">SQLite3::enableExtendedResultCodes($enable = true)</code>，用于 <span class="methodname"><a href="sqlite3.lasterrorcode.html" class="methodname">SQLite3::lastErrorCode()</a></span> 返回扩展结果代码。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration74.new-features.standard">
+  <h3 class="title">标准</h3>
+
+  <div class="sect3" id="migration74.new-features.standard.strip-tags">
+   <h4 class="title">带标签数组的 strip_tags()</h4>
+   <p class="para">
+    <span class="function"><a href="function.strip-tags.html" class="function">strip_tags()</a></span> 现在接受允许的标签数组：现在可以编写
+    <code class="literal">strip_tags($str, [&#039;a&#039;, &#039;p&#039;])</code> 代替
+    <code class="literal">strip_tags($str, &#039;&lt;a&gt;&lt;p&gt;&#039;)</code>。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration74.new-features.standard.magic-serialize">
+   <h4 class="title">自定义对象序列化</h4>
+   <p class="para">
+    新增自定义对象序列化的新机制，使用两种新魔术方法：<code class="literal">__serialize</code>
+    和 <code class="literal">__unserialize</code>。
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// 返回数组，包含对象所有必要的状态。<br /></span><span style="color: #007700">public function </span><span style="color: #0000BB">__serialize</span><span style="color: #007700">(): array;<br /><br /></span><span style="color: #FF8000">// 从指定的数据数组中回复对象状态。<br /></span><span style="color: #007700">public function </span><span style="color: #0000BB">__unserialize</span><span style="color: #007700">(array </span><span style="color: #0000BB">$data</span><span style="color: #007700">): </span><span style="color: #0000BB">void</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </div>
+    新的序列化机制取代了 <span class="interfacename"><a href="class.serializable.html" class="interfacename">Serializable</a></span> 接口，并且将会在未来弃用。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration74.new-features.standard.array-merge-no-args">
+   <h4 class="title">不带参数的数组合并函数</h4>
+   <p class="para">
+    现在可以不带任何参数调用 <span class="function"><a href="function.array-merge.html" class="function">array_merge()</a></span> 和
+    <span class="function"><a href="function.array-merge-recursive.html" class="function">array_merge_recursive()</a></span>，此时会返回空数组。这跟展开运算符结合非常有用，比如
+    <code class="literal">array_merge(...$arrays)</code>。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration74.new-features.standard.proc-open">
+   <h4 class="title"><span class="function"><a href="function.proc-open.html" class="function">proc_open()</a></span> 函数</h4>
+   <p class="para">
+    <span class="function"><a href="function.proc-open.html" class="function">proc_open()</a></span> 现在接受数组而不是命令字符串。在这种情况下，会直接打开进程（无需通过
+    shell），PHP 将会负责任何必要的参数转义。
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />proc_open</span><span style="color: #007700">([</span><span style="color: #DD0000">'php'</span><span style="color: #007700">, </span><span style="color: #DD0000">'-r'</span><span style="color: #007700">, </span><span style="color: #DD0000">'echo "Hello World\n";'</span><span style="color: #007700">], </span><span style="color: #0000BB">$descriptors</span><span style="color: #007700">, </span><span style="color: #0000BB">$pipes</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </div>
+   </p>
+   <p class="para">
+    <span class="function"><a href="function.proc-open.html" class="function">proc_open()</a></span> 现在支持
+    <code class="literal">redirect</code> 和 <code class="literal">null</code> 描述符。
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// Like 2&gt;&amp;1 on the shell<br /></span><span style="color: #0000BB">proc_open</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">, [</span><span style="color: #0000BB">1 </span><span style="color: #007700">=&gt; [</span><span style="color: #DD0000">'pipe'</span><span style="color: #007700">, </span><span style="color: #DD0000">'w'</span><span style="color: #007700">], </span><span style="color: #0000BB">2 </span><span style="color: #007700">=&gt; [</span><span style="color: #DD0000">'redirect'</span><span style="color: #007700">, </span><span style="color: #0000BB">1</span><span style="color: #007700">]], </span><span style="color: #0000BB">$pipes</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">// Like 2&gt;/dev/null or 2&gt;nul on the shell<br /></span><span style="color: #0000BB">proc_open</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">, [</span><span style="color: #0000BB">1 </span><span style="color: #007700">=&gt; [</span><span style="color: #DD0000">'pipe'</span><span style="color: #007700">, </span><span style="color: #DD0000">'w'</span><span style="color: #007700">], </span><span style="color: #0000BB">2 </span><span style="color: #007700">=&gt; [</span><span style="color: #DD0000">'null'</span><span style="color: #007700">]], </span><span style="color: #0000BB">$pipes</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </div>
+   </p>
+  </div>
+
+  <div class="sect3" id="migration74.new-features.standard.sodium-argon-hash">
+   <h4 class="title">argon2i(d) without libargon</h4>
+   <p class="para">
+    在不使用 libargon 的情况下编译 PHP 时，<span class="function"><a href="function.password-hash.html" class="function">password_hash()</a></span> 现在由 sodium 扩展实现了 argon2i 和 argon2id 。
+   </p>
+  </div>
+
+ </div>
+
+</div></div></div></body></html>

@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>预加载</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="opcache.resources.html">« 资源类型</a></li>
+      <li style="float: right;"><a href="ref.opcache.html">OPcache 函数 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="book.opcache.html">OPcache</a></li>
+    <li>预加载</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="opcache.preloading" class="chapter">
+ <h1>预加载</h1>
+
+
+ <p class="para">
+  从 PHP 7.4.0 起，PHP 可以被配置为在引擎启动时将一些脚本预加载进 opcache 中。在那些文件中的任何函数、类、
+  接口或者 trait （但不包括常量）将在接下来的所有请求中变为全局可用，不再需要显示地包含它们。这牺牲了基准的
+  内存占用率但换来了方便和性能（因为这些代码将始终可用）。它还需要通过重启 PHP 进程来清除预加载的脚本，
+  这意味着这个功能仅在生产环境中有实用价值，而非开发环境。
+ </p>
+
+ <p class="para">
+  需要注意的是，性能和内存之间的最佳平衡因应用而异。 “预加载一切” 可能是最简单的策略，但不一定是最好的策略。
+  此外，只有当不同的请求间有持久化的进程时，预加载才有用。这意味着，虽然在启用了 opcache 的命令行脚本中可以使用预加载，
+  但这通常是没有意义的。例外情况是在使用预加载时的 <a href="ffi.examples-complete.html" class="link">FFI 库</a>。
+ </p>
+
+ <blockquote class="note"><p><strong class="note">注意</strong>: 
+  <p class="para">
+   Windows 上不支持预加载。
+  </p>
+ </p></blockquote>
+
+ <p class="para">
+  配置预加载需要两步，并且要求开启 opcache。首先，在<var class="filename">php.ini</var> 中设置 
+  <a href="opcache.configuration.html#ini.opcache.preload" class="link">opcache.preload</a> 的值：
+ </p>
+
+ <div class="informalexample">
+  <div class="example-contents">
+<div class="inicode"><pre class="inicode">opcache.preload=preload.php</pre>
+</div>
+  </div>
+
+ </div>
+
+ <p class="para">
+  <var class="filename">preload.php</var> 是一个在服务器启动时会运行一次（PHP-FPM、mod_php 等）的任意文件，
+  它的代码会加载到持久化内存中。在以 root 用户启动后切换到非特权系统用户的服务器上，又或者是以 root 
+  用户身份运行 PHP 的情况（不建议这样做），可以通过<a href="opcache.configuration.html#ini.opcache.preload-user" class="link">opcache.preload_user</a> 
+  来指定进行预加载的系统用户。
+  默认情况下，不允许以 root 用户身份进行预加载。通过设置 <code class="literal">opcache.preload_user=root</code> 来显示地允许它。
+ </p>
+
+ <p class="para">
+  在 <var class="filename">preload.php</var> 脚本中， 任何被 <span class="function"><a href="function.include.html" class="function">include</a></span>、
+  <span class="function"><a href="function.include-once.html" class="function">include_once</a></span>、<span class="function"><a href="function.require.html" class="function">require</a></span>、<span class="function"><a href="function.require-once.html" class="function">require_once</a></span>或
+  <span class="function"><a href="function.opcache-compile-file.html" class="function">opcache_compile_file()</a></span> 引用的文件将被解析到持久化内存中。 在下面的这个例子中，
+  所有在 <var class="filename">src</var> 目录下的 <var class="filename">.php</var> 文件将被预加载，除非那是一个
+  <code class="literal">Test</code> 文件。
+ </p>
+
+ <div class="informalexample">
+  <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$directory </span><span style="color: #007700">= new </span><span style="color: #0000BB">RecursiveDirectoryIterator</span><span style="color: #007700">(</span><span style="color: #0000BB">__DIR__ </span><span style="color: #007700">. </span><span style="color: #DD0000">'/src'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$fullTree </span><span style="color: #007700">= new </span><span style="color: #0000BB">RecursiveIteratorIterator</span><span style="color: #007700">(</span><span style="color: #0000BB">$directory</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$phpFiles </span><span style="color: #007700">= new </span><span style="color: #0000BB">RegexIterator</span><span style="color: #007700">(</span><span style="color: #0000BB">$fullTree</span><span style="color: #007700">, </span><span style="color: #DD0000">'/.+((?&lt;!Test)+\.php$)/i'</span><span style="color: #007700">, </span><span style="color: #0000BB">RecursiveRegexIterator</span><span style="color: #007700">::</span><span style="color: #0000BB">GET_MATCH</span><span style="color: #007700">);<br /><br />foreach (</span><span style="color: #0000BB">$phpFiles </span><span style="color: #007700">as </span><span style="color: #0000BB">$key </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">$file</span><span style="color: #007700">) {<br />    require_once </span><span style="color: #0000BB">$file</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">];<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+  </div>
+
+ </div>
+
+ <p class="para">
+  <span class="function"><a href="function.include.html" class="function">include</a></span> 和 <span class="function"><a href="function.opcache-compile-file.html" class="function">opcache_compile_file()</a></span> 都会生效，但对代码处理方式有不同的影响。
+  Both <span class="function"><a href="function.include.html" class="function">include</a></span> and <span class="function"><a href="function.opcache-compile-file.html" class="function">opcache_compile_file()</a></span> will work, but have different
+  implications for how code gets handled.
+
+  <ul class="itemizedlist">
+    <li class="listitem"><span class="simpara"><span class="function"><a href="function.include.html" class="function">include</a></span> 将执行文件中的代码，而 <span class="function"><a href="function.opcache-compile-file.html" class="function">opcache_compile_file()</a></span>
+    不会执行代码。这意味着只有前者支持条件声明（在 if 块中声明函数）。</span></li>
+    <li class="listitem"><span class="simpara">由于 <span class="function"><a href="function.include.html" class="function">include</a></span> 会执行代码，因此所有被 <span class="function"><a href="function.include.html" class="function">include</a></span> 的文件也将被解析，
+    其中的定义也将被预加载。</span></li>
+    <li class="listitem"><span class="simpara"><span class="function"><a href="function.opcache-compile-file.html" class="function">opcache_compile_file()</a></span> 可以按任何顺序加载文件。也就是说，如果 <var class="filename">a.php</var> 
+    定义了类 <code class="literal">A</code>，而 <var class="filename">b.php</var> 定义了一个继承类 <code class="literal">A</code> 的类 <code class="literal">B</code>，
+    则 <span class="function"><a href="function.opcache-compile-file.html" class="function">opcache_compile_file()</a></span> 可以按任何顺序来加载这两个文件。然而，当使用 <span class="function"><a href="function.include.html" class="function">include</a></span> 时，
+    <var class="filename">a.php</var> <em>必须</em> 先被包含。</span></li>
+    <li class="listitem"><span class="simpara">不管在哪种情况下，如果一个脚本包含了一个已经被预加载的文件，那么这个已经被预加载的文件里的内容仍将被执行，
+    但其中定义的任何符号将不会被重新定义。使用 <span class="function"><a href="function.include-once.html" class="function">include_once</a></span> 不会阻止文件被二次包含。有时候可能仍需要重新加载文件
+    来包含其中定义的全局常量，因为这些常量预加载并不会处理。</span></li>
+  </ul>
+
+  因此，哪种方式更好取决于所需的行为。对于本来会使用自动加载器的代码，<span class="function"><a href="function.opcache-compile-file.html" class="function">opcache_compile_file()</a></span> 
+  有更高的灵活性。而对于本来会需要手动加载的代码，<span class="function"><a href="function.include.html" class="function">include</a></span> 会更健壮。
+ </p>
+
+</div>
+</div></div></body></html>

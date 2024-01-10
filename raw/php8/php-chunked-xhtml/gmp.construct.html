@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Create GMP number</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="class.gmp.html">« GMP</a></li>
+      <li style="float: right;"><a href="gmp.serialize.html">GMP::__serialize »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="class.gmp.html">GMP</a></li>
+    <li>Create GMP number</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="gmp.construct" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">GMP::__construct</h1>
+  <p class="verinfo">(PHP 8 &gt;= 8.2.4)</p><p class="refpurpose"><span class="refname">GMP::__construct</span> &mdash; <span class="dc-title">Create GMP number</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-gmp.construct-description">
+  <h3 class="title">说明</h3>
+  <div class="constructorsynopsis dc-description">
+   <span class="modifier">public</span> <span class="methodname"><strong>GMP::__construct</strong></span>(<span class="methodparam"><span class="type"><span class="type">int</span>|<span class="type">string</span></span> <code class="parameter">$num</code><span class="initializer"> = 0</span></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$base</code><span class="initializer"> = 0</span></span>)</div>
+
+  <p class="para rdfs-comment">
+   Creates a GMP number from an integer or string.
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-gmp.construct-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">num</code></dt>
+
+     <dd>
+
+      <p class="para">
+       An integer or a string. The string representation can be decimal,
+       hexadecimal or octal.
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">base</code></dt>
+
+     <dd>
+
+      <p class="para">
+       The base.
+      </p>
+      <p class="para">
+       The base may vary from 2 to 62. If base is 0 (default value), the
+       actual base is determined from the leading characters: if the first
+       two characters are <code class="literal">0x</code> or <code class="literal">0X</code>,
+       hexadecimal is assumed, if the first two characters are <code class="literal">0b</code> or <code class="literal">0B</code>,
+       binary is assumed, otherwise if the first character is <code class="literal">0</code>,
+       octal is assumed, otherwise decimal is assumed.
+       For bases up to 36, case is ignored; upper-case and lower-case letters have the same value.
+       For bases 37 to 62, upper-case letter represent the usual 10 to 35 while lower-case letter represent 36 to 61.
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ 
+
+ <div class="refsect1 seealso" id="refsect1-gmp.construct-seealso">
+  <h3 class="title">参见</h3>
+  <ul class="simplelist">
+   <li class="member"><span class="function"><a href="function.gmp-init.html" class="function" rel="rdfs-seeAlso">gmp_init()</a> - Create GMP number</span></li>
+  </ul>
+ </div>
+
+
+</div></div></div></body></html>

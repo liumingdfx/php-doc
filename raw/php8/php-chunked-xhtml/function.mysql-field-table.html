@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>取得指定字段所在的表名</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.mysql-field-seek.html">« mysql_field_seek</a></li>
+      <li style="float: right;"><a href="function.mysql-field-type.html">mysql_field_type »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.mysql.html">MySQL 函数</a></li>
+    <li>取得指定字段所在的表名</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.mysql-field-table" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">mysql_field_table</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">mysql_field_table</span> &mdash; <span class="dc-title">取得指定字段所在的表名</span></p>
+
+ </div>
+
+ <div id="function.mysql-field-table-refsynopsisdiv">
+  <div class="warning"><strong class="warning">警告</strong>
+   <p class="para">本扩展自 PHP 5.5.0
+起已废弃，并在自 PHP 7.0.0 开始被移除。应使用 <a href="book.mysqli.html" class="link">MySQLi</a>
+或 <a href="ref.pdo-mysql.html" class="link">PDO_MySQL</a> 扩展来替换之。参见 <a href="mysqlinfo.api.choosing.html" class="link">MySQL：选择 API</a> 
+指南来获取更多信息。用以替代本函数的有：</p>
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="mysqli-result.fetch-field-direct.html" class="function">mysqli_fetch_field_direct()</a></span> [table] 或 [orgtable]</li>
+    <li class="member"><span class="methodname"><a href="pdostatement.getcolumnmeta.html" class="methodname">PDOStatement::getColumnMeta()</a></span> [table]</li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.mysql-field-table-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>mysql_field_table</strong></span>(<span class="methodparam"><span class="type">resource</span> <code class="parameter">$result</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$field_offset</code></span>): <span class="type">string</span></div>
+
+  <p class="para rdfs-comment">
+   返回指定字段所在的表名。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.mysql-field-table-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    <dt>
+
+<code class="parameter">result</code></dt>
+<dd>
+<p class="para"><span class="type">resource</span>
+型的结果集。此结果集来自对 <span class="function"><a href="function.mysql-query.html" class="function">mysql_query()</a></span>
+的调用。</p></dd>
+
+    <dt>
+
+<code class="parameter">field_offset</code></dt>
+<dd>
+<p class="para">数值型字段偏移量。
+<code class="parameter">field_offset</code> 从 <code class="literal">0</code> 开始。如果
+<code class="parameter">field_offset</code> 不存在，则会发出一个
+<strong><code>E_WARNING</code></strong> 级别的错误</p></dd>
+
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.mysql-field-table-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   The name of the table on success.
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.mysql-field-table-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="reflectionclassconstant.isenumcase.example.basic">
+    <p><strong>示例 #1 <span class="function"><strong>mysql_field_table()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />$query </span><span style="color: #007700">= </span><span style="color: #DD0000">"SELECT account.*, country.* FROM account, country WHERE country.name = 'Portugal' AND account.country_id = country.id"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// get the result from the DB<br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">mysql_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$query</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// Lists the table name and then the field name<br /></span><span style="color: #007700">for (</span><span style="color: #0000BB">$i </span><span style="color: #007700">= </span><span style="color: #0000BB">0</span><span style="color: #007700">; </span><span style="color: #0000BB">$i </span><span style="color: #007700">&lt; </span><span style="color: #0000BB">mysql_num_fields</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">); ++</span><span style="color: #0000BB">$i</span><span style="color: #007700">) {<br />    </span><span style="color: #0000BB">$table </span><span style="color: #007700">= </span><span style="color: #0000BB">mysql_field_table</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">, </span><span style="color: #0000BB">$i</span><span style="color: #007700">);<br />    </span><span style="color: #0000BB">$field </span><span style="color: #007700">= </span><span style="color: #0000BB">mysql_field_name</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">, </span><span style="color: #0000BB">$i</span><span style="color: #007700">);<br /><br />    echo  </span><span style="color: #DD0000">"</span><span style="color: #0000BB">$table</span><span style="color: #DD0000">: </span><span style="color: #0000BB">$field</span><span style="color: #DD0000">\n"</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.mysql-field-table-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    为了向下兼容，可以使用下列已废弃的别名：
+    <span class="function"><strong>mysql_fieldtable()</strong></span>
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.mysql-field-table-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.mysql-list-tables.html" class="function" rel="rdfs-seeAlso">mysql_list_tables()</a> - 列出 MySQL 数据库中的表</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div></div></div></body></html>

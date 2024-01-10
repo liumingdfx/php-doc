@@ -1,0 +1,298 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>设置用户自定义的错误处理函数</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.restore-exception-handler.html">« restore_exception_handler</a></li>
+      <li style="float: right;"><a href="function.set-exception-handler.html">set_exception_handler »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.errorfunc.html">错误处理 函数</a></li>
+    <li>设置用户自定义的错误处理函数</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.set-error-handler" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">set_error_handler</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.0.1, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">set_error_handler</span> &mdash; <span class="dc-title">设置用户自定义的错误处理函数</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.set-error-handler-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>set_error_handler</strong></span>(<span class="methodparam"><span class="type">?</span><span class="type"><span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span><span class="type"></span></span> <code class="parameter">$callback</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$error_levels</code><span class="initializer"> = <strong><code>E_ALL</code></strong></span></span>): <span class="type"><span class="type">?</span><span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span></span></div>
+
+  <p class="para rdfs-comment">
+   设置用户的函数 (<code class="parameter">callback</code>) 来处理脚本中出现的错误。
+  </p>
+  <p class="para">
+   本函数可用于在运行时定义自定义错误处理程序，例如，在应用程序中发生严重错误，或者在特定条件下触发了错误（使用
+   <span class="function"><a href="function.trigger-error.html" class="function">trigger_error()</a></span>），应用程序需要执行文件/数据清理。
+  </p>
+  <p class="para">
+   重要的是要记住 <code class="parameter">error_levels</code> 里指定的错误类型都会绕过 PHP 标准错误处理程序，
+   除非回调函数返回了 <strong><code>false</code></strong>。
+   <span class="function"><a href="function.error-reporting.html" class="function">error_reporting()</a></span> 设置将不会起到作用而继续会调用错误处理函数
+   —— 不过仍然可以获取 <a href="errorfunc.configuration.html#ini.error-reporting" class="link">error_reporting</a> 的当前值，并做适当处理。
+  </p>
+  <p class="para">
+   同时注意，处理程序有责任在必要时使用 <span class="function"><a href="function.exit.html" class="function">exit()</a></span> 停止脚本执行。
+   如果错误处理程序返回了，脚本将会在发生错误的后一行继续执行。
+  </p>
+  <p class="para">
+   以下级别的错误不能由用户定义的函数来处理，独立于发生错误的地方：
+   <strong><code>E_ERROR</code></strong>、 <strong><code>E_PARSE</code></strong>、
+   <strong><code>E_CORE_ERROR</code></strong>、 <strong><code>E_CORE_WARNING</code></strong>、
+   <strong><code>E_COMPILE_ERROR</code></strong>、
+   <strong><code>E_COMPILE_WARNING</code></strong>，和在
+   调用 <span class="function"><strong>set_error_handler()</strong></span> 函数所在文件中产生的大多数
+   <strong><code>E_STRICT</code></strong>。
+  </p>
+  <p class="para">
+   如果错误发生在脚本执行之前（比如文件上传时），将不会
+   调用自定义的错误处理程序因为它尚未在那时注册。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.set-error-handler-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">callback</code></dt>
+
+     <dd>
+
+      <p class="para">
+       如果传递 <strong><code>null</code></strong>，则处理程序重置为默认状态。否则，处理程序是具有以下签名的回调。
+      </p>
+      <p class="para">
+       <div class="methodsynopsis dc-description">
+        <span class="methodname"><span class="replaceable">handler</span></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$errno</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$errstr</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$errfile</code><span class="initializer"> = ?</span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$errline</code><span class="initializer"> = ?</span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">array</span> <code class="parameter">$errcontext</code><span class="initializer"> = ?</span></span><br>): <span class="type">bool</span></div>
+
+       <dl>
+        
+         <dt>
+<code class="parameter">errno</code></dt>
+
+         <dd>
+
+          <span class="simpara">
+           第一个参数 <code class="parameter">errno</code>，将会以 int 形式传递错误的级别。
+          </span>
+         </dd>
+
+        
+        
+         <dt>
+<code class="parameter">errstr</code></dt>
+
+         <dd>
+
+          <span class="simpara">
+           第二个参数 <code class="parameter">errstr</code>，将会以 string 形式传递错误的信息。
+          </span>
+         </dd>
+
+        
+        
+         <dt>
+<code class="parameter">errfile</code></dt>
+
+         <dd>
+
+          <span class="simpara">
+           如果回调接受第三个参数，<code class="parameter">errfile</code>，将会以 string 形式传递错误的文件名。
+          </span>
+         </dd>
+
+        
+        
+         <dt>
+<code class="parameter">errline</code></dt>
+
+         <dd>
+
+          <span class="simpara">
+           如果回调接受第四个参数，<code class="parameter">errline</code>，将会以 int 形式传递错误发生的行号。
+          </span>
+         </dd>
+
+        
+        
+         <dt>
+<code class="parameter">errcontext</code></dt>
+
+         <dd>
+
+          <span class="simpara">
+           如果回调接受第五个参数，<code class="parameter">errcontext</code>
+           将会传递数组，该数组指向错误发生时活动符号表。也就是说，<code class="parameter">errcontext</code>
+           会包含错误触发处作用域内所有变量的数组。用户的错误处理程序不应该修改错误上下文（context）。
+          </span>
+          <div class="warning"><strong class="warning">警告</strong>
+           <p class="simpara">
+            此参数自 PHP 7.2.0 后<em>弃用</em>并自 PHP 8.0.0
+            <em>移除</em>。如果函数没有为该参数定义默认值，那么在调用时会出现“too few arguments”的错误。
+           </p>
+          </div>
+         </dd>
+
+        
+       </dl>
+
+      </p>
+      <p class="para">
+       如果函数返回 <strong><code>false</code></strong>，标准错误处理处理程序将会继续调用。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">error_levels</code></dt>
+
+     <dd>
+
+      <p class="para">
+       就像 <a href="errorfunc.configuration.html#ini.error-reporting" class="link">error_reporting</a>
+       的 ini 设置能够控制错误的显示一样，此参数能够用于屏蔽
+       <code class="parameter">callback</code> 的触发。如果没有该掩码，无论 <a href="errorfunc.configuration.html#ini.error-reporting" class="link">error_reporting</a> 是如何设置的，<code class="parameter">callback</code>
+       都会在每个错误发生时被调用。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.set-error-handler-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   如果之前定义的错误处理程序（如果有）。如果是内置的错误处理程序，则返回
+   <strong><code>null</code></strong>。如果之前的错误处理程序是一个类的方法，此函数会返回带类和方法名的索引数组。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.set-error-handler-changelog">
+  <h3 class="title">更新日志</h3>
+  <p class="para">
+   <table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>8.0.0</td>
+       <td>
+        删除 <code class="parameter">errcontext</code> 并不再传递给用户回调。
+       </td>
+      </tr>
+
+      <tr>
+       <td>7.2.0</td>
+       <td>
+        <code class="parameter">errcontext</code> 被废弃。使用此参数时会导致 <strong><code>E_DEPRECATED</code></strong> 提醒。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.set-error-handler-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="example-1565">
+    <p><strong>示例 #1 用 <span class="function"><strong>set_error_handler()</strong></span> 和 <span class="function"><a href="function.trigger-error.html" class="function">trigger_error()</a></span> 进行错误处理</strong></p>
+    <div class="example-contents"><p>
+     以下示例展示了通过触发错误并以用户自定义的程序来进行内部异常的处理。
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// error handler function<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">myErrorHandler</span><span style="color: #007700">(</span><span style="color: #0000BB">$errno</span><span style="color: #007700">, </span><span style="color: #0000BB">$errstr</span><span style="color: #007700">, </span><span style="color: #0000BB">$errfile</span><span style="color: #007700">, </span><span style="color: #0000BB">$errline</span><span style="color: #007700">)<br />{<br />    if (!(</span><span style="color: #0000BB">error_reporting</span><span style="color: #007700">() &amp; </span><span style="color: #0000BB">$errno</span><span style="color: #007700">)) {<br />        </span><span style="color: #FF8000">// This error code is not included in error_reporting, so let it fall<br />        // through to the standard PHP error handler<br />        </span><span style="color: #007700">return </span><span style="color: #0000BB">false</span><span style="color: #007700">;<br />    }<br /><br />    </span><span style="color: #FF8000">// $errstr may need to be escaped:<br />    </span><span style="color: #0000BB">$errstr </span><span style="color: #007700">= </span><span style="color: #0000BB">htmlspecialchars</span><span style="color: #007700">(</span><span style="color: #0000BB">$errstr</span><span style="color: #007700">);<br /><br />    switch (</span><span style="color: #0000BB">$errno</span><span style="color: #007700">) {<br />    case </span><span style="color: #0000BB">E_USER_ERROR</span><span style="color: #007700">:<br />        echo </span><span style="color: #DD0000">"&lt;b&gt;My ERROR&lt;/b&gt; [</span><span style="color: #0000BB">$errno</span><span style="color: #DD0000">] </span><span style="color: #0000BB">$errstr</span><span style="color: #DD0000">&lt;br /&gt;\n"</span><span style="color: #007700">;<br />        echo </span><span style="color: #DD0000">"  Fatal error on line </span><span style="color: #0000BB">$errline</span><span style="color: #DD0000"> in file </span><span style="color: #0000BB">$errfile</span><span style="color: #DD0000">"</span><span style="color: #007700">;<br />        echo </span><span style="color: #DD0000">", PHP " </span><span style="color: #007700">. </span><span style="color: #0000BB">PHP_VERSION </span><span style="color: #007700">. </span><span style="color: #DD0000">" (" </span><span style="color: #007700">. </span><span style="color: #0000BB">PHP_OS </span><span style="color: #007700">. </span><span style="color: #DD0000">")&lt;br /&gt;\n"</span><span style="color: #007700">;<br />        echo </span><span style="color: #DD0000">"Aborting...&lt;br /&gt;\n"</span><span style="color: #007700">;<br />        exit(</span><span style="color: #0000BB">1</span><span style="color: #007700">);<br /><br />    case </span><span style="color: #0000BB">E_USER_WARNING</span><span style="color: #007700">:<br />        echo </span><span style="color: #DD0000">"&lt;b&gt;My WARNING&lt;/b&gt; [</span><span style="color: #0000BB">$errno</span><span style="color: #DD0000">] </span><span style="color: #0000BB">$errstr</span><span style="color: #DD0000">&lt;br /&gt;\n"</span><span style="color: #007700">;<br />        break;<br /><br />    case </span><span style="color: #0000BB">E_USER_NOTICE</span><span style="color: #007700">:<br />        echo </span><span style="color: #DD0000">"&lt;b&gt;My NOTICE&lt;/b&gt; [</span><span style="color: #0000BB">$errno</span><span style="color: #DD0000">] </span><span style="color: #0000BB">$errstr</span><span style="color: #DD0000">&lt;br /&gt;\n"</span><span style="color: #007700">;<br />        break;<br /><br />    default:<br />        echo </span><span style="color: #DD0000">"Unknown error type: [</span><span style="color: #0000BB">$errno</span><span style="color: #DD0000">] </span><span style="color: #0000BB">$errstr</span><span style="color: #DD0000">&lt;br /&gt;\n"</span><span style="color: #007700">;<br />        break;<br />    }<br /><br />    </span><span style="color: #FF8000">/* Don't execute PHP internal error handler */<br />    </span><span style="color: #007700">return </span><span style="color: #0000BB">true</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #FF8000">// function to test the error handling<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">scale_by_log</span><span style="color: #007700">(</span><span style="color: #0000BB">$vect</span><span style="color: #007700">, </span><span style="color: #0000BB">$scale</span><span style="color: #007700">)<br />{<br />    if (!</span><span style="color: #0000BB">is_numeric</span><span style="color: #007700">(</span><span style="color: #0000BB">$scale</span><span style="color: #007700">) || </span><span style="color: #0000BB">$scale </span><span style="color: #007700">&lt;= </span><span style="color: #0000BB">0</span><span style="color: #007700">) {<br />        </span><span style="color: #0000BB">trigger_error</span><span style="color: #007700">(</span><span style="color: #DD0000">"log(x) for x &lt;= 0 is undefined, you used: scale = </span><span style="color: #0000BB">$scale</span><span style="color: #DD0000">"</span><span style="color: #007700">, </span><span style="color: #0000BB">E_USER_ERROR</span><span style="color: #007700">);<br />    }<br /><br />    if (!</span><span style="color: #0000BB">is_array</span><span style="color: #007700">(</span><span style="color: #0000BB">$vect</span><span style="color: #007700">)) {<br />        </span><span style="color: #0000BB">trigger_error</span><span style="color: #007700">(</span><span style="color: #DD0000">"Incorrect input vector, array of values expected"</span><span style="color: #007700">, </span><span style="color: #0000BB">E_USER_WARNING</span><span style="color: #007700">);<br />        return </span><span style="color: #0000BB">null</span><span style="color: #007700">;<br />    }<br /><br />    </span><span style="color: #0000BB">$temp </span><span style="color: #007700">= array();<br />    foreach(</span><span style="color: #0000BB">$vect </span><span style="color: #007700">as </span><span style="color: #0000BB">$pos </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">$value</span><span style="color: #007700">) {<br />        if (!</span><span style="color: #0000BB">is_numeric</span><span style="color: #007700">(</span><span style="color: #0000BB">$value</span><span style="color: #007700">)) {<br />            </span><span style="color: #0000BB">trigger_error</span><span style="color: #007700">(</span><span style="color: #DD0000">"Value at position </span><span style="color: #0000BB">$pos</span><span style="color: #DD0000"> is not a number, using 0 (zero)"</span><span style="color: #007700">, </span><span style="color: #0000BB">E_USER_NOTICE</span><span style="color: #007700">);<br />            </span><span style="color: #0000BB">$value </span><span style="color: #007700">= </span><span style="color: #0000BB">0</span><span style="color: #007700">;<br />        }<br />        </span><span style="color: #0000BB">$temp</span><span style="color: #007700">[</span><span style="color: #0000BB">$pos</span><span style="color: #007700">] = </span><span style="color: #0000BB">log</span><span style="color: #007700">(</span><span style="color: #0000BB">$scale</span><span style="color: #007700">) * </span><span style="color: #0000BB">$value</span><span style="color: #007700">;<br />    }<br /><br />    return </span><span style="color: #0000BB">$temp</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #FF8000">// set to the user defined error handler<br /></span><span style="color: #0000BB">$old_error_handler </span><span style="color: #007700">= </span><span style="color: #0000BB">set_error_handler</span><span style="color: #007700">(</span><span style="color: #DD0000">"myErrorHandler"</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// trigger some errors, first define a mixed array with a non-numeric item<br /></span><span style="color: #007700">echo </span><span style="color: #DD0000">"vector a\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$a </span><span style="color: #007700">= array(</span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #0000BB">3</span><span style="color: #007700">, </span><span style="color: #DD0000">"foo"</span><span style="color: #007700">, </span><span style="color: #0000BB">5.5</span><span style="color: #007700">, </span><span style="color: #0000BB">43.3</span><span style="color: #007700">, </span><span style="color: #0000BB">21.11</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// now generate second array<br /></span><span style="color: #007700">echo </span><span style="color: #DD0000">"----\nvector b - a notice (b = log(PI) * a)\n"</span><span style="color: #007700">;<br /></span><span style="color: #FF8000">/* Value at position $pos is not a number, using 0 (zero) */<br /></span><span style="color: #0000BB">$b </span><span style="color: #007700">= </span><span style="color: #0000BB">scale_by_log</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">, </span><span style="color: #0000BB">M_PI</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$b</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// this is trouble, we pass a string instead of an array<br /></span><span style="color: #007700">echo </span><span style="color: #DD0000">"----\nvector c - a warning\n"</span><span style="color: #007700">;<br /></span><span style="color: #FF8000">/* Incorrect input vector, array of values expected */<br /></span><span style="color: #0000BB">$c </span><span style="color: #007700">= </span><span style="color: #0000BB">scale_by_log</span><span style="color: #007700">(</span><span style="color: #DD0000">"not array"</span><span style="color: #007700">, </span><span style="color: #0000BB">2.3</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$c</span><span style="color: #007700">); </span><span style="color: #FF8000">// NULL<br /><br />// this is a critical error, log of zero or negative number is undefined<br /></span><span style="color: #007700">echo </span><span style="color: #DD0000">"----\nvector d - fatal error\n"</span><span style="color: #007700">;<br /></span><span style="color: #FF8000">/* log(x) for x &lt;= 0 is undefined, you used: scale = $scale" */<br /></span><span style="color: #0000BB">$d </span><span style="color: #007700">= </span><span style="color: #0000BB">scale_by_log</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">, -</span><span style="color: #0000BB">2.5</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$d</span><span style="color: #007700">); </span><span style="color: #FF8000">// Never reached<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例的输出类似于：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+vector a
+Array
+(
+    [0] =&gt; 2
+    [1] =&gt; 3
+    [2] =&gt; foo
+    [3] =&gt; 5.5
+    [4] =&gt; 43.3
+    [5] =&gt; 21.11
+)
+----
+vector b - a notice (b = log(PI) * a)
+&lt;b&gt;My NOTICE&lt;/b&gt; [1024] Value at position 2 is not a number, using 0 (zero)&lt;br /&gt;
+Array
+(
+    [0] =&gt; 2.2894597716988
+    [1] =&gt; 3.4341896575482
+    [2] =&gt; 0
+    [3] =&gt; 6.2960143721717
+    [4] =&gt; 49.566804057279
+    [5] =&gt; 24.165247890281
+)
+----
+vector c - a warning
+&lt;b&gt;My WARNING&lt;/b&gt; [512] Incorrect input vector, array of values expected&lt;br /&gt;
+NULL
+----
+vector d - fatal error
+&lt;b&gt;My ERROR&lt;/b&gt; [256] log(x) for x &lt;= 0 is undefined, you used: scale = -2.5&lt;br /&gt;
+  Fatal error on line 35 in file trigger_error.php, PHP 5.2.1 (FreeBSD)&lt;br /&gt;
+Aborting...&lt;br /&gt;
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.set-error-handler-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="classname"><a href="class.errorexception.html" class="classname">ErrorException</a></span></li>
+    <li class="member"><span class="function"><a href="function.error-reporting.html" class="function" rel="rdfs-seeAlso">error_reporting()</a> - 设置应该报告何种 PHP 错误</span></li>
+    <li class="member"><span class="function"><a href="function.restore-error-handler.html" class="function" rel="rdfs-seeAlso">restore_error_handler()</a> - 还原之前的错误处理函数</span></li>
+    <li class="member"><span class="function"><a href="function.trigger-error.html" class="function" rel="rdfs-seeAlso">trigger_error()</a> - 产生一个用户级别的 error/warning/notice 信息</span></li>
+    <li class="member"><a href="errorfunc.constants.html" class="link">error level constants</a></li>
+   </ul>
+  </p>
+ </div>
+
+</div></div></div></body></html>

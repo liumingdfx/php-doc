@@ -1,0 +1,336 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>状态页面</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="fpm.observability.html">« 可观察性</a></li>
+      <li style="float: right;"><a href="ref.fpm.html">FPM 函数 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="fpm.observability.html">可观察性</a></li>
+    <li>状态页面</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="fpm.status" class="sect1">
+ <h2 class="title">状态页面</h2>
+ 
+ <p class="para">
+  此页面提供 FPM 状态页面的设置和内容的相关信息。请参见 <span class="function"><a href="function.fpm-get-status.html" class="function">fpm_get_status()</a></span>。
+ </p>
+
+ <div class="sect2" id="fpm.status.configuration">
+  <h3 class="title">配置</h3>
+  
+  <p class="para">
+   可以在 FPM poll 配置中设置 <a href="install.fpm.configuration.html#pm.status-path" class="link">pm.status_path</a>
+   配置参数来启用 FPM 状态页面。
+  </p>
+
+  <div class="caution"><strong class="caution">警告</strong>
+   <p class="para">
+    为了安全，FPM 状态页面应仅限于内部请求或已知客户端 IP，因为该页面会显示请求 URL 和可用资源的有关信息。
+   </p>
+  </div>
+  
+  <p class="para">
+   取决于 Web 服务器配置，可能需要配置 Web 服务器允许绕过任何 PHP 脚本，直接请求该路径。Apache 在 UDS 上监听 FPM
+   并且 <code class="literal">pm.status_path</code> 设置为 <code class="literal">/fpm-status</code> 的配置示例看起来就像是这样：
+  </p>
+
+  <div class="informalexample">
+   <div class="example-contents">
+    <div class="apache-confcode"><pre class="apache-confcode">&lt;LocationMatch &quot;/fpm-status&quot;&gt;
+ Order Allow,Deny
+ Allow from 127.0.0.1
+ ProxyPass &quot;unix:/var/run/php-fpm.sock|fcgi://localhost/fpm-status&quot;
+&lt;/LocationMatch&gt;</pre>
+</div>
+   </div>
+
+  </div>
+
+  <p class="para">
+   重载/重启 FPM 和 Web 服务器后，可以从浏览器访问状态页面（如果配置了 IP 限制，请求只能来自允许的 IP）。
+  </p>
+ </div>
+
+ <div class="sect2" id="fpm.status.parameters">
+  <h3 class="title">查询参数</h3>
+
+  <p class="para">
+   可以指定以下某一查询参数来更改状态页面输出的格式：
+  </p>
+  
+  <ul class="simplelist">
+   <li class="member"><code class="literal">html</code></li>
+   <li class="member"><code class="literal">json</code></li>
+   <li class="member"><code class="literal">openmetrics</code></li>
+   <li class="member"><code class="literal">xml</code></li>
+  </ul>
+
+  <p class="para">
+   也可以使用 <code class="literal">full</code> 查询参数返回附加信息。
+  </p>
+  
+  <p class="para">
+   状态页面 URL 示例：
+  </p>
+  
+  <ul class="simplelist">
+   <li class="member">
+    <code class="literal">https://localhost/fpm-status</code>
+    ——默认文本格式的简短输出
+   </li>
+   <li class="member">
+    <code class="literal">https://localhost/fpm-status?full</code>
+    ——默认文本格式的完整输出
+   </li>
+   <li class="member">
+    <code class="literal">https://localhost/fpm-status?json</code>
+    ——JSON 格式的简短输出
+   </li>
+   <li class="member">
+    <code class="literal">https://localhost/fpm-status?html&amp;full</code>
+    ——HTML 格式的完整输出
+   </li>
+  </ul>
+ </div>
+ 
+ <div class="sect2" id="fpm.status.contents">
+  <h3 class="title">显示信息</h3>
+
+  <p class="para">
+   日期/时间值在 JSON/XML 输出中使用 unix 时间戳格式，否则将生成以下示例日期
+   <code class="literal">&quot;03/Jun/2021:07:21:46 +0100&quot;</code>。
+  </p>
+  
+  <table class="doctable table">
+   <caption><strong>基础信息——始终在状态页面显示</strong></caption>
+   
+    <thead>
+     <tr>
+      <th>参数</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>pool</td>
+      <td>FPM 进程池的名称。</td>
+     </tr>
+
+     <tr>
+      <td>proccess manager</td>
+      <td>进程管理器类型——static、dynamic 或 ondemand。</td>
+     </tr>
+
+     <tr>
+      <td>start time</td>
+      <td>进程池最后一次启动的日期/时间。</td>
+     </tr>
+
+     <tr>
+      <td>start since</td>
+      <td>进程自启动以来的秒数。</td>
+     </tr>
+
+     <tr>
+      <td>accepted conn</td>
+      <td>服务的请求总数</td>
+     </tr>
+
+     <tr>
+      <td>listen queue</td>
+      <td>当前等待空闲进程的请求（backlog）总数。</td>
+     </tr>
+
+     <tr>
+      <td>max listen queue</td>
+      <td>监听队列在任一时间看到的最大请求数。</td>
+     </tr>
+
+     <tr>
+      <td>listen queue len</td>
+      <td>监听队列的最大允许数量。</td>
+     </tr>
+
+     <tr>
+      <td>idle processes</td>
+      <td>当前空闲（等待请求）的进程数。</td>
+     </tr>
+
+     <tr>
+      <td>active processes</td>
+      <td>当前正在处理请求的进程数。</td>
+     </tr>
+
+     <tr>
+      <td>total processes</td>
+      <td>当前进程总数。</td>
+     </tr>
+
+     <tr>
+      <td>max active processes</td>
+      <td>并发活动进程的最大数量。</td>
+     </tr>
+
+     <tr>
+      <td>max children reached</td>
+      <td>
+       是否达到了最大进程数？如果是，则值显示为 <code class="literal">1</code>，否则为 <code class="literal">0</code>。
+      </td>
+     </tr>
+
+     <tr>
+      <td>slow requests</td>
+      <td>
+       达到配置 <code class="literal">request_slowlog_timeout</code> 的请求总数。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+
+  <table class="doctable table">
+   <caption><strong>每个进程的信息——仅在 <code class="literal">full</code> 输出模式中显示</strong></caption>
+   
+    <thead>
+     <tr>
+      <th>参数</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>pid</td>
+      <td>进程的系统 PID。</td>
+     </tr>
+
+     <tr>
+      <td>state</td>
+      <td>进程状态——空闲、运行……</td>
+     </tr>
+
+     <tr>
+      <td>start time</td>
+      <td>进程开始的日期/时间。</td>
+     </tr>
+
+     <tr>
+      <td>start since</td>
+      <td>进程自启动以来的秒数。</td>
+     </tr>
+
+     <tr>
+      <td>requests</td>
+      <td>最大服务请求数。</td>
+     </tr>
+
+     <tr>
+      <td>request duration</td>
+      <td>服务请求所花费的总时间（以秒为单位）。</td>
+     </tr>
+
+     <tr>
+      <td>request method</td>
+      <td>最后服务请求的 HTTP 方法。</td>
+     </tr>
+
+     <tr>
+      <td>request uri</td>
+      <td>
+       最后服务请求的 URI（在 Web 服务器处理后，如果使用前端控制器模式重定向，将始终是 <code class="literal">/index.php</code>）。
+      </td>
+     </tr>
+
+     <tr>
+      <td>content length</td>
+      <td>最后一个请求的请求正文长度，以字节为单位。</td>
+     </tr>
+
+     <tr>
+      <td>user</td>
+      <td>最后一个请求的 HTTP 用户（<code class="literal">PHP_AUTH_USER</code>）。</td>
+     </tr>
+
+     <tr>
+      <td>script</td>
+      <td>
+       最后一个请求执行的执行脚本的完整路径。如果不适用（比如状态页面请求），将是 <code class="literal">&#039;-&#039;</code>。
+      </td>
+     </tr>
+
+     <tr>
+      <td>last request cpu</td>
+      <td>
+       最后一个请求的 %cpu。如果进程不空闲，将为 0，因为进程是在请求处理完成时进行计算的。
+      </td>
+     </tr>
+
+     <tr>
+      <td>last request memory</td>
+      <td>
+       最后一个请求消耗的最大内存量。如果进程不空闲，将为 0，因为进程是在请求处理完成时进行计算的。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    当 FPM 重启时，重置所有池指定的值。
+   </p>
+  </p></blockquote>
+
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    openMetrics 格式输出使用不同的参数类型以便更好的适应 OpenMetrics 格式。参数和值的说明包含在 OpenMetrics 格式输出中。
+   </p>
+  </p></blockquote>
+ </div>
+
+ <div class="sect2">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>8.1.0</td>
+      <td>新增 openmetrics 格式。</td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+</div></div></div></body></html>

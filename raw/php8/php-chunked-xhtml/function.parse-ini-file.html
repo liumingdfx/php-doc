@@ -1,0 +1,384 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>解析一个配置文件</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.move-uploaded-file.html">« move_uploaded_file</a></li>
+      <li style="float: right;"><a href="function.parse-ini-string.html">parse_ini_string »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.filesystem.html">文件系统函数</a></li>
+    <li>解析一个配置文件</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.parse-ini-file" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">parse_ini_file</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">parse_ini_file</span> &mdash; <span class="dc-title">解析一个配置文件</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.parse-ini-file-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>parse_ini_file</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$filename</code></span>, <span class="methodparam"><span class="type">bool</span> <code class="parameter">$process_sections</code><span class="initializer"> = <strong><code>false</code></strong></span></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$scanner_mode</code><span class="initializer"> = <strong><code>INI_SCANNER_NORMAL</code></strong></span></span>): <span class="type"><span class="type">array</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>parse_ini_file()</strong></span> 载入一个由
+   <code class="parameter">filename</code> 指定的 ini
+   文件，并将其中的设置作为一个关联数组返回。
+  </p>
+  <p class="para">
+   ini 文件的结构和 <var class="filename">php.ini</var> 的相同。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.parse-ini-file-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">filename</code></dt>
+
+     <dd>
+
+      <p class="para">
+       要解析的 ini 文件的文件名。如果使用相对路径，则优先在相对于当前工作目录的目录中查找文件，如果未找到则在
+       <a href="ini.core.html#ini.include-path" class="link">include_path</a> 中查找文件进行解析。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">process_sections</code></dt>
+
+     <dd>
+
+      <p class="para">
+       如果将 <code class="parameter">process_sections</code> 参数设为
+       <strong><code>true</code></strong>，将得到多维数组，包括了配置文件中的节名和配置。<code class="parameter">process_sections</code>
+       的默认值是 <strong><code>false</code></strong>。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">scanner_mode</code></dt>
+
+     <dd>
+
+      <p class="para">
+       可以是 <strong><code>INI_SCANNER_NORMAL</code></strong>（默认），也可以是
+       <strong><code>INI_SCANNER_RAW</code></strong>。如果提供了
+       <strong><code>INI_SCANNER_RAW</code></strong>，然后将不会解析选项值。
+      </p>
+      <p class="para">
+    As of PHP 5.6.1 can also be specified as <strong><code>INI_SCANNER_TYPED</code></strong>.
+    In this mode boolean, null and integer types are preserved when possible.
+    String values <code class="literal">&quot;true&quot;</code>, <code class="literal">&quot;on&quot;</code> and <code class="literal">&quot;yes&quot;</code>
+    are converted to <strong><code>true</code></strong>. <code class="literal">&quot;false&quot;</code>, <code class="literal">&quot;off&quot;</code>, <code class="literal">&quot;no&quot;</code>
+    and <code class="literal">&quot;none&quot;</code> are considered <strong><code>false</code></strong>. <code class="literal">&quot;null&quot;</code> is converted to <strong><code>null</code></strong>
+    in typed mode. Also, all numeric strings are converted to integer type if it is possible.
+   </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 returnvalues" id="refsect1-function.parse-ini-file-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   成功时以关联数组 <span class="type">array</span> 返回设置，失败时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.parse-ini-file-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 <var class="filename">sample.ini</var> 的内容</strong></p>
+    <div class="example-contents">
+<div class="cdata"><pre>
+; This is a sample configuration file
+; Comments start with &#039;;&#039;, as in php.ini
+
+[first_section]
+one = 1
+five = 5
+animal = BIRD
+
+[second_section]
+path = &quot;/usr/local/bin&quot;
+URL = &quot;http://www.example.com/~username&quot;
+
+[third_section]
+phpversion[] = &quot;5.0&quot;
+phpversion[] = &quot;5.1&quot;
+phpversion[] = &quot;5.2&quot;
+phpversion[] = &quot;5.3&quot;
+
+urls[svn] = &quot;http://svn.php.net&quot;
+urls[git] = &quot;http://git.php.net&quot;
+</pre></div>
+    </div>
+
+   </div>
+   <div class="example" id="">
+    <p><strong>示例 #2 <span class="function"><strong>parse_ini_file()</strong></span> 例子</strong></p>
+    <div class="example-contents"><p>
+     <a href="language.constants.html" class="link">常量</a>（并非像
+     <strong><code>__FILE__</code></strong> 之类的“魔术常量”）也可以在 ini
+     文件中被解析，因此如果在运行 <span class="function"><strong>parse_ini_file()</strong></span>
+     之前定义了常量作为 ini 的值，将会被集成到结果中去。只有 ini
+     的值会被求值，且该值必须是常量。例如：
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />define</span><span style="color: #007700">(</span><span style="color: #DD0000">'BIRD'</span><span style="color: #007700">, </span><span style="color: #DD0000">'Dodo bird'</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// Parse without sections<br /></span><span style="color: #0000BB">$ini_array </span><span style="color: #007700">= </span><span style="color: #0000BB">parse_ini_file</span><span style="color: #007700">(</span><span style="color: #DD0000">"sample.ini"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$ini_array</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// Parse with sections<br /></span><span style="color: #0000BB">$ini_array </span><span style="color: #007700">= </span><span style="color: #0000BB">parse_ini_file</span><span style="color: #007700">(</span><span style="color: #DD0000">"sample.ini"</span><span style="color: #007700">, </span><span style="color: #0000BB">true</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$ini_array</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例的输出类似于：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+    [one] =&gt; 1
+    [five] =&gt; 5
+    [animal] =&gt; Dodo bird
+    [path] =&gt; /usr/local/bin
+    [URL] =&gt; http://www.example.com/~username
+    [phpversion] =&gt; Array
+        (
+            [0] =&gt; 5.0
+            [1] =&gt; 5.1
+            [2] =&gt; 5.2
+            [3] =&gt; 5.3
+        )
+
+    [urls] =&gt; Array
+        (
+            [svn] =&gt; http://svn.php.net
+            [git] =&gt; http://git.php.net
+        )
+
+)
+Array
+(
+    [first_section] =&gt; Array
+        (
+            [one] =&gt; 1
+            [five] =&gt; 5
+            [animal] =&gt; Dodo bird
+        )
+
+    [second_section] =&gt; Array
+        (
+            [path] =&gt; /usr/local/bin
+            [URL] =&gt; http://www.example.com/~username
+        )
+
+    [third_section] =&gt; Array
+        (
+            [phpversion] =&gt; Array
+                (
+                    [0] =&gt; 5.0
+                    [1] =&gt; 5.1
+                    [2] =&gt; 5.2
+                    [3] =&gt; 5.3
+                )
+
+            [urls] =&gt; Array
+                (
+                    [svn] =&gt; http://svn.php.net
+                    [git] =&gt; http://git.php.net
+                )
+
+        )
+
+)
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #3 <span class="function"><strong>parse_ini_file()</strong></span> 格式化 php.ini 文件</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// 简单的函数，用于比较下面的结果<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">yesno</span><span style="color: #007700">(</span><span style="color: #0000BB">$expression</span><span style="color: #007700">)<br />{<br />    return(</span><span style="color: #0000BB">$expression </span><span style="color: #007700">? </span><span style="color: #DD0000">'Yes' </span><span style="color: #007700">: </span><span style="color: #DD0000">'No'</span><span style="color: #007700">);<br />}<br /><br /></span><span style="color: #FF8000">// 使用 php_ini_loaded_file() 函数获取 php.ini 的路径<br /></span><span style="color: #0000BB">$ini_path </span><span style="color: #007700">= </span><span style="color: #0000BB">php_ini_loaded_file</span><span style="color: #007700">();<br /><br /></span><span style="color: #FF8000">// 解析 php.ini<br /></span><span style="color: #0000BB">$ini </span><span style="color: #007700">= </span><span style="color: #0000BB">parse_ini_file</span><span style="color: #007700">(</span><span style="color: #0000BB">$ini_path</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// Print and compare the values, note that using get_cfg_var()<br />// will give the same results for parsed and loaded here<br /></span><span style="color: #007700">echo </span><span style="color: #DD0000">'(parsed) magic_quotes_gpc = ' </span><span style="color: #007700">. </span><span style="color: #0000BB">yesno</span><span style="color: #007700">(</span><span style="color: #0000BB">$ini</span><span style="color: #007700">[</span><span style="color: #DD0000">'magic_quotes_gpc'</span><span style="color: #007700">]) . </span><span style="color: #0000BB">PHP_EOL</span><span style="color: #007700">;<br />echo </span><span style="color: #DD0000">'(loaded) magic_quotes_gpc = ' </span><span style="color: #007700">. </span><span style="color: #0000BB">yesno</span><span style="color: #007700">(</span><span style="color: #0000BB">get_cfg_var</span><span style="color: #007700">(</span><span style="color: #DD0000">'magic_quotes_gpc'</span><span style="color: #007700">)) . </span><span style="color: #0000BB">PHP_EOL</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例的输出类似于：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+(parsed) magic_quotes_gpc = Yes
+(loaded) magic_quotes_gpc = Yes
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #4 内插值</strong></p>
+    <div class="example-contents"><p>
+     除了对常量求值之外，某些字符在 ini 值中具有特殊含义。此外，可以使用 <code class="code">${}</code>
+     语法读取环境变量和之前定义的配置项（参阅 <span class="function"><a href="function.get-cfg-var.html" class="function">get_cfg_var()</a></span>）。
+    </p></div>
+    <div class="example-contents">
+<div class="cdata"><pre>
+; | is used for bitwise OR
+three = 2|3
+
+; &amp; is used for bitwise AND
+four = 6&amp;5
+
+; ^ is used for bitwise XOR
+five = 3^6
+
+; ~ is used for bitwise negate
+negative_two = ~1
+
+; () is used for grouping
+seven = (8|7)&amp;(6|5)
+
+; Interpolate the PATH environment variable
+path = ${PATH}
+
+; Interpolate the configuration option &#039;memory_limit&#039;
+configured_memory_limit = ${memory_limit}
+
+</pre></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #5 转义字符</strong></p>
+    <div class="example-contents"><p>
+     Some characters have special meaning in double-quoted strings and must be escaped by the backslash prefix.
+     First of all, these are the double quote <code class="code">&quot;</code> as the boundary marker, and the backslash <code class="code">\</code> itself
+     (if followed by one of the special characters):
+    </p></div>
+    <div class="example-contents">
+<div class="cdata"><pre>
+quoted = &quot;She said \&quot;Exactly my point\&quot;.&quot; ; Results in a string with quote marks in it.
+hint = &quot;Use \\\&quot; to escape double quote&quot; ; Results in: Use \&quot; to escape double quote
+</pre></div>
+    </div>
+
+    <div class="example-contents"><p>
+     There is an exception made for Windows-like paths: it&#039;s possible to not escape trailing backslash
+     if the quoted string is directly followed by a linebreak:
+    </p></div>
+    <div class="example-contents">
+<div class="cdata"><pre>
+save_path = &quot;C:\Temp\&quot;
+</pre></div>
+    </div>
+
+    <div class="example-contents"><p>
+     If one does need to escape double quote followed by linebreak in a multiline value,
+     it&#039;s possible to use value concatenation in the following way
+     (there is one double-quoted string directly followed by another one):
+    </p></div>
+    <div class="example-contents">
+<div class="cdata"><pre>
+long_text = &quot;Lorem \&quot;ipsum\&quot;&quot;&quot;
+ dolor&quot; ; Results in: Lorem &quot;ipsum&quot;\n dolor
+</pre></div>
+    </div>
+
+    <div class="example-contents"><p>
+     Another character with special meaning is <code class="code">$</code> (the dollar sign).
+     It must be escaped if followed by the open curly brace:
+    </p></div>
+    <div class="example-contents">
+<div class="cdata"><pre>
+code = &quot;\${test}&quot;
+</pre></div>
+    </div>
+
+    <div class="example-contents"><p>
+     <strong><code>INI_SCANNER_RAW</code></strong> 模式不支持转义字符（在此模式下，所有字符都会“不做任何处理”）。
+    </p></div>
+    <div class="example-contents"><p>
+     注意 ini 解析器不支持标准转义序列（<code class="code">\n</code>、<code class="code">\t</code> 等）。如有必要，使用
+     <span class="function"><a href="function.stripcslashes.html" class="function">stripcslashes()</a></span> 函数对 <span class="function"><strong>parse_ini_file()</strong></span>
+     后的结果进行后处理。
+    </p></div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.parse-ini-file-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    本函数和 <var class="filename">php.ini</var>
+    文件无关，该文件在运行脚本时就已经处理过了。本函数可以用来读取应用程序的配置文件。
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    如果 ini 文件中的值包含任何非字母数字的字符，需要将其括在双引号中（&quot;）。
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <span class="simpara">
+    有些保留字不能作为 ini
+    文件中的键名，包括：<code class="literal">null</code>、<code class="literal">yes</code>、<code class="literal">no</code>、<code class="literal">true</code>、<code class="literal">false</code>、<code class="literal">on</code>、<code class="literal">off</code>、<code class="literal">none</code>。除非使用
+    <strong><code>INI_SCANNER_TYPED</code></strong> 模式，否则
+    <code class="literal">null</code>、<code class="literal">off</code>、<code class="literal">no</code> 和
+    <code class="literal">false</code> 的值等效于
+    <code class="literal">&quot;&quot;</code>，<code class="literal">on</code>、<code class="literal">yes</code> 和 <code class="literal">true</code>
+    的值等效于 <code class="literal">&quot;1&quot;</code>。字符 <code class="literal">?{}|&amp;~!()^&quot;</code>
+    也不能用在键名的任何地方，而且这些字符在选项值中有着特殊的意义。
+   </span>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    不带等号的条目会忽略。例如“foo”会忽略，而“bar =”将会解析并添加空值。例如，会忽略
+    MySQL 在 <var class="filename">my.cnf</var> 中不带值的“no-auto-rehash”设置。
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    ini 文件通常被 Web 服务器视为纯文本，因此在请求时会提供给浏览器。这意味着为了安全起见，必须将 ini
+    文件保存在 docroot 之外，或者重新配置 Web 服务器，不会提供这些文件。如果不这么做，可能会带来安全风险。
+   </p>
+  </p></blockquote>
+ </div>
+
+ 
+ <div class="refsect1 seealso" id="refsect1-function.parse-ini-file-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.parse-ini-string.html" class="function" rel="rdfs-seeAlso">parse_ini_string()</a> - 解析配置字符串</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

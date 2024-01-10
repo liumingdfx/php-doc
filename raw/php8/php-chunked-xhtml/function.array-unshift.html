@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>在数组开头插入一个或多个单元</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.array-unique.html">« array_unique</a></li>
+      <li style="float: right;"><a href="function.array-values.html">array_values »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.array.html">数组 函数</a></li>
+    <li>在数组开头插入一个或多个单元</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.array-unshift" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">array_unshift</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">array_unshift</span> &mdash; <span class="dc-title">在数组开头插入一个或多个单元</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.array-unshift-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>array_unshift</strong></span>(<span class="methodparam"><span class="type">array</span> <code class="parameter reference">&$array</code></span>, <span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">...$values</code></span>): <span class="type">int</span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>array_unshift()</strong></span> 将传入的单元插入到 <code class="parameter">array</code>
+   数组的开头。注意单元是作为整体被插入的，因此传入单元将保持同样的顺序。所有的数值键名将修改为从零开始重新计数，所有的文字键名保持不变。
+  </p>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+ <p class="para">
+    重置数组中的内部指针，指向第一个元素。
+ </p>
+</p></blockquote>
+
+ </div>
+
+ <div class="refsect1 parameters" id="refsect1-function.array-unshift-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">array</code></dt>
+
+     <dd>
+
+      <p class="para">
+       输入的数组。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">values</code></dt>
+
+     <dd>
+
+      <p class="para">
+       插入的变量。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+ <div class="refsect1 returnvalues" id="refsect1-function.array-unshift-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回 <code class="parameter">array</code> 数组新的单元数目。
+  </p>
+ </div>
+
+   
+ <div class="refsect1 changelog" id="refsect1-function.array-unshift-changelog">
+  <h3 class="title">更新日志</h3>
+  <p class="para">
+   <table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>7.3.0</td>
+       <td>
+        现在可以只用一个参数来调用，之前至少需要两个参数。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </div>
+
+   
+ <div class="refsect1 examples" id="refsect1-function.array-unshift-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 <span class="function"><strong>array_unshift()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$queue </span><span style="color: #007700">= [<br />    </span><span style="color: #DD0000">"orange"</span><span style="color: #007700">,<br />    </span><span style="color: #DD0000">"banana"<br /></span><span style="color: #007700">];<br /><br /></span><span style="color: #0000BB">array_unshift</span><span style="color: #007700">(</span><span style="color: #0000BB">$queue</span><span style="color: #007700">, </span><span style="color: #DD0000">"apple"</span><span style="color: #007700">, </span><span style="color: #DD0000">"raspberry"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$queue</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+array(4) {
+  [0] =&gt;
+  string(5) &quot;apple&quot;
+  [1] =&gt;
+  string(9) &quot;raspberry&quot;
+  [2] =&gt;
+  string(6) &quot;orange&quot;
+  [3] =&gt;
+  string(6) &quot;banana&quot;
+}
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #2 关联数组用法</strong></p>
+    <div class="example-contents"><p>
+     如果一个关联数组添加到另一个关联数组开头，则添加到开头的数组将数字索引到前者的数组中。
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$foods </span><span style="color: #007700">= [<br />    </span><span style="color: #DD0000">'apples' </span><span style="color: #007700">=&gt; [<br />        </span><span style="color: #DD0000">'McIntosh' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'red'</span><span style="color: #007700">,<br />        </span><span style="color: #DD0000">'Granny Smith' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'green'</span><span style="color: #007700">,<br />    ],<br />    </span><span style="color: #DD0000">'oranges' </span><span style="color: #007700">=&gt; [<br />        </span><span style="color: #DD0000">'Navel' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'orange'</span><span style="color: #007700">,<br />        </span><span style="color: #DD0000">'Valencia' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'orange'</span><span style="color: #007700">,<br />    ],<br />];<br /></span><span style="color: #0000BB">$vegetables </span><span style="color: #007700">= [<br />    </span><span style="color: #DD0000">'lettuce' </span><span style="color: #007700">=&gt; [<br />        </span><span style="color: #DD0000">'Iceberg' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'green'</span><span style="color: #007700">,<br />        </span><span style="color: #DD0000">'Butterhead' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'green'</span><span style="color: #007700">,<br />    ],<br />    </span><span style="color: #DD0000">'carrots' </span><span style="color: #007700">=&gt; [<br />        </span><span style="color: #DD0000">'Deep Purple Hybrid' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'purple'</span><span style="color: #007700">,<br />        </span><span style="color: #DD0000">'Imperator' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'orange'</span><span style="color: #007700">,<br />    ],<br />    </span><span style="color: #DD0000">'cucumber' </span><span style="color: #007700">=&gt; [<br />        </span><span style="color: #DD0000">'Kirby' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'green'</span><span style="color: #007700">,<br />        </span><span style="color: #DD0000">'Gherkin' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'green'</span><span style="color: #007700">,<br />    ],<br />];<br /><br /></span><span style="color: #0000BB">array_unshift</span><span style="color: #007700">(</span><span style="color: #0000BB">$foods</span><span style="color: #007700">, </span><span style="color: #0000BB">$vegetables</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$foods</span><span style="color: #007700">);</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+array(3) {
+  [0] =&gt;
+  array(3) {
+    &#039;lettuce&#039; =&gt;
+    array(2) {
+      &#039;Iceberg&#039; =&gt;
+      string(5) &quot;green&quot;
+      &#039;Butterhead&#039; =&gt;
+      string(5) &quot;green&quot;
+    }
+    &#039;carrots&#039; =&gt;
+    array(2) {
+      &#039;Deep Purple Hybrid&#039; =&gt;
+      string(6) &quot;purple&quot;
+      &#039;Imperator&#039; =&gt;
+      string(6) &quot;orange&quot;
+    }
+    &#039;cucumber&#039; =&gt;
+    array(2) {
+      &#039;Kirby&#039; =&gt;
+      string(5) &quot;green&quot;
+      &#039;Gherkin&#039; =&gt;
+      string(5) &quot;green&quot;
+    }
+  }
+  &#039;apples&#039; =&gt;
+  array(2) {
+    &#039;McIntosh&#039; =&gt;
+    string(3) &quot;red&quot;
+    &#039;Granny Smith&#039; =&gt;
+    string(5) &quot;green&quot;
+  }
+  &#039;oranges&#039; =&gt;
+  array(2) {
+    &#039;Navel&#039; =&gt;
+    string(6) &quot;orange&quot;
+    &#039;Valencia&#039; =&gt;
+    string(6) &quot;orange&quot;
+  }
+}
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+ <div class="refsect1 seealso" id="refsect1-function.array-unshift-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.array-merge.html" class="function" rel="rdfs-seeAlso">array_merge()</a> - 合并一个或多个数组</span></li>
+    <li class="member"><span class="function"><a href="function.array-shift.html" class="function" rel="rdfs-seeAlso">array_shift()</a> - 将数组开头的单元移出数组</span></li>
+    <li class="member"><span class="function"><a href="function.array-push.html" class="function" rel="rdfs-seeAlso">array_push()</a> - 将一个或多个单元压入数组的末尾（入栈）</span></li>
+    <li class="member"><span class="function"><a href="function.array-pop.html" class="function" rel="rdfs-seeAlso">array_pop()</a> - 弹出数组最后一个单元（出栈）</span></li>
+   </ul>
+  </p>
+ </div>
+
+  </div></div></div></body></html>

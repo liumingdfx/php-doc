@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>不向后兼容的变更</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="migration83.constants.html">« 新的全局常量</a></li>
+      <li style="float: right;"><a href="migration83.deprecated.html">弃用功能 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="migration83.html">从 PHP 8.2.x 移植到 PHP 8.3.x</a></li>
+    <li>不向后兼容的变更</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="migration83.incompatible" class="sect1">
+ <h2 class="title">不向后兼容的变更</h2>
+
+ <div class="sect2" id="migration83.incompatible.core">
+  <h3 class="title">PHP 核心</h3>
+
+  <div class="sect3" id="migration83.incompatible.core.overflowing-call-stack">
+
+   <h4 class="title">调用栈非常接近溢出的程序</h4>
+   <p class="para">
+    当使用超过 zend.max_allowed_stack_size-zend.reserved_stack_size
+    字节的栈，导致调用栈非常接近溢出的程序现在可能会抛出错误。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.incompatible.core.proc-get-status-multiple-times">
+   <h4 class="title">多次执行 proc_get_status()</h4>
+   <p class="para">
+    在 POSIX 系统上多次执行 <span class="function"><a href="function.proc-get-status.html" class="function">proc_get_status()</a></span> 现在将始终返回正确的值。以前，函数只有在第一次调用时才会返回正确的值。<span class="function"><a href="function.proc-get-status.html" class="function">proc_get_status()</a></span>
+    之后执行 <span class="function"><a href="function.proc-close.html" class="function">proc_close()</a></span> 现在也会返回正确的退出码。之前会返回 <code class="literal">-1</code>。
+    在内部，这是通过缓存 POSIX 系统的结果实现的。如果需要之前的行为，可以检测 <span class="function"><a href="function.proc-get-status.html" class="function">proc_get_status()</a></span>
+    返回数组中的 <code class="literal">&quot;cached&quot;</code> 键，以检查结果是否已经缓存。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.incompatible.core.zend-max-execution-timers">
+   <h4 class="title">Zend Max Execution Timers</h4>
+   <p class="para">
+    在 Linux 上，Zend Max Execution Timers 在 ZTS 编译中默认启用。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.incompatible.core.traits-with-static-properties">
+   <h4 class="title">使用带静态属性的 trait</h4>
+   <p class="para">
+    使用带静态属性的 trait 现在会重新声明从父类继承的静态属性。这将为当前类创建单独的静态属性存储。这与不使用
+    trait 而将静态属性直接添加到当前类中类似。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.incompatible.core.negative-index-to-empty-array">
+   <h4 class="title">赋值负数索引到空数组</h4>
+   <p class="para">
+    现在将负数索引 <var class="varname">$n</var> 赋值给空数组，将确保下一个索引为 <code class="code">$n+1</code> 而不是 <code class="literal">0</code>。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.incompatible.core.class-constant-visibility-check">
+   <h4 class="title">类常量可见性差别检查</h4>
+   <p class="para">
+    从接口进行继承时，现在会正确的检查类常量的可见性差别。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration83.incompatible.core.weakmap-entries-maps-to-itself">
+   <h4 class="title">键映射到自身的 WeakMap 条目</h4>
+   <p class="para">
+    如果该键只能通过迭代 WeakMap（认为通过迭代可达是弱可达性）才能访问到，那么在循环回收期间，现在可以删除键映射到自身（可能是传递）的
+    <span class="classname"><a href="class.weakmap.html" class="classname">WeakMap</a></span> 条目。
+   </p>
+  </div>
+ </div>
+
+ <div class="sect2" id="migration83.incompatible.date">
+  <h3 class="title">Date</h3>
+
+  <p class="para">
+   DateTime 扩展在 <span class="classname"><a href="class.dateerror.html" class="classname">DateError</a></span> 和 <span class="classname"><a href="class.dateexception.html" class="classname">DateException</a></span> 层次结构下引入了特定于
+   Date 扩展的 exception 和 error，而不是 warning 和通用 exception。这改善了错误处理，但需要检查 error 和 exception。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration83.incompatible.dom">
+  <h3 class="title">DOM</h3>
+
+  <p class="para">
+   现在对于没有父节点的节点调用 <span class="methodname"><a href="domchildnode.after.html" class="methodname">DOMChildNode::after()</a></span>、<span class="methodname"><a href="domchildnode.before.html" class="methodname">DOMChildNode::before()</a></span>
+   和 <span class="methodname"><a href="domchildnode.replacewith.html" class="methodname">DOMChildNode::replaceWith()</a></span> 时不会有任何操作，不会抛出层级结构异常，这是 DOM 规范要求的行为。
+  </p>
+
+  <p class="para">
+   在没有文档的时候使用 <span class="classname"><a href="class.domparentnode.html" class="classname">DOMParentNode</a></span> 和 <span class="classname"><a href="class.domchildnode.html" class="classname">DOMChildNode</a></span>
+   方法可以正常工作，而不会抛出 <strong><code>DOM_HIERARCHY_REQUEST_ERR</code></strong>
+   <span class="classname"><a href="class.domexception.html" class="classname">DOMException</a></span>。这与 DOM 规范要求的行为一致。
+  </p>
+
+  <p class="para">
+   不带指定前缀就调用 <span class="methodname"><a href="domdocument.createattributens.html" class="methodname">DOMDocument::createAttributeNS()</a></span>
+   将错误的创建默认命名空间，并将元素放入到命名空间而不是元素中。这个错误现在已经修复。
+  </p>
+
+  <p class="para">
+   当前缀已用于不同的 URI，<span class="methodname"><a href="domdocument.createattributens.html" class="methodname">DOMDocument::createAttributeNS()</a></span> 之前会错误的抛出
+   <strong><code>DOM_NAMESPACE_ERRNAMESPACE_ERR</code></strong>
+   <span class="classname"><a href="class.domexception.html" class="classname">DOMException</a></span>。现在当前缀名称存在冲突时，将会正确的选择不同前缀。
+  </p>
+
+  <p class="para">
+   为一些 DOM 类添加了新的方法和属性。如果用户空间类继承了这些类并声明了相同的属性和方法，则这些声明必须兼容。否则将会抛出典型的声明不兼容的编译错误。参阅<a href="migration83.new-features.html#migration83.new-features.dom" class="link">新功能列表</a>和<a href="migration83.new-functions.html#migration83.new-functions.dom" class="link">新函数</a>列表已获取新实现的方法和属性。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration83.incompatible.ffi">
+  <h3 class="title">FFI</h3>
+
+  <p class="para">
+   当 C 函数有 <span class="type"><span class="type void">void</span></span> 返回类型时，现在返回 <strong><code>null</code></strong>，而不是返回对象 <code class="literal">object(FFI\CData:void) { }</code>
+  </p>
+ </div>
+
+ <div class="sect2" id="migration83.incompatible.opcache">
+  <h3 class="title">Opcache</h3>
+
+  <p class="para">
+   移除了 <a href="opcache.configuration.html#ini.opcache.consistency-checks" class="link">opcache.consistency_checks</a> INI 指令。此功能与 tracing JIT
+   以及继承缓存不兼容，自 PHP 8.1.18 和 PHP 8.2.5 起，已禁用此功能，无法启用。脚本持久化后，因其检验和无效，导致 tracing JIT
+   以及继承缓存会修改 shm。尝试修复可跳过的可修改指针，但由于复杂性而被拒绝。因此决定移除此功能。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration83.incompatible.phar">
+  <h3 class="title">Phar</h3>
+
+  <p class="para">
+   <span class="classname"><a href="class.phar.html" class="classname">Phar</a></span> 类常量的类型现在已声明。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration83.incompatible.standard">
+  <h3 class="title">标准</h3>
+
+  <p class="para">
+   <span class="function"><a href="function.range.html" class="function">range()</a></span> 函数已经进行了各种更改：
+   <ul class="simplelist">
+    <li class="member">当传递 <span class="type">object</span>、<span class="type">resource</span> 或 <span class="type">array</span> 作为边界输入时，现在会抛出 <span class="classname"><a href="class.typeerror.html" class="classname">TypeError</a></span>。</li>
+    <li class="member">当传递 <code class="literal">0</code> 作为 <code class="parameter">$step</code> 时，现在会抛出更具描述性的 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。</li>
+    <li class="member">使用负数 <code class="parameter">$step</code> 作为自增范围时现在会抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。</li>
+    <li class="member">如果 <code class="parameter">$step</code> 可以解释为整数的浮点数，那么现在就可以这样做。</li>
+    <li class="member">如果任意参数是无穷大或者 NAN，现在会抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。</li>
+    <li class="member">如果 <code class="parameter">$start</code> 或 <code class="parameter">$end</code> 是空字符串，现在会触发
+     <strong><code>E_WARNING</code></strong>。值将会转换为 <code class="literal">0</code>。</li>
+    <li class="member">如果 <code class="parameter">$start</code> 或 <code class="parameter">$end</code> 超过 1
+     字节时，仅当其为非数字字符串时，现在会触发 <strong><code>E_WARNING</code></strong>。</li>
+    <li class="member">如果 <code class="parameter">$start</code> 或 <code class="parameter">$end</code> 因为其它边界输入是数字（例如
+     <code class="code">range(5, &#039;z&#039;);</code>）导致强制转换为整数，现在会触发 <strong><code>E_WARNING</code></strong>。</li>
+    <li class="member">当尝试生成字符范围时，如果 <code class="parameter">$step</code> 时浮点数，除非两个边界输入都是输字符串（例如
+     <code class="code">range(&#039;5&#039;, &#039;9&#039;, 0.5);</code> 不会产生警告），否则会触发 <strong><code>E_WARNING</code></strong>。</li>
+    <li class="member">如果其中一个边界是数字字符串，另一个边界输入不转换为数字（例如 <code class="code">range(&#039;9&#039;, &#039;A&#039;);</code>），现在
+     <span class="function"><a href="function.range.html" class="function">range()</a></span> 会生成字符列表。</li>
+   </ul>
+
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />range</span><span style="color: #007700">(</span><span style="color: #DD0000">'9'</span><span style="color: #007700">, </span><span style="color: #DD0000">'A'</span><span style="color: #007700">);  </span><span style="color: #FF8000">// ["9", ":", ";", "&lt;", "=", "&gt;", "?", "@", "A"]，自 PHP 8.3.0 起<br /></span><span style="color: #0000BB">range</span><span style="color: #007700">(</span><span style="color: #DD0000">'9'</span><span style="color: #007700">, </span><span style="color: #DD0000">'A'</span><span style="color: #007700">);  </span><span style="color: #FF8000">// [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]，PHP 8.3.0 之前<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+
+  <p class="para">
+   <span class="function"><a href="function.file.html" class="function">file()</a></span> flags 错误检查现在可以捕获所有无效的
+   flags。尤其是之前默默接受 <strong><code>FILE_APPEND</code></strong>。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration83.incompatible.SNMP">
+  <h3 class="title">SNMP</h3>
+
+  <p class="para">
+   <span class="classname"><a href="class.snmp.html" class="classname">SNMP</a></span> 类常量的类型现在已声明。
+  </p>
+ </div>
+
+</div></div></div></body></html>

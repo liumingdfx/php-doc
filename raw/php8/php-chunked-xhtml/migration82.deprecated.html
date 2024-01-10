@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>废弃的功能</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="migration82.incompatible.html">« 不向后兼容的变更</a></li>
+      <li style="float: right;"><a href="migration82.other-changes.html">其他变更 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="migration82.html">从 PHP 8.1.x 移植到 PHP 8.2.x</a></li>
+    <li>废弃的功能</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="migration82.deprecated" class="sect1">
+ <h2 class="title">废弃的功能</h2>
+
+ <div class="sect2" id="migration82.deprecated.core">
+  <h3 class="title">PHP 核心</h3>
+
+  <div class="sect3" id="migration82.deprecated.core.dynamic-properties">
+   <h4 class="title">动态属性的使用</h4>
+
+   <p class="para">
+    弃用动态属性创建，除非类选择使用 <code class="code">#[\AllowDynamicProperties]</code>
+    注解。<span class="classname"><a href="class.stdclass.html" class="classname">stdClass</a></span> 允许动态属性。<a href="language.oop5.overloading.html#object.get" class="link">__get()</a>/<a href="language.oop5.overloading.html#object.set" class="link">__set()</a>
+    魔术方法不受此更改的影响。解决动态属性弃用警告，可以通过以下方式：
+    <ul class="simplelist">
+     <li class="member">声明属性（首选）。</li>
+     <li class="member">
+      将 <code class="code">#[\AllowDynamicProperties]</code> 添加到
+      <code class="code">#[\AllowDynamicProperties]</code>（这也适用于所有子类）。
+     </li>
+     <li class="member">
+      如果需要将附加数据于不属于自己的对象相关联，则使用 <span class="classname"><a href="class.weakmap.html" class="classname">WeakMap</a></span>。
+     </li>
+    </ul>
+   </p>
+  </div>
+
+  <div class="sect3" id="migration82.deprecated.core.relative-callables">
+   <h4 class="title">Relative callables</h4>
+
+   <p class="para">
+    弃用 <code class="code">$callable()</code> 语法不接受的可调用对象（但
+    <span class="function"><a href="function.call-user-func.html" class="function">call_user_func()</a></span> 接受）。尤其是：
+    <ul class="simplelist">
+     <li class="member"><code class="code">&quot;self::method&quot;</code></li>
+     <li class="member"><code class="code">&quot;parent::method&quot;</code></li>
+     <li class="member"><code class="code">&quot;static::method&quot;</code></li>
+     <li class="member"><code class="code">[&quot;self&quot;, &quot;method&quot;]</code></li>
+     <li class="member"><code class="code">[&quot;parent&quot;, &quot;method&quot;]</code></li>
+     <li class="member"><code class="code">[&quot;static&quot;, &quot;method&quot;]</code></li>
+     <li class="member"><code class="code">[&quot;Foo&quot;, &quot;Bar::method&quot;]</code></li>
+     <li class="member"><code class="code">[new Foo, &quot;Bar::method&quot;]</code></li>
+    </ul>
+
+    这不会影响正常方法调用，比如 <code class="code">&quot;A::method&quot;</code> 或
+    <code class="code">[&quot;A&quot;, &quot;method&quot;]</code>。
+   </p>
+   
+   
+  </div>
+
+  <div class="sect3" id="migration82.deprecated.core.dollar-brace-interpolation">
+   <h4 class="title"><code class="code">&quot;${var}&quot;</code> 和 <code class="code">&quot;${expr}&quot;</code> 样式插值</h4>
+
+   <p class="para">
+    弃用字符串插值的 <code class="code">&quot;${var}&quot;</code> 和 <code class="code">&quot;${expr}&quot;</code> 样式。
+    Use <code class="code">&quot;$var&quot;/&quot;{$var}&quot;</code> and <code class="code">&quot;{${expr}}&quot;</code>, respectively.
+    
+   </p>
+  </div>
+
+ </div>
+
+ <div class="sect2" id="migration82.deprecated.mbstring">
+  <h3 class="title">MBString</h3>
+
+  <p class="para">
+   对于所有的 MBString 函数，已经弃用了 <code class="literal">QPrint</code>、<code class="literal">Base64</code>、<code class="literal">Uuencode</code>
+   和 <code class="literal">HTML-ENTITIES</code> 等“文本编码”。
+
+   与 MBString 支持的其他文本编码不同，这些编码不是对 Unicode 码点序列进行编码，而是对原始字节序列进行编码。当指定了这些非编码时，大多数
+   MBString 函数的返回值不清楚是否正确。此外，PHP 已经内置了它们的单独实现；例如，可以使用
+   <span class="function"><a href="function.convert-uuencode.html" class="function">convert_uuencode()</a></span>/<span class="function"><a href="function.convert-uudecode.html" class="function">convert_uudecode()</a></span> 处理 Uuencode 编码的数据。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration82.deprecated.spl">
+  <h3 class="title">SPL</h3>
+
+  <p class="para">
+   弃用内部方法 <span class="methodname"><strong>SplFileInfo::_bad_state_ex()</strong></span>。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration82.deprecated.standard">
+  <h3 class="title">标准</h3>
+
+  <p class="para">
+   弃用 <span class="function"><a href="function.utf8-encode.html" class="function">utf8_encode()</a></span> 和 <span class="function"><a href="function.utf8-decode.html" class="function">utf8_decode()</a></span>。
+  </p>
+ </div>
+
+</div></div></div></body></html>

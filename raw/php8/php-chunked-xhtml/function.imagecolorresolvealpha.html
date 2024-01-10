@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>取得指定颜色 + alpha 或其最接近的替代值</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.imagecolorresolve.html">« imagecolorresolve</a></li>
+      <li style="float: right;"><a href="function.imagecolorset.html">imagecolorset »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.image.html">GD 和图像处理 函数</a></li>
+    <li>取得指定颜色 + alpha 或其最接近的替代值</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.imagecolorresolvealpha" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">imagecolorresolvealpha</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.0.6, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">imagecolorresolvealpha</span> &mdash; <span class="dc-title">取得指定颜色 + alpha 或其最接近的替代值</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.imagecolorresolvealpha-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>imagecolorresolvealpha</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><a href="class.gdimage.html" class="type GdImage">GdImage</a></span> <code class="parameter">$image</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$red</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$green</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$blue</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$alpha</code></span><br>): <span class="type">int</span></div>
+
+  <p class="para rdfs-comment">
+   本函数保证返回所请求的颜色的颜色索引，要么是确切的颜色要么是最接近的颜色。
+  </p>
+ </div>
+
+ <div class="refsect1 parameters" id="refsect1-function.imagecolorresolvealpha-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    <dt>
+
+<code class="parameter">image</code></dt>
+<dd>
+<p class="para">由图象创建函数(例如<span class="function"><a href="function.imagecreatetruecolor.html" class="function">imagecreatetruecolor()</a></span>)返回的 
+<span class="classname"><a href="class.gdimage.html" class="classname">GdImage</a></span> 对象。</p></dd>
+
+    
+     <dt>
+<code class="parameter">red</code></dt>
+
+     <dd>
+
+      <p class="para">红色成分的值。</p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">green</code></dt>
+
+     <dd>
+
+      <p class="para">绿色成分的值。</p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">blue</code></dt>
+
+     <dd>
+
+      <p class="para">蓝色成分的值。</p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">alpha</code></dt>
+
+     <dd>
+
+      <p class="para">
+       介于 <code class="literal">0</code> 和 <code class="literal">127</code> 之间的值。<code class="literal">0</code>
+       表示完全不透明，而 <code class="literal">127</code> 表示完全透明。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+   colors 参数是 0 到 255 之间的整数或 0x00 到 0xFF 之间的十六进制数。
+  </p>
+ </div>
+
+ <div class="refsect1 returnvalues" id="refsect1-function.imagecolorresolvealpha-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回颜色索引。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.imagecolorresolvealpha-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+ <td>8.0.0</td>
+ <td>
+  <code class="parameter">image</code> 现在需要 <span class="classname"><a href="class.gdimage.html" class="classname">GdImage</a></span> 实例；之前需要有效的 <code class="literal">gd</code> <span class="type">resource</span>。
+ </td>
+</tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.imagecolorresolvealpha-examples">
+  <h3 class="title">示例</h3>
+  <div class="example" id="">
+   <p><strong>示例 #1 使用 <span class="function"><strong>imagecoloresolvealpha()</strong></span> 从图像中获取颜色</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// Load an image<br /></span><span style="color: #0000BB">$im </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecreatefromgif</span><span style="color: #007700">(</span><span style="color: #DD0000">'phplogo.gif'</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// Get closest colors from the image<br /></span><span style="color: #0000BB">$colors </span><span style="color: #007700">= array();<br /></span><span style="color: #0000BB">$colors</span><span style="color: #007700">[] = </span><span style="color: #0000BB">imagecolorresolvealpha</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$colors</span><span style="color: #007700">[] = </span><span style="color: #0000BB">imagecolorresolvealpha</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">200</span><span style="color: #007700">, </span><span style="color: #0000BB">127</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// Output<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$colors</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">imagedestroy</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>  
+   </div>
+
+   <div class="example-contents"><p>以上示例的输出类似于：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+    [0] =&gt; 89
+    [1] =&gt; 85
+)
+</pre></div>
+   </div>
+  </div>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.imagecolorresolvealpha-seealso">
+  <h3 class="title">参见</h3>
+  <ul class="simplelist">
+   <li class="member"><span class="function"><a href="function.imagecolorclosestalpha.html" class="function" rel="rdfs-seeAlso">imagecolorclosestalpha()</a> - 获取最接近指定颜色 + alpha 的颜色索引</span></li>
+  </ul>
+ </div>
+
+</div></div></div></body></html>

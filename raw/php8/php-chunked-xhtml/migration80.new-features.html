@@ -1,0 +1,545 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>新特性</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="migration80.html">« 从 PHP 7.4.x 移植到 PHP 8.0.x</a></li>
+      <li style="float: right;"><a href="migration80.incompatible.html">不向后兼容的变更 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="migration80.html">从 PHP 7.4.x 移植到 PHP 8.0.x</a></li>
+    <li>新特性</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="migration80.new-features" class="sect1">
+ <h2 class="title">新特性</h2>
+
+ <div class="sect2" id="migration80.new-features.core">
+  <h3 class="title">PHP 核心中的新特性</h3>
+
+  <div class="sect3" id="migration80.new-features.core.named-arguments">
+   <h4 class="title">命名参数</h4>
+
+   <p class="para">
+    
+    新增<a href="functions.arguments.html#functions.named-arguments" class="link">命名参数</a>的功能。
+   </p>
+  </div>
+
+  <div class="sect3" id="migration80.new-features.core.attributes">
+   <h4 class="title">注解（Attributes）</h4>
+
+   <p class="para">
+    新增<a href="language.attributes.html" class="link">注解</a>的功能。
+    
+    
+    
+    
+   </p>
+  </div>
+
+  <div class="sect3" id="migration80.new-features.core.property-promotion">
+   <h4 class="title">构造器属性提升（Constructor Property Promotion）</h4>
+
+   <p class="para">
+    新增对<a href="language.oop5.decon.html#language.oop5.decon.constructor.promotion" class="link">构造器属性提升</a>（在构造函数中声明类的属性）的支持。
+    
+   </p>
+  </div>
+
+  <div class="sect3" id="migration80.new-features.core.union-types">
+   <h4 class="title">联合类型</h4>
+
+   <p class="para">
+    新增<a href="language.types.declarations.html#language.types.declarations.composite.union" class="link">联合类型</a>。
+    
+   </p> 
+  </div>
+
+  <div class="sect3" id="migration80.new-features.core.match">
+   <h4 class="title">match 表达式</h4>
+
+   <p class="para">
+    新增 <a href="control-structures.match.html" class="link"><code class="literal">match</code> 表达式</a>。
+    
+   </p>
+  </div>
+
+  <div class="sect3" id="migration80.new-features.core.nullsafe-operator">
+   <h4 class="title">Nullsafe 运算符</h4>
+
+   <p class="para">
+    新增 <a href="language.oop5.basic.html#language.oop5.basic.nullsafe" class="link">Nullsafe 运算符</a>（<code class="literal">?-&gt;</code>）。
+    
+   </p>
+  </div>
+
+  <div class="sect3" id="migration80.new-features.core.others">
+   <h4 class="title">其他新特性</h4>
+
+   <ul class="itemizedlist">
+    <li class="listitem">
+     <p class="para">
+      新增 <a href="class.weakmap.html" class="link">WeakMap</a> 类。
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      新增 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span> 类。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      现在，只要类型兼容，任意数量的函数参数都可以用一个可变参数替换。例如允许编写下面的代码：
+     </p>
+     <p class="para">
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">A </span><span style="color: #007700">{<br />     public function </span><span style="color: #0000BB">method</span><span style="color: #007700">(</span><span style="color: #0000BB">int $many</span><span style="color: #007700">, </span><span style="color: #0000BB">string $parameters</span><span style="color: #007700">, </span><span style="color: #0000BB">$here</span><span style="color: #007700">) {}<br />}<br />class </span><span style="color: #0000BB">B </span><span style="color: #007700">extends </span><span style="color: #0000BB">A </span><span style="color: #007700">{<br />     public function </span><span style="color: #0000BB">method</span><span style="color: #007700">(...</span><span style="color: #0000BB">$everything</span><span style="color: #007700">) {}<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+      </div>
+
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      <span class="type"><span class="type static">static</span></span>（“后期静态绑定”中）可以作为返回类型：
+     </p>
+     <p class="para">
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">Test </span><span style="color: #007700">{<br />     public function </span><span style="color: #0000BB">create</span><span style="color: #007700">(): static {<br />          return new static();<br />     }<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+      </div>
+
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      现在可以通过 <code class="code">$object::class</code> 获取类名，返回的结果和 <code class="code">get_class($object)</code> 一致。
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      <a href="language.oop5.basic.html#language.oop5.basic.new" class="link"><code class="literal">new</code></a>、<a href="language.operators.type.html" class="link"><code class="literal">instanceof</code></a> 可用于任何表达式，用法为 <code class="code">new (expression)(...$args)</code> 和 <code class="code">$obj instanceof (expression)</code>。
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      添加对一些变量语法一致性的修复，例如现在能够编写
+      <code class="code">Foo::BAR::$baz</code>。
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      添加 <span class="interfacename"><a href="class.stringable.html" class="interfacename">Stringable</a></span> interface，当类定义 <a href="language.oop5.magic.html#object.tostring" class="link">__toString()</a> 方法后会自动实现该接口。
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      Trait 可以定义私有抽象方法（abstract private method）。类必须实现 trait 定义的该方法。
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      可作为表达式使用 <code class="literal">throw</code>。使得可以编写以下用法：
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$fn </span><span style="color: #007700">= fn() =&gt; throw new </span><span style="color: #0000BB">Exception</span><span style="color: #007700">(</span><span style="color: #DD0000">'Exception in arrow function'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$user </span><span style="color: #007700">= </span><span style="color: #0000BB">$session</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">user </span><span style="color: #007700">?? throw new </span><span style="color: #0000BB">Exception</span><span style="color: #007700">(</span><span style="color: #DD0000">'Must have user'</span><span style="color: #007700">);</span></span></code></div>
+      </div>
+
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      参数列表中的末尾逗号为可选。
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">functionWithLongSignature</span><span style="color: #007700">(<br />    </span><span style="color: #0000BB">Type1 $parameter1</span><span style="color: #007700">,<br />    </span><span style="color: #0000BB">Type2 $parameter2</span><span style="color: #007700">, </span><span style="color: #FF8000">// &lt;-- 这个逗号也被允许了<br /></span><span style="color: #007700">) {<br />}</span></span></code></div>
+      </div>
+
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+     现在允许 <code class="code">catch (Exception)</code> exception 而无需捕获到变量中。
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      支持 <span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> 类型。
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      父类中声明的私有方法不在对子类中的方法执行任何继承规则（final private 构造方法除外）。下列示例说明删除了那些限制：
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">ParentClass </span><span style="color: #007700">{<br />    private function </span><span style="color: #0000BB">method1</span><span style="color: #007700">() {}<br />    private function </span><span style="color: #0000BB">method2</span><span style="color: #007700">() {}<br />    private static function </span><span style="color: #0000BB">method3</span><span style="color: #007700">() {}<br />    </span><span style="color: #FF8000">// 抛出警告，因为“final”不再有效：<br />    </span><span style="color: #007700">private final function </span><span style="color: #0000BB">method4</span><span style="color: #007700">() {}<br />}<br />class </span><span style="color: #0000BB">ChildClass </span><span style="color: #007700">extends </span><span style="color: #0000BB">ParentClass </span><span style="color: #007700">{<br />    </span><span style="color: #FF8000">// 现在允许以下所有内容，即使修饰符与父类中的私有方法不同。<br />    </span><span style="color: #007700">public abstract function </span><span style="color: #0000BB">method1</span><span style="color: #007700">() {}<br />    public static function </span><span style="color: #0000BB">method2</span><span style="color: #007700">() {}<br />    public function </span><span style="color: #0000BB">method3</span><span style="color: #007700">() {}<br />    public function </span><span style="color: #0000BB">method4</span><span style="color: #007700">() {}<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+      </div>
+
+      
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      新增 <span class="function"><a href="function.get-resource-id.html" class="function">get_resource_id()</a></span>，返回值跟 <code class="code">(int) $resource</code>
+      相同。其在更清晰的 API 下提供了相同的功能。
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      新增 <span class="classname"><a href="class.internaliterator.html" class="classname">InternalIterator</a></span>。
+     </p>
+    </li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="sect2" id="migration80.new-features.date">
+  <h3 class="title">日期和时间</h3>
+  
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     新增 <span class="methodname"><a href="datetime.createfrominterface.html" class="methodname">DateTime::createFromInterface()</a></span> 和
+     <span class="methodname"><a href="datetimeimmutable.createfrominterface.html" class="methodname">DateTimeImmutable::createFromInterface()</a></span>。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     新增 DateTime 格式化标识符 <code class="literal">p</code>，跟 <code class="literal">P</code> 相同，但对于 UTC
+     返回 <code class="literal">Z</code> 而不是 <code class="literal">+00:00</code>。
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.new-features.dom">
+  <h3 class="title">DOM</h3>
+
+  <p class="para">
+   新增新遍历和操作 API：<span class="interfacename"><a href="class.domparentnode.html" class="interfacename">DOMParentNode</a></span> 和
+   <span class="interfacename"><a href="class.domchildnode.html" class="interfacename">DOMChildNode</a></span>。
+   
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.new-features.filter">
+  <h3 class="title">Filter</h3>
+
+  <p class="para">
+   新增 <strong><code>FILTER_VALIDATE_BOOL</code></strong>，是 <strong><code>FILTER_VALIDATE_BOOLEAN</code></strong>
+   的别名。首选新名称，因为其使用规范类型名称。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.new-features.enchant">
+  <h3 class="title">Enchant</h3>
+
+  <p class="para">
+   新增 <span class="function"><a href="function.enchant-dict-add.html" class="function">enchant_dict_add()</a></span>、<span class="function"><a href="function.enchant-dict-is-added.html" class="function">enchant_dict_is_added()</a></span>
+   和 <strong><code>LIBENCHANT_VERSION</code></strong>。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.new-features.fpm">
+  <h3 class="title">FPM</h3>
+
+  <p class="para">
+   新增新选项 <code class="literal">pm.status_listen</code>，允许从不同的端点（例如端口或者 UDS
+   文件）获取状态。这对于所有的子进程忙于处理长时间运行的请求时获取状态特别有用。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.new-features.hash">
+  <h3 class="title">Hash</h3>
+
+  <p class="para">
+   <span class="classname"><a href="class.hashcontext.html" class="classname">HashContext</a></span> 对象现在可序列化。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.new-features.intl">
+  <h3 class="title">国际化函数</h3>
+
+  <p class="para">
+   新增 <strong><code>IntlDateFormatter::RELATIVE_FULL</code></strong>、<strong><code>IntlDateFormatter::RELATIVE_LONG</code></strong>、<strong><code>IntlDateFormatter::RELATIVE_MEDIUM</code></strong>
+   和 <strong><code>IntlDateFormatter::RELATIVE_SHORT</code></strong> 常量。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.new-features.ldap">
+  <h3 class="title">LDAP</h3>
+
+  <p class="para">
+   新增 <span class="function"><a href="function.ldap-count-references.html" class="function">ldap_count_references()</a></span>，返回搜索结果中引用消息的数量。
+  </p>
+ </div>
+ <div class="sect2" id="migration80.new-features.opcache">
+  <h3 class="title">OPcache</h3>
+
+  <p class="para">
+   如果启用了 opcache.record_warnings ini 设置，OPcache
+   将在编译时记录警告并在下一次包含时重放，即使是从缓存中提供的。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.new-features.openssl">
+  <h3 class="title">OpenSSL</h3>
+
+  <p class="para">
+   新增由加密、解密、签名、验证和读取功能组成的加密消息语法（CMS）（<a href="http://www.faqs.org/rfcs/rfc5652" class="link external">&raquo;&nbsp;RFC 5652</a>）支持。该
+   API 类似于 <abbr title="Public Key Cryptography Standards">PKCS</abbr> #7 函数的 API，但增加了新的编码常量
+   <strong><code>OPENSSL_ENCODING_DER</code></strong>、<strong><code>OPENSSL_ENCODING_SMIME</code></strong>
+   和 <strong><code>OPENSSL_ENCODING_PEM</code></strong>：
+   <ul class="simplelist">
+    <li class="member">
+     <span class="function"><a href="function.openssl-cms-encrypt.html" class="function">openssl_cms_encrypt()</a></span> 使用证书加密文件中的消息并将结果输出到提供的文件。
+    </li>
+    <li class="member">
+     <span class="function"><a href="function.openssl-cms-decrypt.html" class="function">openssl_cms_decrypt()</a></span> 解密文件中的 S/MIME 消息并将结果输出到提供的文件。
+    </li>
+    <li class="member">
+     <span class="function"><a href="function.openssl-cms-read.html" class="function">openssl_cms_read()</a></span> 将 CMS 文件导出到 <abbr title="Privacy-Enhanced Mail">PEM</abbr> 证书数组。
+    </li>
+    <li class="member">
+     <span class="function"><a href="function.openssl-cms-sign.html" class="function">openssl_cms_sign()</a></span> 使用证书和密钥对文件中的 MIME 消息进行签名，并将结果输出到提供的文件。
+    </li>
+    <li class="member">
+     <span class="function"><a href="function.openssl-cms-verify.html" class="function">openssl_cms_verify()</a></span> 用于验证数据块是否完好无损，签名者是否是声称的那个人，然后返回签名者的证书。
+    </li>
+   </ul>
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.new-features.pcre">
+  <h3 class="title">正则表达式（兼容 Perl）</h3>
+
+  <p class="para">
+   新增 <span class="function"><a href="function.preg-last-error-msg.html" class="function">preg_last_error_msg()</a></span>，返回最后一条人可读的 PCRE
+   错误消息。它是对 <span class="function"><a href="function.preg-last-error.html" class="function">preg_last_error()</a></span>（返回整数枚举值）的补充。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.new-features.reflection">
+  <h3 class="title">反射</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     下列方法现在返回内部函数参数默认值的相关信息：
+    </p>
+    <p class="para">
+     <ul class="simplelist">
+      <li class="member"><span class="methodname"><a href="reflectionparameter.isdefaultvalueavailable.html" class="methodname">ReflectionParameter::isDefaultValueAvailable()</a></span></li>
+      <li class="member"><span class="methodname"><a href="reflectionparameter.getdefaultvalue.html" class="methodname">ReflectionParameter::getDefaultValue()</a></span></li>
+      <li class="member"><span class="methodname"><a href="reflectionparameter.isdefaultvalueconstant.html" class="methodname">ReflectionParameter::isDefaultValueConstant()</a></span></li>
+      <li class="member"><span class="methodname"><a href="reflectionparameter.getdefaultvalueconstantname.html" class="methodname">ReflectionParameter::getDefaultValueConstantName()</a></span></li>
+     </ul>
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.new-features.sqlite3">
+  <h3 class="title">SQLite3</h3>
+
+  <p class="para">
+   新增 <span class="methodname"><a href="sqlite3.setauthorizer.html" class="methodname">SQLite3::setAuthorizer()</a></span> 和相应类常量，用于设置用户定义的回调函数，该函数将用于数据库的授权或拒绝操作。
+   
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.new-features.standard">
+  <h3 class="title">标准库</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     新增 <span class="function"><a href="function.str-contains.html" class="function">str_contains()</a></span>、<span class="function"><a href="function.str-starts-with.html" class="function">str_starts_with()</a></span> 和
+     <span class="function"><a href="function.str-ends-with.html" class="function">str_ends_with()</a></span>，分别检查 <code class="parameter">haystack</code>
+     是否包含 <code class="parameter">needle</code> 或以 <code class="parameter">needle</code> 开头/结尾。
+     
+     
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     新增 <span class="function"><a href="function.fdiv.html" class="function">fdiv()</a></span> 在 IEEE 754 语义下执行浮点除法。认为除以零已经明确定义，将返回
+     <code class="literal">Inf</code>、<code class="literal">-Inf</code> 或 <code class="literal">NaN</code>。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     新增 <span class="function"><a href="function.get-debug-type.html" class="function">get_debug_type()</a></span> 返回对错误消息有用的类型。与 <span class="function"><a href="function.gettype.html" class="function">gettype()</a></span>
+     不同的是，它使用规范的类型名称，为对象返回类名，为资源表示资源类型。
+     
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.printf.html" class="function">printf()</a></span> 和相关函数现在支持 <code class="literal">%h</code> 和 <code class="literal">%H</code> 格式说明符。它们与
+     <code class="literal">%g</code> 和 <code class="literal">%G</code> 相同，但始终使用 <code class="literal">&quot;.&quot;</code> 作为小数点分隔符，而不是通过
+     <strong><code>LC_NUMERIC</code></strong> 区域确定。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     现在，<span class="function"><a href="function.printf.html" class="function">printf()</a></span> 和相关函数支持使用 <code class="literal">&quot;*&quot;</code> 作为宽度或精度，此时宽度/精度将作为参数传递给
+     printf。这也允许在 <code class="literal">%g</code>、<code class="literal">%G</code>、<code class="literal">%h</code> 和 <code class="literal">%H</code>
+     中使用精度 <code class="literal">-1</code>。例如，以下代码可用于重现 PHP 的默认浮点数格式化：
+    </p>
+    <p class="para">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />printf</span><span style="color: #007700">(</span><span style="color: #DD0000">"%.*H"</span><span style="color: #007700">, (int) </span><span style="color: #0000BB">ini_get</span><span style="color: #007700">(</span><span style="color: #DD0000">"precision"</span><span style="color: #007700">), </span><span style="color: #0000BB">$float</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">printf</span><span style="color: #007700">(</span><span style="color: #DD0000">"%.*H"</span><span style="color: #007700">, (int) </span><span style="color: #0000BB">ini_get</span><span style="color: #007700">(</span><span style="color: #DD0000">"serialize_precision"</span><span style="color: #007700">), </span><span style="color: #0000BB">$float</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     现在，<span class="function"><a href="function.proc-open.html" class="function">proc_open()</a></span> 支持伪终端（PTY）描述符。以下将 <code class="literal">stdin</code>、<code class="literal">stdout</code>
+     和 <code class="literal">stderr</code> 附加到同一个 PTY：
+    </p>
+    <p class="para">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$proc </span><span style="color: #007700">= </span><span style="color: #0000BB">proc_open</span><span style="color: #007700">(</span><span style="color: #0000BB">$command</span><span style="color: #007700">, [[</span><span style="color: #DD0000">'pty'</span><span style="color: #007700">], [</span><span style="color: #DD0000">'pty'</span><span style="color: #007700">], [</span><span style="color: #DD0000">'pty'</span><span style="color: #007700">]], </span><span style="color: #0000BB">$pipes</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.proc-open.html" class="function">proc_open()</a></span> 现在支持套接字对描述符。以下将独立的套接字对附加到 <code class="literal">stdin</code>、<code class="literal">stdout</code>
+     和 <code class="literal">stderr</code>：
+    </p>
+    <p class="para">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$proc </span><span style="color: #007700">= </span><span style="color: #0000BB">proc_open</span><span style="color: #007700">(</span><span style="color: #0000BB">$command</span><span style="color: #007700">, [[</span><span style="color: #DD0000">'socket'</span><span style="color: #007700">], [</span><span style="color: #DD0000">'socket'</span><span style="color: #007700">], [</span><span style="color: #DD0000">'socket'</span><span style="color: #007700">]], </span><span style="color: #0000BB">$pipes</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </p>
+    <p class="para">
+     与管道不同，套接字在 Windows 上不会出现阻塞 I/O 问题。然而，并非所有程序都能正确地与 stdio 套接字配合工作。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     排序函数现在已稳定，这意味着相等的元素比较将保留其原始顺序。
+     
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.array-diff.html" class="function">array_diff()</a></span> 和 <span class="function"><a href="function.array-intersect.html" class="function">array_intersect()</a></span>
+     及其变体现在可以接受单个数组作为参数。这意味着现在可以使用下列用法：
+    </p>
+    <p class="para">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// 如果 $excludes 为空也可以：<br /></span><span style="color: #0000BB">array_diff</span><span style="color: #007700">(</span><span style="color: #0000BB">$array</span><span style="color: #007700">, ...</span><span style="color: #0000BB">$excludes</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">// 如果 $arrays 仅包含单个数组也可以：<br /></span><span style="color: #0000BB">array_intersect</span><span style="color: #007700">(...</span><span style="color: #0000BB">$arrays</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="function"><a href="function.ob-implicit-flush.html" class="function">ob_implicit_flush()</a></span> 的 <code class="parameter">flag</code> 参数已经从接受 <span class="type">int</span>
+     变更为接受 <span class="type">bool</span>。
+    </p>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration80.new-features.tokenizer">
+  <h3 class="title">Tokenizer</h3>
+
+  <p class="para">
+   <span class="classname"><a href="class.phptoken.html" class="classname">PhpToken</a></span> 为分词器（tokenizer）新增基于对象的接口。表现更为统一且符合人体工程学，同时内存效率更高、速度更快。
+   
+  </p>
+ </div>
+
+ <div class="sect2" id="migration80.new-features.zip">
+  <h3 class="title">Zip</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <p class="para">
+     Zip 扩展更新到版本 1.19.1。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     新的 <span class="methodname"><a href="ziparchive.setmtimename.html" class="methodname">ZipArchive::setMtimeName()</a></span> 和
+     <span class="methodname"><a href="ziparchive.setmtimeindex.html" class="methodname">ZipArchive::setMtimeIndex()</a></span> 设置条目的修改时间。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     新的 <span class="methodname"><a href="ziparchive.registerprogresscallback.html" class="methodname">ZipArchive::registerProgressCallback()</a></span> 提供在关闭归档期间更新。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     新的 <span class="methodname"><a href="ziparchive.registercancelcallback.html" class="methodname">ZipArchive::registerCancelCallback()</a></span> 允许在归档关闭期间取消。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     新的 <span class="methodname"><a href="ziparchive.replacefile.html" class="methodname">ZipArchive::replaceFile()</a></span> 替换条目内容。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     新的 <span class="methodname"><a href="ziparchive.iscompressionmethoddupported.html" class="methodname">ZipArchive::isCompressionMethodSupported()</a></span> 检查可选的压缩功能。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     新的 <span class="methodname"><a href="ziparchive.isencryptionmethoddupported.html" class="methodname">ZipArchive::isEncryptionMethodSupported()</a></span> 检查可选的加密功能。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     新增 <var class="varname">ZipArchive::lastId</var> 属性，用于获取最后新增实体的索引值。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     现在使用 <var class="varname">ZipArchive::status</var> 和 <var class="varname">ZipArchive::statusSys</var>
+     属性或者 <span class="methodname"><a href="ziparchive.getstatusstring.html" class="methodname">ZipArchive::getStatusString()</a></span> 方法可以在归档关闭后检查错误。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     <span class="methodname"><a href="ziparchive.addglob.html" class="methodname">ZipArchive::addGlob()</a></span> 和 <span class="methodname"><a href="ziparchive.addpattern.html" class="methodname">ZipArchive::addPattern()</a></span>
+     的 <code class="literal">&#039;remove_path&#039;</code> 选项现在视为任意字符串前缀（为了跟 <code class="literal">&#039;add_path&#039;</code>
+     选项保持一致），之前视为目录名称。
+    </p>
+   </li>
+   <li class="listitem">
+    <p class="para">
+     可选的压缩/加密功能现在在 phpinfo 中列出。
+    </p>
+   </li>
+  </ul>
+ </div>
+
+</div></div></div></body></html>

@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>示例</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="classobj.constants.html">« 预定义常量</a></li>
+      <li style="float: right;"><a href="ref.classobj.html">类/对象 函数 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="book.classobj.html">类/对象</a></li>
+    <li>示例</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="classobj.examples" class="appendix">
+ <h1>示例</h1>
+
+ <p class="para">
+  在这个示例中，首先定义了一个基类和该类的扩展。基类描述了普通的蔬菜，
+  是否可食用及其颜色。子类 <var class="varname">Spinach</var> 
+  添加了烹饪的方法和检查是否已烹饪的方法。
+ </p>
+ <p class="para">
+  <div class="example" id="">
+   <p><strong>示例 #1 定义类</strong></p>
+   <div class="example-contents"><p><var class="varname">Vegetable</var></p></div>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">class </span><span style="color: #0000BB">Vegetable </span><span style="color: #007700">{<br />    public </span><span style="color: #0000BB">$edible</span><span style="color: #007700">;<br /><br />    public </span><span style="color: #0000BB">$color</span><span style="color: #007700">;<br /><br />    public function </span><span style="color: #0000BB">__construct</span><span style="color: #007700">(</span><span style="color: #0000BB">$edible</span><span style="color: #007700">, </span><span style="color: #0000BB">$color </span><span style="color: #007700">= </span><span style="color: #DD0000">"green"</span><span style="color: #007700">)<br />    {<br />        </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">edible </span><span style="color: #007700">= </span><span style="color: #0000BB">$edible</span><span style="color: #007700">;<br />        </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">color </span><span style="color: #007700">= </span><span style="color: #0000BB">$color</span><span style="color: #007700">;<br />    }<br /><br />    public function </span><span style="color: #0000BB">isEdible</span><span style="color: #007700">()<br />    {<br />        return </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">edible</span><span style="color: #007700">;<br />    }<br /><br />    public function </span><span style="color: #0000BB">getColor</span><span style="color: #007700">()<br />    {<br />        return </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">color</span><span style="color: #007700">;<br />    }<br />}<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+   <div class="example-contents"><p><var class="varname">Spinach</var></p></div>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">class </span><span style="color: #0000BB">Spinach </span><span style="color: #007700">extends </span><span style="color: #0000BB">Vegetable </span><span style="color: #007700">{<br />    public </span><span style="color: #0000BB">$cooked </span><span style="color: #007700">= </span><span style="color: #0000BB">false</span><span style="color: #007700">;<br /><br />    public function </span><span style="color: #0000BB">__construct</span><span style="color: #007700">()<br />    {<br />        </span><span style="color: #0000BB">parent</span><span style="color: #007700">::</span><span style="color: #0000BB">__construct</span><span style="color: #007700">(</span><span style="color: #0000BB">true</span><span style="color: #007700">, </span><span style="color: #DD0000">"green"</span><span style="color: #007700">);<br />    }<br /><br />    public function </span><span style="color: #0000BB">cook</span><span style="color: #007700">()<br />    {<br />        </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">cooked </span><span style="color: #007700">= </span><span style="color: #0000BB">true</span><span style="color: #007700">;<br />    }<br /><br />    public function </span><span style="color: #0000BB">isCooked</span><span style="color: #007700">()<br />    {<br />        return </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">cooked</span><span style="color: #007700">;<br />    }<br />}<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+  </div>
+ </p>
+ <p class="para">
+  接下来从这些类中实例化了两个对象并打印了它们的信息，包括了他们类的继承关系。
+  同时也定义了一些实用函数，主要为了漂亮地打印出这些变量。
+ </p>
+ <p class="para">
+  <div class="example" id="">
+   <p><strong>示例 #2 test_script.php</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #FF8000">// 注册自动加载器以加载类<br /></span><span style="color: #0000BB">spl_autoload_register</span><span style="color: #007700">();<br /><br />function </span><span style="color: #0000BB">printProperties</span><span style="color: #007700">(</span><span style="color: #0000BB">$obj</span><span style="color: #007700">)<br />{<br />    foreach (</span><span style="color: #0000BB">get_object_vars</span><span style="color: #007700">(</span><span style="color: #0000BB">$obj</span><span style="color: #007700">) as </span><span style="color: #0000BB">$prop </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">$val</span><span style="color: #007700">) {<br />        echo </span><span style="color: #DD0000">"\t</span><span style="color: #0000BB">$prop</span><span style="color: #DD0000"> = </span><span style="color: #0000BB">$val</span><span style="color: #DD0000">\n"</span><span style="color: #007700">;<br />    }<br />}<br /><br />function </span><span style="color: #0000BB">printMethods</span><span style="color: #007700">(</span><span style="color: #0000BB">$obj</span><span style="color: #007700">)<br />{<br />    </span><span style="color: #0000BB">$arr </span><span style="color: #007700">= </span><span style="color: #0000BB">get_class_methods</span><span style="color: #007700">(</span><span style="color: #0000BB">get_class</span><span style="color: #007700">(</span><span style="color: #0000BB">$obj</span><span style="color: #007700">));<br />    foreach (</span><span style="color: #0000BB">$arr </span><span style="color: #007700">as </span><span style="color: #0000BB">$method</span><span style="color: #007700">) {<br />        echo </span><span style="color: #DD0000">"\tfunction </span><span style="color: #0000BB">$method</span><span style="color: #DD0000">()\n"</span><span style="color: #007700">;<br />    }<br />}<br /><br />function </span><span style="color: #0000BB">objectBelongsTo</span><span style="color: #007700">(</span><span style="color: #0000BB">$obj</span><span style="color: #007700">, </span><span style="color: #0000BB">$class</span><span style="color: #007700">)<br />{<br />    if (</span><span style="color: #0000BB">is_subclass_of</span><span style="color: #007700">(</span><span style="color: #0000BB">$obj</span><span style="color: #007700">, </span><span style="color: #0000BB">$class</span><span style="color: #007700">)) {<br />        echo </span><span style="color: #DD0000">"Object belongs to class " </span><span style="color: #007700">. </span><span style="color: #0000BB">get_class</span><span style="color: #007700">(</span><span style="color: #0000BB">$obj</span><span style="color: #007700">);<br />        echo </span><span style="color: #DD0000">", a subclass of </span><span style="color: #0000BB">$class</span><span style="color: #DD0000">\n"</span><span style="color: #007700">;<br />    } else {<br />        echo </span><span style="color: #DD0000">"Object does not belong to a subclass of </span><span style="color: #0000BB">$class</span><span style="color: #DD0000">\n"</span><span style="color: #007700">;<br />    }<br />}<br /><br /></span><span style="color: #FF8000">// 实例化 2 对象<br /></span><span style="color: #0000BB">$veggie </span><span style="color: #007700">= new </span><span style="color: #0000BB">Vegetable</span><span style="color: #007700">(</span><span style="color: #0000BB">true</span><span style="color: #007700">, </span><span style="color: #DD0000">"blue"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$leafy </span><span style="color: #007700">= new </span><span style="color: #0000BB">Spinach</span><span style="color: #007700">();<br /><br /></span><span style="color: #FF8000">// 打印这些对象的信息<br /></span><span style="color: #007700">echo </span><span style="color: #DD0000">"veggie: CLASS " </span><span style="color: #007700">. </span><span style="color: #0000BB">get_class</span><span style="color: #007700">(</span><span style="color: #0000BB">$veggie</span><span style="color: #007700">) . </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />echo </span><span style="color: #DD0000">"leafy: CLASS " </span><span style="color: #007700">. </span><span style="color: #0000BB">get_class</span><span style="color: #007700">(</span><span style="color: #0000BB">$leafy</span><span style="color: #007700">);<br />echo </span><span style="color: #DD0000">", PARENT " </span><span style="color: #007700">. </span><span style="color: #0000BB">get_parent_class</span><span style="color: #007700">(</span><span style="color: #0000BB">$leafy</span><span style="color: #007700">) . </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// 显示蔬菜的属性<br /></span><span style="color: #007700">echo </span><span style="color: #DD0000">"\nveggie: Properties\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">printProperties</span><span style="color: #007700">(</span><span style="color: #0000BB">$veggie</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 和 leafy 的方法<br /></span><span style="color: #007700">echo </span><span style="color: #DD0000">"\nleafy: Methods\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">printMethods</span><span style="color: #007700">(</span><span style="color: #0000BB">$leafy</span><span style="color: #007700">);<br /><br />echo </span><span style="color: #DD0000">"\nParentage:\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">objectBelongsTo</span><span style="color: #007700">(</span><span style="color: #0000BB">$leafy</span><span style="color: #007700">, </span><span style="color: #0000BB">Spinach</span><span style="color: #007700">::class);<br /></span><span style="color: #0000BB">objectBelongsTo</span><span style="color: #007700">(</span><span style="color: #0000BB">$leafy</span><span style="color: #007700">, </span><span style="color: #0000BB">Vegetable</span><span style="color: #007700">::class);<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例会输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+veggie: CLASS Vegetable
+leafy: CLASS Spinach, PARENT Vegetable
+
+veggie: Properties
+        edible = 1
+        color = blue
+
+leafy: Methods
+        function __construct()
+        function cook()
+        function isCooked()
+        function isEdible()
+        function getColor()
+
+Parentage:
+Object does not belong to a subclass of Spinach
+Object belongs to class Spinach, a subclass of Vegetable
+</pre></div>
+   </div>
+   <div class="example-contents"><p>
+    一个重要的事情是需要注意在上面的示例中，对象 <var class="varname">$leafy</var> 是 
+    <span class="classname"><strong class="classname">Spinach</strong></span> 的实例（<span class="classname"><strong class="classname">Vegetable</strong></span> 的子类）。
+   </p></div>
+  </div>
+ </p>
+</div>
+</div></div></body></html>

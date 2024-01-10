@@ -1,0 +1,407 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>新特性</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="migration72.html">« 从 PHP 7.1.x 移植到 PHP 7.2.x</a></li>
+      <li style="float: right;"><a href="migration72.new-functions.html">新函数 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="migration72.html">从 PHP 7.1.x 移植到 PHP 7.2.x</a></li>
+    <li>新特性</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="migration72.new-features" class="sect1">
+ <h2 class="title">新特性</h2>
+
+ <div class="sect2" id="migration72.new-features.object-type">
+  <h3 class="title">新的对象类型</h3>
+
+  <p class="para">
+   这种新的对象类型, <span class="type">object</span>, 引进了可用于逆变（contravariant）参数输入和协变（covariant）返回任何对象类型。
+  </p>
+
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">function </span><span style="color: #0000BB">test</span><span style="color: #007700">(</span><span style="color: #0000BB">object $obj</span><span style="color: #007700">) : </span><span style="color: #0000BB">object<br /></span><span style="color: #007700">{<br />    return new </span><span style="color: #0000BB">SplQueue</span><span style="color: #007700">();<br />}<br /><br /></span><span style="color: #0000BB">test</span><span style="color: #007700">(new </span><span style="color: #0000BB">stdClass</span><span style="color: #007700">());</span></span></code></div>
+   </div>
+
+  </div>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.ext-loading-by-name">
+  <h3 class="title">通过名称加载扩展</h3>
+
+  <p class="para">
+   扩展文件不再需要通过文件加载
+   (Unix下以<code class="literal">.so</code>为文件扩展名，在Windows下以 <code class="literal">.dll</code> 为文件扩展名) 进行指定。可以在php.ini配置文件进行启用, 也可以使用
+   <span class="function"><a href="function.dl.html" class="function">dl()</a></span> 函数进行启用。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.abstract-method-overriding">
+  <h3 class="title">重写抽象方法（Abstract method）</h3>
+
+  <p class="para">
+   当一个抽象类继承于另外一个抽象类的时候，继承后的抽象类可以重写被继承的抽象类的抽象方法。
+  </p>
+
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">abstract class </span><span style="color: #0000BB">A<br /></span><span style="color: #007700">{<br />    abstract function </span><span style="color: #0000BB">test</span><span style="color: #007700">(</span><span style="color: #0000BB">string $s</span><span style="color: #007700">);<br />}<br />abstract class </span><span style="color: #0000BB">B </span><span style="color: #007700">extends </span><span style="color: #0000BB">A<br /></span><span style="color: #007700">{<br />    </span><span style="color: #FF8000">// 被覆盖 - 仍然保持参数的逆变和返回的逆变<br />    </span><span style="color: #007700">abstract function </span><span style="color: #0000BB">test</span><span style="color: #007700">(</span><span style="color: #0000BB">$s</span><span style="color: #007700">) : </span><span style="color: #0000BB">int</span><span style="color: #007700">;<br />}</span></span></code></div>
+   </div>
+
+  </div>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.sodium">
+  <h3 class="title"><a href="book.sodium.html" class="link">Sodium</a> 现在是核心扩展</h3>
+
+  <p class="para">
+   现代 Sodium 加密类已经成为 PHP 核心扩展。
+  </p>
+  <p class="para">
+   参阅 <a href="book.sodium.html" class="link">Sodium</a> 章节获取完整函数参考。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.pws-hashing-with-argon2">
+  <h3 class="title">使用 Argon2 算法生成密码散列</h3>
+
+  <p class="para">
+   Argon2 已经加入到<a href="book.password.html" class="link">密码散列 API</a>, 以下是显露出来的常量:
+  </p>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <span class="simpara">
+     <strong><code>PASSWORD_ARGON2I</code></strong>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <strong><code>PASSWORD_ARGON2_DEFAULT_MEMORY_COST</code></strong>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <strong><code>PASSWORD_ARGON2_DEFAULT_TIME_COST</code></strong>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <strong><code>PASSWORD_ARGON2_DEFAULT_THREADS</code></strong>
+    </span>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.pdo-extended-str-types">
+  <h3 class="title">新增 <a href="book.pdo.html" class="link">PDO</a> 字符串扩展类型</h3>
+
+  <p class="para">
+   当你准备支持多语言字符集，PDO的字符串类型已经扩展支持国际化的字符集。以下是扩展的常量：
+  </p>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <span class="simpara">
+     <strong><code>PDO::PARAM_STR_NATL</code></strong>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <strong><code>PDO::PARAM_STR_CHAR</code></strong>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <strong><code>PDO::ATTR_DEFAULT_STR_PARAM</code></strong>
+    </span>
+   </li>
+  </ul>
+
+  <p class="para">
+   这些常量通过<strong><code>PDO::PARAM_STR</code></strong>利用位运算<code class="literal">OR</code>进行计算：
+  </p>
+
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />$db</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">quote</span><span style="color: #007700">(</span><span style="color: #DD0000">'über'</span><span style="color: #007700">, </span><span style="color: #0000BB">PDO</span><span style="color: #007700">::</span><span style="color: #0000BB">PARAM_STR </span><span style="color: #007700">| </span><span style="color: #0000BB">PDO</span><span style="color: #007700">::</span><span style="color: #0000BB">PARAM_STR_NATL</span><span style="color: #007700">);</span></span></code></div>
+   </div>
+
+  </div>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.additional-emulated-prepares-debugging-info">
+  <h3 class="title">为 <a href="book.pdo.html" class="link">PDO</a> 新增额外的模拟调试信息</h3>
+
+  <p class="para">
+   <span class="function"><a href="pdostatement.debugdumpparams.html" class="function">PDOStatement::debugDumpParams()</a></span>方法已经更新，当发送SQL到数据库的时候，在一致性、行查询（包括替换绑定占位符）将会显示调试信息。这一特性已经加入到模拟调试中（在模拟调试打开时可用）。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.extended-ops-in-ldap">
+  <h3 class="title"><a href="book.ldap.html" class="link">LDAP</a> 支持新的操作方式</h3>
+
+  <p class="para">
+   LDAP 扩展已经新增了EXOP支持. 扩展暴露以下函数和常量:
+  </p>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <span class="simpara">
+     <span class="function"><a href="function.ldap-parse-exop.html" class="function">ldap_parse_exop()</a></span>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <span class="function"><a href="function.ldap-exop.html" class="function">ldap_exop()</a></span>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <span class="function"><a href="function.ldap-exop-passwd.html" class="function">ldap_exop_passwd()</a></span>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <span class="function"><a href="function.ldap-exop-whoami.html" class="function">ldap_exop_whoami()</a></span>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <strong><code>LDAP_EXOP_START_TLS</code></strong>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <strong><code>LDAP_EXOP_MODIFY_PASSWD</code></strong>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <strong><code>LDAP_EXOP_REFRESH</code></strong>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <strong><code>LDAP_EXOP_WHO_AM_I</code></strong>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <strong><code>LDAP_EXOP_TURN</code></strong>
+    </span>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.addr-info-in-sockets">
+  <h3 class="title"><a href="book.sockets.html" class="link">Socket</a> 扩展添加了地址信息</h3>
+
+  <p class="para">
+   Socket 扩展现在具有查找地址信息的能力，且可以连接到这个地址，或者进行绑定和解析。为此添加了以下一些函数:
+  </p>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <span class="simpara">
+     <span class="function"><a href="function.socket-addrinfo-lookup.html" class="function">socket_addrinfo_lookup()</a></span>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <span class="function"><a href="function.socket-addrinfo-connect.html" class="function">socket_addrinfo_connect()</a></span>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <span class="function"><a href="function.socket-addrinfo-bind.html" class="function">socket_addrinfo_bind()</a></span>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <span class="function"><a href="function.socket-addrinfo-explain.html" class="function">socket_addrinfo_explain()</a></span>
+    </span>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.param-type-widening">
+  <h3 class="title">扩展了参数类型</h3>
+
+  <p class="para">
+   重写方法和接口实现的参数类型现在可以省略了。不过这仍然是符合LSP，因为现在这种参数类型是逆变的。
+  </p>
+
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">interface </span><span style="color: #0000BB">A<br /></span><span style="color: #007700">{<br />    public function </span><span style="color: #0000BB">Test</span><span style="color: #007700">(array </span><span style="color: #0000BB">$input</span><span style="color: #007700">);<br />}<br /><br />class </span><span style="color: #0000BB">B </span><span style="color: #007700">implements </span><span style="color: #0000BB">A<br /></span><span style="color: #007700">{<br />    public function </span><span style="color: #0000BB">Test</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">){} </span><span style="color: #FF8000">// type omitted for $input<br /></span><span style="color: #007700">}</span></span></code></div>
+   </div>
+
+  </div>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.trailing-comma-in-grouped-namespaces">
+  <h3 class="title">允许分组命名空间的尾部逗号</h3>
+
+  <p class="para">
+   命名空间可以在PHP 7中使用尾随逗号进行分组引入。
+  </p>
+
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">use </span><span style="color: #0000BB">Foo\Bar</span><span style="color: #007700">\{<br />    </span><span style="color: #0000BB">Foo</span><span style="color: #007700">,<br />    </span><span style="color: #0000BB">Bar</span><span style="color: #007700">,<br />    </span><span style="color: #0000BB">Baz</span><span style="color: #007700">,<br />};</span></span></code></div>
+   </div>
+
+  </div>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.proc_nice-windows-support">
+  <h3 class="title"><span class="function"><a href="function.proc-nice.html" class="function">proc_nice()</a></span> 现在支持 Windows</h3>
+
+  <p class="para">
+   <span class="function"><a href="function.proc-nice.html" class="function">proc_nice()</a></span> 函数现在支持 Windows。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.pack-unpack-endian-support">
+  <h3 class="title"><span class="function"><a href="function.pack.html" class="function">pack()</a></span> 和 <span class="function"><a href="function.unpack.html" class="function">unpack()</a></span> 字节序支持</h3>
+
+  <p class="para">
+   <span class="function"><a href="function.pack.html" class="function">pack()</a></span> 和 <span class="function"><a href="function.unpack.html" class="function">unpack()</a></span> 函数现在 float 和
+   double 都支持大小端。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.exif-features">
+  <h3 class="title"><a href="book.exif.html" class="link">EXIF</a> 扩展增强</h3>
+
+  <p class="para">
+   EXIF 扩展已更新以支持更多的格式。这意味着使用 <span class="function"><a href="function.exif-read-data.html" class="function">exif_read_data()</a></span>
+   函数解析图片时，现在可以正确转换图片格式的特定标签。现在支持下面这些新格式：
+  </p>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <span class="simpara">
+     Samsung
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     DJI
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     Panasonic
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     Sony
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     Pentax
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     Minolta
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     Sigma/Foveon
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     AGFA
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     Kyocera
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     Ricoh
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     Epson
+    </span>
+   </li>
+  </ul>
+
+  <p class="para">
+   EXIF 函数 <span class="function"><a href="function.exif-read-data.html" class="function">exif_read_data()</a></span> 和 <span class="function"><a href="function.exif-thumbnail.html" class="function">exif_thumbnail()</a></span> 
+   现在支持传递流作为它们的第一个参数。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.pcre">
+  <h3 class="title"><a href="book.pcre.html" class="link">PCRE</a> 新功能</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <span class="simpara">
+     PCRE_DUPNAMES 设置新增 <code class="literal">J</code> 修饰符。
+    </span>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.sqlite3">
+  <h3 class="title"><a href="book.sqlite3.html" class="link">SQLite3</a> 允许写入 BLOB</h3>
+
+  <p class="para">
+   <span class="methodname"><a href="sqlite3.openblob.html" class="methodname">SQLite3::openBlob()</a></span> 现在允许在写入模式打开 BLOB 
+   字段，以前仅支持读模式。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.oci8">
+  <h3 class="title"><a href="book.oci8.html" class="link">Oracle OCI8</a> 透明应用程序故障转移回调</h3>
+
+  <p class="para">
+   新增 <a href="oci8.taf.html" class="link">Oracle 数据库透明应用程序故障转移（TAF）回调</a>的支持。
+   TAF 允许 PHP OCI8 应用程序在断开链接时自动重新连接到预配置的数据库。新的 TAF
+   回调支持允许 PHP 应用程序在故障转移期间的监控和控制重新连接。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.zip">
+  <h3 class="title"><a href="book.zip.html" class="link">ZIP</a> 扩展增强</h3>
+
+  <p class="para">
+   新增加密归档读写支持（需要 libzip 1.2.0）。
+  </p>
+  <p class="para">
+   现在 <span class="classname"><a href="class.ziparchive.html" class="classname">ZipArchive</a></span> 类实现了 <span class="interfacename"><a href="class.countable.html" class="interfacename">Countable</a></span> 
+   接口。
+  </p>
+  <p class="para">
+   <code class="literal">zip://</code> 流现在接受 <code class="literal">&#039;password&#039;</code> 上下文选项。
+  </p>
+ </div>
+</div></div></div></body></html>

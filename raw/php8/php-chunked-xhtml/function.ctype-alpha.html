@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>检测字母字符</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.ctype-alnum.html">« ctype_alnum</a></li>
+      <li style="float: right;"><a href="function.ctype-cntrl.html">ctype_cntrl »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.ctype.html">Ctype 函数</a></li>
+    <li>检测字母字符</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.ctype-alpha" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">ctype_alpha</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.0.4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">ctype_alpha</span> &mdash; <span class="dc-title">检测字母字符</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.ctype-alpha-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>ctype_alpha</strong></span>(<span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$text</code></span>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   检测提供的 <span class="type">string</span> 类型的 <code class="parameter">text</code> 里面的所有字符是否都是字母。在标准的
+   <code class="literal">C</code> 语言区域设置中，字母仅仅是指 <code class="literal">[A-Za-z]</code>，并且如果 $text 是单个字符，则
+   <span class="function"><strong>ctype_alpha()</strong></span> 等同于 <code class="literal">(ctype_upper($text) ||
+   ctype_lower($text))</code>，但是在其他语言中有些字母既不视为大写也不视为小写。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.ctype-alpha-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">text</code></dt>
+
+     <dd>
+
+      <p class="para">
+       要测试的字符串。
+       <blockquote class="note"><p><strong class="note">注意</strong>: <p class="para">
+如果给出一个 -128 到 255 之间(含)的<span class="type">int</span>, 将会被解释为该值对应的ASCII字符 (负值将加上 256 以支持扩展ASCII字符).
+其它整数将会被解释为该值对应的十进制字符串.</p></p></blockquote>
+       <div class="warning"><strong class="warning">警告</strong><p class="para">
+自 PHP 8.1.0 起，弃用传递非字符串参数。未来该参数将解释为字符串而不是 ASCII 
+码点。根据预期行为，应将参数转为字符串或显式调用 <span class="function"><a href="function.chr.html" class="function">chr()</a></span>。</p></div>
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.ctype-alpha-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   如果在当前区域设置中 <code class="parameter">text</code> 里的每个字符都是字母，那么就返回
+   <strong><code>true</code></strong>，否则返回 <strong><code>false</code></strong>。当使用空字符串调用时，结果始终为 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.ctype-alpha-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 <span class="function"><strong>ctype_alpha()</strong></span> 例子（使用默认的语言环境）</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$strings </span><span style="color: #007700">= array(</span><span style="color: #DD0000">'KjgWZC'</span><span style="color: #007700">, </span><span style="color: #DD0000">'arf12'</span><span style="color: #007700">);<br />foreach (</span><span style="color: #0000BB">$strings </span><span style="color: #007700">as </span><span style="color: #0000BB">$testcase</span><span style="color: #007700">) {<br />    if (</span><span style="color: #0000BB">ctype_alpha</span><span style="color: #007700">(</span><span style="color: #0000BB">$testcase</span><span style="color: #007700">)) {<br />        echo </span><span style="color: #DD0000">"The string </span><span style="color: #0000BB">$testcase</span><span style="color: #DD0000"> consists of all letters.\n"</span><span style="color: #007700">;<br />    } else {<br />        echo </span><span style="color: #DD0000">"The string </span><span style="color: #0000BB">$testcase</span><span style="color: #DD0000"> does not consist of all letters.\n"</span><span style="color: #007700">;<br />    }<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+The string KjgWZC consists of all letters.
+The string arf12 does not consist of all letters.
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.ctype-alpha-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.ctype-upper.html" class="function" rel="rdfs-seeAlso">ctype_upper()</a> - 检测大写字符</span></li>
+    <li class="member"><span class="function"><a href="function.ctype-lower.html" class="function" rel="rdfs-seeAlso">ctype_lower()</a> - 检测小写字符</span></li>
+    <li class="member"><span class="function"><a href="function.setlocale.html" class="function" rel="rdfs-seeAlso">setlocale()</a> - 设置区域信息</span></li>
+    <li class="member"><span class="function"><a href="intlchar.isalpha.html" class="function" rel="rdfs-seeAlso">IntlChar::isalpha()</a> - Check if code point is a letter character</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div></div></div></body></html>

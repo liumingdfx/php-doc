@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>修改日期时间对象的值</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="datetime.getlasterrors.html">« DateTime::getLastErrors</a></li>
+      <li style="float: right;"><a href="datetime.set-state.html">DateTime::__set_state »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="class.datetime.html">DateTime</a></li>
+    <li>修改日期时间对象的值</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="datetime.modify" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">DateTime::modify</h1>
+  <h1 class="refname">date_modify</h1>
+  <p class="verinfo">(PHP 5 &gt;= 5.2.0, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">DateTime::modify</span> -- <span class="refname">date_modify</span> &mdash; <span class="dc-title">修改日期时间对象的值</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-datetime.modify-description">
+  <h3 class="title">说明</h3>
+  <p class="para">面向对象风格</p>
+  <div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><strong>DateTime::modify</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$modifier</code></span>): <span class="type"><span class="type"><a href="class.datetime.html" class="type DateTime">DateTime</a></span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">过程化风格</p>
+  <div class="methodsynopsis dc-description"><span class="methodname"><a href="function.date-modify.html" class="methodname">date_modify</a></span>(<span class="methodparam"><span class="type"><a href="class.datetime.html" class="type DateTime">DateTime</a></span> <code class="parameter">$object</code></span>, <span class="methodparam"><span class="type">string</span> <code class="parameter">$modifier</code></span>): <span class="type"><span class="type"><a href="class.datetime.html" class="type DateTime">DateTime</a></span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   通过 <span class="function"><a href="datetimeimmutable.construct.html" class="function">DateTimeImmutable::__construct()</a></span> 能够接受的格式，对 Datetime 对象的时间戳进行修改（自增或者自减）。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-datetime.modify-parameters">
+  <h3 class="title">参数</h3>
+  <dl>
+   <dt>
+<code class="parameter">object</code></dt>
+
+<dd>
+<p class="para">仅过程化风格：由 <span class="function"><a href="function.date-create.html" class="function">date_create()</a></span> 返回的 <span class="classname"><a href="class.datetime.html" class="classname">DateTime</a></span> 类型的对象。此函数会修改这个对象。</p></dd>
+
+   
+    <dt>
+<code class="parameter">modifier</code></dt>
+
+    <dd>
+
+     <p class="para">日期/时间字符串。正确格式的说明详见 <a href="datetime.formats.html" class="link">日期与时间格式</a>。</p>
+    </dd>
+
+   
+  </dl>
+
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-datetime.modify-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回方法链修改后的 <span class="classname"><a href="class.datetime.html" class="classname">DateTime</a></span> 对象， 或者在失败时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 errors" id="refsect1-datetime.modify-errors">
+  <h3 class="title">错误／异常</h3>
+  <p class="para">
+   仅限于面向对象的 API：如果传递了无效的日期/时间字符串，将抛出 <span class="exceptionname"><a href="class.datemalformedstringexception.html" class="exceptionname">DateMalformedStringException</a></span>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-datetime.modify-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>8.3.0</td>
+      <td>
+       现在如果传递了无效的字符串，<span class="methodname"><strong>DateTime::modify()</strong></span> 将抛出
+       <span class="exceptionname"><a href="class.datemalformedstringexception.html" class="exceptionname">DateMalformedStringException</a></span> 而不是警告。<span class="function"><a href="function.date-modify.html" class="function">date_modify()</a></span>
+       尚未更改。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-datetime.modify-examples">
+  <h3 class="title">示例</h3>
+  <div class="example" id="">
+   <p><strong>示例 #1 <span class="function"><strong>DateTime::modify()</strong></span> 示例</strong></p>
+   <div class="example-contents"><p>面向对象风格</p></div>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$date </span><span style="color: #007700">= new </span><span style="color: #0000BB">DateTime</span><span style="color: #007700">(</span><span style="color: #DD0000">'2006-12-12'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$date</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">modify</span><span style="color: #007700">(</span><span style="color: #DD0000">'+1 day'</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">$date</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">format</span><span style="color: #007700">(</span><span style="color: #DD0000">'Y-m-d'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+   <div class="example-contents"><p>过程化风格</p></div>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$date </span><span style="color: #007700">= </span><span style="color: #0000BB">date_create</span><span style="color: #007700">(</span><span style="color: #DD0000">'2006-12-12'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">date_modify</span><span style="color: #007700">(</span><span style="color: #0000BB">$date</span><span style="color: #007700">, </span><span style="color: #DD0000">'+1 day'</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">date_format</span><span style="color: #007700">(</span><span style="color: #0000BB">$date</span><span style="color: #007700">, </span><span style="color: #DD0000">'Y-m-d'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例会输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+2006-12-13
+</pre></div>
+   </div>
+  </div>
+  <div class="example" id="">
+   <p><strong>示例 #2 增加或者减少月份的时候需要当心</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$date </span><span style="color: #007700">= new </span><span style="color: #0000BB">DateTime</span><span style="color: #007700">(</span><span style="color: #DD0000">'2000-12-31'</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$date</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">modify</span><span style="color: #007700">(</span><span style="color: #DD0000">'+1 month'</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">$date</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">format</span><span style="color: #007700">(</span><span style="color: #DD0000">'Y-m-d'</span><span style="color: #007700">) . </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$date</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">modify</span><span style="color: #007700">(</span><span style="color: #DD0000">'+1 month'</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">$date</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">format</span><span style="color: #007700">(</span><span style="color: #DD0000">'Y-m-d'</span><span style="color: #007700">) . </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例会输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+2001-01-31
+2001-03-03
+</pre></div>
+   </div>
+  </div>
+  <div class="example" id="">
+   <p><strong>示例 #3 支持所有日期和时间格式</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$date </span><span style="color: #007700">= new </span><span style="color: #0000BB">DateTime</span><span style="color: #007700">(</span><span style="color: #DD0000">'2020-12-31'</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$date</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">modify</span><span style="color: #007700">(</span><span style="color: #DD0000">'July 1st, 2023'</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">$date</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">format</span><span style="color: #007700">(</span><span style="color: #DD0000">'Y-m-d H:i'</span><span style="color: #007700">) . </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$date</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">modify</span><span style="color: #007700">(</span><span style="color: #DD0000">'Monday next week'</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">$date</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">format</span><span style="color: #007700">(</span><span style="color: #DD0000">'Y-m-d H:i'</span><span style="color: #007700">) . </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$date</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">modify</span><span style="color: #007700">(</span><span style="color: #DD0000">'17:30'</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">$date</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">format</span><span style="color: #007700">(</span><span style="color: #DD0000">'Y-m-d H:i'</span><span style="color: #007700">) . </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例会输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+2023-07-01 00:00
+2023-07-03 00:00
+2023-07-03 17:30
+</pre></div>
+   </div>
+  </div>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-datetime.modify-seealso">
+  <h3 class="title">参见</h3>
+  <ul class="simplelist">
+   <li class="member"><span class="function"><a href="function.strtotime.html" class="function" rel="rdfs-seeAlso">strtotime()</a> - 将任何英文文本日期时间描述解析为 Unix 时间戳</span></li>
+   <li class="member"><span class="function"><a href="datetimeimmutable.modify.html" class="function" rel="rdfs-seeAlso">DateTimeImmutable::modify()</a> - Creates a new object with modified timestamp</span></li>
+   <li class="member"><span class="function"><a href="datetime.add.html" class="function" rel="rdfs-seeAlso">DateTime::add()</a> - 修改 DateTime 对象，增加天、月、年、小时、分钟以及秒的数量。</span></li>
+   <li class="member"><span class="function"><a href="datetime.sub.html" class="function" rel="rdfs-seeAlso">DateTime::sub()</a> - 对 DateTime 对象减去一定量的日、月、年、小时、分钟和秒。</span></li>
+   <li class="member"><span class="function"><a href="datetime.setdate.html" class="function" rel="rdfs-seeAlso">DateTime::setDate()</a> - 设置日期</span></li>
+   <li class="member"><span class="function"><a href="datetime.setisodate.html" class="function" rel="rdfs-seeAlso">DateTime::setISODate()</a> - 设置 ISO 日期</span></li>
+   <li class="member"><span class="function"><a href="datetime.settime.html" class="function" rel="rdfs-seeAlso">DateTime::setTime()</a> - 设置时间</span></li>
+   <li class="member"><span class="function"><a href="datetime.settimestamp.html" class="function" rel="rdfs-seeAlso">DateTime::setTimestamp()</a> - 以 Unix 时间戳的方式设置日期和时间</span></li>
+  </ul>
+ </div>
+
+
+</div></div></div></body></html>

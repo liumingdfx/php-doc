@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>返回指定对象的 hash id</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.spl-classes.html">« spl_classes</a></li>
+      <li style="float: right;"><a href="function.spl-object-id.html">spl_object_id »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.spl.html">SPL 函数</a></li>
+    <li>返回指定对象的 hash id</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.spl-object-hash" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">spl_object_hash</h1>
+  <p class="verinfo">(PHP 5 &gt;= 5.2.0, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">spl_object_hash</span> &mdash; <span class="dc-title">
+   返回指定对象的 hash id
+  </span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.spl-object-hash-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>spl_object_hash</strong></span>(<span class="methodparam"><span class="type">object</span> <code class="parameter">$object</code></span>): <span class="type">string</span></div>
+
+  <p class="para rdfs-comment">
+   本函数为对象返回唯一标识符。只要对象没有销毁，这个 id
+   可用作保存对象的散列键，或者用于标识对象。一旦对象销毁，它的散列值可能会被其它对象重用。此行为类似为
+   <span class="function"><a href="function.spl-object-id.html" class="function">spl_object_id()</a></span>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.spl-object-hash-parameters">
+   <h3 class="title">参数</h3>
+   <p class="para">
+    <dl>
+     
+      <dt>
+<code class="parameter">object</code></dt>
+
+      <dd>
+
+       <p class="para">
+        任何对象。 
+       </p>
+      </dd>
+
+     
+    </dl>
+
+   </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.spl-object-hash-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   字符串，对于当前存在的每个对象都是唯一的，且对同一个对象始终相同。
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.spl-object-hash-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 A <span class="function"><strong>spl_object_hash()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$id </span><span style="color: #007700">= </span><span style="color: #0000BB">spl_object_hash</span><span style="color: #007700">(</span><span style="color: #0000BB">$object</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$storage</span><span style="color: #007700">[</span><span style="color: #0000BB">$id</span><span style="color: #007700">] = </span><span style="color: #0000BB">$object</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.spl-object-hash-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    当对象销毁后，它的散列值可能会被其它对象重用。
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    对象散列应该使用 <code class="code">===</code> 和 <code class="code">!==</code> 标识符比较，因为返回的散列可能是<a href="language.types.numeric-strings.html" class="link">数字字符串</a>。例如：<code class="literal">0000000000000e600000000000000000</code>。
+   </p>
+  </p></blockquote>
+ </div>
+
+ <div class="refsect1 seealso" id="refsect1-function.spl-object-hash-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.spl-object-id.html" class="function" rel="rdfs-seeAlso">spl_object_id()</a> - Return the integer object handle for given object</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div></div></div></body></html>

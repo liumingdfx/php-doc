@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>读取大对象</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.pg-lo-read-all.html">« pg_lo_read_all</a></li>
+      <li style="float: right;"><a href="function.pg-lo-seek.html">pg_lo_seek »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.pgsql.html">PostgreSQL 函数</a></li>
+    <li>读取大对象</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.pg-lo-read" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">pg_lo_read</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.2.0, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">pg_lo_read</span> &mdash; <span class="dc-title">读取大对象</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.pg-lo-read-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>pg_lo_read</strong></span>(<span class="methodparam"><span class="type"><a href="class.pgsql-lob.html" class="type PgSql\Lob">PgSql\Lob</a></span> <code class="parameter">$lob</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$length</code><span class="initializer"> = 8192</span></span>): <span class="type"><span class="type">string</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>pg_lo_read()</strong></span> 从大对象中读取最多 <code class="parameter">length</code> 字节的数据并以 <span class="type">string</span> 返回。
+  </p>
+  <p class="para">
+   要使用大对象接口，必须将其封装在一个事务块中。
+  </p>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    本函数以前的名字为 <span class="function"><strong>pg_loread()</strong></span>。
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.pg-lo-read-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">lob</code></dt>
+
+     <dd>
+
+      <p class="para">通过 <span class="function"><a href="function.pg-lo-open.html" class="function">pg_lo_open()</a></span> 返回的 <span class="classname"><a href="class.pgsql-lob.html" class="classname">PgSql\Lob</a></span> 实例。</p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">length</code></dt>
+
+     <dd>
+
+      <p class="para">
+       可选的要返回的最大字节数。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.pg-lo-read-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   包含来自大对象的 <code class="parameter">length</code> 字节的 <span class="type">string</span>，或错误时为 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.pg-lo-read-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+ <td>8.1.0</td>
+ <td>
+  现在 <code class="parameter">lob</code> 接受 <span class="classname"><a href="class.pgsql-lob.html" class="classname">PgSql\Lob</a></span> 
+  实例，之前接受 <a href="language.types.resource.html" class="link">resource</a>。
+ </td>
+</tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+ 
+ <div class="refsect1 examples" id="refsect1-function.pg-lo-read-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 <span class="function"><strong>pg_lo_read()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />   $doc_oid </span><span style="color: #007700">= </span><span style="color: #0000BB">189762345</span><span style="color: #007700">;<br />   </span><span style="color: #0000BB">$database </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">"dbname=jacarta"</span><span style="color: #007700">);<br />   </span><span style="color: #0000BB">pg_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$database</span><span style="color: #007700">, </span><span style="color: #DD0000">"begin"</span><span style="color: #007700">);<br />   </span><span style="color: #0000BB">$handle </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_lo_open</span><span style="color: #007700">(</span><span style="color: #0000BB">$database</span><span style="color: #007700">, </span><span style="color: #0000BB">$doc_oid</span><span style="color: #007700">, </span><span style="color: #DD0000">"r"</span><span style="color: #007700">);<br />   </span><span style="color: #0000BB">$data </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_lo_read</span><span style="color: #007700">(</span><span style="color: #0000BB">$handle</span><span style="color: #007700">, </span><span style="color: #0000BB">50000</span><span style="color: #007700">);<br />   </span><span style="color: #0000BB">pg_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$database</span><span style="color: #007700">, </span><span style="color: #DD0000">"commit"</span><span style="color: #007700">);<br />   echo </span><span style="color: #0000BB">$data</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div> 
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 seealso" id="refsect1-function.pg-lo-read-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.pg-lo-read-all.html" class="function" rel="rdfs-seeAlso">pg_lo_read_all()</a> - 读取整个大对象并直接发送到浏览器</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div></div></div></body></html>

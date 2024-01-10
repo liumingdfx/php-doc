@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>建立起始和终止元素处理程序</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.xml-set-default-handler.html">« xml_set_default_handler</a></li>
+      <li style="float: right;"><a href="function.xml-set-end-namespace-decl-handler.html">xml_set_end_namespace_decl_handler »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.xml.html">XML 解析器函数</a></li>
+    <li>建立起始和终止元素处理程序</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.xml-set-element-handler" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">xml_set_element_handler</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">xml_set_element_handler</span> &mdash; <span class="dc-title">建立起始和终止元素处理程序</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.xml-set-element-handler-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>xml_set_element_handler</strong></span>(<span class="methodparam"><span class="type"><a href="class.xmlparser.html" class="type XMLParser">XMLParser</a></span> <code class="parameter">$parser</code></span>, <span class="methodparam"><span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span> <code class="parameter">$start_handler</code></span>, <span class="methodparam"><span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span> <code class="parameter">$end_handler</code></span>): <span class="type"><span class="type true">true</span></span></div>
+
+  <p class="para rdfs-comment">
+   为 <code class="parameter">parser</code> 参数指定的 XML 解析器建立元素处理函数。
+  </p>
+  <p class="para">
+   当打开新的 XML 元素时调用 <code class="parameter">start_handler</code>，当关闭 XML 元素时调用 <code class="parameter">end_handler</code>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.xml-set-element-handler-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+ <dt>
+<code class="parameter">parser</code></dt>
+
+ <dd>
+
+  <p class="para">
+   XML 解析器。
+  </p>
+ </dd>
+
+
+    
+     <dt>
+<code class="parameter">start_handler</code></dt>
+
+     <dd>
+
+      <p class="para">
+ 如果传递 <strong><code>null</code></strong> 或空字符串，处理程序将重置为其默认状态。
+</p>
+<p class="para">
+ 如果 <code class="parameter">handler</code> 是 <span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span>，设置的 callable 将作为处理程序。
+</p>
+<p class="para">
+ 如果 <code class="parameter">handler</code> 是 <span class="type">string</span>，它可以是 <span class="function"><a href="function.xml-set-object.html" class="function">xml_set_object()</a></span>
+ 设置的对象的方法名称。
+</p>
+      <p class="para">
+       处理程序的签名必须是：
+       <div class="methodsynopsis dc-description">
+        <span class="methodname"><span class="replaceable">start_element_handler</span></span>(<span class="methodparam"><span class="type"><a href="class.xmlparser.html" class="type XMLParser">XMLParser</a></span> <code class="parameter">$parser</code></span>, <span class="methodparam"><span class="type">string</span> <code class="parameter">$name</code></span>, <span class="methodparam"><span class="type">array</span> <code class="parameter">$attributes</code></span>): <span class="type"><span class="type void">void</span></span></div>
+
+       <dl>
+        
+ <dt>
+<code class="parameter">parser</code></dt>
+
+ <dd>
+
+  <span class="simpara">
+   XML 解析器调用的处理程序。
+  </span>
+ </dd>
+
+
+        
+         <dt>
+<code class="parameter">name</code></dt>
+
+         <dd>
+
+          <span class="simpara">
+           包含调用此处理程序的元素名称。如果<a href="xml.case-folding.html" class="link">大写转换</a>对该解析器有效，元素名将用大写字母表示。
+          </span>
+         </dd>
+
+        
+        
+         <dt>
+<code class="parameter">attributes</code></dt>
+
+         <dd>
+
+          <span class="simpara">
+           带有元素属性的关联数组。如果元素没有数组则为空数组。数组元素的下标为属性名，元素的值即为属性的值。属性名将以和元素名同样的标准进行<a href="xml.case-folding.html" class="link">大写转换</a>，值<em>不</em>进行大写转换。
+          </span>
+          <span class="simpara">
+           遍历 <code class="parameter">attributes</code> 的顺序与声明 attributes 的顺序相同。
+          </span>
+         </dd>
+
+        
+       </dl>
+
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">end_handler</code></dt>
+
+     <dd>
+
+      <p class="para">
+ 如果传递 <strong><code>null</code></strong> 或空字符串，处理程序将重置为其默认状态。
+</p>
+<p class="para">
+ 如果 <code class="parameter">handler</code> 是 <span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span>，设置的 callable 将作为处理程序。
+</p>
+<p class="para">
+ 如果 <code class="parameter">handler</code> 是 <span class="type">string</span>，它可以是 <span class="function"><a href="function.xml-set-object.html" class="function">xml_set_object()</a></span>
+ 设置的对象的方法名称。
+</p>
+      <p class="para">
+       处理程序的签名必须是：
+       <div class="methodsynopsis dc-description">
+        <span class="methodname"><span class="replaceable">end_element_handler</span></span>(<span class="methodparam"><span class="type"><a href="class.xmlparser.html" class="type XMLParser">XMLParser</a></span> <code class="parameter">$parser</code></span>, <span class="methodparam"><span class="type">string</span> <code class="parameter">$name</code></span>): <span class="type"><span class="type void">void</span></span></div>
+
+       <dl>
+        
+ <dt>
+<code class="parameter">parser</code></dt>
+
+ <dd>
+
+  <span class="simpara">
+   XML 解析器调用的处理程序。
+  </span>
+ </dd>
+
+
+        
+         <dt>
+<code class="parameter">name</code></dt>
+
+         <dd>
+
+          <span class="simpara">
+           包含调用此处理程序的元素名称。如果<a href="xml.case-folding.html" class="link">大写转换</a>对该解析器有效，元素名将用大写字母表示。
+          </span>
+         </dd>
+
+        
+       </dl>
+
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.xml-set-element-handler-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   总是返回 <strong><code>true</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.xml-set-element-handler-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+      <tr>
+ <td>8.0.0</td>
+ <td>
+  <code class="parameter">parser</code> 现在接受 <span class="classname"><a href="class.xmlparser.html" class="classname">XMLParser</a></span> 实例；之前接受有效的 <code class="literal">xml</code> <span class="type">resource</span>。
+ </td>
+</tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+</div></div></div></body></html>

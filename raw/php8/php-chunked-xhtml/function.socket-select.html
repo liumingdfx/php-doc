@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>从给定套接字数组运行带指定超时时间的 select() 系统调用</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.socket-recvmsg.html">« socket_recvmsg</a></li>
+      <li style="float: right;"><a href="function.socket-send.html">socket_send »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.sockets.html">Socket 函数</a></li>
+    <li>从给定套接字数组运行带指定超时时间的 select() 系统调用</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.socket-select" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">socket_select</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.1.0, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">socket_select</span> &mdash; <span class="dc-title">从给定套接字数组运行带指定超时时间的 select() 系统调用</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.socket-select-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>socket_select</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">array</span><span class="type"></span></span> <code class="parameter reference">&$read</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">array</span><span class="type"></span></span> <code class="parameter reference">&$write</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">array</span><span class="type"></span></span> <code class="parameter reference">&$except</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">int</span><span class="type"></span></span> <code class="parameter">$seconds</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$microseconds</code><span class="initializer"> = 0</span></span><br>): <span class="type"><span class="type">int</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>socket_select()</strong></span> 接受套接字数组并等待其状态改变。如果拥有 BSD 套接字背景，会认识到这些套接字数组事实上被称为文件描述符集合。观察三个独立套接字数组。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.socket-select-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">read</code></dt>
+
+     <dd>
+
+      <p class="para">
+       <code class="parameter">read</code> 数组中列出要检查是否可读的套接字（更准确地说，查看读取是否会阻塞-特别是套接字在 EOF 时也可以是就绪状态，此时 <span class="function"><a href="function.socket-read.html" class="function">socket_read()</a></span> 
+       将会返回长度为 0 的字符串。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">write</code></dt>
+
+     <dd>
+
+      <p class="para">
+       <code class="parameter">write</code> 数组中列出要检查的写入是否阻塞的套接字。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">except</code></dt>
+
+     <dd>
+
+      <p class="para">
+       <code class="parameter">except</code> 数组中列出要检查的是否异常的套接字。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">seconds</code></dt>
+
+     <dd>
+
+      <p class="para">
+       <code class="parameter">seconds</code> 和 <code class="parameter">microseconds</code> 
+       构成 <code class="literal">timeout</code> 参数。<code class="literal">timeout</code> 
+       是 <span class="function"><strong>socket_select()</strong></span> 返回前的运行时间上限。<code class="parameter">seconds</code> 
+       可以是 0，使 <span class="function"><strong>socket_select()</strong></span> 立即返回。这在轮询时很有用。如果 <code class="parameter">seconds</code> 
+       是 <strong><code>null</code></strong>（不会超时），<span class="function"><strong>socket_select()</strong></span> 会无限期阻塞。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">microseconds</code></dt>
+
+     <dd>
+
+      <p class="para">
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+  <div class="warning"><strong class="warning">警告</strong>
+   <p class="para">
+    函数退出时，数组中状态发生变更的套接字将会被修改。
+   </p>
+  </div>
+  <p class="para">
+   你不需要将每个数组都传递到 <span class="function"><strong>socket_select()</strong></span> 
+   中。可以将它忽略或者使用空数组和 <strong><code>null</code></strong> 代替。不要忘记这些数组是<em>引用</em>传递的，在 <span class="function"><strong>socket_select()</strong></span> 
+   返回时会被修改。
+  </p>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    由于当前 Zend 引擎的限制，无法使用像 <strong><code>null</code></strong> 这样的常数修饰符直接作为参数传递给期望获取引用参数的方法。而是使用临时变量或表达式：
+    <div class="example" id="">
+     <p><strong>示例 #1 <span class="function"><strong>socket_select()</strong></span> 使用 <strong><code>null</code></strong> </strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$e </span><span style="color: #007700">= </span><span style="color: #0000BB">NULL</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">socket_select</span><span style="color: #007700">(</span><span style="color: #0000BB">$r</span><span style="color: #007700">, </span><span style="color: #0000BB">$w</span><span style="color: #007700">, </span><span style="color: #0000BB">$e</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </div>
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.socket-select-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   成功时 <span class="function"><strong>socket_select()</strong></span> 
+   返回数组中被修改的套接字个数，如果超时则可能返回 0。失败时时返回 <strong><code>false</code></strong>。可以使用 <span class="function"><a href="function.socket-last-error.html" class="function">socket_last_error()</a></span> 
+   检索错误码。 
+  </p>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    确保使用 <code class="literal">===</code> 运算符来检查错误。因为 <span class="function"><strong>socket_select()</strong></span> 
+    可能返回 0，使用 <code class="literal">==</code> 将被计算为 <strong><code>true</code></strong>：
+    <div class="example" id="">
+     <p><strong>示例 #2 理解 <span class="function"><strong>socket_select()</strong></span> 的返回值</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$e </span><span style="color: #007700">= </span><span style="color: #0000BB">NULL</span><span style="color: #007700">;<br />if (</span><span style="color: #0000BB">false </span><span style="color: #007700">=== </span><span style="color: #0000BB">socket_select</span><span style="color: #007700">(</span><span style="color: #0000BB">$r</span><span style="color: #007700">, </span><span style="color: #0000BB">$w</span><span style="color: #007700">, </span><span style="color: #0000BB">$e</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">)) {<br />    echo </span><span style="color: #DD0000">"socket_select() failed, reason: " </span><span style="color: #007700">.<br />        </span><span style="color: #0000BB">socket_strerror</span><span style="color: #007700">(</span><span style="color: #0000BB">socket_last_error</span><span style="color: #007700">()) . </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+     </div>
+
+    </div>
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.socket-select-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #3 <span class="function"><strong>socket_select()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">/* Prepare the read array */<br /></span><span style="color: #0000BB">$read   </span><span style="color: #007700">= array(</span><span style="color: #0000BB">$socket1</span><span style="color: #007700">, </span><span style="color: #0000BB">$socket2</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$write  </span><span style="color: #007700">= </span><span style="color: #0000BB">NULL</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$except </span><span style="color: #007700">= </span><span style="color: #0000BB">NULL</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$num_changed_sockets </span><span style="color: #007700">= </span><span style="color: #0000BB">socket_select</span><span style="color: #007700">(</span><span style="color: #0000BB">$read</span><span style="color: #007700">, </span><span style="color: #0000BB">$write</span><span style="color: #007700">, </span><span style="color: #0000BB">$except</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">);<br /><br />if (</span><span style="color: #0000BB">$num_changed_sockets </span><span style="color: #007700">=== </span><span style="color: #0000BB">false</span><span style="color: #007700">) {<br />    </span><span style="color: #FF8000">/* Error handling */<br /></span><span style="color: #007700">} else if (</span><span style="color: #0000BB">$num_changed_sockets </span><span style="color: #007700">&gt; </span><span style="color: #0000BB">0</span><span style="color: #007700">) {<br />    </span><span style="color: #FF8000">/* At least at one of the sockets something interesting happened */<br /></span><span style="color: #007700">}<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.socket-select-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <p class="para">
+    请注意，处理某些实现的套接字时需要特别小心。一些基本规则：
+    <ul class="itemizedlist">
+     <li class="listitem">
+      <span class="simpara">
+       始终使用不带超时时间的 <span class="function"><strong>socket_select()</strong></span>，如果没有可用数据，程序不会做任何事。依赖超时的代码通常不可移植并且很难调试。
+      </span>
+     </li>
+     <li class="listitem">
+      <span class="simpara">
+       不打算在 <span class="function"><strong>socket_select()</strong></span> 调用后检查值的套接字不要添加到集合中。<span class="function"><strong>socket_select()</strong></span> 
+       返回后，必须检查所有数组中的套接字。任何可写套接字需要处理写事件，任何可读套接字需要处理读事件。
+      </span>
+     </li>
+     <li class="listitem">
+      <span class="simpara">
+       在处理数组中返回套接字的读或写操作时，可能并不会读取或写入请求的所有数据。需要做好仅仅读取或写入单个字节的准备。
+      </span>
+     </li>
+     <li class="listitem">
+      <span class="simpara">
+       在大多数套接字实现中，仅在套接字收到带外数据时，<code class="parameter">except</code> 中的套接字可以捕获异常。
+      </span>
+     </li>
+    </ul>
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.socket-select-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.socket-read.html" class="function" rel="rdfs-seeAlso">socket_read()</a> - 从套接字中读取最大长度的数据</span></li>
+    <li class="member"><span class="function"><a href="function.socket-write.html" class="function" rel="rdfs-seeAlso">socket_write()</a> - 向套接字写数据</span></li>
+    <li class="member"><span class="function"><a href="function.socket-last-error.html" class="function" rel="rdfs-seeAlso">socket_last_error()</a> - 返回套接字上的最后一个错误</span></li>
+    <li class="member"><span class="function"><a href="function.socket-strerror.html" class="function" rel="rdfs-seeAlso">socket_strerror()</a> - 返回描述套接字错误的字符串</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

@@ -1,0 +1,419 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>断言检测</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.assert-options.html">« assert_options</a></li>
+      <li style="float: right;"><a href="function.cli-get-process-title.html">cli_get_process_title »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.info.html">PHP 选项/信息 函数</a></li>
+    <li>断言检测</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.assert" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">assert</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">assert</span> &mdash; <span class="dc-title">断言检测</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.assert-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>assert</strong></span>(<span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$assertion</code></span>, <span class="methodparam"><span class="type"><span class="type"><a href="class.throwable.html" class="type Throwable">Throwable</a></span>|<span class="type">string</span>|<span class="type">null</span></span> <code class="parameter">$description</code><span class="initializer"> = <strong><code>null</code></strong></span></span>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>assert()</strong></span> 允许定义预期（expectations）：在开发和测试环境中生效的断言，但在生产环境中会优化掉以达到零成本。
+  </p>
+  <p class="para">
+   断言应该只用于调试功能。其中一个用例是检查健全性的前提条件，应该始终为
+   <strong><code>true</code></strong>，如果不满足这些条件，则表示存在某些编程错误。
+   另一个用例是确保某些功能的存在，例如扩展函数或某些系统限制和特性。
+  </p>
+  <p class="para">
+   由于断言可以配置为已消除，因此<em>不</em>应该用于普通运行时操作，比如检查输入参数。一般来说，代码应该在禁用断言检查的情况下仍然按预期运行。
+  </p>
+  <p class="para">
+   <span class="function"><strong>assert()</strong></span> 将检查 <code class="parameter">assertion</code> 中指定的预期（expectations）是否成立。如果不成立，也就是结果为
+   <strong><code>false</code></strong>，它将根据 <span class="function"><strong>assert()</strong></span> 的配置采取适当的操作。
+  </p>
+
+  <p class="para">
+   <span class="function"><strong>assert()</strong></span> 的行为由以下 INI 设置决定：
+   <table class="doctable table">
+    <caption><strong>断言 配置选项</strong></caption>
+    
+     <thead>
+      <tr>
+       <th>名字</th>
+       <th>默认</th>
+       <th>说明</th>
+       <th>更新日志</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td><a href="ini.core.html#ini.zend.assertions" class="link">zend.assertions</a></td>
+       <td><code class="literal">1</code></td>
+       <td>
+        <ul class="simplelist">
+         <li class="member">
+          <code class="literal">1</code>：生成并执行代码（开发模式）
+         </li>
+         <li class="member">
+          
+          <code class="literal">0</code>：生成代码但在运行时跳转
+         </li>
+         <li class="member">
+          <code class="literal">-1</code>：生成代码但在运行时跳转（生产模式）
+         </li>
+        </ul>
+       </td>
+       <td class="empty">&nbsp;</td>
+      </tr>
+
+      <tr>
+       <td><a href="info.configuration.html#ini.assert.active" class="link">assert.active</a></td>
+       <td><strong><code>true</code></strong></td>
+       <td>
+        为 <strong><code>false</code></strong> 时，<span class="function"><strong>assert()</strong></span> 将不会检查预期（expectation）并且无条件返回 <strong><code>true</code></strong>。
+       </td>
+       <td>
+        自 PHP 8.3.0 起弃用
+       </td>
+      </tr>
+
+      <tr>
+       <td><a href="info.configuration.html#ini.assert.callback" class="link">assert.callback</a></td>
+       <td><strong><code>null</code></strong></td>
+       <td>
+        当断言失败时，将调用用户定义的函数，其签名应该是：
+        <div class="methodsynopsis dc-description">
+         <span class="methodname"><strong>assert_callback</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$file</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$line</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">null</span> <code class="parameter">$assertion</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$description</code><span class="initializer"> = ?</span></span><br>): <span class="type"><span class="type void">void</span></span></div>
+
+       </td>
+       <td>
+        在 PHP 8.0.0 之前，回调的签名应该是：
+        <div class="methodsynopsis dc-description"><span class="methodname"><strong>assert_callback</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$file</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$line</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$assertion</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$description</code><span class="initializer"> = ?</span></span><br>): <span class="type"><span class="type void">void</span></span></div>
+
+        自 PHP 8.3.0 起弃用
+       </td>
+      </tr>
+
+      <tr>
+       <td><a href="info.configuration.html#ini.assert.exception" class="link">assert.exception</a></td>
+       <td><strong><code>true</code></strong></td>
+       <td>
+        如果为 <strong><code>true</code></strong>，则如果不能满足预期（expectations），将抛出 <span class="classname"><a href="class.assertionerror.html" class="classname">AssertionError</a></span> 异常。
+       </td>
+       <td>
+        自 PHP 8.3.0 起弃用
+       </td>
+      </tr>
+
+      <tr>
+       <td><a href="info.configuration.html#ini.assert.bail" class="link">assert.bail</a></td>
+       <td><strong><code>false</code></strong></td>
+       <td>
+        为 <strong><code>true</code></strong> 时，如果预期（expectation）不支持，将会中止 PHP 脚本的执行。
+       </td>
+       <td>
+        自 PHP 8.3.0 起弃用
+       </td>
+      </tr>
+
+      <tr>
+       <td><a href="info.configuration.html#ini.assert.warning" class="link">assert.warning</a></td>
+       <td><strong><code>true</code></strong></td>
+       <td>
+        为 <strong><code>true</code></strong> 时，则如果预期（expectation）不支持，将发出 <strong><code>E_WARNING</code></strong> 警告。如果启用了
+        <a href="info.configuration.html#ini.assert.exception" class="link">assert.exception</a>，此 INI 设置将无效。
+       </td>
+       <td>
+        自 PHP 8.3.0 起弃用
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.assert-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">assertion</code></dt>
+
+     <dd>
+
+      <p class="para">
+       可以是任何带返回值的表达式，运行后的结果用于表示断言成功还是失败。
+      </p>
+
+      <div class="warning"><strong class="warning">警告</strong>
+       <p class="para">
+        在 PHP 8.0.0 之前，如果 <code class="parameter">assertion</code> 是 <span class="type">string</span>，将解释为
+        PHP 代码，并通过 <span class="function"><a href="function.eval.html" class="function">eval()</a></span> 执行。这个字符串将作为第三个参数传递给回调函数。这种行为在
+        PHP 7.2.0 中<em>弃用</em>，并在 PHP 8.0.0 中<em>移除</em>。
+       </p>
+      </div>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">description</code></dt>
+
+     <dd>
+
+      <p class="para">
+       如果 <code class="parameter">description</code> 是 <span class="classname"><a href="class.throwable.html" class="classname">Throwable</a></span>
+       的实例，只有在 <code class="parameter">assertion</code> 执行失败时才会抛出。
+       <blockquote class="note"><p><strong class="note">注意</strong>: 
+        <p class="para">
+         自 PHP 8.0.0 开始，在调用可能定义的断言回调<em>之前</em>执行此操作。
+        </p>
+       </p></blockquote>
+       <blockquote class="note"><p><strong class="note">注意</strong>: 
+        <p class="para">
+         自 PHP 8.0.0 开始，无论 <a href="info.configuration.html#ini.assert.exception" class="link">assert.exception</a> 的配置如何，都将会抛出该 <span class="type">object</span>。
+        </p>
+       </p></blockquote>
+       <blockquote class="note"><p><strong class="note">注意</strong>: 
+        <p class="para">
+         自 PHP 8.0.0 开始，在这种情况下，<a href="info.configuration.html#ini.assert.bail" class="link">assert.bail</a> 设置不起作用。
+        </p>
+       </p></blockquote>
+      </p>
+      <p class="para">
+       如果 <code class="parameter">description</code> 是 <span class="type">string</span>，当发出异常或警告时，将使用该消息。
+       如果 <code class="parameter">assertion</code> 失败了，可选的 description 将会包括在失败信息里。
+      </p>
+      <p class="para">
+       如果省略 <code class="parameter">description</code>，
+       
+       将在编译时创建默认 description，该 description 等于对 <span class="function"><strong>assert()</strong></span> 调用的源代码。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.assert-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   <span class="function"><strong>assert()</strong></span> 总是返回 <strong><code>true</code></strong>，前提是以下条件中至少有一个为真：
+  </p>
+  <ul class="simplelist">
+   <li class="member"><code class="literal">zend.assertions=0</code></li>
+   <li class="member"><code class="literal">zend.assertions=-1</code></li>
+   <li class="member"><code class="literal">assert.exception=1</code></li>
+   <li class="member"><code class="literal">assert.bail=1</code></li>
+   <li class="member">将自定义异常对象传递给 <code class="parameter">description</code>。</li>
+  </ul>
+  <p class="para">
+   如果所有条件都不满足， <span class="function"><strong>assert()</strong></span> 将在 <code class="parameter">assertion</code> 为真时返回 <strong><code>true</code></strong>，否则返回 <strong><code>false</code></strong>。urn <strong><code>true</code></strong> if
+   <code class="parameter">assertion</code> is truthy and <strong><code>false</code></strong> otherwise.
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.assert-changelog">
+  <h3 class="title">更新日志</h3>
+  <p class="para">
+   <table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>8.3.0</td>
+       <td>
+        弃用所有的 <code class="literal">assert.</code> INI 设置。
+       </td>
+      </tr>
+
+      <tr>
+       <td>8.0.0</td>
+       <td>
+         <span class="function"><strong>assert()</strong></span> 将不再对字符串参数求值，而是跟其他参数一样对待。应该使用 <code class="code">assert($a == $b)</code>
+         替代 <code class="code">assert(&#039;$a == $b&#039;)</code>。已移除 <code class="literal">assert.quiet_eval</code> <var class="filename">php.ini</var> 指令和
+         <strong><code>ASSERT_QUIET_EVAL</code></strong> 常量，因为它们不再有任何作用。
+       </td>
+      </tr>
+
+      <tr>
+       <td>8.0.0</td>
+       <td>
+        如果 <code class="parameter">description</code> 是 <span class="classname"><a href="class.throwable.html" class="classname">Throwable</a></span> 的实例，无论
+        <a href="info.configuration.html#ini.assert.exception" class="link">assert.exception</a> 的值如何，如果断言失败，该对象都会被抛出。
+       </td>
+      </tr>
+
+      <tr>
+       <td>8.0.0</td>
+       <td>
+        如果 <code class="parameter">description</code> 是 <span class="classname"><a href="class.throwable.html" class="classname">Throwable</a></span> 的实例，即使设置了用户回调，也不会调用该回调。
+       </td>
+      </tr>
+
+      <tr>
+       <td>8.0.0</td>
+       <td>
+        不再允许在命名空间中声明叫做 <code class="literal">assert()</code> 的函数，并发出 <strong><code>E_COMPILE_ERROR</code></strong>。
+       </td>
+      </tr>
+
+      <tr>
+       <td>7.3.0</td>
+       <td>
+        弃用在命名空间中声明 <code class="literal">assert()</code> 函数。这样声明会发出 <strong><code>E_DEPRECATED</code></strong>。
+       </td>
+      </tr>
+
+      <tr>
+       <td>7.2.0</td>
+       <td>
+        弃用使用 <span class="type">string</span> 作为 <code class="parameter">assertion</code>。当 <a href="info.configuration.html#ini.assert.active" class="link">assert.active</a>
+        和 <a href="ini.core.html#ini.zend.assertions" class="link">zend.assertions</a> 都设为 <code class="literal">1</code> 时，现在会发出
+        <strong><code>E_DEPRECATED</code></strong> 通知。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.assert-examples">
+  <h3 class="title">示例</h3>
+   <div class="example" id="example-1640">
+    <p><strong>示例 #1 <span class="function"><strong>assert()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />assert</span><span style="color: #007700">(</span><span style="color: #0000BB">1 </span><span style="color: #007700">&gt; </span><span style="color: #0000BB">2</span><span style="color: #007700">);<br />echo </span><span style="color: #DD0000">'Hi!'</span><span style="color: #007700">;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>
+     如果启用断言（<a href="ini.core.html#ini.zend.assertions" class="link"><code class="literal">zend.assertions=1</code></a>）
+     以上示例会输出：
+    </p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Fatal error: Uncaught AssertionError: assert(1 &gt; 2) in example.php:2
+Stack trace:
+#0 example.php(2): assert(false, &#039;assert(1 &gt; 2)&#039;)
+#1 {main}
+  thrown in example.php on line 2
+</pre></div>
+    </div>
+    <div class="example-contents"><p>
+     如果禁用断言（<code class="literal">zend.assertions=0</code> 或 <code class="literal">zend.assertions=-1</code>）
+     以上示例会输出：
+    </p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Hi!
+</pre></div>
+    </div>
+   </div>
+   <div class="example" id="example-1643">
+    <p><strong>示例 #2 使用自定义信息</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />assert</span><span style="color: #007700">(</span><span style="color: #0000BB">1 </span><span style="color: #007700">&gt; </span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #DD0000">"Expected one to be greater than two"</span><span style="color: #007700">);<br />echo </span><span style="color: #DD0000">'Hi!'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>
+     如果启用断言，以上示例会输出：
+    </p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Fatal error: Uncaught AssertionError: Expected one to be greater than two in example.php:2
+Stack trace:
+#0 example.php(2): assert(false, &#039;Expected one to...&#039;)
+#1 {main}
+  thrown in example.php on line 2
+</pre></div>
+    </div>
+    <div class="example-contents"><p>
+     如果禁用断言，以上示例会输出：
+    </p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Hi!
+</pre></div>
+    </div>
+   </div>
+  <div class="example" id="example-1646">
+   <p><strong>示例 #3 使用自定义异常类</strong></p>
+   <div class="example-contents">
+    <div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">ArithmeticAssertionError </span><span style="color: #007700">extends </span><span style="color: #0000BB">AssertionError </span><span style="color: #007700">{}<br /><br /></span><span style="color: #0000BB">assert</span><span style="color: #007700">(</span><span style="color: #0000BB">1 </span><span style="color: #007700">&gt; </span><span style="color: #0000BB">2</span><span style="color: #007700">, new </span><span style="color: #0000BB">ArithmeticAssertionError</span><span style="color: #007700">(</span><span style="color: #DD0000">"Expected one to be greater than two"</span><span style="color: #007700">));<br />echo </span><span style="color: #DD0000">'Hi!'</span><span style="color: #007700">;</span></span></code></div>
+   </div>
+
+    <div class="example-contents"><p>
+     如果启用断言，以上示例会输出：
+    </p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Fatal error: Uncaught ArithmeticAssertionError: Expected one to be greater than two in example.php:4
+Stack trace:
+#0 {main}
+  thrown in example.php on line 4
+</pre></div>
+    </div>
+   <div class="example-contents"><p>
+    如果禁用断言，以上示例会输出：
+   </p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+Hi!
+</pre></div>
+   </div>
+  </div>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.assert-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.assert-options.html" class="function" rel="rdfs-seeAlso">assert_options()</a> - 设置/获取各种断言 flag</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

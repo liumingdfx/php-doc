@@ -1,0 +1,217 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>运行时配置</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="com.installation.html">« 安装</a></li>
+      <li style="float: right;"><a href="com.resources.html">资源类型 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="com.setup.html">安装/配置</a></li>
+    <li>运行时配置</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="com.configuration" class="section">
+ <h2 class="title">运行时配置</h2>
+ <p class="simpara">
+这些函数的行为受 <var class="filename">php.ini</var> 中的设置影响。
+</p>
+ <p class="para">
+ <table class="doctable table">
+  <caption><strong>COM 配置选项</strong></caption>
+  
+   <thead>
+    <tr>
+     <th>名字</th>
+     <th>默认</th>
+     <th>可修改范围</th>
+     <th>更新日志</th>
+    </tr>
+
+   </thead>
+
+   <tbody class="tbody">
+    <tr>
+     <td><a href="com.configuration.html#ini.com.allow-dcom" class="link">com.allow_dcom</a></td>
+     <td>&quot;0&quot;</td>
+     <td>PHP_INI_SYSTEM</td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    <tr>
+     <td><a href="com.configuration.html#ini.com.autoregister-typelib" class="link">com.autoregister_typelib</a></td>
+     <td>&quot;0&quot;</td>
+     <td>PHP_INI_ALL</td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    <tr>
+     <td><a href="com.configuration.html#ini.com.autoregister-verbose" class="link">com.autoregister_verbose</a></td>
+     <td>&quot;0&quot;</td>
+     <td>PHP_INI_ALL</td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    <tr>
+     <td><a href="com.configuration.html#ini.com.autoregister-casesensitive" class="link">com.autoregister_casesensitive</a></td>
+     <td>&quot;1&quot;</td>
+     <td>PHP_INI_ALL</td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    <tr>
+     <td><a href="com.configuration.html#ini.com.code-page" class="link">com.code_page</a></td>
+     <td>&quot;&quot;</td>
+     <td>PHP_INI_ALL</td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    <tr>
+     <td><a href="com.configuration.html#ini.com.dotnet-version" class="link">com.dotnet_version</a></td>
+     <td>&quot;&quot;</td>
+     <td>PHP_INI_SYSTEM</td>
+     <td>As of PHP 8.0.0</td>
+    </tr>
+
+    <tr>
+     <td><a href="com.configuration.html#ini.com.typelib-file" class="link">com.typelib_file</a></td>
+     <td>&quot;&quot;</td>
+     <td>PHP_INI_SYSTEM</td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+   </tbody>
+  
+ </table>
+
+ 有关 PHP_INI_* 样式的更多详情与定义，见 <a href="configuration.changes.modes.html" class="xref">配置可被设定范围</a>。
+ </p>
+
+ <p class="para">这是配置指令的简短说明。</p>
+
+ <p class="para">
+  <dl>
+   
+    <dt id="ini.com.allow-dcom">
+     <code class="parameter">com.allow_dcom</code>
+    </dt>
+
+    <dd>
+
+    <p class="para">
+     启用后，将允许 PHP 作为 D-COM（分布式 COM）客户端运行，并允许 PHP 脚本在远程服务器上实例化 COM 对象。
+    </p>
+    </dd>
+
+   
+   
+   
+    <dt id="ini.com.autoregister-typelib">
+     <code class="parameter">com.autoregister_typelib</code>
+    </dt>
+
+    <dd>
+
+    <p class="para">
+     启用后，PHP 尝试从已实例化的 <span class="classname"><a href="class.com.html" class="classname">COM</a></span> 对象的类型库中注册常量，前提是这些对象实现了获取信息所需的接口。注册的常量是否区分大小写，由
+     <a href="com.configuration.html#ini.com.autoregister-casesensitive" class="link">com.autoregister_casesensitive</a> <var class="filename">php.ini</var> 控制。
+    </p>
+    </dd>
+
+   
+
+   
+    <dt id="ini.com.autoregister-verbose">
+     <code class="parameter">com.autoregister_verbose</code>
+    </dt>
+
+    <dd>
+
+    <p class="para">
+     启用时，在对象实例化期间加载类型库出现的任何问题都会使用 PHP
+     的错误机制报告。默认为 off，如果查找或者加载类库出现错误则不会发出任何指示。
+    </p>
+    </dd>
+
+   
+
+   
+    <dt id="ini.com.autoregister-casesensitive">
+     <code class="parameter">com.autoregister_casesensitive</code>
+    </dt>
+
+    <dd>
+
+    <p class="para">
+     启用时（默认），实例化 <span class="classname"><a href="class.com.html" class="classname">COM</a></span>
+     对象时，在自动加载类型库中找到的常量将区分大小写进行注册。有关详细信息，请参阅
+     <span class="function"><a href="function.com-load-typelib.html" class="function">com_load_typelib()</a></span>。
+    </p>
+    </dd>
+
+   
+
+   
+    <dt id="ini.com.code-page">
+     <code class="parameter">com.code_page</code>
+    </dt>
+
+    <dd>
+
+    <p class="para">
+     它控制着与 COM 对象之间传递字符串时要使用的默认字符集代码页。如果将其设置为空字符串，PHP 将使用 <strong><code>CP_ACP</code></strong>，即默认的系统 ANSI 代码页。
+    </p>
+    <p class="para">
+     如果脚本中的文本默认使用不同的编码/字符集进行编码，设置该指令将免去将代码页作为参数传递给 <a href="class.com.html" class="xref">com</a> 类构造函数的麻烦。请注意，通过使用这个指令（与任何 PHP 配置指令一样），PHP 脚本变得不太可移植；应尽可能使用 COM 构造函数参数。
+    </p>
+    </dd>
+
+   
+
+   
+    <dt id="ini.com.dotnet-version">
+     <code class="parameter">com.dotnet_version</code>
+    </dt>
+
+    <dd>
+
+    <p class="para">
+     用于 <span class="classname"><a href="class.dotnet.html" class="classname">dotnet</a></span> 对象的 .NET 框架版本。设置的值是框架版本号的前三部分，以点分隔，并以
+     <code class="literal">v</code> 作为前缀，例如 <code class="literal">v4.0.30319</code>。
+    </p>
+    </dd>
+
+   
+
+   
+    <dt id="ini.com.typelib-file">
+     <code class="parameter">com.typelib_file</code>
+    </dt>
+
+    <dd>
+
+    <p class="para">
+     设置后，它应该保存一个在启动时应加载的包含类型库列表的文件路径。文件的每一行将被视为类型库名称，并且将其加载，就像调用 <span class="function"><a href="function.com-load-typelib.html" class="function">com_load_typelib()</a></span>
+     一样。常量会持久注册，因此只需要加载一次库。如果类型库名称以字符串 <code class="literal">#cis</code> 或 <code class="literal">#case_insensitive</code> 结尾，则该库的常量将以不区分大小写的方式注册。
+    </p>
+    </dd>
+
+   
+  
+  </dl>
+
+ </p>
+ 
+</div></div></div></body></html>

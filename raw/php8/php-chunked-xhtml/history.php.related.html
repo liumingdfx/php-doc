@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>PHP 相关项目的历史</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="history.php.html">« PHP 的历史</a></li>
+      <li style="float: right;"><a href="history.php.books.html">PHP 相关书籍 »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="history.html">PHP 及其相关项目的历史</a></li>
+    <li>PHP 相关项目的历史</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="history.php.related" class="sect1">
+  <h2 class="title">PHP 相关项目的历史</h2>
+  
+  
+
+  <div class="sect2" id="history.pear">
+   <h3 class="title">PEAR</h3>
+   <p class="para">
+    <a href="https://pear.php.net/" class="link external">&raquo;&nbsp;PEAR</a>，<code class="literal">PHP 扩展与应用资源库（PHP Extension and Application Repository</code>，最初是 PHP Extension
+    and Add-on Repository）是 PHP 版本的基础类，将来可能会发展成为在开发人员间分发 PHP 扩展的主要方式之一。
+   </p>
+   <p class="para">
+    PEAR 诞生于 2000 年 1 月在特拉维夫举行的 PHP 开发者会议（PDM）上的讨论。由 Stig S. Bakken 创建，并献给他的第一个女儿 Malin Bakken。
+   </p>
+   <p class="para">
+    自 2000 年初以来，PEAR 已经发展成为一个重要的大型项目，大量开发人员致力于实现常见的、可重用的功能，以造福于整个 PHP 社区。今天的 PEAR
+    包括各种用于数据库访问、内容缓存、数学计算、电子商务等的基础设施基础类。
+   </p>
+   <p class="para">
+    有关 PEAR 的更多信息见其<a href="https://pear.php.net/manual/" class="link external">&raquo;&nbsp;手册</a>。
+   </p>
+  </div>
+
+  <div class="sect2" id="history.phpqa">
+   <h3 class="title">PHP 质量保证倡议（QA）</h3>
+   <p class="para">
+    <a href="https://qa.php.net/" class="link external">&raquo;&nbsp;PHP 质量保证倡议</a>成立于 2000 年夏天，以回应对 PHP 版本没有针对生产环境进行足够好的测试的批评。该团队现在由一组核心开发人员组成，他们对
+    PHP 代码库有很好的理解。这些开发人员花费大量时间定位和修复 PHP 中的错误。此外，还有许多其他团队成员使用各种平台测试这些修复并提供反馈。
+   </p>
+  </div>
+
+  <div class="sect2" id="history.phpgtk">
+   <h3 class="title">PHP-GTK</h3>
+   <p class="para">
+    <a href="http://gtk.php.net/" class="link external">&raquo;&nbsp;PHP-GTK</a> 是编写客户端图形用户界面（GUI）程序的 PHP 解决方案。Andrei Zmievski
+    回忆了 PHP-GTK 规划和创建的过程：
+   </p>
+   <blockquote class="blockquote">
+    <p class="para">
+     “我总是对 GUI 编程有着浓厚的兴趣。我发现 Gtk+ 是一个非常好的工具包，只是用它在 C 中有点乏味。目睹了 PyGtk 和 GTK-Perl 的实现，我决定尝试 PHP 是否也能够被做成 Gtk+ 的接口，哪怕是最低限度的。2000
+     年 8 月，我有了更多的业余时间，那是我开始尝试的时候。我的主要指导方针是 PyGtk 实现，因为它功能相当完整且有漂亮的面向对象的接口。PyG 的作者 James Henstridge，在最初的筹备阶段提供了非常有用的建议。
+    </p>
+    <p class="para">
+     手写所有 Gtk+ 函数接口是不可能的事情，所以我把重点放在了代码生成上，类似于 PyGtk 的做法。代码生成器是一个 PHP 程序，它读取一组包含 Gtk+ 类、常量和方法信息的 <var class="filename">.defs</var>
+     文件，并生成连接到 PHP 的 C 代码。无法自动生成的部分可以在 <var class="filename">.overrides</var> 文件。
+    </p>
+    <p class="para">
+     代码生成器和基础设施的工作花了一些时间，因为在 2000 年秋天我几乎没有时间花在 PHP-GTK 上。在我把 PHP-GTK 给 Frank Kromann 演示过后，他产生了浓厚的兴趣，并开始帮助我完成代码生成器和 Win 32
+     实现。当我们编写了第一个 Hello World 程序并将其启动时，我们的喜悦之情溢于言表。又花了几个月的时间才使项目达到了可展示的状态，并于 2001 年 3 月 1 日发布了初始版本。这个故事很快就传到了 SlashDot。
+    </p>
+    <p class="para">
+     意识到 PHP-GTK 前景广阔，我便专门为它设置了邮件列表和 CVS 知识库。同时，gtk.php.net 网站也在 Colin Viebrock 的帮助下建立起来。文档的工作也由 James Moore 承担起来。
+    </p>
+    <p class="para">
+     自 PHP-GTK 发布之后，越来越受欢迎。我们有自己的文档小组，手册持续更新，人们开始为 PHP-GTK 编写扩展，以及越来越多的应用程序。
+    </p>
+   </blockquote>
+  </div>
+ </div></div></div></body></html>

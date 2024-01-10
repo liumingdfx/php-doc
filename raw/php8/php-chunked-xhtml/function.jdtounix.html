@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>将儒略日数转换为 Unix 时间戳</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.jdtojulian.html">« jdtojulian</a></li>
+      <li style="float: right;"><a href="function.jewishtojd.html">jewishtojd »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.calendar.html">Calendar 函数</a></li>
+    <li>将儒略日数转换为 Unix 时间戳</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.jdtounix" class="refentry"> 
+ <div class="refnamediv">
+  <h1 class="refname">jdtounix</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">jdtounix</span> &mdash; <span class="dc-title">将儒略日数转换为 Unix 时间戳</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.jdtounix-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>jdtounix</strong></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$julian_day</code></span>): <span class="type">int</span></div>
+
+  <p class="para rdfs-comment">
+   这个函数将返回与 <code class="parameter">julian_day</code>
+   给出的儒略日相对应的 Unix 时间戳。返回的时间是 UTC。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.jdtounix-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">julian_day</code></dt>
+
+     <dd>
+
+      <p class="para">
+       儒略日数在 64 位系统上是 <code class="literal">2440588</code> 到 <code class="literal">106751993607888</code>
+       之间的数字，在 32 位系统上是 <code class="literal">2440588</code> 到 <code class="literal">2465443</code> 之间的数字。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.jdtounix-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   指定儒略日的开始时（午夜，而非中午）的 unix 时间戳。
+  </p>
+ </div>
+
+
+ <div class="refsect1 errors" id="refsect1-function.jdtounix-errors">
+  <h3 class="title">错误／异常</h3>
+  <p class="para">
+   <code class="parameter">julian_day</code> 超出允许的范围值，抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.jdtounix-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       此函数在失败时不再返回 <strong><code>false</code></strong>，而是引发 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。
+      </td>
+     </tr>
+
+     <tr>
+      <td>7.3.24, 7.4.12</td>
+      <td>
+       扩充了 <code class="parameter">julian_day</code> 的上限。以前无论计算机体系结构如何，都是
+       <code class="literal">2465342</code>。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.jdtounix-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.unixtojd.html" class="function" rel="rdfs-seeAlso">unixtojd()</a> - 将 Unix 时间戳转换为儒略日数</span></li> 
+   </ul>
+  </p>
+ </div>
+
+</div></div></div></body></html>

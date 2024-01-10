@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>面向过程和面向对象，两种接口</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="mysqli.quickstart.html">« 快速入门指南</a></li>
+      <li style="float: right;"><a href="mysqli.quickstart.connections.html">Connections »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="mysqli.quickstart.html">快速入门指南</a></li>
+    <li>面向过程和面向对象，两种接口</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="mysqli.quickstart.dual-interface" class="section">
+  <h2 class="title">面向过程和面向对象，两种接口</h2>
+  <p class="para">
+   mysqli 扩展具有双重接口。支持面向过程和面向对象，两种编程范式。
+  </p>
+  <p class="para">
+   从旧的 mysql 扩展迁移的用户可能更喜欢过程接口。过程接口类似于旧的 mysql 扩展。在许多情况下，函数名称仅在前缀上有所不同。一些 mysqli
+   函数将连接句柄作为第一个参数，而匹配的旧 mysql 接口函数将其作为可选的最后一个参数。
+  </p>
+  <p class="para">
+   <div class="example" id="example-4259">
+    <p><strong>示例 #1 从旧的 mysql 扩展轻松迁移</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />$mysqli </span><span style="color: #007700">= </span><span style="color: #0000BB">mysqli_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">"example.com"</span><span style="color: #007700">, </span><span style="color: #DD0000">"user"</span><span style="color: #007700">, </span><span style="color: #DD0000">"password"</span><span style="color: #007700">, </span><span style="color: #DD0000">"database"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">mysqli_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">, </span><span style="color: #DD0000">"SELECT 'Please do not use the deprecated mysql extension for new development. ' AS _msg FROM DUAL"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$row </span><span style="color: #007700">= </span><span style="color: #0000BB">mysqli_fetch_assoc</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">$row</span><span style="color: #007700">[</span><span style="color: #DD0000">'_msg'</span><span style="color: #007700">];<br /><br /></span><span style="color: #0000BB">$mysql </span><span style="color: #007700">= </span><span style="color: #0000BB">mysql_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">"example.com"</span><span style="color: #007700">, </span><span style="color: #DD0000">"user"</span><span style="color: #007700">, </span><span style="color: #DD0000">"password"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">mysql_select_db</span><span style="color: #007700">(</span><span style="color: #DD0000">"test"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">mysql_query</span><span style="color: #007700">(</span><span style="color: #DD0000">"SELECT 'Use the mysqli extension instead.' AS _msg FROM DUAL"</span><span style="color: #007700">, </span><span style="color: #0000BB">$mysql</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$row </span><span style="color: #007700">= </span><span style="color: #0000BB">mysql_fetch_assoc</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">$row</span><span style="color: #007700">[</span><span style="color: #DD0000">'_msg'</span><span style="color: #007700">];</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Please do not use the deprecated mysql extension for new development. Use the mysqli extension instead.
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   <strong>面向对象接口</strong>
+  </p>
+  <p class="para">
+   除了经典的过程式接口，用户还可以选择使用面向对象接口。文档是使用面向对象的接口组织的。面向对象的接口按用途分组进行展示函数，使其更容易上手。参考部分提供了两种语法变体的示例。
+  </p>
+  <p class="para">
+   这两个接口之间没有显着的性能差异。用户可以根据个人喜好进行选择。
+  </p>
+  <p class="para">
+   <div class="example" id="example-4262">
+    <p><strong>示例 #2 面向对象和面向过程接口</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />$mysqli </span><span style="color: #007700">= </span><span style="color: #0000BB">mysqli_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">"example.com"</span><span style="color: #007700">, </span><span style="color: #DD0000">"user"</span><span style="color: #007700">, </span><span style="color: #DD0000">"password"</span><span style="color: #007700">, </span><span style="color: #DD0000">"database"</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">mysqli_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">, </span><span style="color: #DD0000">"SELECT 'A world full of ' AS _msg FROM DUAL"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$row </span><span style="color: #007700">= </span><span style="color: #0000BB">mysqli_fetch_assoc</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">$row</span><span style="color: #007700">[</span><span style="color: #DD0000">'_msg'</span><span style="color: #007700">];<br /><br /></span><span style="color: #0000BB">$mysqli </span><span style="color: #007700">= new </span><span style="color: #0000BB">mysqli</span><span style="color: #007700">(</span><span style="color: #DD0000">"example.com"</span><span style="color: #007700">, </span><span style="color: #DD0000">"user"</span><span style="color: #007700">, </span><span style="color: #DD0000">"password"</span><span style="color: #007700">, </span><span style="color: #DD0000">"database"</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">query</span><span style="color: #007700">(</span><span style="color: #DD0000">"SELECT 'choices to please everybody.' AS _msg FROM DUAL"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$row </span><span style="color: #007700">= </span><span style="color: #0000BB">$result</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">fetch_assoc</span><span style="color: #007700">();<br />echo </span><span style="color: #0000BB">$row</span><span style="color: #007700">[</span><span style="color: #DD0000">'_msg'</span><span style="color: #007700">];</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+A world full of choices to please everybody.
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   面向对象的接口用于快速入门，因为参考部分是以这种方式组织的。
+  </p>
+  <p class="para">
+   <strong>混合风格</strong>
+  </p>
+  <p class="para">
+   可以随时在样式之间切换。出于代码清晰度和编码风格的原因，这两种风格不建议混合使用。
+  </p>
+  <p class="para">
+   <div class="example" id="example-4265">
+    <p><strong>示例 #3 糟糕的编码风格</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /><br />$mysqli </span><span style="color: #007700">= new </span><span style="color: #0000BB">mysqli</span><span style="color: #007700">(</span><span style="color: #DD0000">"example.com"</span><span style="color: #007700">, </span><span style="color: #DD0000">"user"</span><span style="color: #007700">, </span><span style="color: #DD0000">"password"</span><span style="color: #007700">, </span><span style="color: #DD0000">"database"</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">mysqli_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">, </span><span style="color: #DD0000">"SELECT 'Possible but bad style.' AS _msg FROM DUAL"</span><span style="color: #007700">);<br /><br />if (</span><span style="color: #0000BB">$row </span><span style="color: #007700">= </span><span style="color: #0000BB">$result</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">fetch_assoc</span><span style="color: #007700">()) {<br />    echo </span><span style="color: #0000BB">$row</span><span style="color: #007700">[</span><span style="color: #DD0000">'_msg'</span><span style="color: #007700">];<br />}</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Possible but bad style.
+</pre></div>
+    </div>
+    </div>
+  </p>
+  <p class="para">
+   <strong>参见</strong>
+  </p>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="methodname"><a href="mysqli.construct.html" class="methodname">mysqli::__construct()</a></span></li>
+    <li class="member"><span class="methodname"><a href="mysqli.query.html" class="methodname">mysqli::query()</a></span></li>
+    <li class="member"><span class="methodname"><a href="mysqli-result.fetch-assoc.html" class="methodname">mysqli_result::fetch_assoc()</a></span></li>
+    <li class="member"><a href="mysqli.connect-errno.html" class="link">$mysqli::connect_errno</a></li>
+    <li class="member"><a href="mysqli.connect-error.html" class="link">$mysqli::connect_error</a></li>
+    <li class="member"><a href="mysqli.errno.html" class="link">$mysqli::errno</a></li>
+    <li class="member"><a href="mysqli.error.html" class="link">$mysqli::error</a></li>
+    <li class="member"><a href="mysqli.summary.html" class="link">MySQLi 扩展的函数概述</a></li>
+   </ul>
+  </p>
+ </div></div></div></body></html>

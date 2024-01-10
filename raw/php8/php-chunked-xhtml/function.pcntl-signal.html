@@ -1,0 +1,203 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>安装信号处理程序</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.pcntl-signal-get-handler.html">« pcntl_signal_get_handler</a></li>
+      <li style="float: right;"><a href="function.pcntl-sigprocmask.html">pcntl_sigprocmask »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.pcntl.html">PCNTL 函数</a></li>
+    <li>安装信号处理程序</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.pcntl-signal" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">pcntl_signal</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.1.0, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">pcntl_signal</span> &mdash; <span class="dc-title">安装信号处理程序</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.pcntl-signal-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>pcntl_signal</strong></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$signal</code></span>, <span class="methodparam"><span class="type"><span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span>|<span class="type">int</span></span> <code class="parameter">$handler</code></span>, <span class="methodparam"><span class="type">bool</span> <code class="parameter">$restart_syscalls</code><span class="initializer"> = <strong><code>true</code></strong></span></span>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>pcntl_signal()</strong></span> 函数为 <code class="parameter">signal</code> 指定的信号安装新的信号处理程序或替换当前信号处理程序。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.pcntl-signal-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">signal</code></dt>
+
+     <dd>
+
+      <p class="para">
+       信号编号。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">handler</code></dt>
+
+     <dd>
+
+      <p class="para">
+       信号处理程序。要么是 <span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span>，将调用它来处理信号，要么是全局常量 <strong><code>SIG_IGN</code></strong> 或
+       <strong><code>SIG_DFL</code></strong>，将分别用于忽略信号或恢复默认信号处理程序。
+      </p>
+      <p class="para">
+       如果指定为 <span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span>，必须实现以下签名：
+      </p>
+      <p class="para">
+       <div class="methodsynopsis dc-description">
+        <span class="methodname"><span class="replaceable">handler</span></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$signo</code></span>, <span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$siginfo</code></span>): <span class="type"><span class="type void">void</span></span></div>
+
+       <dl>
+        
+         <dt>
+<code class="parameter">signal</code></dt>
+
+         <dd>
+
+          <span class="simpara">
+           正在处理的信号。
+          </span>
+         </dd>
+
+        
+        
+         <dt>
+<code class="parameter">siginfo</code></dt>
+
+         <dd>
+
+          <span class="simpara">
+           如果操作系统支持 siginfo_t 结构体，这将是依赖于信号的信号信息数组。
+          </span>
+         </dd>
+
+        
+       </dl>
+
+      </p>
+      <blockquote class="note"><p><strong class="note">注意</strong>: 
+       <p class="para">
+        请注意，当处理程序设置为对象方法时，该对象的引用计数会增加，这会使其持续存在，直到将处理程序更改为其他内容或脚本结束为止。
+       </p>
+      </p></blockquote>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">restart_syscalls</code></dt>
+
+     <dd>
+
+      <p class="para">
+      指定当信号到达时系统调用重启是否可用。（译注：经查资料，此参数意为系统调用被信号打断时，系统调用是否从
+      开始处重新开始，但根据 http://bugs.php.net/bug.php?id=52121，此参数存在bug无效。）
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.pcntl-signal-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   成功时返回 <strong><code>true</code></strong>， 或者在失败时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.pcntl-signal-changelog">
+  <h3 class="title">更新日志</h3>
+  <p class="para">
+   <table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>7.1.0</td>
+       <td>
+        从 PHP 7.1.0 开始，处理程序 callback 指定为第二个参数，其中包含特定信号的 siginfo。仅当操作系统具有
+        siginfo_t 结构体时才提供此数据。如果操作系统未实现 siginfo_t，则提供 NULL。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.pcntl-signal-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 <span class="function"><strong>pcntl_signal()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// 需要使用 ticks<br /></span><span style="color: #007700">declare(</span><span style="color: #0000BB">ticks </span><span style="color: #007700">= </span><span style="color: #0000BB">1</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 信号处理函数<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">sig_handler</span><span style="color: #007700">(</span><span style="color: #0000BB">$signo</span><span style="color: #007700">)<br />{<br /><br />     switch (</span><span style="color: #0000BB">$signo</span><span style="color: #007700">) {<br />         case </span><span style="color: #0000BB">SIGTERM</span><span style="color: #007700">:<br />             </span><span style="color: #FF8000">// 处理终止任务<br />             </span><span style="color: #007700">exit;<br />             break;<br />         case </span><span style="color: #0000BB">SIGHUP</span><span style="color: #007700">:<br />             </span><span style="color: #FF8000">// 处理重启任务<br />             </span><span style="color: #007700">break;<br />         case </span><span style="color: #0000BB">SIGUSR1</span><span style="color: #007700">:<br />             echo </span><span style="color: #DD0000">"Caught SIGUSR1...\n"</span><span style="color: #007700">;<br />             break;<br />         default:<br />             </span><span style="color: #FF8000">// 处理所有其它信号<br />     </span><span style="color: #007700">}<br /><br />}<br /><br />echo </span><span style="color: #DD0000">"Installing signal handler...\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// 安装信号处理程序<br /></span><span style="color: #0000BB">pcntl_signal</span><span style="color: #007700">(</span><span style="color: #0000BB">SIGTERM</span><span style="color: #007700">, </span><span style="color: #DD0000">"sig_handler"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">pcntl_signal</span><span style="color: #007700">(</span><span style="color: #0000BB">SIGHUP</span><span style="color: #007700">,  </span><span style="color: #DD0000">"sig_handler"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">pcntl_signal</span><span style="color: #007700">(</span><span style="color: #0000BB">SIGUSR1</span><span style="color: #007700">, </span><span style="color: #DD0000">"sig_handler"</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 或使用对象<br />// pcntl_signal(SIGUSR1, array($obj, "do_something");<br /><br /></span><span style="color: #007700">echo </span><span style="color: #DD0000">"Generating signal SIGUSR1 to self...\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// 向当前进程 ID 发送 SIGUSR1 信号<br />// posix_* 函数需要 posix 扩展<br /></span><span style="color: #0000BB">posix_kill</span><span style="color: #007700">(</span><span style="color: #0000BB">posix_getpid</span><span style="color: #007700">(), </span><span style="color: #0000BB">SIGUSR1</span><span style="color: #007700">);<br /><br />echo </span><span style="color: #DD0000">"Done\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.pcntl-signal-notes">
+  <h3 class="title">注释</h3>
+  <p class="para">
+   <span class="function"><strong>pcntl_signal()</strong></span> 不堆叠信号处理程序，而是替换。
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.pcntl-signal-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.pcntl-fork.html" class="function" rel="rdfs-seeAlso">pcntl_fork()</a> - 在当前进程当前位置产生分叉（fork）</span></li>
+    <li class="member"><span class="function"><a href="function.pcntl-waitpid.html" class="function" rel="rdfs-seeAlso">pcntl_waitpid()</a> - 等待或返回 fork 的子进程状态</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

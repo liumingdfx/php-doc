@@ -1,0 +1,529 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>输出格式化字符串</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.vfprintf.html">« vfprintf</a></li>
+      <li style="float: right;"><a href="function.vsprintf.html">vsprintf »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.strings.html">字符串 函数</a></li>
+    <li>输出格式化字符串</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.vprintf" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">vprintf</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.1.0, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">vprintf</span> &mdash; <span class="dc-title">输出格式化字符串</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.vprintf-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>vprintf</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$format</code></span>, <span class="methodparam"><span class="type">array</span> <code class="parameter">$values</code></span>): <span class="type">int</span></div>
+
+  <p class="para rdfs-comment">
+   根据 <code class="parameter">format</code> （<span class="function"><a href="function.sprintf.html" class="function">sprintf()</a></span>
+   函数文档中有相关描述）参数指定的格式，在一个格式化字符串中显示多个值。
+  </p>
+  <p class="para">
+   作用与 <span class="function"><a href="function.printf.html" class="function">printf()</a></span> 函数类似，但是接收一个数组参数，而不是一系列可变数量的参数。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.vprintf-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+
+ <dt>
+<code class="parameter">format</code></dt>
+
+ <dd>
+
+  <p class="para">
+   format 字符串通常由零或多个指令组成：普通字符（不包含
+   <code class="literal">%</code>）——直接复制到结果，<em>转换规范</em>——获取每个参数的结果。
+  </p>
+
+  <p class="para">
+   转换规范遵循此原型：
+   <code class="literal">%[argnum$][flags][width][.precision]specifier</code>.
+  </p>
+
+  <p class="formalpara">
+   <h5 class="title">Argnum</h5>
+   <p class="para">
+    整数后跟美元符号 <code class="literal">$</code>，用于指定转换中要处理的参数数量。
+   </p>
+  </p>
+
+  <p class="para">
+   <table class="doctable table">
+    <caption><strong>标志</strong></caption>
+    
+     <thead>
+      <tr>
+       <th>标志</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td><code class="literal">-</code></td>
+       <td>
+        在指定字段宽度时左对齐，默认右对齐
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">+</code></td>
+       <td>
+        正数的加号 <code class="literal">+</code>前缀，默认负数的前缀是负号。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal"> </code>(space)</td>
+       <td>
+        空格填充结果。这是默认设置。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">0</code></td>
+       <td>
+        仅用 0 进行左侧数字填充。使用 <code class="literal">s</code> 标志符可以右侧填充。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">&#039;</code>(char)</td>
+       <td>
+        用字符（char）填充结果。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+
+  <p class="formalpara">
+   <h5 class="title">Width</h5>
+   <p class="para">
+    要么是整数，表示转换结果应该有多少个字符（最少），要么是 <code class="literal">*</code>。如果使用
+    <code class="literal">*</code>，那么宽度将作为额外的整数值提供，位于格式化符号之前。
+   </p>
+  </p>
+
+  <p class="formalpara">
+   <h5 class="title">Precision</h5>
+   <p class="para">
+    小数点 <code class="literal">.</code>，可选的后跟整数或者 <code class="literal">*</code>，其含义取决于格式化符号：
+    <ul class="itemizedlist">
+     <li class="listitem">
+      <span class="simpara">
+       <code class="literal">e</code>、<code class="literal">E</code>、<code class="literal">f</code>、<code class="literal">F</code>
+       标志符：小数点后需要打印的位数（默认是 6）。
+      </span>
+     </li>
+     <li class="listitem">
+      <span class="simpara">
+       <code class="literal">g</code>、<code class="literal">G</code>、<code class="literal">h</code>、<code class="literal">H</code>
+       标志符：这是要打印的最大有效位数。
+      </span>
+     </li>
+     <li class="listitem">
+      <span class="simpara">
+       <code class="literal">s</code> 标志符：充当分界点，为字符串设置最大字符限制。
+      </span>
+     </li>
+    </ul>
+    <blockquote class="note"><p><strong class="note">注意</strong>: 
+     <span class="simpara">
+      如果小数点没有明确的精度值，则假设是 0。如果使用 <code class="literal">*</code>，则精度将作为额外的整数值提供，位于格式化符号之前。
+     </span>
+    </p></blockquote>
+   </p>
+  </p>
+
+  <p class="para">
+   <table class="doctable table">
+    <caption><strong>标志符</strong></caption>
+    
+     <thead>
+      <tr>
+       <th>标志符</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td><code class="literal">%</code></td>
+       <td>
+        字面意思的百分号字符。不需要参数。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">b</code></td>
+       <td>
+        参数视为整数并以二进制数字呈现。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">c</code></td>
+       <td>
+        参数视为整数并以 ASCII 字符呈现。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">d</code></td>
+       <td>
+        参数视为整数并以（有符号）十进制数字呈现。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">e</code></td>
+       <td>
+        参数当做科学符号处理（例如 1.2e+2）。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">E</code></td>
+       <td>
+        与 <code class="literal">e</code> 标志符相同，但使用大写字母（例如 1.2E+2）。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">f</code></td>
+       <td>
+        参数当做浮点数处理且作为浮点数呈现（locale aware）。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">F</code></td>
+       <td>
+        参数当做浮点数处理且作为浮点数呈现（non-locale aware）。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">g</code></td>
+       <td>
+        <p class="para">
+         通用格式。
+        </p>
+        <p class="para">
+         Let P equal the precision if nonzero, 6 if the precision is omitted,
+         or 1 if the precision is zero.
+         Then, if a conversion with style E would have an exponent of X:
+        </p>
+        <p class="para">
+         If P &gt; X ≥ −4, the conversion is with style f and precision P − (X + 1).
+         Otherwise, the conversion is with style e and precision P − 1.
+        </p>
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">G</code></td>
+       <td>
+        Like the <code class="literal">g</code> specifier but uses
+        <code class="literal">E</code> and <code class="literal">f</code>.
+       </td>
+      </tr>
+
+      <tr>
+        <td><code class="literal">h</code></td>
+        <td>
+         Like the <code class="literal">g</code> specifier but uses <code class="literal">F</code>.
+         Available as of PHP 8.0.0.
+        </td>
+       </tr>
+
+       <tr>
+        <td><code class="literal">H</code></td>
+        <td>
+         Like the <code class="literal">g</code> specifier but uses
+         <code class="literal">E</code> and <code class="literal">F</code>. Available as of PHP 8.0.0.
+        </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">o</code></td>
+       <td>
+        参数视为整数并以八进制数字来呈现。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">s</code></td>
+       <td>
+        参数视为字符串来呈现。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">u</code></td>
+       <td>
+        参数视为整数并以无符号十进制数字呈现。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">x</code></td>
+       <td>
+        参数视为整数并作为十六进制数字呈现（带小写字母）。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">X</code></td>
+       <td>
+        参数视为整数并作为十六进制数字呈现（带大写字母）。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+
+  <div class="warning"><strong class="warning">警告</strong>
+   <p class="para">
+    <code class="literal">c</code> 类型标志符忽略填充和宽度
+   </p>
+  </div>
+
+  <div class="warning"><strong class="warning">警告</strong>
+   <p class="para">
+    Attempting to use a combination of the string and width specifiers with character sets that require more than one byte per character may result in unexpected results
+   </p>
+  </div>
+
+  <p class="para">
+   变量将会强制转换为适合标志符的类型：
+   <table class="doctable table">
+    <caption><strong>类型处理</strong></caption>
+    
+     <thead>
+      <tr>
+       <th>类型</th>
+       <th>标志符</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td><span class="type">string</span></td>
+       <td><code class="literal">s</code></td>
+      </tr>
+
+      <tr>
+       <td><span class="type">int</span></td>
+       <td>
+        <code class="literal">d</code>,
+        <code class="literal">u</code>,
+        <code class="literal">c</code>,
+        <code class="literal">o</code>,
+        <code class="literal">x</code>,
+        <code class="literal">X</code>,
+        <code class="literal">b</code>
+       </td>
+      </tr>
+
+      <tr>
+       <td><span class="type">float</span></td>
+       <td>
+        <code class="literal">e</code>,
+        <code class="literal">E</code>,
+        <code class="literal">f</code>,
+        <code class="literal">F</code>,
+        <code class="literal">g</code>,
+        <code class="literal">G</code>,
+        <code class="literal">h</code>,
+        <code class="literal">H</code>
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </dd>
+
+
+
+    
+     <dt>
+<code class="parameter">values</code></dt>
+
+     <dd>
+
+      <p class="para">
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.vprintf-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回输出字符串的长度。
+  </p>
+ </div>
+
+
+ <div class="refsect1 errors" id="refsect1-function.vprintf-errors">
+  <h3 class="title">错误／异常</h3>
+  
+  <p class="para">
+   从 PHP 8.0.0 开始，如果参数个数为零，将抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。在 PHP 8.0.0 之前，会发出 <strong><code>E_WARNING</code></strong>。
+  </p>
+  <p class="para">
+   从 PHP 8.0.0 开始，如果 <code class="literal">[width]</code> 小于零或大于 <strong><code>PHP_INT_MAX</code></strong>，则会抛出
+   <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。在 PHP 8.0.0 之前，会发出 <strong><code>E_WARNING</code></strong>。
+  </p>
+  <p class="para">
+   从 PHP 8.0.0 开始，如果 <code class="literal">[precision]</code> 小于零或大于 <strong><code>PHP_INT_MAX</code></strong>，则会抛出
+   <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。在 PHP 8.0.0 之前，会发出 <strong><code>E_WARNING</code></strong>。
+  </p>
+  <p class="para">
+   从 PHP 8.0.0 开始，当传递的参数少于所需的参数时会抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。在 PHP 8.0.0 之前，返回 <strong><code>false</code></strong> 并发出 <strong><code>E_WARNING</code></strong>。
+  </p>
+
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.vprintf-changelog">
+  <h3 class="title">更新日志</h3>
+  
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       此函数失败时不再返回 <strong><code>false</code></strong>。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       如果参数个数为零则抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>；以前该函数则会发出 <strong><code>E_WARNING</code></strong>。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       如果 <code class="literal">[width]</code> 小于零或大于 <strong><code>PHP_INT_MAX</code></strong>，则抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>；以前该函数则会发出 <strong><code>E_WARNING</code></strong>。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       如果 <code class="literal">[precision]</code> 小于零或大于 <strong><code>PHP_INT_MAX</code></strong>，则抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>；以前该函数则会发出 <strong><code>E_WARNING</code></strong>。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       当传递的参数少于所需的参数时抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>；以前该函数则会发出 <strong><code>E_WARNING</code></strong>。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+
+ </div>
+
+ 
+ <div class="refsect1 examples" id="refsect1-function.vprintf-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>示例 #1 <span class="function"><strong>vprintf()</strong></span>：补零整数</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />vprintf</span><span style="color: #007700">(</span><span style="color: #DD0000">"%04d-%02d-%02d"</span><span style="color: #007700">, </span><span style="color: #0000BB">explode</span><span style="color: #007700">(</span><span style="color: #DD0000">'-'</span><span style="color: #007700">, </span><span style="color: #DD0000">'1988-8-1'</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+1988-08-01
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.vprintf-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.printf.html" class="function" rel="rdfs-seeAlso">printf()</a> - 输出格式化字符串</span></li>
+    <li class="member"><span class="function"><a href="function.sprintf.html" class="function" rel="rdfs-seeAlso">sprintf()</a> - 返回格式化字符串</span></li>
+    <li class="member"><span class="function"><a href="function.fprintf.html" class="function" rel="rdfs-seeAlso">fprintf()</a> - 将格式化后的字符串写入到流</span></li>
+    <li class="member"><span class="function"><a href="function.vsprintf.html" class="function" rel="rdfs-seeAlso">vsprintf()</a> - 返回格式化字符串</span></li>
+    <li class="member"><span class="function"><a href="function.vfprintf.html" class="function" rel="rdfs-seeAlso">vfprintf()</a> - 将格式化字符串写入流</span></li>
+    <li class="member"><span class="function"><a href="function.sscanf.html" class="function" rel="rdfs-seeAlso">sscanf()</a> - 根据指定格式解析输入的字符</span></li>
+    <li class="member"><span class="function"><a href="function.fscanf.html" class="function" rel="rdfs-seeAlso">fscanf()</a> - 从文件中格式化输入</span></li>
+    <li class="member"><span class="function"><a href="function.number-format.html" class="function" rel="rdfs-seeAlso">number_format()</a> - 以千位分隔符方式格式化一个数字</span></li>
+    <li class="member"><span class="function"><a href="function.date.html" class="function" rel="rdfs-seeAlso">date()</a> - 格式化 Unix 时间戳</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div></div></div></body></html>

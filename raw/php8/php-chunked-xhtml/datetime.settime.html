@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>设置时间</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="datetime.setisodate.html">« DateTime::setISODate</a></li>
+      <li style="float: right;"><a href="datetime.settimestamp.html">DateTime::setTimestamp »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="class.datetime.html">DateTime</a></li>
+    <li>设置时间</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="datetime.settime" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">DateTime::setTime</h1>
+  <h1 class="refname">date_time_set</h1>
+  <p class="verinfo">(PHP 5 &gt;= 5.2.0, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">DateTime::setTime</span> -- <span class="refname">date_time_set</span> &mdash; <span class="dc-title">设置时间</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-datetime.settime-description">
+  <h3 class="title">说明</h3>
+  <p class="para">面向对象风格</p>
+  <div class="methodsynopsis dc-description">
+   <span class="modifier">public</span> <span class="methodname"><strong>DateTime::setTime</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$hour</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$minute</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$second</code><span class="initializer"> = 0</span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$microsecond</code><span class="initializer"> = 0</span></span><br>): <span class="type"><a href="class.datetime.html" class="type DateTime">DateTime</a></span></div>
+
+  <p class="para rdfs-comment">过程化风格</p>
+  <div class="methodsynopsis dc-description"><span class="methodname"><a href="function.date-time-set.html" class="methodname">date_time_set</a></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><a href="class.datetime.html" class="type DateTime">DateTime</a></span> <code class="parameter">$object</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$hour</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$minute</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$second</code><span class="initializer"> = 0</span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$microsecond</code><span class="initializer"> = 0</span></span><br>): <span class="type"><a href="class.datetime.html" class="type DateTime">DateTime</a></span></div>
+
+  <p class="para rdfs-comment">
+   将 DateTime 的当前时间重置为不同的时间。
+  </p>
+  <p class="para">
+   跟 <span class="methodname"><a href="datetimeimmutable.settime.html" class="methodname">DateTimeImmutable::setTime()</a></span> 一样，但适用于
+   <span class="classname"><a href="class.datetime.html" class="classname">DateTime</a></span>。
+  </p>
+  <p class="para">
+   过程化版本将 <span class="classname"><a href="class.datetime.html" class="classname">DateTime</a></span> 对象作为第一个参数。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-datetime.settime-parameters">
+  <h3 class="title">参数</h3>
+  <dl>
+   <dt>
+<code class="parameter">object</code></dt>
+
+<dd>
+<p class="para">仅过程化风格：由 <span class="function"><a href="function.date-create.html" class="function">date_create()</a></span> 返回的 <span class="classname"><a href="class.datetime.html" class="classname">DateTime</a></span> 类型的对象。此函数会修改这个对象。</p></dd>
+
+   
+    <dt>
+<code class="parameter">hour</code></dt>
+
+    <dd>
+
+     <p class="para">
+      时间中的小时。
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">minute</code></dt>
+
+    <dd>
+
+     <p class="para">
+      时间中的分钟。
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">second</code></dt>
+
+    <dd>
+
+     <p class="para">
+      时间中的秒。
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">microsecond</code></dt>
+
+    <dd>
+
+     <p class="para">
+      时间中的微秒。
+     </p>
+    </dd>
+
+   
+  </dl>
+
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-datetime.settime-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回方法链修改后的 <span class="classname"><a href="class.datetime.html" class="classname">DateTime</a></span> 对象。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-datetime.settime-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>8.1.0</td>
+      <td>The behaviour with double existing hours (during the fall-back
+      DST transition) changed. Previously PHP would pick the second occurrence
+      (after the DST transition), instead of the first occurrence (before DST
+       transition).</td>
+     </tr>
+
+     <tr>
+      <td>7.1.0</td>
+      <td>新增 <code class="parameter">microsecond</code> 参数。</td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-datetime.settime-seealso">
+  <h3 class="title">参见</h3>
+  <ul class="simplelist">
+   <li class="member"><span class="function"><a href="datetimeimmutable.settime.html" class="function" rel="rdfs-seeAlso">DateTimeImmutable::setTime()</a> - Sets the time</span></li>
+  </ul>
+ </div>
+
+
+</div></div></div></body></html>

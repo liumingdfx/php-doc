@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Internet 域：TCP，UDP，SSL 和 TLS</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="transports.html">« 所支持的套接字传输器列表</a></li>
+      <li style="float: right;"><a href="transports.unix.html">Unix 域：Unix 和 UDG »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="transports.html">所支持的套接字传输器列表</a></li>
+    <li>Internet 域：TCP，UDP，SSL 和 TLS</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="transports.inet" class="section">
+  <h2 class="title">Internet 域：TCP，UDP，SSL 和 TLS</h2>
+  <p class="simpara">
+   <code class="literal">ssl://</code>、<code class="literal">tls://</code>、<code class="literal">sslv2://</code> &amp; <code class="literal">sslv3://</code>。
+  </p>
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <span class="simpara">
+    如果没有指定传输器，则假设是 <code class="literal">tcp://</code>。
+   </span>
+  </p></blockquote>
+
+  <ul class="itemizedlist">
+   <li class="listitem"><span class="simpara"><code class="literal">127.0.0.1</code></span></li>
+   <li class="listitem"><span class="simpara"><code class="literal">fe80::1</code></span></li>
+   <li class="listitem"><span class="simpara"><code class="literal">www.example.com</code></span></li>
+   <li class="listitem"><span class="simpara"><code class="literal">tcp://127.0.0.1</code></span></li>
+   <li class="listitem"><span class="simpara"><code class="literal">tcp://fe80::1</code></span></li>
+   <li class="listitem"><span class="simpara"><code class="literal">tcp://www.example.com</code></span></li>
+   <li class="listitem"><span class="simpara"><code class="literal">udp://www.example.com</code></span></li>
+   <li class="listitem"><span class="simpara"><code class="literal">ssl://www.example.com</code></span></li>
+   <li class="listitem"><span class="simpara"><code class="literal">sslv2://www.example.com</code></span></li>
+   <li class="listitem"><span class="simpara"><code class="literal">sslv3://www.example.com</code></span></li>
+   <li class="listitem"><span class="simpara"><code class="literal">tls://www.example.com</code></span></li>
+  </ul>
+
+  <p class="simpara">
+   Internet 域套接字在目标地址中还期望有一个端口号。在 <span class="function"><a href="function.fsockopen.html" class="function">fsockopen()</a></span>
+   中在第二个参数中指定，这样就不会影响传输器的 URL。然而在 <span class="function"><a href="function.stream-socket-client.html" class="function">stream_socket_client()</a></span>
+   和相关的函数中是用传统的 URL，端口号在传输器 URL 后面以冒号分隔而指定。
+  </p>
+
+  <ul class="itemizedlist">
+   <li class="listitem"><span class="simpara"><code class="literal">tcp://127.0.0.1:80</code></span></li>
+   <li class="listitem"><span class="simpara"><code class="literal">tcp://[fe80::1]:80</code></span></li>
+   <li class="listitem"><span class="simpara"><code class="literal">tcp://www.example.com:80</code></span></li>
+  </ul>
+
+  <blockquote class="note"><p><strong class="note">注意</strong>: 
+   <strong>带端口号的 IPv6 数字地址</strong><br />
+   <span class="simpara">
+    在上面的第二个例子中，IPv4 和主机名的例子只加了一个冒号和端口号，但 IPv6 的地址被放在方括号中：
+    <code class="literal">[fe80::1]</code>。这是为了将 IPv6 地址中的冒号和用来分隔端口号的冒号区别开来。
+   </span>
+  </p></blockquote>
+
+  <p class="simpara">
+    <code class="literal">ssl://</code> 和 <code class="literal">tls://</code> 传输器（仅在 openssl 支持已编译入 PHP 
+    后可用）是 <code class="literal">tcp://</code> 传输器加入 SSL 加密后的扩展。
+  </p>
+
+  <p class="simpara">
+    <code class="literal">ssl://</code> 将根据远程服务器的兼容性和参数设置尝试与之建立 SSL V2 或 SSL V3 链接 
+    <code class="literal">sslv2://</code> 和 <code class="literal">sslv3://</code> 将明确的选择 SSL V2 或 SSL V3 
+    协议进行连接。
+  </p>
+ </div></div></div></body></html>
